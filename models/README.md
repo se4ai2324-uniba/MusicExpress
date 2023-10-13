@@ -18,7 +18,7 @@ For our experiment, the Model was trained on 610 instances which are songs taken
 By utilizing playlists available on Spotify, song clusters are created using the K-Medoids clustering model.
 For our experiment, we used the playlist «[keep grinding.](https://open.spotify.com/playlist/3fSsw9Mp5Mi2DDiweZggtP?si=151ba94cd4ca4cbb)» as the training set, and the playlist «[Spotify Most Played All Time 500Mil+](https://open.spotify.com/playlist/2YRe7HRKNRvXdJBp9nXFza#:~:text=Blinding%20Lights%20by%20The%20Weekend,at%20least%20500%20million%20streams.URL)» as the test set.
 
-More information about the data used can be found in the [Data Card](data\README.md) along with details about the performed Feature Selection.
+More information about the data used can be found in the [Data Card](data/README.md) along with details about the performed Feature Selection.
 
 The choice of the number of clusters (denoted by **k**) was made by evaluating the **Silhouette Score and two criteria**, which led us to select 5 as the optimal value for k in our experiment.
 

@@ -7,8 +7,8 @@ The [Spotipy](https://spotipy.readthedocs.io/en/2.22.1/) library is used to extr
 
 The Model and Data Cards are available here:
 
-- [Model Card](models\README.md).
-- [Data Card](data\README.md).
+- [Model Card](models/README.md).
+- [Data Card](data/README.md).
 
 ## Citation
 
