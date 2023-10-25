@@ -1,0 +1,107 @@
+schema: '2.0'
+stages:
+  extract:
+    cmd: python src/data/extractData.py
+    deps:
+    - path: data/raw/dataset.zip
+      hash: md5
+      md5: 840d5f7150b4eb7da302b31bd18d7cd4
+      size: 35270
+    - path: src/data/extractData.py
+      hash: md5
+      md5: 1f4e00cc0d989f60e8a6d892e198ac0b
+      size: 1552
+    outs:
+    - path: data/interim
+      hash: md5
+      md5: 9bc27317bd11260feaf2a62269fe9073.dir
+      size: 73149
+      nfiles: 4
+  preprocessing:
+    cmd: python src/features/preprocessing.py
+    deps:
+    - path: data/interim/Spotify's Most Played All-Time [Updated Weekly]  Most Streamed  Top
+        Played  500Mil+.csv
+      hash: md5
+      md5: b0fee05abcb685b00516fbca0cf2e0d4
+      size: 24370
+    - path: data/interim/keep grinding..csv
+      hash: md5
+      md5: 917645cb29939755a53c01834dee66c3
+      size: 29615
+    - path: src/features/preprocessing.py
+      hash: md5
+      md5: 6d883395be7dc3739d17a79c4a126fbe
+      size: 3136
+    outs:
+    - path: data/processed/testSet.csv
+      hash: md5
+      md5: 32c46b3c4014cf23d7c9daebd30e3002
+      size: 30804
+    - path: data/processed/trainSet.csv
+      hash: md5
+      md5: c031532dd0736ec636fd6ac3ec26eb76
+      size: 37464
+  clustering:
+    cmd: python src/models/clustering.py
+    deps:
+    - path: data/processed/testSet.csv
+      hash: md5
+      md5: 32c46b3c4014cf23d7c9daebd30e3002
+      size: 30804
+    - path: data/processed/trainSet.csv
+      hash: md5
+      md5: c031532dd0736ec636fd6ac3ec26eb76
+      size: 37464
+    - path: src/models/clustering.py
+      hash: md5
+      md5: b8caf7d0e525b0351ab2db79717b042b
+      size: 1440
+    outs:
+    - path: data/output/clustertestSet.csv
+      hash: md5
+      md5: a384e18b81c5583179657251b34d5427
+      size: 31792
+    - path: data/output/clustertrainSet.csv
+      hash: md5
+      md5: b6b8906caf7f9bb8b80866a92462c6fa
+      size: 38683
+  recommending:
+    cmd: python src/models/recommend.py
+    deps:
+    - path: data/output/clustertestSet.csv
+      hash: md5
+      md5: a384e18b81c5583179657251b34d5427
+      size: 31792
+    - path: data/output/clustertrainSet.csv
+      hash: md5
+      md5: b6b8906caf7f9bb8b80866a92462c6fa
+      size: 38683
+    - path: src/models/recommend.py
+      hash: md5
+      md5: 8e87f8d43a724ad2dacb8142a464bced
+      size: 3233
+    outs:
+    - path: data/output/recommendations.csv
+      hash: md5
+      md5: c7934239b72f2fa580278117971fb398
+      size: 170
+  metrics:
+    cmd: python src/models/metrics.py
+    deps:
+    - path: data/interim/feedbackUser1.csv
+      hash: md5
+      md5: 9435266c830c699446dbbd4a90f00b08
+      size: 9618
+    - path: data/interim/feedbackUser2.csv
+      hash: md5
+      md5: e939268619fd26bcf6fd7aae58e578e0
+      size: 9546
+    - path: data/output/recommendations.csv
+      hash: md5
+      md5: c7934239b72f2fa580278117971fb398
+      size: 170
+    - path: src/models/metrics.py
+      hash: md5
+      md5: a0c39c6aa6d1acc5fff698c9ea287969
+      size: 1278

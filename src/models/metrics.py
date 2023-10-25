@@ -39,9 +39,7 @@ accuracy = float(correct_predictions / conf.no_recommendations)
 
 print(f"Accuracy: {accuracy:.2f}")
 
-'''
-dagshub.init("testMLOPS", "justivanr", mlflow=True)
+dagshub.init("MusicExpress", "justivanr", mlflow=True)
 mlflow.start_run() 
 mlflow.log_metric("Accuracy", accuracy)
 mlflow.end_run()
-'''

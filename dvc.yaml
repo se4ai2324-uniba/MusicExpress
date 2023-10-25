@@ -1,0 +1,48 @@
+stages:
+  extract:
+    cmd: python src/data/extractData.py
+    deps:
+      - src/data/extractData.py
+      - data/raw/dataset.zip
+    outs:
+      - data/interim:
+          cache: false
+  preprocessing:
+    cmd: python src/features/preprocessing.py
+    deps:
+      - data/interim/keep grinding..csv
+      - data/interim/Spotify's Most Played All-Time [Updated Weekly]  Most Streamed  Top
+        Played  500Mil+.csv
+      - src/features/preprocessing.py
+    outs:
+      - data/processed/trainSet.csv:
+          cache: false
+      - data/processed/testSet.csv:
+          cache: false
+  clustering:
+    cmd: python src/models/clustering.py
+    deps:
+      - data/processed/trainSet.csv
+      - data/processed/testSet.csv
+      - src/models/clustering.py
+    outs:
+      - data/output/clustertrainSet.csv:
+          cache: false
+      - data/output/clustertestSet.csv:
+          cache: false
+  recommending:
+    cmd: python src/models/recommend.py
+    deps:
+      - data/output/clustertrainSet.csv
+      - data/output/clustertestSet.csv
+      - src/models/recommend.py
+    outs:
+      - data/output/recommendations.csv:
+          cache: false
+  metrics:
+    cmd: python src/models/metrics.py
+    deps:
+      - data/interim/feedbackUser1.csv
+      - data/interim/feedbackUser2.csv
+      - data/output/recommendations.csv
+      - src/models/metrics.py

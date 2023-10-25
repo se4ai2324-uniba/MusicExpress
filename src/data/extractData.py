@@ -7,7 +7,7 @@ import spotipyUtilities as spUt
 import pandas as pd
 import zipfile as zf
 
-with zf.ZipFile(conf.data_dir +'data.zip', 'r') as zip_ref:
+with zf.ZipFile(conf.data_dir +'dataset.zip', 'r') as zip_ref:
     zip_ref.extractall(conf.prepro_data_dir)
 
 print("The default playlists are:\n")
@@ -34,8 +34,8 @@ for playlistID in conf.playlists:
 
   print("===================================================")
 
-print("All playlists have been stored!\nHere a list of all the stored playlists:")
+
+print("All playlists have been stored! Here a list of all the stored playlists:")
 for x in range(len(playlistsNames)):
   print(str(x+1) + ". Playlist: " + playlistsNames[x])
-
 print("===================================================")

@@ -50,15 +50,15 @@ testTracksDF = pd.read_csv(conf.cluster_test_set_path)
 
 trainTrackIndex = random.randint(0, len(trainTracksDF))
 trainTrack = trainTracksDF.iloc[trainTrackIndex]
-print("The track is: \"%s - %s\"." % (trainTrack['Name'], trainTrack['Artist']) )
+print("===================================================")
+print("Starting song recommendation phase...")
+print("===================================================")
 
 trackCluster = trainTracksDF[trainTracksDF['Name'] == trainTrack['Name']]
-print("The track found in the test set is: \"%s - %s\"." % (trackCluster['Name'].values[0], trackCluster['Artist'].values[0]))
+print("The track from which suggestions will be computed is: \"%s - %s\"." 
+      % (trackCluster['Name'].values[0], trackCluster['Artist'].values[0]))
 
 trainTrackCluster = trackCluster['Cluster'].values[0]
-print("The track's cluster is: %s." % str(trainTrackCluster))
-
-print("The track from which the suggestions will be made is \"%s\" who's artist is \"%s\"." % (trainTrack['Name'], trainTrack['Artist']) )
 print("===================================================")
 
 recommendations = recommend_songs(testTracksDF, trainTrack, trainTrackCluster, conf.no_recommendations, conf.features)
