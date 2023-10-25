@@ -14,7 +14,7 @@ The Model and Data Cards are available here:
 
 - Python 3.11.5 ([Download here](https://python.domainunion.de/downloads/release/python-3115/)) (on VS Code select the Python 3.11.5 Kernel) since there might be some problems with the scikit-learn-extra library when using Python 3.12.0
 
-- The libraries **mlflow** and **dagshub** might be highlighted by Pylance (if installed) in the [recommend.py](src/models/recommend.py) script: this won't lead to issues when using the virtual environment to run the code
+- The libraries **mlflow** and **dagshub** might be highlighted by Pylance (if installed) in the [metrics.py](src/models/metrics.py) script: this won't lead to issues when using the virtual environment to run the code
 
 We suggest you to use a virtual environment in which you can download the requirements.
 
