@@ -81,6 +81,18 @@ You can easily install them as follows:
 pip install -r requirements.txt
 ```
 
+### Reproduce DVC Pipeline
+
+With the following instructions you will be able to run the DVC Pipeline that we developed:
+
+```bash
+# Retrieves the data needed in the pipeline from the remote storage
+dvc pull -r myremote
+
+# Runs the DVC Pipeline
+dvc repro
+```
+
 ## Citation
 
 ```bibtex
