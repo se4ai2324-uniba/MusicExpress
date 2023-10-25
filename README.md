@@ -7,8 +7,79 @@ The [Spotipy](https://spotipy.readthedocs.io/en/2.22.1/) library is used to extr
 
 The Model and Data Cards are available here:
 
-- [Model Card](models/README.md).
-- [Data Card](data/README.md).
+- [Model Card](models/README.md)
+- [Data Card](data/README.md)
+
+## Requirements
+
+- Python 3.11.5 ([Download here](https://python.domainunion.de/downloads/release/python-3115/)) (on VS Code select the Python 3.11.5 Kernel) since there might be some problems with the scikit-learn-extra library when using Python 3.12.0
+
+- The libraries **mlflow** and **dagshub** might be highlighted by Pylance (if installed) in the [recommend.py](src/models/recommend.py) script: this won't lead to issues when using the virtual environment to run the code
+
+We suggest you to use a virtual environment in which you can download the requirements.
+
+### Create a Virtual Environment
+
+We report different ways to create a virtual environment so that if you have different versions of Python on your computer, you can easily create one without needing to look it up.
+
+#### Standard creation
+
+- Windows:
+
+```bash
+python -m venv your_venv_name
+```
+
+- Linux:
+
+```bash
+python3 -m venv your_venv_name
+```
+
+#### Specifc Python Version creation
+
+```bash
+path\to\the\python\version\exe\you\want\to\use -m venv your_venv_name
+```
+
+Example:
+
+```bash
+path\...\Python311\python.exe -m venv your_venv_name
+```
+
+### Activate the virtual environment
+
+- Windows:
+
+```bash
+your_venv_name/Scripts/activate
+```
+
+```bash
+your_venv_name/Scripts/activate.ps1
+```
+
+- Linux:
+
+```bash
+your_venv_name/bin/activate
+```
+
+### Installation of requirements.txt
+
+We suggest to update pip before installing the requirements in the virtual environment. Copy the following code to update pip:
+
+```bash
+python.exe -m pip install --upgrade pip
+```
+
+After updating pip, you will need to install the requirements.txt in order for the model to work and also plot the results.
+You can easily install them as follows:
+
+```bash
+pip install -r requirements.txt
+```
 
 ## Citation
 
@@ -30,6 +101,7 @@ url = {https://github.com/se4ai2324-uniba/MusicExpress}
     ├── data
     │   ├── external       <- Data from third party sources.
     │   ├── interim        <- Intermediate data that has been transformed.
+    │   ├── output         <- Data after clustering and song recommendations
     │   ├── processed      <- The final, canonical data sets for modeling.
     │   └── raw            <- The original, immutable data dump.
     │
