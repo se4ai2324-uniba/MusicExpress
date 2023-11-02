@@ -4,7 +4,9 @@ sys.path.append('src')
 import conf
 import pandas as pd
 import mlflow 
+import mlflow.sklearn
 import dagshub
+from joblib import load
 
 recSongs_pred = pd.read_csv(conf.recommendations_path)
 recSongs_pred['Feedback'] = 1
@@ -39,7 +41,18 @@ accuracy = float(correct_predictions / conf.no_recommendations)
 
 print(f"Accuracy: {accuracy:.2f}")
 
+kmedoids = load(conf.model_file_path)
+
 dagshub.init("MusicExpress", "se4ai2324-uniba", mlflow=True)
+
 mlflow.start_run() 
+
+mlflow.sklearn.log_model(kmedoids, "kmedoids-model")
+mlflow.log_params({
+    "no_cluster": conf.no_cluster,
+    "rnd_state": conf.rnd_state,
+    'no_recommendations': conf.no_recommendations
+})
 mlflow.log_metric("Accuracy", accuracy)
+
 mlflow.end_run()

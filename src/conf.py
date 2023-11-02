@@ -32,6 +32,9 @@ sp = spotipy.Spotify(auth_manager = authManager)
 # Number of clusters to compute
 no_cluster = 5
 
+# K-Medoids Random State
+rnd_state = 42
+
 # Number of recommendations to provide
 no_recommendations = 5
 
@@ -47,3 +50,7 @@ cluster_train_set_path = os.path.join(output_dir, 'clustertrainSet.csv')
 cluster_test_set_path = os.path.join(output_dir, 'clustertestSet.csv')
 
 recommendations_path = os.path.join(output_dir, 'recommendations.csv')
+
+# Path to store the K-Medoids model (needed for MLFlow Model Registry)
+model_file_path = "models/model.pkl"
+
