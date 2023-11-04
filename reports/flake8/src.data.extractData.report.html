@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>flake8 violations: src\data\extractData.py</title>
+      <meta http-equiv="Content-Type" value="text/html; charset=UTF-8">
+      <link rel="stylesheet" href="styles.css">
+<script>
+function bindHandler(link) {
+   var code = link.getAttribute('data-code');
+   var key = location.pathname + '#' + code;
+
+   var ul = link.parentNode.querySelector('.details');
+   if (sessionStorage[key] != 'open') {
+      ul.style.display = 'none';
+   }
+   link.addEventListener('click', function (event) {
+      if (!ul.style.display || ul.style.display == 'none') {
+         ul.style.display = 'block';
+         sessionStorage[key] = 'open';
+      } else {
+         ul.style.display = 'none';
+         sessionStorage[key] = 'closed';
+      }
+   });
+}
+
+window.addEventListener('DOMContentLoaded', function () {
+   var links = document.querySelectorAll('#index > li > a');
+   for (var i = 0; i < links.length; i++) {
+      bindHandler(links[i]);
+   }
+});
+</script>
+   </head>
+   <body>
+      <div id="masthead" class="sev-1"></div>
+      <div id="page">
+         <p id="srclink">
+            <a title="View full annotated source"
+               href="src.data.extractData.source.html">
+               <img src="file.svg" alt="&#x2261;">
+            </a></p>
+         <h1>
+            <a href="index.html">
+               <img src="back.svg" alt="&#x2B05;">
+               src\data\extractData.py
+            </a>
+         </h1>
+
+         <ul id="index">
+         
+         <li>
+            <a data-code="F401">
+               <span class="count sev-1">
+                  1
+               </span>
+               <strong>F401:</strong> 'pandas as pd' imported but unused
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="src.data.extractData.source.html#l7">
+                  <tt><i>7</i> <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E111">
+               <span class="count sev-2">
+                  6
+               </span>
+               <strong>E111:</strong> indentation is not a multiple of 4
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="src.data.extractData.source.html#l25">
+                  <tt><i>25</i>   <span class="n">playlistName</span> <span class="o">=</span> <span class="n">spUt</span><span class="o">.</span><span class="n">clearPlaylistName</span><span class="p">(</span><span class="n">spUt</span><span class="o">.</span><span class="n">getPlaylistName</span><span class="p">(</span><span class="n">playlistID</span><span class="p">))</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="src.data.extractData.source.html#l27">
+                  <tt><i>27</i>   <span class="n">playlistsNames</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">playlistName</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="src.data.extractData.source.html#l29">
+                  <tt><i>29</i>   <span class="k">if</span><span class="p">(</span><span class="n">flUt</span><span class="o">.</span><span class="n">checkFileExists</span><span class="p">(</span><span class="n">playlistID</span><span class="p">)):</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="src.data.extractData.source.html#l31">
+                  <tt><i>31</i>   <span class="k">else</span><span class="p">:</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="src.data.extractData.source.html#l35">
+                  <tt><i>35</i>   <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;===================================================&quot;</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="src.data.extractData.source.html#l40">
+                  <tt><i>40</i>   <span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;. Playlist: &quot;</span> <span class="o">+</span> <span class="n">playlistsNames</span><span class="p">[</span><span class="n">x</span><span class="p">])</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E501">
+               <span class="count sev-2">
+                  6
+               </span>
+               <strong>E501:</strong> line too long (85 > 79 characters)
+               
+                  (and 5 similar)
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <p>Line too long (85 > 79 characters):</p>
+               
+               <a href="src.data.extractData.source.html#l1">
+                  <tt><i>1</i> <span class="c1"># ================================ Playlist Retrival ================================</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (82 > 79 characters):</p>
+               
+               <a href="src.data.extractData.source.html#l18">
+                  <tt><i>18</i> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Checking if the playlist is stored, otherwise the data will be extracted.&quot;</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (88 > 79 characters):</p>
+               
+               <a href="src.data.extractData.source.html#l20">
+                  <tt><i>20</i> <span class="c1"># List of the playlists names, needed to store them and avoid repeatedly retrieving them</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (111 > 79 characters):</p>
+               
+               <a href="src.data.extractData.source.html#l30">
+                  <tt><i>30</i>     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The file of the playlist </span><span class="se">\&quot;</span><span class="si">%s</span><span class="se">\&quot;</span><span class="s2"> is stored and ready to be used.&quot;</span> <span class="o">%</span> <span class="n">spUt</span><span class="o">.</span><span class="n">getPlaylistName</span><span class="p">(</span><span class="n">playlistID</span><span class="p">))</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (115 > 79 characters):</p>
+               
+               <a href="src.data.extractData.source.html#l32">
+                  <tt><i>32</i>     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The file of the playlist </span><span class="se">\&quot;</span><span class="si">%s</span><span class="se">\&quot;</span><span class="s2"> isn&#39;t stored. Creating dataframe...&quot;</span> <span class="o">%</span> <span class="n">spUt</span><span class="o">.</span><span class="n">getPlaylistName</span><span class="p">(</span><span class="n">playlistID</span><span class="p">))</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (81 > 79 characters):</p>
+               
+               <a href="src.data.extractData.source.html#l38">
+                  <tt><i>38</i> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;All playlists have been stored! Here a list of all the stored playlists:&quot;</span><span class="p">)</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E402">
+               <span class="count sev-2">
+                  5
+               </span>
+               <strong>E402:</strong> module level import not at top of file
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="src.data.extractData.source.html#l4">
+                  <tt><i>4</i> <span class="kn">import</span> <span class="nn">conf</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="src.data.extractData.source.html#l5">
+                  <tt><i>5</i> <span class="kn">import</span> <span class="nn">filesUtilities</span> <span class="k">as</span> <span class="nn">flUt</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="src.data.extractData.source.html#l6">
+                  <tt><i>6</i> <span class="kn">import</span> <span class="nn">spotipyUtilities</span> <span class="k">as</span> <span class="nn">spUt</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="src.data.extractData.source.html#l7">
+                  <tt><i>7</i> <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="src.data.extractData.source.html#l8">
+                  <tt><i>8</i> <span class="kn">import</span> <span class="nn">zipfile</span> <span class="k">as</span> <span class="nn">zf</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E225">
+               <span class="count sev-2">
+                  1
+               </span>
+               <strong>E225:</strong> missing whitespace around operator
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="src.data.extractData.source.html#l10">
+                  <tt><i>10</i> <span class="k">with</span> <span class="n">zf</span><span class="o">.</span><span class="n">ZipFile</span><span class="p">(</span><span class="n">conf</span><span class="o">.</span><span class="n">data_dir</span> <span class="o">+</span><span class="s1">&#39;dataset.zip&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">zip_ref</span><span class="p">:</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E275">
+               <span class="count sev-2">
+                  1
+               </span>
+               <strong>E275:</strong> missing whitespace after keyword
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="src.data.extractData.source.html#l29">
+                  <tt><i>29</i>   <span class="k">if</span><span class="p">(</span><span class="n">flUt</span><span class="o">.</span><span class="n">checkFileExists</span><span class="p">(</span><span class="n">playlistID</span><span class="p">)):</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="W292">
+               <span class="count sev-2">
+                  1
+               </span>
+               <strong>W292:</strong> no newline at end of file
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="src.data.extractData.source.html#l41">
+                  <tt><i>41</i> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;===================================================&quot;</span><span class="p">)</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         </ul>
+      </div>
+   </body>
+</html>

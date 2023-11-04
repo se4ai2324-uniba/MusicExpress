@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>src\data\extractData.py - flake8 annotated source</title>
+      <meta http-equiv="Content-Type" value="text/html; charset=UTF-8">
+      <link rel="stylesheet" href="styles.css">
+   </head>
+   <body>
+      <div id="masthead" class="sev-1"></div>
+      <div id="page">
+         <h1>
+            <a href="src.data.extractData.report.html">
+               <img src="back.svg" alt="&#x2B05;">
+               src\data\extractData.py source
+            </a>
+         </h1>
+
+         <div id="doc">
+            <div id="l1"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        E501
+                     </span>
+                     Line too long (85 > 79 characters)</li>
+               
+               </ul><tt><i>1</i> <span class="c1"># ================================ Playlist Retrival ================================</span></tt>
+            </div>
+            <div id="l2"
+               class="code sev- "><tt><i>2</i> <span class="kn">import</span> <span class="nn">sys</span></tt>
+            </div>
+            <div id="l3"
+               class="code sev- "><tt><i>3</i> <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;src&#39;</span><span class="p">)</span></tt>
+            </div>
+            <div id="l4"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        E402
+                     </span>
+                     Module level import not at top of file</li>
+               
+               </ul><tt><i>4</i> <span class="kn">import</span> <span class="nn">conf</span></tt>
+            </div>
+            <div id="l5"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        E402
+                     </span>
+                     Module level import not at top of file</li>
+               
+               </ul><tt><i>5</i> <span class="kn">import</span> <span class="nn">filesUtilities</span> <span class="k">as</span> <span class="nn">flUt</span></tt>
+            </div>
+            <div id="l6"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        E402
+                     </span>
+                     Module level import not at top of file</li>
+               
+               </ul><tt><i>6</i> <span class="kn">import</span> <span class="nn">spotipyUtilities</span> <span class="k">as</span> <span class="nn">spUt</span></tt>
+            </div>
+            <div id="l7"
+               class="code sev-1  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-1">
+                        F401
+                     </span>
+                     'pandas as pd' imported but unused</li>
+               
+                  <li>
+                     <span class="count sev-2">
+                        E402
+                     </span>
+                     Module level import not at top of file</li>
+               
+               </ul><tt><i>7</i> <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span></tt>
+            </div>
+            <div id="l8"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        E402
+                     </span>
+                     Module level import not at top of file</li>
+               
+               </ul><tt><i>8</i> <span class="kn">import</span> <span class="nn">zipfile</span> <span class="k">as</span> <span class="nn">zf</span></tt>
+            </div>
+            <div id="l9"
+               class="code sev- "><tt><i>9</i> &nbsp;</tt>
+            </div>
+            <div id="l10"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        E225
+                     </span>
+                     Missing whitespace around operator</li>
+               
+               </ul><tt><i>10</i> <span class="k">with</span> <span class="n">zf</span><span class="o">.</span><span class="n">ZipFile</span><span class="p">(</span><span class="n">conf</span><span class="o">.</span><span class="n">data_dir</span> <span class="o">+</span><span class="s1">&#39;dataset.zip&#39;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">zip_ref</span><span class="p">:</span></tt>
+            </div>
+            <div id="l11"
+               class="code sev- "><tt><i>11</i>     <span class="n">zip_ref</span><span class="o">.</span><span class="n">extractall</span><span class="p">(</span><span class="n">conf</span><span class="o">.</span><span class="n">prepro_data_dir</span><span class="p">)</span></tt>
+            </div>
+            <div id="l12"
+               class="code sev- "><tt><i>12</i> &nbsp;</tt>
+            </div>
+            <div id="l13"
+               class="code sev- "><tt><i>13</i> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The default playlists are:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span></tt>
+            </div>
+            <div id="l14"
+               class="code sev- "><tt><i>14</i> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">conf</span><span class="o">.</span><span class="n">playlists</span><span class="p">:</span></tt>
+            </div>
+            <div id="l15"
+               class="code sev- "><tt><i>15</i>     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Playlist&#39;s ID: </span><span class="si">%s</span><span class="s2"> || Name: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">spUt</span><span class="o">.</span><span class="n">getPlaylistName</span><span class="p">(</span><span class="n">p</span><span class="p">)))</span></tt>
+            </div>
+            <div id="l16"
+               class="code sev- "><tt><i>16</i> &nbsp;</tt>
+            </div>
+            <div id="l17"
+               class="code sev- "><tt><i>17</i> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;===================================================&quot;</span><span class="p">)</span></tt>
+            </div>
+            <div id="l18"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        E501
+                     </span>
+                     Line too long (82 > 79 characters)</li>
+               
+               </ul><tt><i>18</i> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Checking if the playlist is stored, otherwise the data will be extracted.&quot;</span><span class="p">)</span></tt>
+            </div>
+            <div id="l19"
+               class="code sev- "><tt><i>19</i> &nbsp;</tt>
+            </div>
+            <div id="l20"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        E501
+                     </span>
+                     Line too long (88 > 79 characters)</li>
+               
+               </ul><tt><i>20</i> <span class="c1"># List of the playlists names, needed to store them and avoid repeatedly retrieving them</span></tt>
+            </div>
+            <div id="l21"
+               class="code sev- "><tt><i>21</i> <span class="n">playlistsNames</span> <span class="o">=</span> <span class="p">[]</span></tt>
+            </div>
+            <div id="l22"
+               class="code sev- "><tt><i>22</i> &nbsp;</tt>
+            </div>
+            <div id="l23"
+               class="code sev- "><tt><i>23</i> <span class="k">for</span> <span class="n">playlistID</span> <span class="ow">in</span> <span class="n">conf</span><span class="o">.</span><span class="n">playlists</span><span class="p">:</span></tt>
+            </div>
+            <div id="l24"
+               class="code sev- "><tt><i>24</i> &nbsp;</tt>
+            </div>
+            <div id="l25"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        E111
+                     </span>
+                     Indentation is not a multiple of 4</li>
+               
+               </ul><tt><i>25</i>   <span class="n">playlistName</span> <span class="o">=</span> <span class="n">spUt</span><span class="o">.</span><span class="n">clearPlaylistName</span><span class="p">(</span><span class="n">spUt</span><span class="o">.</span><span class="n">getPlaylistName</span><span class="p">(</span><span class="n">playlistID</span><span class="p">))</span></tt>
+            </div>
+            <div id="l26"
+               class="code sev- "><tt><i>26</i> &nbsp;</tt>
+            </div>
+            <div id="l27"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        E111
+                     </span>
+                     Indentation is not a multiple of 4</li>
+               
+               </ul><tt><i>27</i>   <span class="n">playlistsNames</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">playlistName</span><span class="p">)</span></tt>
+            </div>
+            <div id="l28"
+               class="code sev- "><tt><i>28</i> &nbsp;</tt>
+            </div>
+            <div id="l29"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        E111
+                     </span>
+                     Indentation is not a multiple of 4</li>
+               
+                  <li>
+                     <span class="count sev-2">
+                        E275
+                     </span>
+                     Missing whitespace after keyword</li>
+               
+               </ul><tt><i>29</i>   <span class="k">if</span><span class="p">(</span><span class="n">flUt</span><span class="o">.</span><span class="n">checkFileExists</span><span class="p">(</span><span class="n">playlistID</span><span class="p">)):</span></tt>
+            </div>
+            <div id="l30"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        E501
+                     </span>
+                     Line too long (111 > 79 characters)</li>
+               
+               </ul><tt><i>30</i>     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The file of the playlist </span><span class="se">\&quot;</span><span class="si">%s</span><span class="se">\&quot;</span><span class="s2"> is stored and ready to be used.&quot;</span> <span class="o">%</span> <span class="n">spUt</span><span class="o">.</span><span class="n">getPlaylistName</span><span class="p">(</span><span class="n">playlistID</span><span class="p">))</span></tt>
+            </div>
+            <div id="l31"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        E111
+                     </span>
+                     Indentation is not a multiple of 4</li>
+               
+               </ul><tt><i>31</i>   <span class="k">else</span><span class="p">:</span></tt>
+            </div>
+            <div id="l32"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        E501
+                     </span>
+                     Line too long (115 > 79 characters)</li>
+               
+               </ul><tt><i>32</i>     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The file of the playlist </span><span class="se">\&quot;</span><span class="si">%s</span><span class="se">\&quot;</span><span class="s2"> isn&#39;t stored. Creating dataframe...&quot;</span> <span class="o">%</span> <span class="n">spUt</span><span class="o">.</span><span class="n">getPlaylistName</span><span class="p">(</span><span class="n">playlistID</span><span class="p">))</span></tt>
+            </div>
+            <div id="l33"
+               class="code sev- "><tt><i>33</i>     <span class="n">tracksDF</span> <span class="o">=</span> <span class="n">flUt</span><span class="o">.</span><span class="n">createPlaylistDF</span><span class="p">(</span><span class="n">playlistID</span><span class="p">)</span></tt>
+            </div>
+            <div id="l34"
+               class="code sev- "><tt><i>34</i> &nbsp;</tt>
+            </div>
+            <div id="l35"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        E111
+                     </span>
+                     Indentation is not a multiple of 4</li>
+               
+               </ul><tt><i>35</i>   <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;===================================================&quot;</span><span class="p">)</span></tt>
+            </div>
+            <div id="l36"
+               class="code sev- "><tt><i>36</i> &nbsp;</tt>
+            </div>
+            <div id="l37"
+               class="code sev- "><tt><i>37</i> &nbsp;</tt>
+            </div>
+            <div id="l38"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        E501
+                     </span>
+                     Line too long (81 > 79 characters)</li>
+               
+               </ul><tt><i>38</i> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;All playlists have been stored! Here a list of all the stored playlists:&quot;</span><span class="p">)</span></tt>
+            </div>
+            <div id="l39"
+               class="code sev- "><tt><i>39</i> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">playlistsNames</span><span class="p">)):</span></tt>
+            </div>
+            <div id="l40"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        E111
+                     </span>
+                     Indentation is not a multiple of 4</li>
+               
+               </ul><tt><i>40</i>   <span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;. Playlist: &quot;</span> <span class="o">+</span> <span class="n">playlistsNames</span><span class="p">[</span><span class="n">x</span><span class="p">])</span></tt>
+            </div>
+            <div id="l41"
+               class="code sev-2  le">
+               <ul class="violations">
+               
+                  <li>
+                     <span class="count sev-2">
+                        W292
+                     </span>
+                     No newline at end of file</li>
+               
+               </ul><tt><i>41</i> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;===================================================&quot;</span><span class="p">)</span></tt>
+            </div>
+            
+         </div>
+      </div>
+   </body>
+</html>

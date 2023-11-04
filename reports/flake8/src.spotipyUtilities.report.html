@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>flake8 violations: src\spotipyUtilities.py</title>
+      <meta http-equiv="Content-Type" value="text/html; charset=UTF-8">
+      <link rel="stylesheet" href="styles.css">
+<script>
+function bindHandler(link) {
+   var code = link.getAttribute('data-code');
+   var key = location.pathname + '#' + code;
+
+   var ul = link.parentNode.querySelector('.details');
+   if (sessionStorage[key] != 'open') {
+      ul.style.display = 'none';
+   }
+   link.addEventListener('click', function (event) {
+      if (!ul.style.display || ul.style.display == 'none') {
+         ul.style.display = 'block';
+         sessionStorage[key] = 'open';
+      } else {
+         ul.style.display = 'none';
+         sessionStorage[key] = 'closed';
+      }
+   });
+}
+
+window.addEventListener('DOMContentLoaded', function () {
+   var links = document.querySelectorAll('#index > li > a');
+   for (var i = 0; i < links.length; i++) {
+      bindHandler(links[i]);
+   }
+});
+</script>
+   </head>
+   <body>
+      <div id="masthead" class="sev-2"></div>
+      <div id="page">
+         <p id="srclink">
+            <a title="View full annotated source"
+               href="src.spotipyUtilities.source.html">
+               <img src="file.svg" alt="&#x2261;">
+            </a></p>
+         <h1>
+            <a href="index.html">
+               <img src="back.svg" alt="&#x2B05;">
+               src\spotipyUtilities.py
+            </a>
+         </h1>
+
+         <ul id="index">
+         
+         <li>
+            <a data-code="E111">
+               <span class="count sev-2">
+                  35
+               </span>
+               <strong>E111:</strong> indentation is not a multiple of 4
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="src.spotipyUtilities.source.html#l7">
+                  <tt><i>7</i>   <span class="n">artistCode</span> <span class="o">=</span> <span class="n">conf</span><span class="o">.</span><span class="n">sp</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">q</span><span class="o">=</span><span class="s1">&#39;artist:&#39;</span> <span class="o">+</span> <span class="n">artist</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="s1">&#39;artist&#39;</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="src.spotipyUtilities.source.html#l9">
+                  <tt><i>9</i>   <span class="k">if</span> <span class="n">artistCode</span><span class="p">[</span><span class="s1">&#39;artists&#39;</span><span class="p">][</span><span class="s1">&#39;items&#39;</span><span class="p">]:</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="src.spotipyUtilities.source.html#l10">
+                  <tt><i>10</i>       <span class="n">artist_uri</span> <span class="o">=</span> <span class="n">artistCode</span><span class="p">[</span><span class="s1">&#39;artists&#39;</span><span class="p">][</span><span class="s1">&#39;items&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;uri&#39;</span><span class="p">]</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="src.spotipyUtilities.source.html#l11">
+                  <tt><i>11</i>   <span class="k">else</span><span class="p">:</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="src.spotipyUtilities.source.html#l12">
+                  <tt><i>12</i>       <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Artist not found.&#39;</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="src.spotipyUtilities.source.html#l14">
+                  <tt><i>14</i>   <span class="k">return</span> <span class="n">artist_uri</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="src.spotipyUtilities.source.html#l19">
+                  <tt><i>19</i>   <span class="n">artistURI</span> <span class="o">=</span> <span class="n">uriFinder</span><span class="p">(</span><span class="n">artistName</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="src.spotipyUtilities.source.html#l20">
+                  <tt><i>20</i>   <span class="n">artist</span> <span class="o">=</span> <span class="n">conf</span><span class="o">.</span><span class="n">sp</span><span class="o">.</span><span class="n">artist</span><span class="p">(</span><span class="n">artistURI</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="src.spotipyUtilities.source.html#l21">
+                  <tt><i>21</i>   <span class="n">genre</span> <span class="o">=</span> <span class="n">artist</span><span class="p">[</span><span class="s1">&#39;genres&#39;</span><span class="p">]</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="src.spotipyUtilities.source.html#l22">
+                  <tt><i>22</i>   <span class="k">return</span> <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">genre</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="src.spotipyUtilities.source.html#l27">
+                  <tt><i>27</i>   <span class="n">artist</span> <span class="o">=</span> <span class="n">uriFinder</span><span class="p">(</span><span class="s1">&#39;Sleep Token&#39;</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="src.spotipyUtilities.source.html#l28">
+                  <tt><i>28</i>   <span class="n">artist</span> <span class="o">=</span> <span class="n">conf</span><span class="o">.</span><span class="n">sp</span><span class="o">.</span><span class="n">artist</span><span class="p">(</span><span class="n">artistURI</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="src.spotipyUtilities.source.html#l29">
+                  <tt><i>29</i>   <span class="n">genre</span> <span class="o">=</span> <span class="n">artist</span><span class="p">[</span><span class="s1">&#39;genres&#39;</span><span class="p">]</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="src.spotipyUtilities.source.html#l30">
+                  <tt><i>30</i>   <span class="k">return</span> <span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">genre</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="src.spotipyUtilities.source.html#l35">
+                  <tt><i>35</i>   <span class="n">albumsData</span> <span class="o">=</span> <span class="n">conf</span><span class="o">.</span><span class="n">sp</span><span class="o">.</span><span class="n">artist_albums</span><span class="p">(</span><span class="n">artistURI</span><span class="p">,</span> <span class="n">album_type</span> <span class="o">=</span> <span class="s1">&#39;album&#39;</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="src.spotipyUtilities.source.html#l36">
+                  <tt><i>36</i>   <span class="n">albums</span> <span class="o">=</span> <span class="n">albumsData</span><span class="p">[</span><span class="s1">&#39;items&#39;</span><span class="p">]</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="src.spotipyUtilities.source.html#l38">
+                  <tt><i>38</i>   <span class="k">while</span> <span class="n">albumsData</span><span class="p">[</span><span class="s1">&#39;next&#39;</span><span class="p">]:</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="src.spotipyUtilities.source.html#l39">
+                  <tt><i>39</i>       <span class="n">albumsData</span> <span class="o">=</span> <span class="n">conf</span><span class="o">.</span><span class="n">sp</span><span class="o">.</span><span class="n">next</span><span class="p">(</span><span class="n">albumsData</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="src.spotipyUtilities.source.html#l40">
+                  <tt><i>40</i>       <span class="n">albums</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">albumsData</span><span class="p">[</span><span class="s1">&#39;items&#39;</span><span class="p">])</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="src.spotipyUtilities.source.html#l42">
+                  <tt><i>42</i>   <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;These are all &quot;</span> <span class="o">+</span> <span class="n">artist</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\&#39;</span><span class="s2">s albums found on Spotify:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="src.spotipyUtilities.source.html#l43">
+                  <tt><i>43</i>   <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">albums</span><span class="p">)):</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="src.spotipyUtilities.source.html#l49">
+                  <tt><i>49</i>   <span class="n">topTracks</span> <span class="o">=</span> <span class="n">conf</span><span class="o">.</span><span class="n">sp</span><span class="o">.</span><span class="n">artist_top_tracks</span><span class="p">(</span><span class="n">artistURI</span><span class="p">,</span> <span class="n">country</span> <span class="o">=</span> <span class="n">targetCountry</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="src.spotipyUtilities.source.html#l51">
+                  <tt><i>51</i>   <span class="n">topTenTracks</span> <span class="o">=</span> <span class="n">topTracks</span><span class="p">[</span><span class="s1">&#39;tracks&#39;</span><span class="p">][:</span><span class="mi">10</span><span class="p">]</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="src.spotipyUtilities.source.html#l53">
+                  <tt><i>53</i>   <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;These are </span><span class="si">%s</span><span class="s2"> </span><span class="se">\&#39;</span><span class="s2">s top </span><span class="si">%d</span><span class="s2"> songs in </span><span class="si">%s</span><span class="s2"> found on Spotify:</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">artist</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">topTenTracks</span><span class="p">),</span> <span class="n">targetCountry</span><span class="p">))</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="src.spotipyUtilities.source.html#l54">
+                  <tt><i>54</i>   <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">topTenTracks</span><span class="p">)):</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="src.spotipyUtilities.source.html#l65">
+                  <tt><i>65</i>   <span class="k">if</span> <span class="s1">&#39;|&#39;</span> <span class="ow">in</span> <span class="n">tmpName</span><span class="p">:</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="src.spotipyUtilities.source.html#l67">
+                  <tt><i>67</i>   <span class="k">return</span> <span class="n">tmpName</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="src.spotipyUtilities.source.html#l91">
+                  <tt><i>91</i>   <span class="n">trackDetails</span> <span class="o">=</span> <span class="n">conf</span><span class="o">.</span><span class="n">sp</span><span class="o">.</span><span class="n">track</span><span class="p">(</span><span class="n">trackID</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="src.spotipyUtilities.source.html#l92">
+                  <tt><i>92</i>   <span class="n">trackFeatures</span> <span class="o">=</span> <span class="n">conf</span><span class="o">.</span><span class="n">sp</span><span class="o">.</span><span class="n">audio_features</span><span class="p">(</span><span class="n">trackID</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="src.spotipyUtilities.source.html#l95">
+                  <tt><i>95</i>   <span class="n">name</span> <span class="o">=</span> <span class="n">trackDetails</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="src.spotipyUtilities.source.html#l98">
+                  <tt><i>98</i>   <span class="n">energy</span> <span class="o">=</span> <span class="n">trackFeatures</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;energy&#39;</span><span class="p">]</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="src.spotipyUtilities.source.html#l99">
+                  <tt><i>99</i>   <span class="n">liveness</span> <span class="o">=</span> <span class="n">trackFeatures</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;liveness&#39;</span><span class="p">]</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="src.spotipyUtilities.source.html#l100">
+                  <tt><i>100</i>   <span class="n">loudness</span> <span class="o">=</span> <span class="n">trackFeatures</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;loudness&#39;</span><span class="p">]</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="src.spotipyUtilities.source.html#l102">
+                  <tt><i>102</i>   <span class="n">trackInfo</span> <span class="o">=</span> <span class="p">[</span><span class="n">name</span><span class="p">,</span> <span class="n">energy</span><span class="p">,</span> <span class="n">liveness</span><span class="p">,</span> <span class="n">loudness</span><span class="p">]</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="src.spotipyUtilities.source.html#l104">
+                  <tt><i>104</i>   <span class="k">return</span> <span class="n">trackInfo</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E302">
+               <span class="count sev-2">
+                  10
+               </span>
+               <strong>E302:</strong> expected 2 blank lines, found 1
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="src.spotipyUtilities.source.html#l5">
+                  <tt><i>5</i> <span class="k">def</span> <span class="nf">uriFinder</span><span class="p">(</span><span class="n">artist</span><span class="p">):</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="src.spotipyUtilities.source.html#l17">
+                  <tt><i>17</i> <span class="k">def</span> <span class="nf">getArtistGenreByName</span><span class="p">(</span><span class="n">artistName</span><span class="p">):</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="src.spotipyUtilities.source.html#l25">
+                  <tt><i>25</i> <span class="k">def</span> <span class="nf">getArtistGenreByURI</span><span class="p">(</span><span class="n">artistURI</span><span class="p">):</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="src.spotipyUtilities.source.html#l33">
+                  <tt><i>33</i> <span class="k">def</span> <span class="nf">albumFinder</span><span class="p">(</span><span class="n">artist</span><span class="p">,</span> <span class="n">artistURI</span><span class="p">):</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="src.spotipyUtilities.source.html#l47">
+                  <tt><i>47</i> <span class="k">def</span> <span class="nf">topSongs</span><span class="p">(</span><span class="n">artist</span><span class="p">,</span> <span class="n">artistURI</span><span class="p">,</span> <span class="n">targetCountry</span><span class="p">):</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="src.spotipyUtilities.source.html#l59">
+                  <tt><i>59</i> <span class="k">def</span> <span class="nf">getPlaylistName</span><span class="p">(</span><span class="n">playlist_id</span><span class="p">):</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="src.spotipyUtilities.source.html#l64">
+                  <tt><i>64</i> <span class="k">def</span> <span class="nf">clearPlaylistName</span><span class="p">(</span><span class="n">tmpName</span><span class="p">):</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="src.spotipyUtilities.source.html#l70">
+                  <tt><i>70</i> <span class="k">def</span> <span class="nf">trackIDsFromPlaylist</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="n">playlistID</span><span class="p">):</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="src.spotipyUtilities.source.html#l89">
+                  <tt><i>89</i> <span class="k">def</span> <span class="nf">getTrackFeatures</span><span class="p">(</span><span class="n">trackID</span><span class="p">):</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="src.spotipyUtilities.source.html#l107">
+                  <tt><i>107</i> <span class="k">def</span> <span class="nf">getTrackPreview</span><span class="p">(</span><span class="n">trackName</span><span class="p">,</span> <span class="n">artistName</span><span class="p">):</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E251">
+               <span class="count sev-2">
+                  4
+               </span>
+               <strong>E251:</strong> unexpected spaces around keyword / parameter equals
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <p>Unexpected spaces around keyword / parameter equals (in 2 places):</p>
+               
+               <a href="src.spotipyUtilities.source.html#l35">
+                  <tt><i>35</i>   <span class="n">albumsData</span> <span class="o">=</span> <span class="n">conf</span><span class="o">.</span><span class="n">sp</span><span class="o">.</span><span class="n">artist_albums</span><span class="p">(</span><span class="n">artistURI</span><span class="p">,</span> <span class="n">album_type</span> <span class="o">=</span> <span class="s1">&#39;album&#39;</span><span class="p">)</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Unexpected spaces around keyword / parameter equals (in 2 places):</p>
+               
+               <a href="src.spotipyUtilities.source.html#l49">
+                  <tt><i>49</i>   <span class="n">topTracks</span> <span class="o">=</span> <span class="n">conf</span><span class="o">.</span><span class="n">sp</span><span class="o">.</span><span class="n">artist_top_tracks</span><span class="p">(</span><span class="n">artistURI</span><span class="p">,</span> <span class="n">country</span> <span class="o">=</span> <span class="n">targetCountry</span><span class="p">)</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E501">
+               <span class="count sev-2">
+                  4
+               </span>
+               <strong>E501:</strong> line too long (97 > 79 characters)
+               
+                  (and 3 similar)
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <p>Line too long (97 > 79 characters):</p>
+               
+               <a href="src.spotipyUtilities.source.html#l1">
+                  <tt><i>1</i> <span class="c1"># ================================ Methods that use Spotipy APIs ================================</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (111 > 79 characters):</p>
+               
+               <a href="src.spotipyUtilities.source.html#l53">
+                  <tt><i>53</i>   <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;These are </span><span class="si">%s</span><span class="s2"> </span><span class="se">\&#39;</span><span class="s2">s top </span><span class="si">%d</span><span class="s2"> songs in </span><span class="si">%s</span><span class="s2"> found on Spotify:</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">artist</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">topTenTracks</span><span class="p">),</span> <span class="n">targetCountry</span><span class="p">))</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (102 > 79 characters):</p>
+               
+               <a href="src.spotipyUtilities.source.html#l63">
+                  <tt><i>63</i> <span class="c1"># Methodo that removes the char &quot;|&quot; if found due to the fact that files cant have it within their name</span></tt>
+               </a>
+            </li><li>
+               
+               <p>Line too long (93 > 79 characters):</p>
+               
+               <a href="src.spotipyUtilities.source.html#l76">
+                  <tt><i>76</i>         <span class="n">playlist</span> <span class="o">=</span> <span class="n">conf</span><span class="o">.</span><span class="n">sp</span><span class="o">.</span><span class="n">user_playlist_tracks</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="n">playlistID</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="n">limit</span><span class="p">,</span> <span class="n">offset</span><span class="o">=</span><span class="n">offset</span><span class="p">)</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="E114">
+               <span class="count sev-2">
+                  2
+               </span>
+               <strong>E114:</strong> indentation is not a multiple of 4 (comment)
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="src.spotipyUtilities.source.html#l94">
+                  <tt><i>94</i>   <span class="c1"># Track Info</span></tt>
+               </a>
+            </li><li>
+               
+               <a href="src.spotipyUtilities.source.html#l97">
+                  <tt><i>97</i>   <span class="c1"># Track Features</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         <li>
+            <a data-code="W292">
+               <span class="count sev-2">
+                  1
+               </span>
+               <strong>W292:</strong> no newline at end of file
+               
+            </a>
+            <ul class="details">
+            <li>
+               
+               <a href="src.spotipyUtilities.source.html#l121">
+                  <tt><i>121</i>     <span class="k">return</span> <span class="kc">None</span></tt>
+               </a>
+            </li>
+            </ul>
+         </li>
+         
+         </ul>
+      </div>
+   </body>
+</html>

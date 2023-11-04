@@ -25,4 +25,8 @@ dvc==3.27.0
 dvc-s3==2.23.0
 dvc_gdrive==2.20.0
 joblib==1.3.2
+
+# Libraries needed for Quality-Assessment
 pylint==3.0.2
+flake8==6.1.0
+flake8-html==0.4.3
