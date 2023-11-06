@@ -1,8 +1,10 @@
-# ================================ Preprocessing ================================
-import sys
-sys.path.append('src')
-import conf
-import pandas as pd
+import sys  # noqa:E402
+sys.path.append('src')  # noqa:E402
+import conf  # noqa:E402
+import pandas as pd  # noqa:E402
+
+
+# =============================== Preprocessing ===============================
 
 # Method that removes rows that contain null values in the field "Name"
 def removeNullValuesDF(df):
@@ -16,7 +18,8 @@ def removeNullValuesDF(df):
 
     return df
 
-# Method that normalizes the values of some columns within a given dataframe using the min max normalization
+
+# Normalize specific dataframe columns using min-max
 def minMaxNormalization(data, columns):
 
     minVals = data[columns].min()
@@ -28,23 +31,28 @@ def minMaxNormalization(data, columns):
 
     return normalized_data
 
-# Method that normalizes the values for the Tempo and Loudness columns in the dataframe
+
+# Normalize Tempo and Loudness columns in the dataframe.
 def normalizeColumns(df):
     colsToNormalize = ['Loudness']
     df = minMaxNormalization(df, colsToNormalize)
     return df
 
-# Method that preprocesses a given dataframe by removing rows with null values and normalizes the values for two columns
+
+# Preprocesses a dataframe by removing null rows and normalizing two columns.
 def preprocessData(df):
     df = removeNullValuesDF(df)
     df = normalizeColumns(df)
     return df
 
+
 # Method to print the min and max value of a column in a dataframe
 def printColumnMinMax(df, column):
     min = df[column].min()
     max = df[column].max()
-    print("For the column %s the min val. is %s and the max val. is %s" % (column, str(min), str(max)))
+    print("For the column %s the min val. is %s and the max val. is %s"
+          % (column, str(min), str(max)))
+
 
 trainTracksDF = pd.read_csv(conf.train_set_csv_path)
 testTracksDF = pd.read_csv(conf.test_set_csv_path)
@@ -52,7 +60,8 @@ testTracksDF = pd.read_csv(conf.test_set_csv_path)
 print("===================================================")
 print("Preprocessing train set..\nRemoving rows with null values...")
 trainTracksDF = removeNullValuesDF(trainTracksDF)
-print("Normalizing the values in the column Loudness. Pre-Normalization min and max values:")
+print("Normalizing the values in the column Loudness."
+      "Pre-Normalization min and max values:")
 printColumnMinMax(trainTracksDF, "Loudness")
 trainTracksDF = normalizeColumns(trainTracksDF)
 print("Post-Normalization min and max values:")
@@ -63,7 +72,8 @@ print("===================================================")
 
 print("Moving onto the test set. Removing rows with null values...")
 testTracksDF = removeNullValuesDF(testTracksDF)
-print("Normalizing the values in the column Loudness. Pre-Normalization min and max values:")
+print("Normalizing the values in the column Loudness."
+      "Pre-Normalization min and max values:")
 printColumnMinMax(testTracksDF, "Loudness")
 testTracksDF = normalizeColumns(testTracksDF)
 print("The test set has been preprocessed!")

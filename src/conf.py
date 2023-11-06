@@ -25,7 +25,7 @@ spotifyClientSecret = "1b160cf5acf94d44922b14c3cc5b295a"
 
 # Instances of the main elements needed from the Spotipy library
 # in order to work with playlists and tracks
-authManager = SpotifyClientCredentials(client_id=spotifyClientId, 
+authManager = SpotifyClientCredentials(client_id=spotifyClientId,
                                        client_secret=spotifyClientSecret)
 sp = spotipy.Spotify(auth_manager=authManager)
 
@@ -39,7 +39,7 @@ rnd_state = 42
 no_recommendations = 5
 
 train_set_csv_path = os.path.join(prepro_data_dir, 'keep grinding..csv')
-test_set_csv_path = os.path.join(prepro_data_dir, 'Spotify\'s Most Played All-Time [Updated Weekly]  Most Streamed  Top Played  500Mil+.csv')
+test_set_csv_path = os.path.join(prepro_data_dir, 'Spotify\'s Most Played All-Time [Updated Weekly]  Most Streamed  Top Played  500Mil+.csv')  # noqa:E501
 feedbackUser1_path = os.path.join(prepro_data_dir, 'feedbackUser1.csv')
 feedbackUser2_path = os.path.join(prepro_data_dir, 'feedbackUser2.csv')
 

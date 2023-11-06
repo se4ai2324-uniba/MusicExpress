@@ -1,6 +1,5 @@
 import spotipyUtilities as spUt
 import conf
-
 import os
 import time
 import pandas as pd

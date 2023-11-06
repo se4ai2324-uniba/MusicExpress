@@ -1,11 +1,12 @@
-import sys
-import conf
-import filesUtilities as flUt
-import spotipyUtilities as spUt
-import zipfile as zf
+import sys  # noqa:E402
+sys.path.append('src')  # noqa:E402
+import conf  # noqa:E402
+import filesUtilities as flUt  # noqa:E402
+import spotipyUtilities as spUt  # noqa:E402
+import zipfile as zf  # noqa:E402
 
 # ======================= Playlist Retrival =======================
-sys.path.append('src')
+
 
 with zf.ZipFile(conf.data_dir + 'dataset.zip', 'r') as zip_ref:
     zip_ref.extractall(conf.prepro_data_dir)
@@ -29,11 +30,11 @@ for playlistID in conf.playlists:
     playlistsNames.append(playlistName)
 
     if (flUt.checkFileExists(playlistID)):
-        print(f"The file of the playlist {spUt.getPlaylistName(playlistID)} 
-              is stored and ready to be used.")
+        print("The file of the playlist %s" % spUt.getPlaylistName(playlistID)
+              + " is stored and ready to be used.")
     else:
-        print(f"The file of the playlist {spUt.getPlaylistName(playlistID)} \
-               isn't stored. Creating dataframe...")
+        print("The file of the playlist %s" % spUt.getPlaylistName(playlistID)
+              + " isn't stored. Creating dataframe...")
         tracksDF = flUt.createPlaylistDF(playlistID)
 
     print("===================================================")

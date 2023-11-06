@@ -1,10 +1,12 @@
+import sys  # noqa:E402
+sys.path.append('src')  # noqa:E402
+import conf  # noqa:E402
+import pandas as pd  # noqa:E402
+from sklearn_extra.cluster import KMedoids  # noqa:E402
+from joblib import dump  # noqa:E402
+
+
 # ================================ Clustering ================================
-import sys
-sys.path.append('src')
-import conf
-import pandas as pd
-from sklearn_extra.cluster import KMedoids
-from joblib import dump
 
 print("Starting to cluster out the data...")
 trainTracksDF = pd.read_csv(conf.pro_train_set_path)
@@ -14,12 +16,13 @@ trainSet = trainTracksDF[conf.features]
 testSet = testTracksDF[conf.features]
 
 # Clustering train set (user's preferences playlist)
-kmedoids = KMedoids(n_clusters = conf.no_cluster, random_state = conf.rnd_state)
+kmedoids = KMedoids(n_clusters=conf.no_cluster,
+                    random_state=conf.rnd_state)
 
 clusters = kmedoids.fit_predict(trainSet)
 trainTracksDF['Cluster'] = clusters
 
-# Clustering test set with the trained model (playlist from which songs will be suggested)
+# Cluster the test set using the trained model for song suggestions.
 test_clusters = kmedoids.predict(testSet)
 testTracksDF['Cluster'] = test_clusters
 

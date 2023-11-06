@@ -2,6 +2,7 @@ import conf
 
 # ====================== Methods that use Spotipy APIs ======================
 
+
 # Method that returns an Artist's URI given its name
 def uriFinder(artist):
 
@@ -55,7 +56,7 @@ def topSongs(artist, artistURI, targetCountry):
 
     topTenTracks = topTracks['tracks'][:10]
 
-    print("These are %s \'s top %d songs in %s found on Spotify:\n" 
+    print("These are %s \'s top %d songs in %s found on Spotify:\n"
           % (artist, len(topTenTracks), targetCountry))
     for x in range(len(topTenTracks)):
         print(str(x+1) + "° Track: " + topTenTracks[x]['name'])
@@ -82,7 +83,7 @@ def trackIDsFromPlaylist(user, playlistID):
     limit = 100
 
     while True:
-        playlist = conf.sp.user_playlist_tracks(user, playlistID, 
+        playlist = conf.sp.user_playlist_tracks(user, playlistID,
                                                 limit=limit, offset=offset)
 
         for elem in playlist['items']:

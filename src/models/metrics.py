@@ -1,19 +1,20 @@
+import sys  # noqa:E402
+sys.path.append('src')  # noqa:E402
+import conf  # noqa:E402
+import pandas as pd  # noqa:E402
+import mlflow  # noqa:E402
+import mlflow.sklearn  # noqa:E402
+import dagshub  # noqa:E402
+from joblib import load  # noqa:E402
+
 # ================================ Metrics ================================
-import sys
-sys.path.append('src')
-import conf
-import pandas as pd
-import mlflow 
-import mlflow.sklearn
-import dagshub
-from joblib import load
 
 recSongs_pred = pd.read_csv(conf.recommendations_path)
 recSongs_pred['Feedback'] = 1
 
 print("These are the systems recommendations:")
 print(recSongs_pred)
-print("Those will be compared to some songs that the user said to like in the test set.")
+print("Comparison with user-liked songs in the test set")
 
 fdbk1 = pd.read_csv(conf.feedbackUser1_path)
 fdbk2 = pd.read_csv(conf.feedbackUser2_path)
@@ -31,7 +32,7 @@ for _, row_pred in recSongs_pred.iterrows():
         song_name_fb = row_fbk['Name']
         artist_name_fb = row_fbk['Artist']
         label_fb = row_fbk['Feedback']
-        
+
         if song_name == song_name_fb and artist_name == artist_name_fb:
 
             if label == label_fb:
@@ -45,7 +46,7 @@ kmedoids = load(conf.model_file_path)
 
 dagshub.init("MusicExpress", "se4ai2324-uniba", mlflow=True)
 
-mlflow.start_run() 
+mlflow.start_run()
 
 mlflow.sklearn.log_model(kmedoids, "kmedoids-model")
 mlflow.log_params({

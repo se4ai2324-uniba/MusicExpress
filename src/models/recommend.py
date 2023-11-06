@@ -1,12 +1,13 @@
-# ================================ Song Recommendations ================================
+import sys  # noqa:E402
+sys.path.append('src')  # noqa:E402
+import conf  # noqa:E402
+import spotipyUtilities as spUt  # noqa:E402
+import numpy as np  # noqa:E402
+import pandas as pd  # noqa:E402
+import random  # noqa:E402
 
-import sys 
-sys.path.append('src')
-import conf
-import spotipyUtilities as spUt
-import numpy as np
-import pandas as pd
-import random
+
+# ========================== Song Recommendations ===========================
 
 # Euclidean distance between two songs
 def euclideanDistance(track1, track2, features):
@@ -18,20 +19,21 @@ def euclideanDistance(track1, track2, features):
 
     return distance
 
-# Function to recommend songs based on cluster
-def recommend_songs(test_tracks_cluster, testTrack, cluster_label, num_recommendations, features):
 
-    clusterTracks = test_tracks_cluster[test_tracks_cluster['Cluster'] == cluster_label]
+# Function to recommend songs based on cluster
+def recommend_songs(test_tracks_cluster, testTrack,
+                    cluster_label, num_recommendations, features):
+
+    clusterTracks = test_tracks_cluster[test_tracks_cluster['Cluster'] == cluster_label]  # noqa:E501
 
     # Calculate similarity with the test song
     similarity_scores = []
 
     for index, track in clusterTracks.iterrows():
-
-      # Avoids to compare between the test track and itself
-      if track['Name'] != testTrack['Name']:
-          similarity = euclideanDistance(testTrack, track, features)
-          similarity_scores.append((index, similarity))
+        # Avoids to compare between the test track and itself
+        if track['Name'] != testTrack['Name']:
+            similarity = euclideanDistance(testTrack, track, features)
+            similarity_scores.append((index, similarity))
 
     # Sort songs by similarity in ascending order - Euclidean Distance
     similarity_scores.sort(key=lambda x: x[1])
@@ -45,6 +47,7 @@ def recommend_songs(test_tracks_cluster, testTrack, cluster_label, num_recommend
 
     return recommended_songs
 
+
 trainTracksDF = pd.read_csv(conf.cluster_train_set_path)
 testTracksDF = pd.read_csv(conf.cluster_test_set_path)
 
@@ -55,21 +58,24 @@ print("Starting song recommendation phase...")
 print("===================================================")
 
 trackCluster = trainTracksDF[trainTracksDF['Name'] == trainTrack['Name']]
-print("The track from which suggestions will be computed is: \"%s - %s\"." 
+print("The track from which suggestions will be computed is: \"%s - %s\"."
       % (trackCluster['Name'].values[0], trackCluster['Artist'].values[0]))
 
 trainTrackCluster = trackCluster['Cluster'].values[0]
 print("===================================================")
 
-recommendations = recommend_songs(testTracksDF, trainTrack, trainTrackCluster, conf.no_recommendations, conf.features)
+recommendations = recommend_songs(testTracksDF, trainTrack, trainTrackCluster,
+                                  conf.no_recommendations, conf.features)
 recommendations_links = []
 
 for x in range(len(recommendations)):
-  recommendations_links.append(spUt.getTrackPreview(recommendations[x]['Name'], recommendations[x]['Artist']))
+    recommendations_links.append(spUt.getTrackPreview(
+        recommendations[x]['Name'], recommendations[x]['Artist']))
 
 for x in range(len(recommendations)):
-  print(str(x+1) + "° Track: " + recommendations[x]['Name'] + " - Artist: " + recommendations[x]['Artist'])
-  print("Preview: ", recommendations_links[x])
+    print(str(x+1) + "° Track: " + recommendations[x]['Name'] +
+          " - Artist: " + recommendations[x]['Artist'])
+    print("Preview: ", recommendations_links[x])
 print("===================================================")
 
 recommendations_data = []
@@ -84,4 +90,4 @@ for recommendation in recommendations:
 recommendationsDF = pd.DataFrame(recommendations_data)
 
 recommPath = conf.output_dir + "recommendations.csv"
-recommendationsDF.to_csv(recommPath, index = False)
+recommendationsDF.to_csv(recommPath, index=False)
