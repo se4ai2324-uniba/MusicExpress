@@ -93,6 +93,8 @@ dvc pull -r myremote
 dvc repro
 ```
 
+Testing is conducted within the DVC pipeline, and you can find more details about it [here](src/tests/README.md).
+
 ## Citation
 
 ```bibtex
@@ -112,44 +114,48 @@ url = {https://github.com/se4ai2324-uniba/MusicExpress}
     ├── README.md          <- The top-level README for developers using this project.
     ├── data
     │   ├── external       <- Data from third party sources.
-    │   ├── interim        <- Intermediate data that has been transformed.
+    │   ├── interim        <- Data before processing
     │   ├── output         <- Data after clustering and song recommendations
-    │   ├── processed      <- The final, canonical data sets for modeling.
+    │   ├── processed      <- Processed data, ready to be used for clustering
     │   └── raw            <- The original, immutable data dump.
     │
     ├── docs               <- A default Sphinx project; see sphinx-doc.org for details
     │
     ├── models             <- Trained and serialized models, model predictions, or model summaries
     │
-    ├── notebooks          <- Jupyter notebooks. Naming convention is a number (for ordering),
-    │                         the creator's initials, and a short `-` delimited description, e.g.
-    │                         `1.0-jqp-initial-data-exploration`.
+    ├── notebooks          <- Jupyter notebook providing an overview of code and the Spotipy library
     │
     ├── references         <- Data dictionaries, manuals, and all other explanatory materials.
     │
     ├── reports            <- Generated analysis as HTML, PDF, LaTeX, etc.
-    │   └── figures        <- Generated graphics and figures to be used in reporting
+    │   ├── figures        <- Generated graphics and figures to be used in reporting
+    │   ├── flake8        <- Flake8 generated HTML page for quality assurance (QA)
+    │   └── pylint        <- Pylint reports for quality assurance (QA)
     │
-    ├── requirements.txt   <- The requirements file for reproducing the analysis environment, e.g.
-    │                         generated with `pip freeze > requirements.txt`
+    ├── requirements.txt   <- The requirements file for reproducing the analysis environment
     │
     ├── setup.py           <- makes project pip installable (pip install -e .) so src can be imported
     ├── src                <- Source code for use in this project.
-    │   ├── __init__.py    <- Makes src a Python module
     │   │
     │   ├── data           <- Scripts to download or generate data
-    │   │   └── make_dataset.py
+    │   │   └── extractData.py
     │   │
     │   ├── features       <- Scripts to turn raw data into features for modeling
-    │   │   └── build_features.py
+    │   │   └── preprocessing.py
     │   │
-    │   ├── models         <- Scripts to train models and then use trained models to make
-    │   │   │                 predictions
-    │   │   ├── predict_model.py
-    │   │   └── train_model.py
+    │   ├── models         <- Scripts to train the model and then use the trained model to make
+    │   │   │                 suggestions
+    │   │   ├── clustering.py
+    │   │   ├── recommend.py
+    │   │   └── metrics.py
     │   │
-    │   └── visualization  <- Scripts to create exploratory and results oriented visualizations
-    │       └── visualize.py
+    │   │── visualization  <- Scripts to create exploratory and results oriented visualizations
+    │   │
+    │   │── conf.py    <- Variables used in all the other scripts
+    │   │
+    │   │── filesUtilities.py    <- Methods for file operations
+    │   │
+    │   └── spotipyUtilities.py    <- Methods that make use of Spotipy features
     │
     └── tox.ini            <- tox file with settings for running tox; see tox.readthedocs.io
 

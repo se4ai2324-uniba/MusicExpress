@@ -8,7 +8,7 @@ coverage
 flake8
 python-dotenv>=0.5.1
 
-# Libraries needed to run the code
+# Libraries needed to run the code found in both the notebook and the scripts
 ipython==8.16.1
 matplotlib==3.8.0
 numpy==1.26.1
@@ -19,6 +19,8 @@ scikit_learn_extra==0.3.0
 spotipy==2.23.0
 yellowbrick==1.5
 nbformat>=4.2.0
+
+# Libraries needed for Data Versioning, Model and Experiment Tracking
 mlflow==2.7.1
 dagshub==0.3.8.post2
 dvc==3.27.0
