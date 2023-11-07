@@ -11,7 +11,7 @@ import conf                         # noqa:E402
 context = gx.get_context()
 
 # Create expectation suite valid for both train and test preprocessed data
-suite = context.add_expectation_suite(expectation_suite_name="preprocessed_data_expectations")
+suite = context.add_expectation_suite(expectation_suite_name="preprocessed_data_expectations")  # noqa:E501
 
 name_notnull_config = ExpectationConfiguration(
     expectation_type="expect_column_values_to_not_be_null",
@@ -139,11 +139,11 @@ suite.add_expectation(loudness_inrange_config)
 context.save_expectation_suite(expectation_suite=suite)
 
 # Connect to train and test data
-train_validator = context.sources.pandas_default.read_csv(conf.pro_train_set_path)
-test_validator = context.sources.pandas_default.read_csv(conf.pro_test_set_path)
+train_validator = context.sources.pandas_default.read_csv(conf.pro_train_set_path)  # noqa:E501
+test_validator = context.sources.pandas_default.read_csv(conf.pro_test_set_path)  # noqa:E501
 
 # Load the expectation suite
-preprocessed_data_suite = context.get_expectation_suite("preprocessed_data_expectations")
+preprocessed_data_suite = context.get_expectation_suite("preprocessed_data_expectations")  # noqa:E501
 
 # Create validation checkpoints
 train_checkpoint = context.add_or_update_checkpoint(
