@@ -16,7 +16,7 @@ def checkFileExists(playlist_id):
     file_path = conf.PREPRO_DATA_DIR + file_name
 
     if os.path.isfile(file_path):
-        print(f'The playlist {currentPlaylist} was already stored.')
+        print(f"The playlist {currentPlaylist} was already stored.")
         print("Checking for differences...")
         return True
     
@@ -42,7 +42,7 @@ def readPlaylistDF(playlist_id):
 def createPlaylistDF(playlist_id):
 
     tracks = spUt.trackIDsFromPlaylist("ivanrinaldi_", playlist_id)
-    print(f'{len(tracks)} tracks have been found in the given playlist!')
+    print(f"{len(tracks)} tracks have been found in the given playlist!")
     print("Extracting features of each track...")
 
     tracksFeatures = []
@@ -51,7 +51,7 @@ def createPlaylistDF(playlist_id):
         time.sleep(.20)
         tracksFeatures.append(spUt.getTrackFeatures(id))
 
-    print(f'Feature for all {len(tracks)} songs have been extracted.')
+    print(f"Feature for all {len(tracks)} songs have been extracted.")
     print("Creating dataframe..")
 
     tracksDF = pd.DataFrame(tracksFeatures, columns=conf.DATAFRAMECOLUMNS)
@@ -67,4 +67,4 @@ def storePlaylistDataframe(playlist_id, dataframe):
     file_path = conf.DATA_DIR + file_name
     dataframe.to_csv(file_path, index=False)
     print("Playlist has been successfully saved!")
-    print(f' - Playlist\'s Name: {str(spUt.getPlaylistName(playlist_id))}.')
+    print(f" - Playlist\'s Name: {str(spUt.getPlaylistName(playlist_id))}.")

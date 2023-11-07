@@ -15,7 +15,7 @@ with zf.ZipFile(conf.DATA_DIR + 'dataset.zip', 'r') as zip_ref:
 
 print("The default playlists are:\n")
 for p in conf.PLAYLISTS:
-    print(f'Playlist\'s ID: {p} || Name: {spUt.getPlaylistName(p)}')
+    print(f"Playlist's ID: {p} || Name: {spUt.getPlaylistName(p)}")
 
 print("===================================================")
 print("Checking if the playlist is stored, \
@@ -32,9 +32,9 @@ for playlistID in conf.PLAYLISTS:
     playlistsNames.append(playlistName)
 
     if (flUt.checkFileExists(playlistID)):
-        print(f'{spUt.getPlaylistName(playlistID)} is stored and ready to be used.')
+        print(f"{spUt.getPlaylistName(playlistID)} is stored and ready to be used.")
     else:
-        print(f'{spUt.getPlaylistName(playlistID)} isn\'t stored. Creating dataframe...')
+        print(f"{spUt.getPlaylistName(playlistID)} isn\'t stored. Creating dataframe...")
 
         tracksDF = flUt.createPlaylistDF(playlistID)
 
@@ -44,5 +44,5 @@ for playlistID in conf.PLAYLISTS:
 print("All playlists have been stored!")
 print("Here a list of all the stored playlists:")
 for x in range(len(playlistsNames)):
-    print(f'{str(x+1)}. Playlist: {playlistsNames[x]}')
+    print(f"{str(x+1)}. Playlist: {playlistsNames[x]}")
 print("===================================================")

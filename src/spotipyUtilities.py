@@ -44,7 +44,7 @@ def albumFinder(artist, artistURI):
         albumsData = conf.SP.next(albumsData)
         albums.extend(albumsData['items'])
 
-    print(f'These are all {artist} \'s albums found on Spotify:')
+    print(f"These are all {artist} \'s albums found on Spotify:")
     for x in range(len(albums)):
         print(str(x) + "° Album: " + albums[x]['name'])
 
@@ -56,8 +56,7 @@ def topSongs(artist, artistURI, targetCountry):
 
     topTenTracks = topTracks['tracks'][:10]
 
-    print(f'These are {artist} \'s top {len(topTenTracks)} 
-          songs in {targetCountry} found on Spotify:')
+    print(f"These are {artist} \'s top {len(topTenTracks)} songs in {targetCountry} found on Spotify:")
 
     for x in range(len(topTenTracks)):
         print(str(x+1) + "° Track: " + topTenTracks[x]['name'])

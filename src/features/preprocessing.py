@@ -16,7 +16,7 @@ def removeNullValuesDF(df):
 
     df = df.dropna(subset=['Name'])
     postLen = len(df)
-    print("%d rows have been removed!" % (preLen-postLen))
+    print(f"{preLen-postLen} rows have been removed!")
 
     return df
 

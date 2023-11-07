@@ -33,4 +33,3 @@ pylint==3.0.2
 flake8==6.1.0
 flake8-html==0.4.3
 great-expectations==0.18.1
-deepchecks==0.17.5
