@@ -48,8 +48,8 @@ def recommend_songs(test_tracks_cluster, testTrack,
     return recommended_songs
 
 
-trainTracksDF = pd.read_csv(conf.cluster_train_set_path)
-testTracksDF = pd.read_csv(conf.cluster_test_set_path)
+trainTracksDF = pd.read_csv(conf.CLUSTER_TRAIN_SET_PATH)
+testTracksDF = pd.read_csv(conf.CLUSTER_TEST_SET_PATH)
 
 trainTrackIndex = random.randint(0, len(trainTracksDF))
 trainTrack = trainTracksDF.iloc[trainTrackIndex]
@@ -65,7 +65,7 @@ trainTrackCluster = trackCluster['Cluster'].values[0]
 print("===================================================")
 
 recommendations = recommend_songs(testTracksDF, trainTrack, trainTrackCluster,
-                                  conf.no_recommendations, conf.features)
+                                  conf.NO_RECOMMENDATIONS, conf.FEATURES)
 recommendations_links = []
 
 for x in range(len(recommendations)):
@@ -89,5 +89,5 @@ for recommendation in recommendations:
 
 recommendationsDF = pd.DataFrame(recommendations_data)
 
-recommPath = conf.output_dir + "recommendations.csv"
+recommPath = conf.OUTPUT_DIR + "recommendations.csv"
 recommendationsDF.to_csv(recommPath, index=False)

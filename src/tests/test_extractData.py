@@ -1,3 +1,5 @@
+"""Script to test the data after extraction"""
+
 import great_expectations as gx
 from great_expectations.core.expectation_suite import ExpectationConfiguration
 import sys
@@ -108,8 +110,8 @@ suite.add_expectation(loudness_float_config)
 context.save_expectation_suite(expectation_suite=suite)
 
 # Connect to train and test data
-train_validator = context.sources.pandas_default.read_csv(conf.train_set_csv_path)  # noqa:E501
-test_validator = context.sources.pandas_default.read_csv(conf.test_set_csv_path)  # noqa:E501
+train_validator = context.sources.pandas_default.read_csv(conf.TRAIN_SET_CSV_PATH)  # noqa:E501
+test_validator = context.sources.pandas_default.read_csv(conf.TEST_SET_CSV_PATH)  # noqa:E501
 
 # Load the expectation suite
 extracted_data_suite = context.get_expectation_suite("extracted_data_expectations")  # noqa:E501

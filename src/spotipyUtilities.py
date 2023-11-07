@@ -1,12 +1,12 @@
-import conf
+"""Script containing methods utilizing Spotipy APIs"""
 
-# ====================== Methods that use Spotipy APIs ======================
+import conf
 
 
 # Method that returns an Artist's URI given its name
 def uriFinder(artist):
 
-    artistCode = conf.sp.search(q='artist:' + artist, type='artist', limit=1)
+    artistCode = conf.SP.search(q='artist:' + artist, type='artist', limit=1)
 
     if artistCode['artists']['items']:
         artist_uri = artistCode['artists']['items'][0]['uri']
@@ -20,7 +20,7 @@ def uriFinder(artist):
 def getArtistGenreByName(artistName):
 
     artistURI = uriFinder(artistName)
-    artist = conf.sp.artist(artistURI)
+    artist = conf.SP.artist(artistURI)
     genre = artist['genres']
     return ', '.join(genre)
 
@@ -29,7 +29,7 @@ def getArtistGenreByName(artistName):
 def getArtistGenreByURI(artistURI):
 
     artist = uriFinder('Sleep Token')
-    artist = conf.sp.artist(artistURI)
+    artist = conf.SP.artist(artistURI)
     genre = artist['genres']
     return ', '.join(genre)
 
@@ -37,14 +37,14 @@ def getArtistGenreByURI(artistURI):
 # Method that returns all the Albums of a given Artist
 def albumFinder(artist, artistURI):
 
-    albumsData = conf.sp.artist_albums(artistURI, album_type='album')
+    albumsData = conf.SP.artist_albums(artistURI, album_type='album')
     albums = albumsData['items']
 
     while albumsData['next']:
-        albumsData = conf.sp.next(albumsData)
+        albumsData = conf.SP.next(albumsData)
         albums.extend(albumsData['items'])
 
-    print("These are all " + artist + "\'s albums found on Spotify:\n")
+    print(f'These are all {artist} \'s albums found on Spotify:')
     for x in range(len(albums)):
         print(str(x) + "° Album: " + albums[x]['name'])
 
@@ -52,12 +52,13 @@ def albumFinder(artist, artistURI):
 # Method that returns the top 10 songs of a given Artist
 def topSongs(artist, artistURI, targetCountry):
 
-    topTracks = conf.sp.artist_top_tracks(artistURI, country=targetCountry)
+    topTracks = conf.SP.artist_top_tracks(artistURI, country=targetCountry)
 
     topTenTracks = topTracks['tracks'][:10]
 
-    print("These are %s \'s top %d songs in %s found on Spotify:\n"
-          % (artist, len(topTenTracks), targetCountry))
+    print(f'These are {artist} \'s top {len(topTenTracks)} 
+          songs in {targetCountry} found on Spotify:')
+
     for x in range(len(topTenTracks)):
         print(str(x+1) + "° Track: " + topTenTracks[x]['name'])
         print(str(x+1) + "° Audio: " + topTenTracks[x]['preview_url'] + "\n")
@@ -65,7 +66,7 @@ def topSongs(artist, artistURI, targetCountry):
 
 # Method that returns the name of a given Playlist
 def getPlaylistName(playlist_id):
-    playlist = conf.sp.playlist(playlist_id)
+    playlist = conf.SP.playlist(playlist_id)
     return playlist['name']
 
 
@@ -83,7 +84,7 @@ def trackIDsFromPlaylist(user, playlistID):
     limit = 100
 
     while True:
-        playlist = conf.sp.user_playlist_tracks(user, playlistID,
+        playlist = conf.SP.user_playlist_tracks(user, playlistID,
                                                 limit=limit, offset=offset)
 
         for elem in playlist['items']:
@@ -100,8 +101,8 @@ def trackIDsFromPlaylist(user, playlistID):
 # Method that returns the features of every track in a given Playlist
 def getTrackFeatures(trackID):
 
-    trackDetails = conf.sp.track(trackID)
-    trackFeatures = conf.sp.audio_features(trackID)
+    trackDetails = conf.SP.track(trackID)
+    trackFeatures = conf.SP.audio_features(trackID)
 
     # Track Info
     name = trackDetails['name']
@@ -120,14 +121,14 @@ def getTrackFeatures(trackID):
 def getTrackPreview(trackName, artistName):
 
     query = f"track:{trackName} artist:{artistName}"
-    results = conf.sp.search(q=query, type='track')
+    results = conf.SP.search(q=query, type='track')
 
     for track in results['tracks']['items']:
         if track['name'].lower() == trackName.lower():
             artists = [artist['name'].lower() for artist in track['artists']]
             if artistName.lower() in artists:
                 track_id = track['id']
-                track_info = conf.sp.track(track_id)
+                track_info = conf.SP.track(track_id)
                 preview_url = track_info['preview_url']
                 return preview_url
 

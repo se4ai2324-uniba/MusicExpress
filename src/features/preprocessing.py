@@ -1,7 +1,9 @@
+"""Script to process the extracted data"""
+
 import sys  # noqa:E402
 sys.path.append('src')  # noqa:E402
-import conf  # noqa:E402
 import pandas as pd  # noqa:E402
+import conf  # noqa:E402
 
 
 # =============================== Preprocessing ===============================
@@ -54,8 +56,8 @@ def printColumnMinMax(df, column):
           % (column, str(min), str(max)))
 
 
-trainTracksDF = pd.read_csv(conf.train_set_csv_path)
-testTracksDF = pd.read_csv(conf.test_set_csv_path)
+trainTracksDF = pd.read_csv(conf.TRAIN_SET_CSV_PATH)
+testTracksDF = pd.read_csv(conf.TEST_SET_CSV_PATH)
 
 print("===================================================")
 print("Preprocessing train set..\nRemoving rows with null values...")
@@ -81,11 +83,11 @@ print("Pre-Normalization min and max values:")
 printColumnMinMax(testTracksDF, "Loudness")
 print("===================================================")
 
-outputTrainFile = conf.pro_data_dir + 'trainSet.csv'
-outputTestFile = conf.pro_data_dir + 'testSet.csv'
+OUTPUT_TRAIN_FILE = conf.PRO_DATA_DIR + 'trainSet.csv'
+OUTPUT_TEST_FILE = conf.PRO_DATA_DIR + 'testSet.csv'
 
 print("Storing the preprocessed files in the folder preprocessed_data.")
-trainTracksDF.to_csv(outputTrainFile, index=False)
-testTracksDF.to_csv(outputTestFile, index=False)
+trainTracksDF.to_csv(OUTPUT_TRAIN_FILE, index=False)
+testTracksDF.to_csv(OUTPUT_TEST_FILE, index=False)
 print("The data has been stored!")
 print("===================================================")

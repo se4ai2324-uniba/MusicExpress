@@ -1,3 +1,5 @@
+"""Script for computing accuracy and storing the experiment."""
+
 import sys  # noqa:E402
 sys.path.append('src')  # noqa:E402
 import conf  # noqa:E402
@@ -9,15 +11,15 @@ from joblib import load  # noqa:E402
 
 # ================================ Metrics ================================
 
-recSongs_pred = pd.read_csv(conf.recommendations_path)
+recSongs_pred = pd.read_csv(conf.RECOMMENDATIONS_PATH)
 recSongs_pred['Feedback'] = 1
 
 print("These are the systems recommendations:")
 print(recSongs_pred)
 print("Comparison with user-liked songs in the test set")
 
-fdbk1 = pd.read_csv(conf.feedbackUser1_path)
-fdbk2 = pd.read_csv(conf.feedbackUser2_path)
+fdbk1 = pd.read_csv(conf.FEEDBACKUSER1_PATH)
+fdbk2 = pd.read_csv(conf.FEEDBACKUSER2_PATH)
 
 correct_predictions = 0
 
@@ -38,11 +40,11 @@ for _, row_pred in recSongs_pred.iterrows():
             if label == label_fb:
                 correct_predictions += 1
 
-accuracy = float(correct_predictions / conf.no_recommendations)
+accuracy = float(correct_predictions / conf.NO_RECOMMENDATIONS)
 
 print(f"Accuracy: {accuracy:.2f}")
 
-kmedoids = load(conf.model_file_path)
+kmedoids = load(conf.MODEL_FILE_PATH)
 
 dagshub.init("MusicExpress", "se4ai2324-uniba", mlflow=True)
 
@@ -50,9 +52,9 @@ mlflow.start_run()
 
 mlflow.sklearn.log_model(kmedoids, "kmedoids-model")
 mlflow.log_params({
-    "no_cluster": conf.no_cluster,
-    "rnd_state": conf.rnd_state,
-    'no_recommendations': conf.no_recommendations
+    "no_cluster": conf.NO_CLUSTER,
+    "rnd_state": conf.RND_STATE,
+    'no_recommendations': conf.NO_RECOMMENDATIONS
 })
 mlflow.log_metric("Accuracy", accuracy)
 

@@ -1,3 +1,5 @@
+"""Script for data clustering"""
+
 import sys  # noqa:E402
 sys.path.append('src')  # noqa:E402
 import conf  # noqa:E402
@@ -9,15 +11,15 @@ from joblib import dump  # noqa:E402
 # ================================ Clustering ================================
 
 print("Starting to cluster out the data...")
-trainTracksDF = pd.read_csv(conf.pro_train_set_path)
-testTracksDF = pd.read_csv(conf.pro_test_set_path)
+trainTracksDF = pd.read_csv(conf.PRO_TRAIN_SET_PATH)
+testTracksDF = pd.read_csv(conf.PRO_TEST_SET_PATH)
 
-trainSet = trainTracksDF[conf.features]
-testSet = testTracksDF[conf.features]
+trainSet = trainTracksDF[conf.FEATURES]
+testSet = testTracksDF[conf.FEATURES]
 
 # Clustering train set (user's preferences playlist)
-kmedoids = KMedoids(n_clusters=conf.no_cluster,
-                    random_state=conf.rnd_state)
+kmedoids = KMedoids(n_clusters=conf.NO_CLUSTER,
+                    random_state=conf.RND_STATE)
 
 clusters = kmedoids.fit_predict(trainSet)
 trainTracksDF['Cluster'] = clusters
@@ -29,8 +31,8 @@ testTracksDF['Cluster'] = test_clusters
 print("Clustering completed!")
 
 print("===================================================")
-outputTrainFile = conf.output_dir + 'clustertrainSet.csv'
-outputTestFile = conf.output_dir + 'clustertestSet.csv'
+outputTrainFile = conf.OUTPUT_DIR + 'clustertrainSet.csv'
+outputTestFile = conf.OUTPUT_DIR + 'clustertestSet.csv'
 
 print("Storing the processed files in the folder processed_data.")
 trainTracksDF.to_csv(outputTrainFile, index=False)
@@ -45,4 +47,4 @@ print("First 5 rows of the test set:")
 print(testTracksDF.head())
 
 # Save the model to the file
-dump(kmedoids, conf.model_file_path)
+dump(kmedoids, conf.MODEL_FILE_PATH)

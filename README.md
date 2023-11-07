@@ -128,6 +128,7 @@ url = {https://github.com/se4ai2324-uniba/MusicExpress}
     ├── references         <- Data dictionaries, manuals, and all other explanatory materials.
     │
     ├── reports            <- Generated analysis as HTML, PDF, LaTeX, etc.
+    │   ├── deepchecks        <- Deepchecks generated HTML pages for data integrity
     │   ├── figures        <- Generated graphics and figures to be used in reporting
     │   ├── flake8        <- Flake8 generated HTML page for quality assurance (QA)
     │   └── pylint        <- Pylint reports for quality assurance (QA)
@@ -149,12 +150,15 @@ url = {https://github.com/se4ai2324-uniba/MusicExpress}
     │   │   ├── recommend.py
     │   │   └── metrics.py
     │   │
+    │   ├── tests         <- Test scripts
+    │   │   ├── test_extractData.py
+    │   │   ├── test_preprocessedData.py
+    │   │   └── test_deepchecks.ipynb
+    │   │
     │   │── visualization  <- Scripts to create exploratory and results oriented visualizations
     │   │
     │   │── conf.py    <- Variables used in all the other scripts
-    │   │
     │   │── filesUtilities.py    <- Methods for file operations
-    │   │
     │   └── spotipyUtilities.py    <- Methods that make use of Spotipy features
     │
     └── tox.ini            <- tox file with settings for running tox; see tox.readthedocs.io
