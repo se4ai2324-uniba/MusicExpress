@@ -8,7 +8,7 @@ To test our code, two libraries have been adopted:
 
 ## GreatExpectations
 
-The Greatexpectations library is employed in the _test_extractData.py_ and _test_preprocessedData.py_ scripts to examine the data needed for suggesting songs to the user. To assess this data, two test suites were established:
+The Greatexpectations library is employed in the [test_extractData script](../tests/test_extractData.py) and [test_preprocessedData script](../tests/test_preprocessedData.py) to examine the data needed for suggesting songs to the user. To assess this data, two test suites were established:
 
 - Test Suite: **extracted_data_expectations**
 
@@ -57,3 +57,13 @@ energy_inrange_config = ExpectationConfiguration(
 The two test suites are included in the DVC pipeline prior to the corresponding extract and preprocessing steps.
 
 ## Deepchecks
+
+The Deepchecks library is utilized in the [test_deepchecks notebook](../tests/test_deepchecks.ipynb) to evaluate the train and test data required for song recommendations. The **data_integrity** test suite was adjusted to retain only the most pertinent tests, which include:
+
+- **Mixed Data Type**: test that checks for variations in data types within a dataset. It helps identify columns or fields that may contain a mix of different data types.
+
+- **Mixed Nulls**: test that examines the presence of null or missing values in the dataset, specifically looking for columns where nulls are mixed with non-null values.
+
+- **Data Duplicates**: test that assesses the dataset for duplicate records or rows. It identifies instances where identical data points appear more than once.
+
+With the listed tests, we can better understand if our data presents issues or not and they also help us in making the data more reliable when used for song recommendations.
