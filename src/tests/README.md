@@ -56,6 +56,8 @@ energy_inrange_config = ExpectationConfiguration(
 
 The two test suites are included in the DVC pipeline prior to the corresponding extract and preprocessing steps.
 
+More information about this tool can be found [here](https://github.com/great-expectations/great_expectations).
+
 ## Deepchecks
 
 The Deepchecks library is utilized in the [test_deepchecks notebook](../tests/test_deepchecks.ipynb) to evaluate the train and test data required for song recommendations. The **data_integrity** test suite was adjusted to retain only the most pertinent tests, which include:
@@ -67,3 +69,5 @@ The Deepchecks library is utilized in the [test_deepchecks notebook](../tests/te
 - **Data Duplicates**: test that assesses the dataset for duplicate records or rows. It identifies instances where identical data points appear more than once.
 
 With the listed tests, we can better understand if our data presents issues or not and they also help us in making the data more reliable when used for song recommendations.
+
+More information about this tool can be found [here](https://github.com/deepchecks/deepchecks/tree/main).
