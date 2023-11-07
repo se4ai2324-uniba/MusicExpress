@@ -9,7 +9,7 @@ pro_data_dir = "data/processed/"
 output_dir = "data/output/"
 
 # Labels needed when creating Dataframes of the Playlists later in the code
-dataframeColumns = ['Name', 'Energy', 'Liveness', 'Loudness']
+dataframeColumns = ['Name', 'Artist', 'Energy', 'Liveness', 'Loudness']
 
 # Features to be used for clustering
 features = ['Energy', 'Liveness', 'Loudness']
