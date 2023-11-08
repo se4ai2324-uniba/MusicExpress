@@ -2,10 +2,10 @@
 
 import sys  # noqa:E402
 sys.path.append('src')  # noqa:E402
-import conf  # noqa:E402
 import filesUtilities as flUt  # noqa:E402
 import spotipyUtilities as spUt  # noqa:E402
 import zipfile as zf  # noqa:E402
+import conf  # noqa:E402
 
 # ======================= Playlist Retrieval =======================
 
@@ -30,7 +30,7 @@ for playlist_id in conf.PLAYLISTS:
 
     playlist_names.append(playlist_name)
 
-    if (flUt.check_file_exists(playlist_id)):
+    if flUt.check_file_exists(playlist_id):
         print(f"{spUt.get_playlist_name(playlist_id)} is "
               "stored and ready to be used.")
     else:

@@ -9,8 +9,8 @@ stages:
       size: 35270
     - path: src/data/extractData.py
       hash: md5
-      md5: aa069b3b7ed8fd978c435eda71c25fea
-      size: 1657
+      md5: 9f40126ca3fbb625c923bb131c4b58ca
+      size: 1655
     outs:
     - path: data/interim
       hash: md5
@@ -31,8 +31,8 @@ stages:
       size: 29615
     - path: src/features/preprocessing.py
       hash: md5
-      md5: e803c11f356f30853613bb1df12095ec
-      size: 3232
+      md5: 6fadc0363e5ba148ff28e378f10eb33d
+      size: 3235
     outs:
     - path: data/processed/testSet.csv
       hash: md5
@@ -55,7 +55,7 @@ stages:
       size: 37464
     - path: src/models/clustering.py
       hash: md5
-      md5: 9a7bf08c2a713d0f68a6df6b85911d9e
+      md5: 06d55996d7fc2d8662a4b2528ffe253b
       size: 1694
     outs:
     - path: data/output/clustertestSet.csv
@@ -79,13 +79,13 @@ stages:
       size: 38683
     - path: src/models/recommend.py
       hash: md5
-      md5: d77d73b6f0e3d4183fcf22dc42375ac1
-      size: 3470
+      md5: 586da62b256d3e5173da60a64f5f434f
+      size: 3490
     outs:
     - path: data/output/recommendations.csv
       hash: md5
-      md5: b3d39f326ee1d4c5514c7d3d3f22743b
-      size: 163
+      md5: e115b2918fb4d9deb52180bf8ef1c1ce
+      size: 155
   metrics:
     cmd: python src/models/metrics.py
     deps:
@@ -99,9 +99,9 @@ stages:
       size: 9546
     - path: data/output/recommendations.csv
       hash: md5
-      md5: b3d39f326ee1d4c5514c7d3d3f22743b
-      size: 163
+      md5: e115b2918fb4d9deb52180bf8ef1c1ce
+      size: 155
     - path: src/models/metrics.py
       hash: md5
-      md5: b376fda454f9b660622760298076f346
+      md5: fc776decbabf3e31d3e2671561318312
       size: 1722

@@ -2,12 +2,12 @@
 
 import sys  # noqa:E402
 sys.path.append('src')  # noqa:E402
-import conf  # noqa:E402
 import pandas as pd  # noqa:E402
 import mlflow  # noqa:E402
 import mlflow.sklearn  # noqa:E402
 import dagshub  # noqa:E402
 from joblib import load  # noqa:E402
+import conf  # noqa:E402
 
 # ================================ Metrics ================================
 
@@ -21,7 +21,7 @@ print("Comparison with user-liked songs in the test set")
 fdbk_1 = pd.read_csv(conf.FEEDBACKUSER1_PATH)
 fdbk_2 = pd.read_csv(conf.FEEDBACKUSER2_PATH)
 
-correct_predictions = 0
+CORRECT_PREDICTIONS = 0
 
 for _, row_pred in rec_songs_pred.iterrows():
 
@@ -38,9 +38,9 @@ for _, row_pred in rec_songs_pred.iterrows():
         if song_name == song_name_fb and artist_name == artist_name_fb:
 
             if label == label_fb:
-                correct_predictions += 1
+                CORRECT_PREDICTIONS += 1
 
-accuracy = float(correct_predictions / conf.NO_RECOMMENDATIONS)
+accuracy = float(CORRECT_PREDICTIONS / conf.NO_RECOMMENDATIONS)
 
 print(f"Accuracy: {accuracy:.2f}")
 

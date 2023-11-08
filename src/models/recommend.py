@@ -1,10 +1,10 @@
 import sys  # noqa:E402
 sys.path.append('src')  # noqa:E402
-import conf  # noqa:E402
-import spotipyUtilities as spUt  # noqa:E402
+import random  # noqa:E402
 import numpy as np  # noqa:E402
 import pandas as pd  # noqa:E402
-import random  # noqa:E402
+import conf  # noqa:E402
+import spotipyUtilities as spUt  # noqa:E402
 
 
 # ========================== Song Recommendations ===========================
@@ -58,8 +58,10 @@ print("Starting song recommendation phase...")
 print("===================================================")
 
 track_cluster = train_tracks_df[train_tracks_df['Name'] == train_track['Name']]
-print("The track from which suggestions will be computed is: \"%s - %s\"."
-      % (track_cluster['Name'].values[0], track_cluster['Artist'].values[0]))
+
+print(f"The track from which suggestions will be computed is: "
+      f"Song: {track_cluster['Name'].values[0]} - " 
+      f"Artist: {track_cluster['Artist'].values[0]}")
 
 train_track_cluster = track_cluster['Cluster'].values[0]
 print("===================================================")
@@ -69,7 +71,7 @@ recommendations = recommend_songs(test_tracks_df, train_track, train_track_clust
 recommendations_links = []
 
 for x in range(len(recommendations)):
-    recommendations_links.append(spUt.getTrackPreview(
+    recommendations_links.append(spUt.get_track_preview(
         recommendations[x]['Name'], recommendations[x]['Artist']))
 
 for x in range(len(recommendations)):
@@ -89,5 +91,5 @@ for recommendation in recommendations:
 
 recommendations_df = pd.DataFrame(recommendations_data)
 
-recomm_path = conf.OUTPUT_DIR + "recommendations.csv"
-recommendations_df.to_csv(recomm_path, index=False)
+RECOMM_PATH = conf.OUTPUT_DIR + "recommendations.csv"
+recommendations_df.to_csv(RECOMM_PATH, index=False)

@@ -1,9 +1,9 @@
 """Script to test the data after being processed"""
 
-import great_expectations as gx
-from great_expectations.core.expectation_suite import ExpectationConfiguration
 import sys
 sys.path.append('src')              # noqa:E402
+import great_expectations as gx
+from great_expectations.core.expectation_suite import ExpectationConfiguration
 import conf                         # noqa:E402
 
 

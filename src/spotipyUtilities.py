@@ -9,35 +9,35 @@ def uri_finder(artist):
     artist_code = conf.SP.search(q='artist:' + artist, type='artist', limit=1)
 
     if artist_code['artists']['items']:
-        artist_URI = artist_code['artists']['items'][0]['uri']
+        artist_uri = artist_code['artists']['items'][0]['uri']
     else:
         print('Artist not found.')
 
-    return artist_URI
+    return artist_uri
 
 
 # Method that returns an Artist's Genre given its name
-def get_artist_genre_by_name(artistName):
+def get_artist_genre_by_name(artist_name):
 
-    artist_URI = uri_finder(artistName)
-    artist = conf.SP.artist(artist_URI)
+    artist_uri = uri_finder(artist_name)
+    artist = conf.SP.artist(artist_uri)
     genre = artist['genres']
     return ', '.join(genre)
 
 
 # Method that returns an Artist's Genre given its URI
-def get_artist_genre_by_URI(artist_URI):
+def get_artist_genre_by_uri(artist_uri):
 
     artist = uri_finder('Sleep Token')
-    artist = conf.SP.artist(artist_URI)
+    artist = conf.SP.artist(artist_uri)
     genre = artist['genres']
     return ', '.join(genre)
 
 
 # Method that returns all the Albums of a given Artist
-def album_finder(artist, artist_URI):
+def album_finder(artist, artist_uri):
 
-    albums_data = conf.SP.artist_albums(artist_URI, album_type='album')
+    albums_data = conf.SP.artist_albums(artist_uri, album_type='album')
     albums = albums_data['items']
 
     while albums_data['next']:
@@ -50,9 +50,9 @@ def album_finder(artist, artist_URI):
 
 
 # Method that returns the top 10 songs of a given Artist
-def top_songs(artist, artist_URI, target_country):
+def top_songs(artist, artist_uri, target_country):
 
-    top_tracks = conf.SP.artist_top_tracks(artist_URI, country=target_country)
+    top_tracks = conf.SP.artist_top_tracks(artist_uri, country=target_country)
 
     top_ten_tracks = top_tracks['tracks'][:10]
 
@@ -77,31 +77,31 @@ def clear_playlist_name(tmp_name):
 
 
 # Method that returns the IDs of every track in a given Playlist
-def track_IDs_from_playlist(user, playlist_ID):
-    track_IDs = []
+def track_ids_from_playlist(user, playlist_id):
+    track_ids = []
     offset = 0
     limit = 100
 
     while True:
-        playlist = conf.SP.user_playlist_tracks(user, playlist_ID,
+        playlist = conf.SP.user_playlist_tracks(user, playlist_id,
                                                 limit=limit, offset=offset)
 
         for elem in playlist['items']:
             track = elem['track']
-            track_IDs.append(track['id'])
+            track_ids.append(track['id'])
 
         offset += limit
         if len(playlist['items']) < limit:
             break
 
-    return track_IDs
+    return track_ids
 
 
 # Method that returns the features of every track in a given Playlist
-def get_track_features(trackID):
+def get_track_features(track_id):
 
-    track_details = conf.SP.track(trackID)
-    track_features = conf.SP.audio_features(trackID)
+    track_details = conf.SP.track(track_id)
+    track_features = conf.SP.audio_features(track_id)
 
     # Track Info
     name = track_details['name']
@@ -117,15 +117,15 @@ def get_track_features(trackID):
 
 
 # Method that returns the link to the preview of the track
-def getTrackPreview(trackName, artistName):
+def get_track_preview(track_name, artist_name):
 
-    query = f"track:{trackName} artist:{artistName}"
+    query = f"track:{track_name} artist:{artist_name}"
     results = conf.SP.search(q=query, type='track')
 
     for track in results['tracks']['items']:
-        if track['name'].lower() == trackName.lower():
+        if track['name'].lower() == track_name.lower():
             artists = [artist['name'].lower() for artist in track['artists']]
-            if artistName.lower() in artists:
+            if artist_name.lower() in artists:
                 track_id = track['id']
                 track_info = conf.SP.track(track_id)
                 preview_url = track_info['preview_url']

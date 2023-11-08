@@ -12,11 +12,11 @@ import conf  # noqa:E402
 def remove_null_values_df(df):
 
     df.isnull().sum()
-    preLen = len(df)
+    pre_len = len(df)
 
     df = df.dropna(subset=['Name'])
     post_len = len(df)
-    print(f"{preLen-post_len} rows have been removed!")
+    print(f"{pre_len-post_len} rows have been removed!")
 
     return df
 
@@ -52,8 +52,9 @@ def preprocess_data(df):
 def print_column_min_max(df, column):
     min = df[column].min()
     max = df[column].max()
-    print("For the column %s the min val. is %s and the max val. is %s"
-          % (column, str(min), str(max)))
+    
+    print(f"For the column {column} the min val. is {str(min)} "
+          f"and the max val. is {str(max)}")
 
 
 train_tracks_df = pd.read_csv(conf.TRAIN_SET_CSV_PATH)

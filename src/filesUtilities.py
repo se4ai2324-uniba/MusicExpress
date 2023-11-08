@@ -1,9 +1,9 @@
 """Script containing methods for file management"""
 
-import conf
 import os
 import time
 import pandas as pd
+import conf
 import spotipyUtilities as spUt
 
 
@@ -19,12 +19,12 @@ def check_file_exists(playlist_id):
         print(f"The playlist {current_playlist} was already stored.")
         print("Checking for differences...")
         return True
-    
+
     return False
 
 
 # Method that reads a stored file
-def read_playlist_DF(playlist_id):
+def read_playlist_df(playlist_id):
 
     file_name = str(playlist_id) + ".csv"
     file_path = conf.DATA_DIR + file_name
@@ -33,15 +33,15 @@ def read_playlist_DF(playlist_id):
         dataframe = pd.read_csv(file_path)
         print("Playlist has been successfully loaded!")
         return dataframe
-    
+
     print("File does not exist. Unable to load playlist.")
     return None
 
 
 # Method that creates the Dataframe for a Playlist and stores it
-def create_playlist_DF(playlist_id):
+def create_playlist_df(playlist_id):
 
-    tracks = spUt.track_IDs_from_playlist("ivanrinaldi_", playlist_id)
+    tracks = spUt.track_ids_from_playlist("ivanrinaldi_", playlist_id)
     print(f"{len(tracks)} tracks have been found in the given playlist!")
     print("Extracting features of each track...")
 
@@ -54,10 +54,10 @@ def create_playlist_DF(playlist_id):
     print(f"Feature for all {len(tracks)} songs have been extracted.")
     print("Creating dataframe..")
 
-    tracks_DF = pd.DataFrame(tracks_features, columns=conf.DATAFRAMECOLUMNS)
+    tracks_df = pd.DataFrame(tracks_features, columns=conf.DATAFRAMECOLUMNS)
     print("The dataframe has been successfully created!")
-    store_playlist_dataframe(playlist_id, tracks_DF)
-    return tracks_DF
+    store_playlist_dataframe(playlist_id, tracks_df)
+    return tracks_df
 
 
 # Method that stores the Dataframe of a Playlist

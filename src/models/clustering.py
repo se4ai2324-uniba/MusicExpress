@@ -2,10 +2,10 @@
 
 import sys  # noqa:E402
 sys.path.append('src')  # noqa:E402
-import conf  # noqa:E402
 import pandas as pd  # noqa:E402
 from sklearn_extra.cluster import KMedoids  # noqa:E402
 from joblib import dump  # noqa:E402
+import conf  # noqa:E402
 
 
 # ================================ Clustering ================================
@@ -31,12 +31,12 @@ test_tracks_df['Cluster'] = test_clusters
 print("Clustering completed!")
 
 print("===================================================")
-output_train_file = conf.OUTPUT_DIR + 'clustertrainSet.csv'
-output_test_file = conf.OUTPUT_DIR + 'clustertestSet.csv'
+OUTPUT_TRAIN_FILE = conf.OUTPUT_DIR + 'clustertrainSet.csv'
+OUTPUT_TEST_FILE = conf.OUTPUT_DIR + 'clustertestSet.csv'
 
 print("Storing the processed files in the folder processed_data.")
-train_tracks_df.to_csv(output_train_file, index=False)
-test_tracks_df.to_csv(output_test_file, index=False)
+train_tracks_df.to_csv(OUTPUT_TRAIN_FILE, index=False)
+test_tracks_df.to_csv(OUTPUT_TEST_FILE, index=False)
 print("The data has been stored!")
 print("===================================================")
 
