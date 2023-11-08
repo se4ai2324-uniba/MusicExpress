@@ -11,25 +11,25 @@ from joblib import load  # noqa:E402
 
 # ================================ Metrics ================================
 
-recSongs_pred = pd.read_csv(conf.RECOMMENDATIONS_PATH)
-recSongs_pred['Feedback'] = 1
+rec_songs_pred = pd.read_csv(conf.RECOMMENDATIONS_PATH)
+rec_songs_pred['Feedback'] = 1
 
 print("These are the systems recommendations:")
-print(recSongs_pred)
+print(rec_songs_pred)
 print("Comparison with user-liked songs in the test set")
 
-fdbk1 = pd.read_csv(conf.FEEDBACKUSER1_PATH)
-fdbk2 = pd.read_csv(conf.FEEDBACKUSER2_PATH)
+fdbk_1 = pd.read_csv(conf.FEEDBACKUSER1_PATH)
+fdbk_2 = pd.read_csv(conf.FEEDBACKUSER2_PATH)
 
 correct_predictions = 0
 
-for _, row_pred in recSongs_pred.iterrows():
+for _, row_pred in rec_songs_pred.iterrows():
 
     song_name = row_pred['Name']
     artist_name = row_pred['Artist']
     label = row_pred['Feedback']
 
-    for _, row_fbk in fdbk1.iterrows():
+    for _, row_fbk in fdbk_1.iterrows():
 
         song_name_fb = row_fbk['Name']
         artist_name_fb = row_fbk['Artist']

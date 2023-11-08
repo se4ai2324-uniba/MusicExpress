@@ -4,45 +4,45 @@ import conf
 
 
 # Method that returns an Artist's URI given its name
-def uriFinder(artist):
+def uri_finder(artist):
 
-    artistCode = conf.SP.search(q='artist:' + artist, type='artist', limit=1)
+    artist_code = conf.SP.search(q='artist:' + artist, type='artist', limit=1)
 
-    if artistCode['artists']['items']:
-        artist_uri = artistCode['artists']['items'][0]['uri']
+    if artist_code['artists']['items']:
+        artist_URI = artist_code['artists']['items'][0]['uri']
     else:
         print('Artist not found.')
 
-    return artist_uri
+    return artist_URI
 
 
 # Method that returns an Artist's Genre given its name
-def getArtistGenreByName(artistName):
+def get_artist_genre_by_name(artistName):
 
-    artistURI = uriFinder(artistName)
-    artist = conf.SP.artist(artistURI)
+    artist_URI = uri_finder(artistName)
+    artist = conf.SP.artist(artist_URI)
     genre = artist['genres']
     return ', '.join(genre)
 
 
 # Method that returns an Artist's Genre given its URI
-def getArtistGenreByURI(artistURI):
+def get_artist_genre_by_URI(artist_URI):
 
-    artist = uriFinder('Sleep Token')
-    artist = conf.SP.artist(artistURI)
+    artist = uri_finder('Sleep Token')
+    artist = conf.SP.artist(artist_URI)
     genre = artist['genres']
     return ', '.join(genre)
 
 
 # Method that returns all the Albums of a given Artist
-def albumFinder(artist, artistURI):
+def album_finder(artist, artist_URI):
 
-    albumsData = conf.SP.artist_albums(artistURI, album_type='album')
-    albums = albumsData['items']
+    albums_data = conf.SP.artist_albums(artist_URI, album_type='album')
+    albums = albums_data['items']
 
-    while albumsData['next']:
-        albumsData = conf.SP.next(albumsData)
-        albums.extend(albumsData['items'])
+    while albums_data['next']:
+        albums_data = conf.SP.next(albums_data)
+        albums.extend(albums_data['items'])
 
     print(f"These are all {artist} \'s albums found on Spotify:")
     for x in range(len(albums)):
@@ -50,70 +50,70 @@ def albumFinder(artist, artistURI):
 
 
 # Method that returns the top 10 songs of a given Artist
-def topSongs(artist, artistURI, targetCountry):
+def top_songs(artist, artist_URI, target_country):
 
-    topTracks = conf.SP.artist_top_tracks(artistURI, country=targetCountry)
+    top_tracks = conf.SP.artist_top_tracks(artist_URI, country=target_country)
 
-    topTenTracks = topTracks['tracks'][:10]
+    top_ten_tracks = top_tracks['tracks'][:10]
 
-    print(f"These are {artist} \'s top {len(topTenTracks)} songs in {targetCountry} found on Spotify:")
+    print(f"These are {artist} \'s top {len(top_ten_tracks)} songs in {target_country} found on Spotify:")
 
-    for x in range(len(topTenTracks)):
-        print(str(x+1) + "° Track: " + topTenTracks[x]['name'])
-        print(str(x+1) + "° Audio: " + topTenTracks[x]['preview_url'] + "\n")
+    for x in range(len(top_ten_tracks)):
+        print(str(x+1) + "° Track: " + top_ten_tracks[x]['name'])
+        print(str(x+1) + "° Audio: " + top_ten_tracks[x]['preview_url'] + "\n")
 
 
 # Method that returns the name of a given Playlist
-def getPlaylistName(playlist_id):
+def get_playlist_name(playlist_id):
     playlist = conf.SP.playlist(playlist_id)
     return playlist['name']
 
 
 # Methodo that removes the char "|" in the file name
-def clearPlaylistName(tmpName):
-    if '|' in tmpName:
-        return tmpName.replace("|", "")
-    return tmpName
+def clear_playlist_name(tmp_name):
+    if '|' in tmp_name:
+        return tmp_name.replace("|", "")
+    return tmp_name
 
 
 # Method that returns the IDs of every track in a given Playlist
-def trackIDsFromPlaylist(user, playlistID):
-    trackIDs = []
+def track_IDs_from_playlist(user, playlist_ID):
+    track_IDs = []
     offset = 0
     limit = 100
 
     while True:
-        playlist = conf.SP.user_playlist_tracks(user, playlistID,
+        playlist = conf.SP.user_playlist_tracks(user, playlist_ID,
                                                 limit=limit, offset=offset)
 
         for elem in playlist['items']:
             track = elem['track']
-            trackIDs.append(track['id'])
+            track_IDs.append(track['id'])
 
         offset += limit
         if len(playlist['items']) < limit:
             break
 
-    return trackIDs
+    return track_IDs
 
 
 # Method that returns the features of every track in a given Playlist
-def getTrackFeatures(trackID):
+def get_track_features(trackID):
 
-    trackDetails = conf.SP.track(trackID)
-    trackFeatures = conf.SP.audio_features(trackID)
+    track_details = conf.SP.track(trackID)
+    track_features = conf.SP.audio_features(trackID)
 
     # Track Info
-    name = trackDetails['name']
+    name = track_details['name']
 
     # Track Features
-    energy = trackFeatures[0]['energy']
-    liveness = trackFeatures[0]['liveness']
-    loudness = trackFeatures[0]['loudness']
+    energy = track_features[0]['energy']
+    liveness = track_features[0]['liveness']
+    loudness = track_features[0]['loudness']
 
-    trackInfo = [name, energy, liveness, loudness]
+    track_info = [name, energy, liveness, loudness]
 
-    return trackInfo
+    return track_info
 
 
 # Method that returns the link to the preview of the track
