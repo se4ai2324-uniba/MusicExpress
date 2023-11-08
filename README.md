@@ -93,7 +93,13 @@ dvc pull -r myremote
 dvc repro
 ```
 
+## Testing
+
 Testing is conducted within the DVC pipeline, and you can find more details about it [here](src/tests/README.md).
+
+## Quality Assurance
+
+Quality assurance tools have been integrated throughout the code, and you can discover further information [here](reports/README.md).
 
 ## Citation
 
