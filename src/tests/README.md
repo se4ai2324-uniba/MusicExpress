@@ -60,7 +60,10 @@ More information about this tool can be found [here](https://github.com/great-ex
 
 ## Deepchecks
 
-The Deepchecks library is utilized in the [test_deepchecks notebook](../tests/test_deepchecks.ipynb) to evaluate the train and test data required for song recommendations. The **data_integrity** test suite was adjusted to retain only the most pertinent tests, which include:
+The Deepchecks library is utilized in the [test_deepchecks notebook](../tests/test_deepchecks.ipynb) to evaluate the train and test data required for song recommendations. 
+Deepchecks provides different sub-packages, each containing many checks and suites for specific tasks. In our case, we used the **Tabular** sub-package, which contains the **data_integrity** test suite. The same test suite was run on both the raw datasets and the processed datasets.
+
+This test suite is composed of eleven checks related to data integrity, from which we kept only the following pertinent tests:
 
 - **Mixed Data Type**: test that checks for variations in data types within a dataset. It helps identify columns or fields that may contain a mix of different data types.
 
@@ -70,4 +73,6 @@ The Deepchecks library is utilized in the [test_deepchecks notebook](../tests/te
 
 With the listed tests, we can better understand if our data presents issues or not and they also help us in making the data more reliable when used for song recommendations.
 
+Here is an example of Deepchecks' UI results:
+![plot](/figures/deepchecks_example.png?raw=true) 
 More information about this tool can be found [here](https://github.com/deepchecks/deepchecks/tree/main).
