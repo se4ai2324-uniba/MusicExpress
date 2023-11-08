@@ -17,13 +17,13 @@
         "module": "spotipy_utilities",
         "obj": "",
         "line": 55,
-        "column": 0,
+        "column": 62,
         "endLine": null,
         "endColumn": null,
         "path": "src\\spotipy_utilities.py",
-        "symbol": "line-too-long",
-        "message": "Line too long (106/100)",
-        "message-id": "C0301"
+        "symbol": "trailing-whitespace",
+        "message": "Trailing whitespace",
+        "message-id": "C0303"
     },
     {
         "type": "convention",
