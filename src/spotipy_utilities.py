@@ -52,7 +52,7 @@ def top_songs(artist, artist_uri, target_country):
 
     top_ten_tracks = top_tracks['tracks'][:10]
 
-    print(f"These are {artist} \'s top {len(top_ten_tracks)} " 
+    print(f"These are {artist} \'s top {len(top_ten_tracks)} "
           f"songs in {target_country} found on Spotify:")
 
     for x,top_track in enumerate(top_ten_tracks):

@@ -1,9 +1,11 @@
 """Script to process the extracted data"""
 
+#pylint: disable=wrong-import-position
 import sys  # noqa:E402
 sys.path.append('src')  # noqa:E402
 import pandas as pd  # noqa:E402
 import conf  # noqa:E402
+#pylint: enable=wrong-import-position
 
 
 # =============================== Preprocessing ===============================

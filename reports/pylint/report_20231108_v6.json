@@ -1,0 +1,28 @@
+[
+    {
+        "type": "refactor",
+        "module": "tests.test_preprocessed_data",
+        "obj": "",
+        "line": 1,
+        "column": 0,
+        "endLine": null,
+        "endColumn": null,
+        "path": "src\\tests\\test_preprocessed_data.py",
+        "symbol": "duplicate-code",
+        "message": "Similar lines in 2 files\n==tests.test_extract_data:[18:98]\n==tests.test_preprocessed_data:[19:99]\nname_notnull_config = ExpectationConfiguration(\n    expectation_type=\"expect_column_values_to_not_be_null\",\n    kwargs={\n        \"auto\": True,\n        \"column\": \"Name\"\n    },\n)\n\nartist_notnull_config = ExpectationConfiguration(\n    expectation_type=\"expect_column_values_to_not_be_null\",\n    kwargs={\n        \"auto\": True,\n        \"column\": \"Artist\"\n    },\n)\n\nenergy_notnull_config = ExpectationConfiguration(\n    expectation_type=\"expect_column_values_to_not_be_null\",\n    kwargs={\n        \"auto\": True,\n        \"column\": \"Energy\"\n    },\n)\n\nliveness_notnull_config = ExpectationConfiguration(\n    expectation_type=\"expect_column_values_to_not_be_null\",\n    kwargs={\n        \"auto\": True,\n        \"column\": \"Liveness\"\n    },\n)\n\nloudness_notnull_config = ExpectationConfiguration(\n    expectation_type=\"expect_column_values_to_not_be_null\",\n    kwargs={\n        \"auto\": True,\n        \"column\": \"Loudness\"\n    },\n)\n\nname_string_config = ExpectationConfiguration(\n    expectation_type=\"expect_column_values_to_be_of_type\",\n    kwargs={\n        \"column\": \"Name\",\n        \"type_\": \"str\"\n    },\n)\n\nartist_string_config = ExpectationConfiguration(\n    expectation_type=\"expect_column_values_to_be_of_type\",\n    kwargs={\n        \"column\": \"Artist\",\n        \"type_\": \"str\"\n    },\n)\n\nenergy_float_config = ExpectationConfiguration(\n    expectation_type=\"expect_column_values_to_be_of_type\",\n    kwargs={\n        \"column\": \"Energy\",\n        \"type_\": \"float\"\n    },\n)\n\nliveness_float_config = ExpectationConfiguration(\n    expectation_type=\"expect_column_values_to_be_of_type\",\n    kwargs={\n        \"column\": \"Liveness\",\n        \"type_\": \"float\"\n    },\n)\n\nloudness_float_config = ExpectationConfiguration(\n    expectation_type=\"expect_column_values_to_be_of_type\",\n    kwargs={\n        \"column\": \"Loudness\",\n        \"type_\": \"float\"\n    },\n)\n",
+        "message-id": "R0801"
+    },
+    {
+        "type": "refactor",
+        "module": "tests.test_preprocessed_data",
+        "obj": "",
+        "line": 1,
+        "column": 0,
+        "endLine": null,
+        "endColumn": null,
+        "path": "src\\tests\\test_preprocessed_data.py",
+        "symbol": "duplicate-code",
+        "message": "Similar lines in 2 files\n==tests.test_extract_data:[95:110]\n==tests.test_preprocessed_data:[123:138]\n    },\n)\n\nsuite.add_expectation(name_notnull_config)\nsuite.add_expectation(artist_notnull_config)\nsuite.add_expectation(energy_notnull_config)\nsuite.add_expectation(liveness_notnull_config)\nsuite.add_expectation(loudness_notnull_config)\n\nsuite.add_expectation(name_string_config)\nsuite.add_expectation(artist_string_config)\nsuite.add_expectation(energy_float_config)\nsuite.add_expectation(liveness_float_config)\nsuite.add_expectation(loudness_float_config)\n",
+        "message-id": "R0801"
+    }
+]

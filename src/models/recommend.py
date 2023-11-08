@@ -1,4 +1,5 @@
 """Script for recommending songs to the user"""
+#pylint: disable=wrong-import-position
 import sys  # noqa:E402
 sys.path.append('src')  # noqa:E402
 import random  # noqa:E402
@@ -6,7 +7,7 @@ import numpy as np  # noqa:E402
 import pandas as pd  # noqa:E402
 import conf  # noqa:E402
 import spotipy_utilities as spUt  # noqa:E402
-
+#pylint: enable=wrong-import-position
 
 def euclidean_distance(track_1, track_2, features):
     """"Euclidean distance between two songs"""
@@ -22,7 +23,9 @@ def recommend_songs(test_tracks_cluster, test_track,
                     cluster_label, num_recommendations, features):
     """Function to recommend songs based on cluster"""
 
+    #pylint: disable=line-too-long
     cluster_tracks = test_tracks_cluster[test_tracks_cluster['Cluster'] == cluster_label]  # noqa:E501
+    #pylint: enable=line-too-long
 
     # Calculate similarity with the test song
     similarity_scores = []

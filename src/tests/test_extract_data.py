@@ -1,17 +1,20 @@
 """Script to test the data after extraction"""
 
+#pylint: disable=wrong-import-position
 import sys
 sys.path.append('src')              # noqa:E402
 import great_expectations as gx
 from great_expectations.core.expectation_suite import ExpectationConfiguration
 import conf                         # noqa:E402
-
+#pylint: enable=wrong-import-position
 
 # Create the Data Context
 context = gx.get_context()
 
 # Create expectation suite valid for both train and test extracted data
+#pylint: disable=line-too-long
 suite = context.add_expectation_suite(expectation_suite_name="extracted_data_expectations")  # noqa:E501
+#pylint: enable=line-too-long
 
 name_notnull_config = ExpectationConfiguration(
     expectation_type="expect_column_values_to_not_be_null",

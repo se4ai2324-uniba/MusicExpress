@@ -1,17 +1,21 @@
 """Script to test the data after being processed"""
 
+#pylint: disable=wrong-import-position
 import sys
 sys.path.append('src')              # noqa:E402
 import great_expectations as gx
 from great_expectations.core.expectation_suite import ExpectationConfiguration
 import conf                         # noqa:E402
+#pylint: enable=wrong-import-position
 
 
 # Create the Data Context
 context = gx.get_context()
 
 # Create expectation suite valid for both train and test preprocessed data
+#pylint: disable=line-too-long
 suite = context.add_expectation_suite(expectation_suite_name="preprocessed_data_expectations")  # noqa:E501
+#pylint: enable=line-too-long
 
 name_notnull_config = ExpectationConfiguration(
     expectation_type="expect_column_values_to_not_be_null",
@@ -143,7 +147,9 @@ train_validator = context.sources.pandas_default.read_csv(conf.PRO_TRAIN_SET_PAT
 test_validator = context.sources.pandas_default.read_csv(conf.PRO_TEST_SET_PATH)  # noqa:E501
 
 # Load the expectation suite
+#pylint: disable=line-too-long
 preprocessed_data_suite = context.get_expectation_suite("preprocessed_data_expectations")  # noqa:E501
+#pylint: enable=line-too-long
 
 # Create validation checkpoints
 train_checkpoint = context.add_or_update_checkpoint(
