@@ -97,9 +97,9 @@ dvc repro
 
 Testing is conducted within the DVC pipeline, and you can find more details about it [here](src/tests/README.md).
 
-## Quality Assurance
+## Quality Assessment (QA)
 
-Quality assurance tools have been integrated throughout the code, and you can discover further information [here](reports/README.md).
+Quality assessment tools have been integrated throughout the code, and you can discover further information [here](reports/README.md).
 
 ## Citation
 
