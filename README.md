@@ -136,8 +136,9 @@ url = {https://github.com/se4ai2324-uniba/MusicExpress}
     ├── reports            <- Generated analysis as HTML, PDF, LaTeX, etc.
     │   ├── deepchecks        <- Deepchecks generated HTML pages for data integrity
     │   ├── figures        <- Generated graphics and figures to be used in reporting
-    │   ├── flake8        <- Flake8 generated HTML page for quality assurance (QA)
-    │   └── pylint        <- Pylint reports for quality assurance (QA)
+    │   ├── flake8        <- Flake8 generated HTML page for quality assessment (QA)
+    │   ├── pylint        <- Pylint reports for quality assessment (QA)
+    │   └── pynblint        <- Pynblint reports for quality assessment (QA)
     │
     ├── requirements.txt   <- The requirements file for reproducing the analysis environment
     │
@@ -145,7 +146,7 @@ url = {https://github.com/se4ai2324-uniba/MusicExpress}
     ├── src                <- Source code for use in this project.
     │   │
     │   ├── data           <- Scripts to download or generate data
-    │   │   └── extractData.py
+    │   │   └── extract_data.py
     │   │
     │   ├── features       <- Scripts to turn raw data into features for modeling
     │   │   └── preprocessing.py
@@ -157,15 +158,16 @@ url = {https://github.com/se4ai2324-uniba/MusicExpress}
     │   │   └── metrics.py
     │   │
     │   ├── tests         <- Test scripts
-    │   │   ├── test_extractData.py
-    │   │   ├── test_preprocessedData.py
-    │   │   └── test_deepchecks.ipynb
+    │   │   ├── test_deepchecks.ipynb
+    │   │   ├── test_extract_data.py
+    │   │   └── test_preprocessed_data.py
     │   │
     │   │── visualization  <- Scripts to create exploratory and results oriented visualizations
     │   │
     │   │── conf.py    <- Variables used in all the other scripts
-    │   │── filesUtilities.py    <- Methods for file operations
-    │   └── spotipyUtilities.py    <- Methods that make use of Spotipy features
+    │   │── files_utilities.py    <- Methods for file operations
+    │   │── great_expectations_utilities.py    <- Methods for file operations
+    │   └── spotipy_utilities.py    <- Methods that make use of Spotipy features
     │
     └── tox.ini            <- tox file with settings for running tox; see tox.readthedocs.io
 
