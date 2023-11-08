@@ -89,7 +89,7 @@ If you're using a Windows distribution and encountering notebook encoding issues
 You can easily run the analysis on a notebook with the following command:
 
 ```bash
-pynblint path\to\notebook.ipynb
+pynblint path\to\notebook.ipynb -qo path/to/save/report.json
 ```
 
 We run the Pynblint analysis on the [test_deepchecks notebook](../src/tests/test_deepchecks.ipynb) and we show a snippet of the analysis' results at first:
