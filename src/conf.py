@@ -43,9 +43,9 @@ RND_STATE = 42
 NO_RECOMMENDATIONS = 5
 
 TRAIN_SET_CSV_PATH = os.path.join(PREPRO_DATA_DIR, 'keep grinding..csv')
-#pylint: disable=line-too-long
+# pylint: disable=line-too-long
 TEST_SET_CSV_PATH = os.path.join(PREPRO_DATA_DIR, 'Spotify\'s Most Played All-Time [Updated Weekly]  Most Streamed  Top Played  500Mil+.csv')  # noqa:E501
-#pylint: enable=line-too-long
+# pylint: enable=line-too-long
 FEEDBACKUSER1_PATH = os.path.join(PREPRO_DATA_DIR, 'feedbackUser1.csv')
 FEEDBACKUSER2_PATH = os.path.join(PREPRO_DATA_DIR, 'feedbackUser2.csv')
 

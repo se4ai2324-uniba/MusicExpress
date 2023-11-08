@@ -1,13 +1,13 @@
 """Script to extract the data"""
 
-#pylint: disable=wrong-import-position
+# pylint: disable=wrong-import-position
 import sys  # noqa:E402
 sys.path.append('src')  # noqa:E402
 import zipfile as zf  # noqa:E402
 import files_utilities as flUt  # noqa:E402
 import spotipy_utilities as spUt  # noqa:E402
 import conf  # noqa:E402
-#pylint: enable=wrong-import-position
+# pylint: enable=wrong-import-position
 
 with zf.ZipFile(conf.DATA_DIR + 'dataset.zip', 'r') as zip_ref:
     zip_ref.extractall(conf.PREPRO_DATA_DIR)
@@ -26,7 +26,7 @@ playlist_names = []
 
 for playlist_id in conf.PLAYLISTS:
 
-    playlist_name = spUt.clear_playlist_name(spUt.get_playlist_name(playlist_id))
+    playlist_name = spUt.clear_playlist_name(spUt.get_playlist_name(playlist_id))  # noqa:E501
 
     playlist_names.append(playlist_name)
 
@@ -34,7 +34,8 @@ for playlist_id in conf.PLAYLISTS:
         print(f"{spUt.get_playlist_name(playlist_id)} is "
               "stored and ready to be used.")
     else:
-        print(f"{spUt.get_playlist_name(playlist_id)} isn't stored. Creating dataframe...")
+        print(f"{spUt.get_playlist_name(playlist_id)} isn't stored. "
+              f"Creating dataframe...")
 
         tracks_df = flUt.create_playlist_df(playlist_id)
 
@@ -42,6 +43,6 @@ for playlist_id in conf.PLAYLISTS:
 
 print("All playlists have been stored!")
 print("Here is a list of all the stored playlists:")
-for x,playlist_name in enumerate(playlist_names):
+for x, playlist_name in enumerate(playlist_names):
     print(f"{str(x + 1)}. Playlist: {playlist_name}")
 print("===================================================")

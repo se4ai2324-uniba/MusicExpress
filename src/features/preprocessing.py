@@ -1,17 +1,17 @@
 """Script to process the extracted data"""
 
-#pylint: disable=wrong-import-position
+# pylint: disable=wrong-import-position
 import sys  # noqa:E402
 sys.path.append('src')  # noqa:E402
 import pandas as pd  # noqa:E402
 import conf  # noqa:E402
-#pylint: enable=wrong-import-position
+# pylint: enable=wrong-import-position
 
-
-# =============================== Preprocessing ===============================
 
 def remove_null_values_df(df):
-    """Method that removes rows that contain null values in the field "Name\""""
+    """Method that removes rows that
+    contain null values in the field "Name\""""
+
     df.isnull().sum()
     pre_len = len(df)
 
@@ -42,7 +42,8 @@ def normalize_columns(df):
 
 
 def preprocess_data(df):
-    """Preprocesses a dataframe by removing null rows and normalizing two columns."""
+    """Preprocesses a dataframe by removing
+    null rows and normalizing two columns."""
     df = remove_null_values_df(df)
     df = normalize_columns(df)
     return df

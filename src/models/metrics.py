@@ -1,6 +1,6 @@
 """Script for computing accuracy and storing the experiment."""
 
-#pylint: disable=wrong-import-position
+# pylint: disable=wrong-import-position
 import sys  # noqa:E402
 sys.path.append('src')  # noqa:E402
 import pandas as pd  # noqa:E402
@@ -9,7 +9,7 @@ import mlflow.sklearn  # noqa:E402
 import dagshub  # noqa:E402
 from joblib import load  # noqa:E402
 import conf  # noqa:E402
-#pylint: enable=wrong-import-position
+# pylint: enable=wrong-import-position
 
 rec_songs_pred = pd.read_csv(conf.RECOMMENDATIONS_PATH)
 rec_songs_pred['Feedback'] = 1
