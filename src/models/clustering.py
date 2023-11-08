@@ -8,8 +8,6 @@ from joblib import dump  # noqa:E402
 import conf  # noqa:E402
 
 
-# ================================ Clustering ================================
-
 print("Starting to cluster out the data...")
 train_tracks_df = pd.read_csv(conf.PRO_TRAIN_SET_PATH)
 test_tracks_df = pd.read_csv(conf.PRO_TEST_SET_PATH)

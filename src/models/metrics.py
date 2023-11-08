@@ -9,7 +9,6 @@ import dagshub  # noqa:E402
 from joblib import load  # noqa:E402
 import conf  # noqa:E402
 
-# ================================ Metrics ================================
 
 rec_songs_pred = pd.read_csv(conf.RECOMMENDATIONS_PATH)
 rec_songs_pred['Feedback'] = 1

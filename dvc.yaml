@@ -1,8 +1,8 @@
 stages:
   extract:
-    cmd: python src/data/extractData.py
+    cmd: python src/data/extract_data.py
     deps:
-      - src/data/extractData.py
+      - src/data/extract_data.py
       - data/raw/dataset.zip
     outs:
       - data/interim:

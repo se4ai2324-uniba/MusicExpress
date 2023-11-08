@@ -7,8 +7,6 @@ from great_expectations.core.expectation_suite import ExpectationConfiguration
 import conf                         # noqa:E402
 
 
-# ================= Great Expectation - Preprocessed data =================
-
 # Create the Data Context
 context = gx.get_context()
 

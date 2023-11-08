@@ -3,9 +3,8 @@
 import conf
 
 
-# Method that returns an Artist's URI given its name
 def uri_finder(artist):
-
+    """Method that returns an Artist's URI given its name"""
     artist_code = conf.SP.search(q='artist:' + artist, type='artist', limit=1)
 
     if artist_code['artists']['items']:
@@ -16,27 +15,24 @@ def uri_finder(artist):
     return artist_uri
 
 
-# Method that returns an Artist's Genre given its name
 def get_artist_genre_by_name(artist_name):
-
+    """Method that returns an Artist's Genre given its name"""
     artist_uri = uri_finder(artist_name)
     artist = conf.SP.artist(artist_uri)
     genre = artist['genres']
     return ', '.join(genre)
 
 
-# Method that returns an Artist's Genre given its URI
 def get_artist_genre_by_uri(artist_uri):
-
+    """Method that returns an Artist's Genre given its URI"""
     artist = uri_finder('Sleep Token')
     artist = conf.SP.artist(artist_uri)
     genre = artist['genres']
     return ', '.join(genre)
 
 
-# Method that returns all the Albums of a given Artist
 def album_finder(artist, artist_uri):
-
+    """Method that returns all the Albums of a given Artist"""
     albums_data = conf.SP.artist_albums(artist_uri, album_type='album')
     albums = albums_data['items']
 
@@ -49,9 +45,8 @@ def album_finder(artist, artist_uri):
         print(str(x) + "° Album: " + albums[x]['name'])
 
 
-# Method that returns the top 10 songs of a given Artist
 def top_songs(artist, artist_uri, target_country):
-
+    """Method that returns all the Albums of a given Artist"""
     top_tracks = conf.SP.artist_top_tracks(artist_uri, country=target_country)
 
     top_ten_tracks = top_tracks['tracks'][:10]
@@ -63,21 +58,21 @@ def top_songs(artist, artist_uri, target_country):
         print(str(x+1) + "° Audio: " + top_ten_tracks[x]['preview_url'] + "\n")
 
 
-# Method that returns the name of a given Playlist
 def get_playlist_name(playlist_id):
+    """Method that returns the name of a given Playlist"""
     playlist = conf.SP.playlist(playlist_id)
     return playlist['name']
 
 
-# Methodo that removes the char "|" in the file name
 def clear_playlist_name(tmp_name):
+    """Methodo that removes the char "|" in the file name"""
     if '|' in tmp_name:
         return tmp_name.replace("|", "")
     return tmp_name
 
 
-# Method that returns the IDs of every track in a given Playlist
 def track_ids_from_playlist(user, playlist_id):
+    """Method that returns the IDs of every track in a given Playlist"""
     track_ids = []
     offset = 0
     limit = 100
@@ -97,9 +92,8 @@ def track_ids_from_playlist(user, playlist_id):
     return track_ids
 
 
-# Method that returns the features of every track in a given Playlist
 def get_track_features(track_id):
-
+    """Method that returns the features of every track in a given Playlist"""
     track_details = conf.SP.track(track_id)
     track_features = conf.SP.audio_features(track_id)
 
@@ -116,9 +110,8 @@ def get_track_features(track_id):
     return track_info
 
 
-# Method that returns the link to the preview of the track
 def get_track_preview(track_name, artist_name):
-
+    """Method that returns the link to the preview of the track"""
     query = f"track:{track_name} artist:{artist_name}"
     results = conf.SP.search(q=query, type='track')
 

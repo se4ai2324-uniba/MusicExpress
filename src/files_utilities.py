@@ -4,12 +4,11 @@ import os
 import time
 import pandas as pd
 import conf
-import spotipyUtilities as spUt
+import spotipy_utilities as spUt
 
 
-# Method that checks whether a file has already been stored or not
 def check_file_exists(playlist_id):
-
+    """Method that checks whether a file has already been stored or not"""
     current_playlist = spUt.clear_playlist_name(spUt.get_playlist_name(playlist_id))
 
     file_name = str(current_playlist) + ".csv"
@@ -23,9 +22,8 @@ def check_file_exists(playlist_id):
     return False
 
 
-# Method that reads a stored file
 def read_playlist_df(playlist_id):
-
+    """Method that reads a stored file"""
     file_name = str(playlist_id) + ".csv"
     file_path = conf.DATA_DIR + file_name
 
@@ -38,9 +36,8 @@ def read_playlist_df(playlist_id):
     return None
 
 
-# Method that creates the Dataframe for a Playlist and stores it
 def create_playlist_df(playlist_id):
-
+    """Method that creates the Dataframe for a Playlist and stores it"""
     tracks = spUt.track_ids_from_playlist("ivanrinaldi_", playlist_id)
     print(f"{len(tracks)} tracks have been found in the given playlist!")
     print("Extracting features of each track...")
@@ -60,8 +57,8 @@ def create_playlist_df(playlist_id):
     return tracks_df
 
 
-# Method that stores the Dataframe of a Playlist
 def store_playlist_dataframe(playlist_id, dataframe):
+    """Method that stores the Dataframe of a Playlist"""
     playlist_name = spUt.get_playlist_name(playlist_id)
     file_name = playlist_name + ".csv"
     file_path = conf.DATA_DIR + file_name

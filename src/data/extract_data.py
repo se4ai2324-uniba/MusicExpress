@@ -2,12 +2,11 @@
 
 import sys  # noqa:E402
 sys.path.append('src')  # noqa:E402
-import filesUtilities as flUt  # noqa:E402
-import spotipyUtilities as spUt  # noqa:E402
 import zipfile as zf  # noqa:E402
+import files_utilities as flUt  # noqa:E402
+import spotipy_utilities as spUt  # noqa:E402
 import conf  # noqa:E402
 
-# ======================= Playlist Retrieval =======================
 
 with zf.ZipFile(conf.DATA_DIR + 'dataset.zip', 'r') as zip_ref:
     zip_ref.extractall(conf.PREPRO_DATA_DIR)

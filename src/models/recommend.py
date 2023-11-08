@@ -1,17 +1,15 @@
+"""Script for recommending songs to the user"""
 import sys  # noqa:E402
 sys.path.append('src')  # noqa:E402
 import random  # noqa:E402
 import numpy as np  # noqa:E402
 import pandas as pd  # noqa:E402
 import conf  # noqa:E402
-import spotipyUtilities as spUt  # noqa:E402
+import spotipy_utilities as spUt  # noqa:E402
 
 
-# ========================== Song Recommendations ===========================
-
-# Euclidean distance between two songs
 def euclidean_distance(track_1, track_2, features):
-
+    """"Euclidean distance between two songs"""
     track_1_features = track_1[features].values
     track_2_features = track_2[features].values
 
@@ -20,9 +18,9 @@ def euclidean_distance(track_1, track_2, features):
     return distance
 
 
-# Function to recommend songs based on cluster
 def recommend_songs(test_tracks_cluster, test_track,
                     cluster_label, num_recommendations, features):
+    """Function to recommend songs based on cluster"""
 
     cluster_tracks = test_tracks_cluster[test_tracks_cluster['Cluster'] == cluster_label]  # noqa:E501
 

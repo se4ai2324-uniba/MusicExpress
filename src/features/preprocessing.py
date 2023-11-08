@@ -8,9 +8,8 @@ import conf  # noqa:E402
 
 # =============================== Preprocessing ===============================
 
-# Method that removes rows that contain null values in the field "Name"
 def remove_null_values_df(df):
-
+    """Method that removes rows that contain null values in the field "Name\""""
     df.isnull().sum()
     pre_len = len(df)
 
@@ -21,9 +20,8 @@ def remove_null_values_df(df):
     return df
 
 
-# Normalize specific dataframe columns using min-max
 def min_max_normalization(data, columns):
-
+    """Normalize specific dataframe columns using min-max"""
     min_vals = data[columns].min()
     max_vals = data[columns].max()
     range_vals = max_vals - min_vals
@@ -34,25 +32,25 @@ def min_max_normalization(data, columns):
     return normalized_data
 
 
-# Normalize Tempo and Loudness columns in the dataframe.
 def normalize_columns(df):
+    """Normalize Tempo and Loudness columns in the dataframe."""
     cols_to_normalize = ['Loudness']
     df = min_max_normalization(df, cols_to_normalize)
     return df
 
 
-# Preprocesses a dataframe by removing null rows and normalizing two columns.
 def preprocess_data(df):
+    """Preprocesses a dataframe by removing null rows and normalizing two columns."""
     df = remove_null_values_df(df)
     df = normalize_columns(df)
     return df
 
 
-# Method to print the min and max value of a column in a dataframe
 def print_column_min_max(df, column):
+    """Method to print the min and max value of a column in a dataframe"""
     min = df[column].min()
     max = df[column].max()
-    
+
     print(f"For the column {column} the min val. is {str(min)} "
           f"and the max val. is {str(max)}")
 
