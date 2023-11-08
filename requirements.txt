@@ -30,6 +30,7 @@ joblib==1.3.2
 
 # Libraries needed for Quality-Assessment
 pylint==3.0.2
+pynblint==0.1.5
 flake8==6.1.0
 flake8-html==0.4.3
 great-expectations==0.18.1

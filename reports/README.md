@@ -84,9 +84,18 @@ Finally, a code quality rating is assigned after issue detection. We've achieved
 
 A static analysis tool for Jupyter notebooks written in Python. It reveals potential notebook defects and recommends corrective actions. More information about this tool can be found [here](https://github.com/collab-uniba/pynblint).
 
-We strongly recommend to use [WSL](https://learn.microsoft.com/en-us/windows/wsl/install) if on a Windows distribution.
-After initiazling the WSL bash with the **bash** command, you can easily run the analysis on the notebook as follows:
+If you're using a Windows distribution and encountering notebook encoding issues, we recommend using [WSL](https://learn.microsoft.com/en-us/windows/wsl/install).
+
+You can easily run the analysis on a notebook with the following command:
 
 ```bash
-pynblint notebooks/MusicExpress.ipynb
+pynblint path\to\notebook.ipynb
 ```
+
+We run the Pynblint analysis on the [test_deepchecks notebook](../src/tests/test_deepchecks.ipynb) and we show a snippet of the analysis' results at first:
+
+![plot](/figures/pynblint_before_fix.png?raw=true)
+
+After fixing all the listed issues, the analysis' results should be as follows:
+
+![plot](/figures/pynblint_after_fix.png?raw=true)
