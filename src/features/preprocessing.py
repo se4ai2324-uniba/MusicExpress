@@ -48,11 +48,11 @@ def preprocess_data(df):
 
 def print_column_min_max(df, column):
     """Method to print the min and max value of a column in a dataframe"""
-    min = df[column].min()
-    max = df[column].max()
+    column_min = df[column].min()
+    column_max = df[column].max()
 
-    print(f"For the column {column} the min val. is {str(min)} "
-          f"and the max val. is {str(max)}")
+    print(f"For the column {column} the min val. is {str(column_min)} "
+          f"and the max val. is {str(column_max)}")
 
 
 train_tracks_df = pd.read_csv(conf.TRAIN_SET_CSV_PATH)

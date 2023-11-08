@@ -41,8 +41,9 @@ def album_finder(artist, artist_uri):
         albums.extend(albums_data['items'])
 
     print(f"These are all {artist} \'s albums found on Spotify:")
-    for x in range(len(albums)):
-        print(str(x) + "° Album: " + albums[x]['name'])
+
+    for x,album in enumerate(albums):
+        print(str(x) + "° Album: " + album['name'])
 
 
 def top_songs(artist, artist_uri, target_country):
@@ -53,9 +54,9 @@ def top_songs(artist, artist_uri, target_country):
 
     print(f"These are {artist} \'s top {len(top_ten_tracks)} songs in {target_country} found on Spotify:")
 
-    for x in range(len(top_ten_tracks)):
-        print(str(x+1) + "° Track: " + top_ten_tracks[x]['name'])
-        print(str(x+1) + "° Audio: " + top_ten_tracks[x]['preview_url'] + "\n")
+    for x,top_track in enumerate(top_ten_tracks):
+        print(str(x+1) + "° Track: " + top_track['name'])
+        print(str(x+1) + "° Audio: " + top_track['preview_url'] + "\n")
 
 
 def get_playlist_name(playlist_id):

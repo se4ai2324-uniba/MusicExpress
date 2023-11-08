@@ -68,13 +68,13 @@ recommendations = recommend_songs(test_tracks_df, train_track, train_track_clust
                                   conf.NO_RECOMMENDATIONS, conf.FEATURES)
 recommendations_links = []
 
-for x in range(len(recommendations)):
+for x,recommendation in enumerate(recommendations):
     recommendations_links.append(spUt.get_track_preview(
-        recommendations[x]['Name'], recommendations[x]['Artist']))
+        recommendation['Name'], recommendation['Artist']))
 
-for x in range(len(recommendations)):
-    print(str(x+1) + "° Track: " + recommendations[x]['Name'] +
-          " - Artist: " + recommendations[x]['Artist'])
+for x,recommendation in enumerate(recommendations):
+    print(str(x+1) + "° Track: " + recommendation['Name'] +
+          " - Artist: " + recommendation['Artist'])
     print("Preview: ", recommendations_links[x])
 print("===================================================")
 
