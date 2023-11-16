@@ -9,6 +9,7 @@ import features.preprocessing as prepro
 
 
 def test_remove_null_values_df():
+    """Test method for the method remove_null_values_df"""
     # Test Case 1: No null values in the 'Name' column
     df1 = pd.DataFrame({'Name': ['John', 'Alice', 'Bob']})
     result_df1 = prepro.remove_null_values_df(df1)
@@ -26,6 +27,7 @@ def test_remove_null_values_df():
 
 
 def test_min_max_normalization():
+    """Test method for the method test_min_max_normalization"""
     # Test Case 1: Normalization of a single column
     data1 = pd.DataFrame({'A': [1, 2, 3, 4, 5]})
     columns1 = ['A']
