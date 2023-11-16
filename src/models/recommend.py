@@ -50,49 +50,52 @@ def recommend_songs(test_tracks_cluster, test_track,
     return recommended_songs
 
 
-train_tracks_df = pd.read_csv(conf.CLUSTER_TRAIN_SET_PATH)
-test_tracks_df = pd.read_csv(conf.CLUSTER_TEST_SET_PATH)
+def recommend():
+    train_tracks_df = pd.read_csv(conf.CLUSTER_TRAIN_SET_PATH)
+    test_tracks_df = pd.read_csv(conf.CLUSTER_TEST_SET_PATH)
 
-train_track_index = random.randint(0, len(train_tracks_df))
-train_track = train_tracks_df.iloc[train_track_index]
-print("===================================================")
-print("Starting song recommendation phase...")
-print("===================================================")
+    train_track_index = random.randint(0, len(train_tracks_df))
+    train_track = train_tracks_df.iloc[train_track_index]
+    print("===================================================")
+    print("Starting song recommendation phase...")
+    print("===================================================")
 
-track_cluster = train_tracks_df[train_tracks_df['Name'] == train_track['Name']]
+    track_cluster = train_tracks_df[train_tracks_df['Name'] == train_track['Name']]
 
-print(f"The track from which suggestions will be computed is: "
+    print(f"The track from which suggestions will be computed is: "
       f"Song: {track_cluster['Name'].values[0]} - "
       f"Artist: {track_cluster['Artist'].values[0]}")
 
-train_track_cluster = track_cluster['Cluster'].values[0]
-print("===================================================")
+    train_track_cluster = track_cluster['Cluster'].values[0]
+    print("===================================================")
 
-recommendations = recommend_songs(test_tracks_df,
+    recommendations = recommend_songs(test_tracks_df,
                                   train_track, train_track_cluster,
                                   conf.NO_RECOMMENDATIONS, conf.FEATURES)
-recommendations_links = []
+    recommendations_links = []
 
-for x, recommendation in enumerate(recommendations):
-    recommendations_links.append(spUt.get_track_preview(
+    for x, recommendation in enumerate(recommendations):
+        recommendations_links.append(spUt.get_track_preview(
         recommendation['Name'], recommendation['Artist']))
 
-for x, recommendation in enumerate(recommendations):
-    print(str(x+1) + "° Track: " + recommendation['Name'] +
+    for x, recommendation in enumerate(recommendations):
+        print(str(x+1) + "° Track: " + recommendation['Name'] +
           " - Artist: " + recommendation['Artist'])
-    print("Preview: ", recommendations_links[x])
-print("===================================================")
+        print("Preview: ", recommendations_links[x])
+    print("===================================================")
 
-recommendations_data = []
+    recommendations_data = []
 
-for recommendation in recommendations:
-    recommendation_dict = {
+    for recommendation in recommendations:
+        recommendation_dict = {
         'Name': recommendation['Name'],
         'Artist': recommendation['Artist']
     }
-    recommendations_data.append(recommendation_dict)
+        recommendations_data.append(recommendation_dict)
 
-recommendations_df = pd.DataFrame(recommendations_data)
+    recommendations_df = pd.DataFrame(recommendations_data)
 
-RECOMM_PATH = conf.OUTPUT_DIR + "recommendations.csv"
-recommendations_df.to_csv(RECOMM_PATH, index=False)
+    RECOMM_PATH = conf.OUTPUT_DIR + "recommendations.csv"
+    recommendations_df.to_csv(RECOMM_PATH, index=False)
+
+recommend()
