@@ -25,7 +25,7 @@ def check_file_exists(playlist_id):
 def read_playlist_df(playlist_id):
     """Method that reads a stored file"""
     file_name = str(playlist_id) + ".csv"
-    file_path = conf.DATA_DIR + file_name
+    file_path = conf.PREPRO_DATA_DIR + file_name
 
     if os.path.isfile(file_path):
         dataframe = pd.read_csv(file_path)
@@ -61,7 +61,7 @@ def store_playlist_dataframe(playlist_id, dataframe):
     """Method that stores the Dataframe of a Playlist"""
     playlist_name = spUt.get_playlist_name(playlist_id)
     file_name = playlist_name + ".csv"
-    file_path = conf.DATA_DIR + file_name
+    file_path = conf.PREPRO_DATA_DIR + file_name
     dataframe.to_csv(file_path, index=False)
     print("Playlist has been successfully saved!")
     print(f" - Playlist\'s Name: {str(spUt.get_playlist_name(playlist_id))}.")

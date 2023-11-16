@@ -101,13 +101,14 @@ def get_track_features(track_id):
 
     # Track Info
     name = track_details['name']
+    artist = track_details['artists'][0]
 
     # Track Features
     energy = track_features[0]['energy']
     liveness = track_features[0]['liveness']
     loudness = track_features[0]['loudness']
 
-    track_info = [name, energy, liveness, loudness]
+    track_info = [name, artist, energy, liveness, loudness]
 
     return track_info
 
