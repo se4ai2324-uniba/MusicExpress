@@ -42,6 +42,7 @@ for playlist_id in conf.PLAYLISTS:
     print("===================================================")
 
 print("All playlists have been stored!")
+
 print("Here is a list of all the stored playlists:")
 for x, playlist_name in enumerate(playlist_names):
     print(f"{str(x + 1)}. Playlist: {playlist_name}")

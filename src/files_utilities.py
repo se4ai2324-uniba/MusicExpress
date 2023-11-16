@@ -45,7 +45,7 @@ def create_playlist_df(playlist_id):
     tracks_features = []
 
     for id_track in tracks:
-        time.sleep(.20)
+        time.sleep(.52)
         tracks_features.append(spUt.get_track_features(id_track))
 
     print(f"Feature for all {len(tracks)} songs have been extracted.")
