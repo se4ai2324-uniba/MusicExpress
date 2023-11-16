@@ -31,35 +31,6 @@ def get_artist_genre_by_uri(artist_uri):
     return ', '.join(genre)
 
 
-def album_finder(artist, artist_uri):
-    """Method that returns all the Albums of a given Artist"""
-    albums_data = conf.SP.artist_albums(artist_uri, album_type='album')
-    albums = albums_data['items']
-
-    while albums_data['next']:
-        albums_data = conf.SP.next(albums_data)
-        albums.extend(albums_data['items'])
-
-    print(f"These are all {artist} \'s albums found on Spotify:")
-
-    for x, album in enumerate(albums):
-        print(str(x) + "° Album: " + album['name'])
-
-
-def top_songs(artist, artist_uri, target_country):
-    """Method that returns all the Albums of a given Artist"""
-    top_tracks = conf.SP.artist_top_tracks(artist_uri, country=target_country)
-
-    top_ten_tracks = top_tracks['tracks'][:10]
-
-    print(f"These are {artist} \'s top {len(top_ten_tracks)} "
-          f"songs in {target_country} found on Spotify:")
-
-    for x, top_track in enumerate(top_ten_tracks):
-        print(str(x+1) + "° Track: " + top_track['name'])
-        print(str(x+1) + "° Audio: " + top_track['preview_url'] + "\n")
-
-
 def get_playlist_name(playlist_id):
     """Method that returns the name of a given Playlist"""
     playlist = conf.SP.playlist(playlist_id)
