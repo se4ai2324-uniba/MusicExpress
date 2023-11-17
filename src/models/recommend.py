@@ -99,5 +99,18 @@ def recommend():
     recommendations_df = pd.DataFrame(recommendations_data)
     recommendations_df.to_csv(RECOMM_PATH, index=False)
 
+    # Build dict with recommended songs
+    result = []
+
+    for i in range(len(recommendations)):
+        temp = {
+            'Name': recommendations[i]['Name'],
+            'Artist': recommendations[i]['Artist'],
+            'Preview' : recommendations_links[i]
+            }
+        result.append(temp)
+
+    return result
+
 
 recommend()

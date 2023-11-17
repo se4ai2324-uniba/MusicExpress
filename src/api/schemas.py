@@ -1,12 +1,10 @@
 """Definitions for the objects used by our resource endpoints."""
 # pylint: disable=wrong-import-position
-import sys  # noqa:E402
-sys.path.append('src')  # noqa:E402
-import conf
-from collections import namedtuple
-from enum import Enum
-import string
-from pydantic import BaseModel
+import sys                      # noqa:E402
+sys.path.append('src')          # noqa:E402
+import conf                     # noqa:E402
+import string                   # noqa:E402
+from pydantic import BaseModel  # noqa:E402
 # pylint: enable=wrong-import-position
 
 
