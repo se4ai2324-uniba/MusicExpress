@@ -1,58 +1,70 @@
-# ================================ Metrics ================================
-import sys
-sys.path.append('src')
-import conf
-import pandas as pd
-import mlflow 
-import mlflow.sklearn
-import dagshub
-from joblib import load
+"""Script for computing accuracy and storing the experiment."""
 
-recSongs_pred = pd.read_csv(conf.recommendations_path)
-recSongs_pred['Feedback'] = 1
+# pylint: disable=wrong-import-position
+import sys  # noqa:E402
+sys.path.append('src')  # noqa:E402
+import pandas as pd  # noqa:E402
+import mlflow  # noqa:E402
+import mlflow.sklearn  # noqa:E402
+import dagshub  # noqa:E402
+from joblib import load  # noqa:E402
+import conf  # noqa:E402
+# pylint: enable=wrong-import-position
 
-print("These are the systems recommendations:")
-print(recSongs_pred)
-print("Those will be compared to some songs that the user said to like in the test set.")
 
-fdbk1 = pd.read_csv(conf.feedbackUser1_path)
-fdbk2 = pd.read_csv(conf.feedbackUser2_path)
+def metrics():
+    """Method to compute accuracy metric"""
+    rec_songs_pred = pd.read_csv(conf.RECOMMENDATIONS_PATH)
+    rec_songs_pred['Feedback'] = 1
 
-correct_predictions = 0
+    print("These are the systems recommendations:")
+    print(rec_songs_pred)
+    print("Comparison with user-liked songs in the test set")
 
-for _, row_pred in recSongs_pred.iterrows():
+    # pylint: disable=unused-variable
+    fdbk_1 = pd.read_csv(conf.FEEDBACKUSER1_PATH)  # noqa:F841
+    fdbk_2 = pd.read_csv(conf.FEEDBACKUSER2_PATH)  # noqa:F841
+    # pylint: enable=unused-variable
 
-    song_name = row_pred['Name']
-    artist_name = row_pred['Artist']
-    label = row_pred['Feedback']
+    correct_predictions = 0
 
-    for _, row_fbk in fdbk1.iterrows():
+    for _, row_pred in rec_songs_pred.iterrows():
+        song_name = row_pred['Name']
+        artist_name = row_pred['Artist']
+        label = row_pred['Feedback']
 
-        song_name_fb = row_fbk['Name']
-        artist_name_fb = row_fbk['Artist']
-        label_fb = row_fbk['Feedback']
-        
-        if song_name == song_name_fb and artist_name == artist_name_fb:
+        for _, row_fbk in fdbk_1.iterrows():
+            song_name_fb = row_fbk['Name']
+            artist_name_fb = row_fbk['Artist']
+            label_fb = row_fbk['Feedback']
 
-            if label == label_fb:
-                correct_predictions += 1
+            if song_name == song_name_fb and artist_name == artist_name_fb:
+                if label == label_fb:
+                    correct_predictions += 1
 
-accuracy = float(correct_predictions / conf.no_recommendations)
+    accuracy = float(correct_predictions / conf.NO_RECOMMENDATIONS)
+    print(f"Accuracy: {accuracy:.2f}")
+    return accuracy
 
-print(f"Accuracy: {accuracy:.2f}")
 
-kmedoids = load(conf.model_file_path)
+def log_experiments(accuracy):
+    """Method to log the experiments on mlflow"""
+    kmedoids = load(conf.MODEL_FILE_PATH)
 
-dagshub.init("MusicExpress", "se4ai2324-uniba", mlflow=True)
+    dagshub.init("MusicExpress", "se4ai2324-uniba", mlflow=True)
 
-mlflow.start_run() 
+    mlflow.start_run()
 
-mlflow.sklearn.log_model(kmedoids, "kmedoids-model")
-mlflow.log_params({
-    "no_cluster": conf.no_cluster,
-    "rnd_state": conf.rnd_state,
-    'no_recommendations': conf.no_recommendations
-})
-mlflow.log_metric("Accuracy", accuracy)
+    mlflow.sklearn.log_model(kmedoids, "kmedoids-model")
+    mlflow.log_params({
+        "no_cluster": conf.NO_CLUSTER,
+        "rnd_state": conf.RND_STATE,
+        'no_recommendations': conf.NO_RECOMMENDATIONS
+        })
+    mlflow.log_metric("Accuracy", accuracy)
 
-mlflow.end_run()
+    mlflow.end_run()
+
+
+model_accuracy = metrics()
+log_experiments(model_accuracy)

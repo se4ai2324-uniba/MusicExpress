@@ -1,45 +1,56 @@
-# ================================ Clustering ================================
-import sys
-sys.path.append('src')
-import conf
-import pandas as pd
-from sklearn_extra.cluster import KMedoids
-from joblib import dump
+"""Script for data clustering"""
 
-print("Starting to cluster out the data...")
-trainTracksDF = pd.read_csv(conf.pro_train_set_path)
-testTracksDF = pd.read_csv(conf.pro_test_set_path)
+# pylint: disable=wrong-import-position
+import sys  # noqa:E402
+sys.path.append('src')  # noqa:E402
+import pandas as pd  # noqa:E402
+from sklearn_extra.cluster import KMedoids  # noqa:E402
+from joblib import dump  # noqa:E402
+import conf  # noqa:E402
+# pylint: enable=wrong-import-position
 
-trainSet = trainTracksDF[conf.features]
-testSet = testTracksDF[conf.features]
+OUTPUT_TRAIN_FILE = conf.OUTPUT_DIR + 'clustertrainSet.csv'
+OUTPUT_TEST_FILE = conf.OUTPUT_DIR + 'clustertestSet.csv'
+
+
+def clustering():
+    """Method to generate data clusters"""
+    print("Starting to cluster out the data...")
+    train_tracks_df = pd.read_csv(conf.PRO_TRAIN_SET_PATH)
+    test_tracks_df = pd.read_csv(conf.PRO_TEST_SET_PATH)
+
+    train_set = train_tracks_df[conf.FEATURES]
+    test_set = test_tracks_df[conf.FEATURES]
 
 # Clustering train set (user's preferences playlist)
-kmedoids = KMedoids(n_clusters = conf.no_cluster, random_state = conf.rnd_state)
+    kmedoids = KMedoids(n_clusters=conf.NO_CLUSTER,
+                        random_state=conf.RND_STATE)
 
-clusters = kmedoids.fit_predict(trainSet)
-trainTracksDF['Cluster'] = clusters
+    clusters = kmedoids.fit_predict(train_set)
+    train_tracks_df['Cluster'] = clusters
 
-# Clustering test set with the trained model (playlist from which songs will be suggested)
-test_clusters = kmedoids.predict(testSet)
-testTracksDF['Cluster'] = test_clusters
+# Cluster the test set using the trained model for song suggestions.
+    test_clusters = kmedoids.predict(test_set)
+    test_tracks_df['Cluster'] = test_clusters
 
-print("Clustering completed!")
+    print("Clustering completed!")
 
-print("===================================================")
-outputTrainFile = conf.output_dir + 'clustertrainSet.csv'
-outputTestFile = conf.output_dir + 'clustertestSet.csv'
+    print("===================================================")
 
-print("Storing the processed files in the folder processed_data.")
-trainTracksDF.to_csv(outputTrainFile, index=False)
-testTracksDF.to_csv(outputTestFile, index=False)
-print("The data has been stored!")
-print("===================================================")
+    print("Storing the processed files in the folder processed_data.")
+    train_tracks_df.to_csv(OUTPUT_TRAIN_FILE, index=False)
+    test_tracks_df.to_csv(OUTPUT_TEST_FILE, index=False)
+    print("The data has been stored!")
+    print("===================================================")
 
-print("First 5 rows of the train set:")
-print(trainTracksDF.head())
+    print("First 5 rows of the train set:")
+    print(train_tracks_df.head())
 
-print("First 5 rows of the test set:")
-print(testTracksDF.head())
+    print("First 5 rows of the test set:")
+    print(test_tracks_df.head())
 
 # Save the model to the file
-dump(kmedoids, conf.model_file_path)
+    dump(kmedoids, conf.MODEL_FILE_PATH)
+
+
+clustering()
