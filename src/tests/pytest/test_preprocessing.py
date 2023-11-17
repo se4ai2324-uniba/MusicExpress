@@ -38,11 +38,12 @@ def test_min_max_normalization():
     data2 = pd.DataFrame({'A': [1, 2, 3, 4, 5], 'B': [10, 20, 30, 40, 50]})
     columns2 = ['A', 'B']
     result_data2 = prepro.min_max_normalization(data2, columns2)
+    # pylint: disable=line-too-long
     assert result_data2['A'].min() == 0, "Min value should be 0 after normalization for column 'A'"  # noqa:E501
     assert result_data2['A'].max() == 1, "Max value should be 1 after normalization for column 'A'"  # noqa:E501
     assert result_data2['B'].min() == 0, "Min value should be 0 after normalization for column 'B'"  # noqa:E501
     assert result_data2['B'].max() == 1, "Max value should be 1 after normalization for column 'B'"  # noqa:E501
-
+    # pylint: enable=line-too-long
     # Test Case 3: Normalization with negative values
     data3 = pd.DataFrame({'A': [-5, -3, 0, 2, 4]})
     columns3 = ['A']

@@ -41,7 +41,9 @@ def extract_data():
             print(f"{spUt.get_playlist_name(playlist_id)} isn't stored. "
                   f"Creating dataframe...")
 
+            # pylint: disable=unused-variable
             tracks_df = flUt.create_playlist_df(playlist_id)  # noqa:F841
+            # pylint: enable=unused-variable
 
         print("===================================================")
 

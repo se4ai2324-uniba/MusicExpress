@@ -9,8 +9,12 @@ from joblib import dump  # noqa:E402
 import conf  # noqa:E402
 # pylint: enable=wrong-import-position
 
+OUTPUT_TRAIN_FILE = conf.OUTPUT_DIR + 'clustertrainSet.csv'
+OUTPUT_TEST_FILE = conf.OUTPUT_DIR + 'clustertestSet.csv'
+
 
 def clustering():
+    """Method to generate data clusters"""
     print("Starting to cluster out the data...")
     train_tracks_df = pd.read_csv(conf.PRO_TRAIN_SET_PATH)
     test_tracks_df = pd.read_csv(conf.PRO_TEST_SET_PATH)
@@ -32,8 +36,6 @@ def clustering():
     print("Clustering completed!")
 
     print("===================================================")
-    OUTPUT_TRAIN_FILE = conf.OUTPUT_DIR + 'clustertrainSet.csv'
-    OUTPUT_TEST_FILE = conf.OUTPUT_DIR + 'clustertestSet.csv'
 
     print("Storing the processed files in the folder processed_data.")
     train_tracks_df.to_csv(OUTPUT_TRAIN_FILE, index=False)

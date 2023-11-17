@@ -40,7 +40,9 @@ def test_get_playlist_name_by_id():
 
 def test_clear_playlist_name():
     '''Test to get the cleaned playlist name'''
+    # pylint: disable=line-too-long
     expected_name = 'Spotify\'s Most Played All-Time [Updated Weekly]  Most Streamed  Top Played  500Mil+'  # noqa:E501
+    # pylint: enable=line-too-long
     name = spUt.get_playlist_name(conf.PLAYLISTS[1])
     name = spUt.clear_playlist_name(name)
     assert name == expected_name, "Playlist name not valid"
@@ -50,7 +52,9 @@ def test_track_ids_from_playlist():
     '''Test to get the tracks' id from a playlist'''
     playlist_id = "0THO1kZlbyWvlgAh8YUCSd"
     user = "ivanrinaldi_"
+    # pylint: disable=line-too-long
     expected_tracks_ids = ['18lR4BzEs7e3qzc0KVkTpU', '1r1fPuhj9H4VdXr7OK6FL5', '373gDROnujxNTFa1FojYIl']  # noqa:E501
+    # pylint: enable=line-too-long
     ids = spUt.track_ids_from_playlist(user, playlist_id)
     assert ids == expected_tracks_ids, "Tracks' ids do not match"
 
@@ -61,7 +65,9 @@ def test_get_track_features():
     expected_track_features = [
             "What I've Done",
             {
+                # pylint: disable=line-too-long
                 'external_urls': {'spotify': 'https://open.spotify.com/artist/6XyY86QOPPrYVGvF9ch6wz'},  # noqa:E501
+                # pylint: enable=line-too-long
                 'href': 'https://api.spotify.com/v1/artists/6XyY86QOPPrYVGvF9ch6wz',  # noqa:E501
                 'id': '6XyY86QOPPrYVGvF9ch6wz',
                 'name': 'Linkin Park',

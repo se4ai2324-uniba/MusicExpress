@@ -7,6 +7,9 @@ import pandas as pd  # noqa:E402
 import conf  # noqa:E402
 # pylint: enable=wrong-import-position
 
+OUTPUT_TRAIN_FILE = conf.PRO_DATA_DIR + 'trainSet.csv'
+OUTPUT_TEST_FILE = conf.PRO_DATA_DIR + 'testSet.csv'
+
 
 def remove_null_values_df(df):
     """Method that removes rows that
@@ -44,6 +47,7 @@ def print_column_min_max(df, column):
 
 
 def preprocess():
+    """Method to preprocess raw data"""
     train_tracks_df = pd.read_csv(conf.TRAIN_SET_CSV_PATH)
     test_tracks_df = pd.read_csv(conf.TEST_SET_CSV_PATH)
 
@@ -70,9 +74,6 @@ def preprocess():
     print("Pre-Normalization min and max values:")
     print_column_min_max(test_tracks_df, "Loudness")
     print("===================================================")
-
-    OUTPUT_TRAIN_FILE = conf.PRO_DATA_DIR + 'trainSet.csv'
-    OUTPUT_TEST_FILE = conf.PRO_DATA_DIR + 'testSet.csv'
 
     print("Storing the preprocessed files in the folder preprocessed_data.")
     train_tracks_df.to_csv(OUTPUT_TRAIN_FILE, index=False)

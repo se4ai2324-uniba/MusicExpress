@@ -9,15 +9,18 @@ import models.recommend as rec  # noqa:E402
 
 
 def test_euclidean_distance():
+    """Method to test euclidean distance computation"""
     train_tracks_df = pd.read_csv(conf.CLUSTER_TRAIN_SET_PATH)
 
     track_1 = train_tracks_df.iloc[0]
     track_2 = train_tracks_df.iloc[1]
-
+    # pylint: disable=line-too-long
     assert rec.euclidean_distance(track_1, track_2, conf.FEATURES) > 0, "Euclidean distance cannot be negative"  # noqa:E501
+    # pylint: enable=line-too-long
 
 
 def test_five_recommended_songs():
+    """Method to test if 5 songs are recommended"""
     train_tracks_df = pd.read_csv(conf.CLUSTER_TRAIN_SET_PATH)
     test_tracks_df = pd.read_csv(conf.CLUSTER_TEST_SET_PATH)
 

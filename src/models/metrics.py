@@ -13,6 +13,7 @@ import conf  # noqa:E402
 
 
 def metrics():
+    """Method to compute accuracy metric"""
     rec_songs_pred = pd.read_csv(conf.RECOMMENDATIONS_PATH)
     rec_songs_pred['Feedback'] = 1
 
@@ -20,10 +21,12 @@ def metrics():
     print(rec_songs_pred)
     print("Comparison with user-liked songs in the test set")
 
+    # pylint: disable=unused-variable
     fdbk_1 = pd.read_csv(conf.FEEDBACKUSER1_PATH)  # noqa:F841
     fdbk_2 = pd.read_csv(conf.FEEDBACKUSER2_PATH)  # noqa:F841
+    # pylint: enable=unused-variable
 
-    CORRECT_PREDICTIONS = 0
+    correct_predictions = 0
 
     for _, row_pred in rec_songs_pred.iterrows():
         song_name = row_pred['Name']
@@ -37,14 +40,15 @@ def metrics():
 
             if song_name == song_name_fb and artist_name == artist_name_fb:
                 if label == label_fb:
-                    CORRECT_PREDICTIONS += 1
+                    correct_predictions += 1
 
-    accuracy = float(CORRECT_PREDICTIONS / conf.NO_RECOMMENDATIONS)
+    accuracy = float(correct_predictions / conf.NO_RECOMMENDATIONS)
     print(f"Accuracy: {accuracy:.2f}")
     return accuracy
 
 
 def log_experiments(accuracy):
+    """Method to log the experiments on mlflow"""
     kmedoids = load(conf.MODEL_FILE_PATH)
 
     dagshub.init("MusicExpress", "se4ai2324-uniba", mlflow=True)
@@ -62,5 +66,5 @@ def log_experiments(accuracy):
     mlflow.end_run()
 
 
-accuracy = metrics()
-log_experiments(accuracy)
+model_accuracy = metrics()
+log_experiments(model_accuracy)

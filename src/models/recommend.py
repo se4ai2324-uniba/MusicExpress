@@ -9,6 +9,8 @@ import conf  # noqa:E402
 import spotipy_utilities as spUt  # noqa:E402
 # pylint: enable=wrong-import-position
 
+RECOMM_PATH = conf.OUTPUT_DIR + "recommendations.csv"
+
 
 def euclidean_distance(track_1, track_2, features):
     """"Euclidean distance between two songs"""
@@ -51,6 +53,7 @@ def recommend_songs(test_tracks_cluster, test_track,
 
 
 def recommend():
+    """Method to recommend songs to the user"""
     train_tracks_df = pd.read_csv(conf.CLUSTER_TRAIN_SET_PATH)
     test_tracks_df = pd.read_csv(conf.CLUSTER_TEST_SET_PATH)
 
@@ -94,8 +97,6 @@ def recommend():
         recommendations_data.append(recommendation_dict)
 
     recommendations_df = pd.DataFrame(recommendations_data)
-
-    RECOMM_PATH = conf.OUTPUT_DIR + "recommendations.csv"
     recommendations_df.to_csv(RECOMM_PATH, index=False)
 
 
