@@ -20,7 +20,7 @@ def clustering():
 
 # Clustering train set (user's preferences playlist)
     kmedoids = KMedoids(n_clusters=conf.NO_CLUSTER,
-                    random_state=conf.RND_STATE)
+                        random_state=conf.RND_STATE)
 
     clusters = kmedoids.fit_predict(train_set)
     train_tracks_df['Cluster'] = clusters
@@ -49,5 +49,6 @@ def clustering():
 
 # Save the model to the file
     dump(kmedoids, conf.MODEL_FILE_PATH)
+
 
 clustering()

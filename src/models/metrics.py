@@ -11,6 +11,7 @@ from joblib import load  # noqa:E402
 import conf  # noqa:E402
 # pylint: enable=wrong-import-position
 
+
 def metrics():
     rec_songs_pred = pd.read_csv(conf.RECOMMENDATIONS_PATH)
     rec_songs_pred['Feedback'] = 1
@@ -19,8 +20,8 @@ def metrics():
     print(rec_songs_pred)
     print("Comparison with user-liked songs in the test set")
 
-    fdbk_1 = pd.read_csv(conf.FEEDBACKUSER1_PATH)
-    fdbk_2 = pd.read_csv(conf.FEEDBACKUSER2_PATH)
+    fdbk_1 = pd.read_csv(conf.FEEDBACKUSER1_PATH)  # noqa:F841
+    fdbk_2 = pd.read_csv(conf.FEEDBACKUSER2_PATH)  # noqa:F841
 
     CORRECT_PREDICTIONS = 0
 
@@ -39,9 +40,7 @@ def metrics():
                     CORRECT_PREDICTIONS += 1
 
     accuracy = float(CORRECT_PREDICTIONS / conf.NO_RECOMMENDATIONS)
-
     print(f"Accuracy: {accuracy:.2f}")
-    
     return accuracy
 
 
@@ -54,10 +53,10 @@ def log_experiments(accuracy):
 
     mlflow.sklearn.log_model(kmedoids, "kmedoids-model")
     mlflow.log_params({
-    "no_cluster": conf.NO_CLUSTER,
-    "rnd_state": conf.RND_STATE,
-    'no_recommendations': conf.NO_RECOMMENDATIONS
-})
+        "no_cluster": conf.NO_CLUSTER,
+        "rnd_state": conf.RND_STATE,
+        'no_recommendations': conf.NO_RECOMMENDATIONS
+        })
     mlflow.log_metric("Accuracy", accuracy)
 
     mlflow.end_run()

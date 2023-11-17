@@ -1,10 +1,9 @@
 """Script containing Pytest tests designed for preprocessing methods"""
 # pylint: disable=wrong-import-position
-import io
 import sys  # noqa:E402
 sys.path.append('src')  # noqa:E402
 import pandas as pd  # noqa:E402
-import features.preprocessing as prepro
+import features.preprocessing as prepro  # noqa:E402
 # pylint: enable=wrong-import-position
 
 
@@ -32,21 +31,21 @@ def test_min_max_normalization():
     data1 = pd.DataFrame({'A': [1, 2, 3, 4, 5]})
     columns1 = ['A']
     result_data1 = prepro.min_max_normalization(data1, columns1)
-    assert result_data1['A'].min() == 0, "Min value should be 0 after normalization"
-    assert result_data1['A'].max() == 1, "Max value should be 1 after normalization"
+    assert result_data1['A'].min() == 0, "Min value should be 0 after normalization"  # noqa:E501
+    assert result_data1['A'].max() == 1, "Max value should be 1 after normalization"  # noqa:E501
 
     # Test Case 2: Normalization of multiple columns
     data2 = pd.DataFrame({'A': [1, 2, 3, 4, 5], 'B': [10, 20, 30, 40, 50]})
     columns2 = ['A', 'B']
     result_data2 = prepro.min_max_normalization(data2, columns2)
-    assert result_data2['A'].min() == 0, "Min value should be 0 after normalization for column 'A'"
-    assert result_data2['A'].max() == 1, "Max value should be 1 after normalization for column 'A'"
-    assert result_data2['B'].min() == 0, "Min value should be 0 after normalization for column 'B'"
-    assert result_data2['B'].max() == 1, "Max value should be 1 after normalization for column 'B'"
+    assert result_data2['A'].min() == 0, "Min value should be 0 after normalization for column 'A'"  # noqa:E501
+    assert result_data2['A'].max() == 1, "Max value should be 1 after normalization for column 'A'"  # noqa:E501
+    assert result_data2['B'].min() == 0, "Min value should be 0 after normalization for column 'B'"  # noqa:E501
+    assert result_data2['B'].max() == 1, "Max value should be 1 after normalization for column 'B'"  # noqa:E501
 
     # Test Case 3: Normalization with negative values
     data3 = pd.DataFrame({'A': [-5, -3, 0, 2, 4]})
     columns3 = ['A']
     result_data3 = prepro.min_max_normalization(data3, columns3)
-    assert result_data3['A'].min() == 0, "Min value should be 0 after normalization"
-    assert result_data3['A'].max() == 1, "Max value should be 1 after normalization"
+    assert result_data3['A'].min() == 0, "Min value should be 0 after normalization"  # noqa:E501
+    assert result_data3['A'].max() == 1, "Max value should be 1 after normalization"  # noqa:E501

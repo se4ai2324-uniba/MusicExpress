@@ -22,7 +22,7 @@ def extract_data():
 
     print("===================================================")
     print("Checking if the playlist is stored, "
-        "otherwise the data will be extracted.")
+          "otherwise the data will be extracted.")
 
     # List of the playlists names
     # needed to store them and avoid repeatedly retrieving them
@@ -36,12 +36,12 @@ def extract_data():
 
         if flUt.check_file_exists(playlist_id):
             print(f"{spUt.get_playlist_name(playlist_id)} is "
-                "stored and ready to be used.")
+                  "stored and ready to be used.")
         else:
             print(f"{spUt.get_playlist_name(playlist_id)} isn't stored. "
-                f"Creating dataframe...")
+                  f"Creating dataframe...")
 
-            tracks_df = flUt.create_playlist_df(playlist_id) #unused
+            tracks_df = flUt.create_playlist_df(playlist_id)  # noqa:F841
 
         print("===================================================")
 
@@ -51,5 +51,6 @@ def extract_data():
     for x, playlist_name in enumerate(playlist_names):
         print(f"{str(x + 1)}. Playlist: {playlist_name}")
     print("===================================================")
+
 
 extract_data()

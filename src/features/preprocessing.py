@@ -51,7 +51,7 @@ def preprocess():
     print("Preprocessing train set..\nRemoving rows with null values...")
     train_tracks_df = remove_null_values_df(train_tracks_df)
     print("Normalizing the values in the column Loudness."
-      "Pre-Normalization min and max values:")
+          "Pre-Normalization min and max values:")
     print_column_min_max(train_tracks_df, "Loudness")
     train_tracks_df = min_max_normalization(train_tracks_df, ['Loudness'])
     print("Post-Normalization min and max values:")
@@ -63,7 +63,7 @@ def preprocess():
     print("Moving onto the test set. Removing rows with null values...")
     test_tracks_df = remove_null_values_df(test_tracks_df)
     print("Normalizing the values in the column Loudness."
-      "Pre-Normalization min and max values:")
+          "Pre-Normalization min and max values:")
     print_column_min_max(test_tracks_df, "Loudness")
     test_tracks_df = min_max_normalization(test_tracks_df, ['Loudness'])
     print("The test set has been preprocessed!")
@@ -79,5 +79,6 @@ def preprocess():
     test_tracks_df.to_csv(OUTPUT_TEST_FILE, index=False)
     print("The data has been stored!")
     print("===================================================")
+
 
 preprocess()
