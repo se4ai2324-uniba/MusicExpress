@@ -7,7 +7,7 @@ from pathlib import Path                            # noqa:E402
 from typing import List                             # noqa:E402
 from fastapi import FastAPI, Request                # noqa:E402
 from schemas import PredictPayload                  # noqa:E402
-from models.recommend import recommend_songs        # noqa:E402
+from models.recommend import recommend        # noqa:E402
 # pylint: enable=wrong-import-position
 
 
@@ -81,7 +81,7 @@ def _get_recommended_songs(request: Request, type: str, payload: PredictPayload)
     #   2. Preprocessing
     #   3. Clustering
     #   BONUS. Import model => recommend_songs
-    recommended_songs = recommend_songs()
+    recommended_songs = recommend()
 
     response = {
         "message": HTTPStatus.OK.phrase,
