@@ -5,9 +5,12 @@ from functools import wraps                         # noqa:E402
 from http import HTTPStatus                         # noqa:E402
 from pathlib import Path                            # noqa:E402
 from typing import List                             # noqa:E402
+from joblib import load                             # noqa:E402
 from fastapi import FastAPI, Request                # noqa:E402
+import conf
 from schemas import PredictPayload                  # noqa:E402
-from models.recommend import recommend        # noqa:E402
+from models.recommend import recommend              # noqa:E402
+from models.clustering import clustering            # noqa:E402
 # pylint: enable=wrong-import-position
 
 
@@ -69,18 +72,85 @@ def _load_models():
     #   1. Load default model(s)
     #   2. Append models to path
 
+    model_paths = [
+        filename for filename in conf.MODEL_FILE_PATH.iterdir() if filename.suffix == ".pkl"
+        
+    ]
+    for path in model_paths:
+        with open(path, "rb") as file:
+            model_wrapper = load(file)
+            model_wrappers_list.append(model_wrapper)
 
 
-@app.get("/models/{type}", tags=["Prediction"])
+@app.get("/models", tags=["Prediction"])
+@construct_response
+def _get_models_list(request: Request):
+    """Return the lsit of available models"""
+
+    available_models = [
+        {
+            "type": model["type"],
+            "parameters": model["params"],
+            "accuracy": model["metrics"],
+        }
+        for model in model_wrappers_list
+    ]
+
+    response = {
+        "message": HTTPStatus.OK.phrase,
+        "status-code": HTTPStatus.OK,
+        "data": available_models,
+    }
+
+    return response
+
+@app.post("/models", tags=["Clustering"])
+@construct_response
+def _cluster_data(request: Request, type: str, payload: PredictPayload):
+    """Cluster out the data"""
+
+    # TODO: 
+    #   1. Load data
+    #   2. Clustering
+    tmp_train_data = "abc"
+    tmp_test_data = "abc"
+    clustering(tmp_train_data, tmp_test_data)
+
+    response = {
+        "message": HTTPStatus.OK.phrase,
+        "status-code": HTTPStatus.OK,
+        "data": {"message": "The data has been clustered! You can now get recommendations!"},
+    }
+
+    return response
+
+@app.get("/data/output", tags=["Recommendation"])
+@construct_response
+def _get_clustered_playlists(request: Request):
+    """Return the list of clustered playlists"""
+
+    available_playlists = [
+        playlist for playlist in conf.OUTPUT_DIR.iterdir() if playlist.suffix == ".csv"
+        ]
+
+    response = {
+        "message": HTTPStatus.OK.phrase,
+        "status-code": HTTPStatus.OK,
+        "data": available_playlists,
+    }
+
+    return response
+
+@app.get("/models/{type}", tags=["Recommendation"])
 @construct_response
 def _get_recommended_songs(request: Request, type: str, payload: PredictPayload):
-    """Return the lsit of recommended songs"""
+    """Return the list of recommended songs"""
 
     # TODO: 
     #   1. Extract data
     #   2. Preprocessing
     #   3. Clustering
-    #   BONUS. Import model => recommend_songs
+    #   BONUS. Load data
     recommended_songs = recommend()
 
     response = {

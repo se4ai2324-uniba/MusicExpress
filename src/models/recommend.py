@@ -52,10 +52,12 @@ def recommend_songs(test_tracks_cluster, test_track,
     return recommended_songs
 
 
-def recommend():
+def recommend(clustered_train_data=conf.CLUSTER_TRAIN_SET_PATH, 
+              clustered_test_data=conf.CLUSTER_TEST_SET_PATH,
+              no_recommendations=conf.NO_RECOMMENDATIONS):
     """Method to recommend songs to the user"""
-    train_tracks_df = pd.read_csv(conf.CLUSTER_TRAIN_SET_PATH)
-    test_tracks_df = pd.read_csv(conf.CLUSTER_TEST_SET_PATH)
+    train_tracks_df = pd.read_csv(clustered_train_data)
+    test_tracks_df = pd.read_csv(clustered_test_data)
 
     train_track_index = random.randint(0, len(train_tracks_df))
     train_track = train_tracks_df.iloc[train_track_index]
@@ -74,7 +76,7 @@ def recommend():
 
     recommendations = recommend_songs(test_tracks_df,
                                       train_track, train_track_cluster,
-                                      conf.NO_RECOMMENDATIONS, conf.FEATURES)
+                                      no_recommendations, conf.FEATURES)
     recommendations_links = []
 
     for x, recommendation in enumerate(recommendations):

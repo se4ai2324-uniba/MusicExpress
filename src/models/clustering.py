@@ -13,11 +13,12 @@ OUTPUT_TRAIN_FILE = conf.OUTPUT_DIR + 'clustertrainSet.csv'
 OUTPUT_TEST_FILE = conf.OUTPUT_DIR + 'clustertestSet.csv'
 
 
-def clustering():
+def clustering(processed_train_data=conf.CLUSTER_TRAIN_SET_PATH, 
+               processed_test_data=conf.CLUSTER_TEST_SET_PATH):
     """Method to generate data clusters"""
     print("Starting to cluster out the data...")
-    train_tracks_df = pd.read_csv(conf.PRO_TRAIN_SET_PATH)
-    test_tracks_df = pd.read_csv(conf.PRO_TEST_SET_PATH)
+    train_tracks_df = pd.read_csv(processed_train_data)
+    test_tracks_df = pd.read_csv(processed_test_data)
 
     train_set = train_tracks_df[conf.FEATURES]
     test_set = test_tracks_df[conf.FEATURES]
