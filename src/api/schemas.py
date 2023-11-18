@@ -1,16 +1,16 @@
 """Definitions for the objects used by our resource endpoints."""
 # pylint: disable=wrong-import-position
-import sys                      # noqa:E402
-sys.path.append('src')          # noqa:E402
-import conf                     # noqa:E402
-import string                   # noqa:E402
-from pydantic import BaseModel  # noqa:E402
+import sys                                                       # noqa:E402
+import os                                                        # noqa:E402
+sys.path.append('\\'.join(os.getcwd().split('\\')[:-2])+'\src')  # noqa:E402
+import conf                                                      # noqa:E402
+from pydantic import BaseModel                                   # noqa:E402
 # pylint: enable=wrong-import-position
 
 
 class PredictPayload(BaseModel):
-    id_playlist_train: string
-    id_playlist_test: string
+    id_playlist_train: str
+    id_playlist_test: str
     no_recommendations : int
    
     class Config:

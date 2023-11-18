@@ -59,5 +59,5 @@ def extract_data(user_data=False, playlists=conf.PLAYLISTS):
             print(f"{str(x + 1)}. Playlist: {playlist_name}")
         print("===================================================")
 
-
-extract_data()
+if __name__ == "__main__":
+    extract_data()

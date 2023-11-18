@@ -81,5 +81,5 @@ def preprocess():
     print("The data has been stored!")
     print("===================================================")
 
-
-preprocess()
+if __name__ == "__main__":
+    preprocess()

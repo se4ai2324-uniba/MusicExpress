@@ -52,5 +52,5 @@ def clustering():
 # Save the model to the file
     dump(kmedoids, conf.MODEL_FILE_PATH)
 
-
-clustering()
+if __name__ == "__main__":
+    clustering()

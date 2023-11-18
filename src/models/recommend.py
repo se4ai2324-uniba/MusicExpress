@@ -52,7 +52,7 @@ def recommend_songs(test_tracks_cluster, test_track,
     return recommended_songs
 
 
-def recommend():
+def recommend_songs():
     """Method to recommend songs to the user"""
     train_tracks_df = pd.read_csv(conf.CLUSTER_TRAIN_SET_PATH)
     test_tracks_df = pd.read_csv(conf.CLUSTER_TEST_SET_PATH)
@@ -112,5 +112,5 @@ def recommend():
 
     return result
 
-
-recommend()
+if __name__ == "__main__":
+    recommend_songs()
