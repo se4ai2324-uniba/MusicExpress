@@ -10,12 +10,12 @@ import conf  # noqa:E402
 # pylint: enable=wrong-import-position
 
 
-def extract_data(user_data=False, playlists=conf.PLAYLISTS):
+def extract_data(user_data=False, playlists=conf.PLAYLISTS, zip_dir=conf.DATA_DIR + 'dataset.zip'):
     """ Method to extract data
     """
     if not user_data:
         # Default scenario
-        with zf.ZipFile(conf.DATA_DIR + 'dataset.zip', 'r') as zip_ref:
+        with zf.ZipFile(zip_dir, 'r') as zip_ref:
             zip_ref.extractall(conf.PREPRO_DATA_DIR)
 
         print("The default playlists are:\n")
