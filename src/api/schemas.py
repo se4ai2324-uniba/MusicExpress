@@ -21,3 +21,10 @@ class PredictPayload(BaseModel):
                 "no_recommendations": conf.NO_RECOMMENDATIONS,
             }
         }
+
+class UserPlaylistPayload(BaseModel):
+
+    id_playlist_train: str
+    id_playlist_test: str
+ 
+   

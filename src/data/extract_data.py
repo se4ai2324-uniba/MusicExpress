@@ -13,6 +13,9 @@ import conf  # noqa:E402
 def extract_data(user_data=False, playlists=conf.PLAYLISTS, zip_dir=conf.DATA_DIR + 'dataset.zip'):
     """ Method to extract data
     """
+    # List of the playlists names needed to store them
+    playlist_names = []
+
     if not user_data:
         # Default scenario
         with zf.ZipFile(zip_dir, 'r') as zip_ref:
@@ -21,7 +24,8 @@ def extract_data(user_data=False, playlists=conf.PLAYLISTS, zip_dir=conf.DATA_DI
         print("The default playlists are:\n")
         for p in conf.PLAYLISTS:
             print(f"Playlist's ID: {p} || Name: {spUt.get_playlist_name(p)}")
-
+            playlist_names.append(spUt.get_playlist_name(p))
+    
     else:
         # User playlists scenario
         print("The provided playlists are:\n")
@@ -31,9 +35,6 @@ def extract_data(user_data=False, playlists=conf.PLAYLISTS, zip_dir=conf.DATA_DI
         print("===================================================")
         print("Checking if the playlists are stored, "
             "otherwise the data will be extracted.")
-
-        # List of the playlists names needed to store them
-        playlist_names = []
 
         for playlist_id in playlists:
 
@@ -58,6 +59,8 @@ def extract_data(user_data=False, playlists=conf.PLAYLISTS, zip_dir=conf.DATA_DI
         for x, playlist_name in enumerate(playlist_names):
             print(f"{str(x + 1)}. Playlist: {playlist_name}")
         print("===================================================")
+
+    return playlist_names
 
 if __name__ == "__main__":
     extract_data()

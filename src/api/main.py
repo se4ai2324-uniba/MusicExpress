@@ -11,7 +11,7 @@ import os                                                        # noqa:E402
 import sys                                                       # noqa:E402
 sys.path.append('\\'.join(os.getcwd().split('\\')[:-2])+'\src')  # noqa:E402
 import conf                                                      # noqa:E402
-from schemas import PredictPayload                               # noqa:E402
+from schemas import PredictPayload,UserPlaylistPayload           # noqa:E402
 from models.recommend import recommend                           # noqa:E402
 from models.clustering import clustering                         # noqa:E402
 from data.extract_data import extract_data                       # noqa:E402
@@ -28,7 +28,6 @@ PRO_DIR=os.path.join(BASE_PATH, conf.PRO_DATA_DIR)
 OUT_DIR=os.path.join(BASE_PATH, conf.OUTPUT_DIR)
 MODELS_DIR = Path("models/")
 model_wrappers_list: List[dict] = []
-
 
 # Define application
 app = FastAPI(
@@ -173,19 +172,38 @@ def _index(request: Request):
 #     return response
 
 
-@app.get('/data/raw', tags=["General"])
+# @app.get('/data/raw', tags=["General"])
+# @construct_response
+# def _get_default_data(request: Request):
+#     extract_data(zip_dir=DATASET_ZIP_DIR)  # default: user_data=False, playlists=conf.PLAYLISTS
+#     train_data = pd.read_csv(DEFAULT_TRAIN_DATA)
+#     test_data = pd.read_csv(DEFAULT_TEST_DATA)
+#     result = [train_data,test_data]
+#     response = {
+#         "message": HTTPStatus.OK.phrase,
+#         "status-code": HTTPStatus.OK,
+#         "data": result
+#     }
+#     return response
+
+
+@app.post('/data/raw', tags=["Data"])
 @construct_response
-def _get_default_data(request: Request):
-    extract_data(zip_dir=DATASET_ZIP_DIR)  # default: user_data=False, playlists=conf.PLAYLISTS
-    train_data = pd.read_csv(DEFAULT_TRAIN_DATA)
-    test_data = pd.read_csv(DEFAULT_TEST_DATA)
-    result = [train_data,test_data]
+def _extract_data(request: Request, user_payload:UserPlaylistPayload):
+
+    if(user_payload == None or ((user_payload.id_playlist_train == '') and (user_payload.id_playlist_test == ''))):
+        result = extract_data(zip_dir=DATASET_ZIP_DIR)  # default: user_data=False, playlists=conf.PLAYLISTS
+    else:
+        user_playlists = [user_payload.id_playlist_train, user_payload.id_playlist_test]
+        result = extract_data(user_data=True, playlists=user_playlists, zip_dir=DATASET_ZIP_DIR)  # default: user_data=False, playlists=conf.PLAYLISTS
+        
     response = {
-        "message": HTTPStatus.OK.phrase,
-        "status-code": HTTPStatus.OK,
-        "data": result
-    }
+            "message": HTTPStatus.OK.phrase,
+            "status-code": HTTPStatus.OK,
+            "data": result
+        }
     return response
+
 
 @app.post("/models/default", tags=["Recommendation"])
 @construct_response
