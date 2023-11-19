@@ -13,6 +13,7 @@ sys.path.append('\\'.join(os.getcwd().split('\\')[:-2])+'\src')  # noqa:E402
 import conf                                                      # noqa:E402
 from schemas import PredictPayload,UserPlaylistPayload           # noqa:E402
 from models.recommend import recommend                           # noqa:E402
+from features.preprocessing import preprocess                    # noqa:E402
 from models.clustering import clustering                         # noqa:E402
 from data.extract_data import extract_data                       # noqa:E402
 from sys import platform                                         # noqa:E402
@@ -200,9 +201,29 @@ def _extract_data(request: Request, user_payload:UserPlaylistPayload):
     response = {
             "message": HTTPStatus.OK.phrase,
             "status-code": HTTPStatus.OK,
-            "data": result
+            "data": os.getcwd()[:-2]
         }
     return response
+
+
+
+@app.post('/data/processed', tags=["Preprocess"])
+@construct_response
+def _preprocess_data(request: Request, user_payload:UserPlaylistPayload):
+
+    if(user_payload == None or ((user_payload.id_playlist_train == '') and (user_payload.id_playlist_test == ''))):
+        result = preprocess()  # default: user_data=False, playlists=conf.PLAYLISTS
+    else:
+        user_playlists = [user_payload.id_playlist_train, user_payload.id_playlist_test]
+        result = preprocess(user_playlists[0],user_playlists[1])  # default: user_data=False, playlists=conf.PLAYLISTS
+        
+    response = {
+            "message": HTTPStatus.OK.phrase if result else HTTPStatus.INTERNAL_SERVER_ERROR.phrase,
+            "status-code": HTTPStatus.OK if result else HTTPStatus.INTERNAL_SERVER_ERROR,
+            "data": 'Preprocessing done!'if result else "Can't preprocess the data"
+        }
+    return response
+
 
 
 @app.post("/models/default", tags=["Recommendation"])

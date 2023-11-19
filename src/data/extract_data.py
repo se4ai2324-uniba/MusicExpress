@@ -7,6 +7,7 @@ import zipfile as zf  # noqa:E402
 import files_utilities as flUt  # noqa:E402
 import spotipy_utilities as spUt  # noqa:E402
 import conf  # noqa:E402
+import os  # noqa:E402
 # pylint: enable=wrong-import-position
 
 
@@ -19,6 +20,7 @@ def extract_data(user_data=False, playlists=conf.PLAYLISTS, zip_dir=conf.DATA_DI
     if not user_data:
         # Default scenario
         with zf.ZipFile(zip_dir, 'r') as zip_ref:
+            
             zip_ref.extractall(conf.PREPRO_DATA_DIR)
 
         print("The default playlists are:\n")
