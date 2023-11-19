@@ -9,16 +9,17 @@ from joblib import dump  # noqa:E402
 import conf  # noqa:E402
 # pylint: enable=wrong-import-position
 
-OUTPUT_TRAIN_FILE = conf.OUTPUT_DIR + 'clustertrainSet.csv'
-OUTPUT_TEST_FILE = conf.OUTPUT_DIR + 'clustertestSet.csv'
-
 
 def clustering(processed_train_data=conf.PRO_TRAIN_SET_PATH, 
-               processed_test_data=conf.PRO_TEST_SET_PATH):
+               processed_test_data=conf.PRO_TEST_SET_PATH,
+               dir_to_store_data=conf.OUTPUT_DIR):
     """Method to generate data clusters"""
     print("Starting to cluster out the data...")
     train_tracks_df = pd.read_csv(processed_train_data)
     test_tracks_df = pd.read_csv(processed_test_data)
+
+    output_train_file = dir_to_store_data + 'clustertrainSet.csv'
+    output_test_file = dir_to_store_data + 'clustertestSet.csv'
 
     train_set = train_tracks_df[conf.FEATURES]
     test_set = test_tracks_df[conf.FEATURES]
@@ -39,8 +40,8 @@ def clustering(processed_train_data=conf.PRO_TRAIN_SET_PATH,
     print("===================================================")
 
     print("Storing the processed files in the folder processed_data.")
-    train_tracks_df.to_csv(OUTPUT_TRAIN_FILE, index=False)
-    test_tracks_df.to_csv(OUTPUT_TEST_FILE, index=False)
+    train_tracks_df.to_csv(output_train_file, index=False)
+    test_tracks_df.to_csv(output_test_file, index=False)
     print("The data has been stored!")
     print("===================================================")
 

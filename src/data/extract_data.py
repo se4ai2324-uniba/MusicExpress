@@ -11,7 +11,9 @@ import os  # noqa:E402
 # pylint: enable=wrong-import-position
 
 
-def extract_data(user_data=False, playlists=conf.PLAYLISTS, zip_dir=conf.DATA_DIR + 'dataset.zip'):
+def extract_data(user_data=False, playlists=conf.PLAYLISTS, 
+                 zip_dir=conf.DATA_DIR + 'dataset.zip',
+                 dir_to_store_data=conf.PREPRO_DATA_DIR):
     """ Method to extract data
     """
     # List of the playlists names needed to store them
@@ -20,8 +22,7 @@ def extract_data(user_data=False, playlists=conf.PLAYLISTS, zip_dir=conf.DATA_DI
     if not user_data:
         # Default scenario
         with zf.ZipFile(zip_dir, 'r') as zip_ref:
-            
-            zip_ref.extractall(conf.PREPRO_DATA_DIR)
+            zip_ref.extractall(dir_to_store_data)
 
         print("The default playlists are:\n")
         for p in conf.PLAYLISTS:
@@ -51,7 +52,8 @@ def extract_data(user_data=False, playlists=conf.PLAYLISTS, zip_dir=conf.DATA_DI
                 print(f"{spUt.get_playlist_name(playlist_id)} isn't stored. "
                     f"Creating dataframe...")
 
-                flUt.create_playlist_df(playlist_id)  # noqa:F841
+                # flUt.create_playlist_df(playlist_id)  # noqa:F841
+                flUt.create_playlist_df(playlist_id, dir_to_store_data)  # noqa:F841
 
             print("===================================================")
 

@@ -21,20 +21,27 @@ import pandas as pd                                              # noqa:E402
 # pylint: enable=wrong-import-position
 
 BASE_PATH = '\\'.join(os.getcwd().split('\\')[:-2]) + '\\' if platform == 'win32' else '/'.join(os.getcwd().split('/')[:-2]) + '/'
-DATASET_ZIP_DIR=os.path.join(BASE_PATH, conf.DATA_DIR + 'dataset.zip')
-DEFAULT_TRAIN_DATA=os.path.join(BASE_PATH, conf.TRAIN_SET_CSV_PATH)
-DEFAULT_TEST_DATA=os.path.join(BASE_PATH, conf.TEST_SET_CSV_PATH)
-PREPRO_DIR=os.path.join(BASE_PATH, conf.PREPRO_DATA_DIR)
-PRO_DIR=os.path.join(BASE_PATH, conf.PRO_DATA_DIR)
-OUT_DIR=os.path.join(BASE_PATH, conf.OUTPUT_DIR)
+
+# Default Data Directories
+DATASET_ZIP_DIR = os.path.join(BASE_PATH, conf.DATA_DIR + 'dataset.zip')
+DEFAULT_TRAIN_DATA = os.path.join(BASE_PATH, conf.TRAIN_SET_CSV_PATH)
+DEFAULT_TEST_DATA = os.path.join(BASE_PATH, conf.TEST_SET_CSV_PATH)
+
+# Data Directories
+PREPRO_DIR = os.path.join(BASE_PATH, "data\interim\\")
+PRO_DIR = os.path.join(BASE_PATH, "data\processed\\")
+OUT_DIR = os.path.join(BASE_PATH, "data\output\\")
+
+# Models Directories
 MODELS_DIR = Path("models/")
 model_wrappers_list: List[dict] = []
+
 
 # Define application
 app = FastAPI(
     title="MusicExpress",
-    description="Description of Music Express APP",
-    version="version",
+    description="Music Recommender System using the K-Medoids clustering method",
+    version="v01",
 )
 
 
@@ -71,7 +78,7 @@ def _index(request: Request):
     response = {
         "message": HTTPStatus.OK.phrase,
         "status-code": HTTPStatus.OK,
-        "data": {"message": "Welcome to MusicExpress! Please, read the `/docs`!"},  # TODO: modifica messaggio
+        "data": {"message": "Welcome to MusicExpress! Please, read the `/docs` if you want to use our system!"},
     }
     return response
 
@@ -193,15 +200,15 @@ def _index(request: Request):
 def _extract_data(request: Request, user_payload:UserPlaylistPayload):
 
     if(user_payload == None or ((user_payload.id_playlist_train == '') and (user_payload.id_playlist_test == ''))):
-        result = extract_data(zip_dir=DATASET_ZIP_DIR)  # default: user_data=False, playlists=conf.PLAYLISTS
+        result = extract_data(zip_dir=DATASET_ZIP_DIR, dir_to_store_data=PREPRO_DIR)  # default: user_data=False, playlists=conf.PLAYLISTS
     else:
         user_playlists = [user_payload.id_playlist_train, user_payload.id_playlist_test]
-        result = extract_data(user_data=True, playlists=user_playlists, zip_dir=DATASET_ZIP_DIR)  # default: user_data=False, playlists=conf.PLAYLISTS
+        result = extract_data(user_data=True, playlists=user_playlists, zip_dir=DATASET_ZIP_DIR, dir_to_store_data=PREPRO_DIR)  # default: user_data=False, playlists=conf.PLAYLISTS
         
     response = {
             "message": HTTPStatus.OK.phrase,
             "status-code": HTTPStatus.OK,
-            "data": os.getcwd()[:-2]
+            "data": result
         }
     return response
 
@@ -212,10 +219,10 @@ def _extract_data(request: Request, user_payload:UserPlaylistPayload):
 def _preprocess_data(request: Request, user_payload:UserPlaylistPayload):
 
     if(user_payload == None or ((user_payload.id_playlist_train == '') and (user_payload.id_playlist_test == ''))):
-        result = preprocess()  # default: user_data=False, playlists=conf.PLAYLISTS
+        result = preprocess(dir_to_store_data = PRO_DIR)  # default: user_data=False, playlists=conf.PLAYLISTS
     else:
         user_playlists = [user_payload.id_playlist_train, user_payload.id_playlist_test]
-        result = preprocess(user_playlists[0],user_playlists[1])  # default: user_data=False, playlists=conf.PLAYLISTS
+        result = preprocess(user_playlists[0],user_playlists[1], dir_to_store_data = PRO_DIR)  # default: user_data=False, playlists=conf.PLAYLISTS
         
     response = {
             "message": HTTPStatus.OK.phrase if result else HTTPStatus.INTERNAL_SERVER_ERROR.phrase,

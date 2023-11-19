@@ -11,6 +11,7 @@ PREPRO_DATA_DIR = "data/interim/"
 PRO_DATA_DIR = "data/processed/"
 OUTPUT_DIR = "data/output/"
 
+
 # Labels needed when creating Dataframes of the Playlists later in the code
 DATAFRAMECOLUMNS = ['Name', 'Artist', 'Energy', 'Liveness', 'Loudness']
 

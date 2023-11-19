@@ -9,8 +9,6 @@ import conf  # noqa:E402
 import spotipy_utilities as spUt  # noqa:E402
 # pylint: enable=wrong-import-position
 
-RECOMM_PATH = conf.OUTPUT_DIR + "recommendations.csv"
-
 
 def euclidean_distance(track_1, track_2, features):
     """"Euclidean distance between two songs"""
@@ -25,6 +23,7 @@ def euclidean_distance(track_1, track_2, features):
 def recommend_songs(test_tracks_cluster, test_track,
                     cluster_label, num_recommendations, features):
     """Function to recommend songs based on cluster"""
+
 
     # pylint: disable=line-too-long
     cluster_tracks = test_tracks_cluster[test_tracks_cluster['Cluster'] == cluster_label]  # noqa:E501
@@ -54,10 +53,13 @@ def recommend_songs(test_tracks_cluster, test_track,
 
 def recommend(clustered_train_data=conf.CLUSTER_TRAIN_SET_PATH, 
               clustered_test_data=conf.CLUSTER_TEST_SET_PATH,
-              no_recommendations=conf.NO_RECOMMENDATIONS):
+              no_recommendations=conf.NO_RECOMMENDATIONS,
+                    dir_to_store_recommendation=conf.OUTPUT_DIR):
     """Method to recommend songs to the user"""
     train_tracks_df = pd.read_csv(clustered_train_data)
     test_tracks_df = pd.read_csv(clustered_test_data)
+
+    recomm_path = dir_to_store_recommendation + "recommendations.csv"
 
     train_track_index = random.randint(0, len(train_tracks_df))
     train_track = train_tracks_df.iloc[train_track_index]
@@ -99,7 +101,7 @@ def recommend(clustered_train_data=conf.CLUSTER_TRAIN_SET_PATH,
         recommendations_data.append(recommendation_dict)
 
     recommendations_df = pd.DataFrame(recommendations_data)
-    recommendations_df.to_csv(RECOMM_PATH, index=False)
+    recommendations_df.to_csv(recomm_path, index=False)
 
     # Build dict with recommended songs
     result = []
