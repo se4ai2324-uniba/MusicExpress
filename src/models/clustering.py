@@ -1,18 +1,20 @@
 """Script for data clustering"""
 
 # pylint: disable=wrong-import-position
-import sys  # noqa:E402
-sys.path.append('src')  # noqa:E402
-import pandas as pd  # noqa:E402
+import os                                   # noqa:E402
+import sys                                  # noqa:E402
+sys.path.append('src')                      # noqa:E402
+import pandas as pd                         # noqa:E402
 from sklearn_extra.cluster import KMedoids  # noqa:E402
-from joblib import dump  # noqa:E402
-import conf  # noqa:E402
+from joblib import dump                     # noqa:E402
+import conf                                 # noqa:E402
 # pylint: enable=wrong-import-position
 
 
 def clustering(processed_train_data=conf.PRO_TRAIN_SET_PATH, 
                processed_test_data=conf.PRO_TEST_SET_PATH,
-               dir_to_store_data=conf.OUTPUT_DIR):
+               dir_to_store_data=conf.OUTPUT_DIR,
+               dir_to_store_model=conf.MODEL_FILE_PATH):
     """Method to generate data clusters"""
     print("Starting to cluster out the data...")
     train_tracks_df = pd.read_csv(processed_train_data)
@@ -52,7 +54,12 @@ def clustering(processed_train_data=conf.PRO_TRAIN_SET_PATH,
     print(test_tracks_df.head())
 
 # Save the model to the file
-    dump(kmedoids, conf.MODEL_FILE_PATH)
+    dump(kmedoids, dir_to_store_model)
+
+    if(os.path.exists(output_train_file) and os.path.exists(output_test_file)):
+        return True
+    else:
+        return False
 
 if __name__ == "__main__":
     clustering()

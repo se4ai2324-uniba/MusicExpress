@@ -1,5 +1,9 @@
 """Main script: it includes our API initialization and endpoints."""
 # pylint: disable=wrong-import-position
+import os                                                        # noqa:E402
+import sys                                                       # noqa:E402
+from sys import platform                                         # noqa:E402
+sys.path.append('\\'.join(os.getcwd().split('\\')[:-2])+'\src')  # noqa:E402
 from datetime import datetime                                    # noqa:E402
 from functools import wraps                                      # noqa:E402
 from http import HTTPStatus                                      # noqa:E402
@@ -7,19 +11,16 @@ from pathlib import Path                                         # noqa:E402
 from typing import List                                          # noqa:E402
 from joblib import load                                          # noqa:E402
 from fastapi import FastAPI, Request                             # noqa:E402
-import os                                                        # noqa:E402
-import sys                                                       # noqa:E402
-sys.path.append('\\'.join(os.getcwd().split('\\')[:-2])+'\src')  # noqa:E402
+import pandas as pd                                              # noqa:E402
 import conf                                                      # noqa:E402
 from schemas import PredictPayload,UserPlaylistPayload           # noqa:E402
-from models.recommend import recommend                           # noqa:E402
+from data.extract_data import extract_data                       # noqa:E402
 from features.preprocessing import preprocess                    # noqa:E402
 from models.clustering import clustering                         # noqa:E402
-from data.extract_data import extract_data                       # noqa:E402
-from sys import platform                                         # noqa:E402
-import pandas as pd                                              # noqa:E402
+from models.recommend import recommend                           # noqa:E402
 # pylint: enable=wrong-import-position
 
+# Folder Directory
 BASE_PATH = '\\'.join(os.getcwd().split('\\')[:-2]) + '\\' if platform == 'win32' else '/'.join(os.getcwd().split('/')[:-2]) + '/'
 
 # Default Data Directories
@@ -32,10 +33,12 @@ PREPRO_DIR = os.path.join(BASE_PATH, "data\interim\\")
 PRO_DIR = os.path.join(BASE_PATH, "data\processed\\")
 OUT_DIR = os.path.join(BASE_PATH, "data\output\\")
 
-# Models Directories
+# Directory containing models.pkl files
+STORE_MODEL_DIR = os.path.join(BASE_PATH, "models\model.pkl")
 MODELS_DIR = Path("models/")
-model_wrappers_list: List[dict] = []
 
+# Models list
+model_wrappers_list: List[dict] = []
 
 # Define application
 app = FastAPI(
@@ -78,8 +81,96 @@ def _index(request: Request):
     response = {
         "message": HTTPStatus.OK.phrase,
         "status-code": HTTPStatus.OK,
-        "data": {"message": "Welcome to MusicExpress! Please, read the `/docs` if you want to use our system!"},
+        "data": {"message": "Welcome to MusicExpress! Please, read the `/docs` if you want to use our system!"},  # noqa:E501
     }
+    return response
+
+
+@app.post('/data/raw', tags=["Data"])
+@construct_response
+def _extract_data(request: Request, user_payload:UserPlaylistPayload):
+
+    if(user_payload == None or ((user_payload.id_playlist_train == '') and (user_payload.id_playlist_test == ''))):
+        result = extract_data(zip_dir=DATASET_ZIP_DIR, 
+                              dir_to_store_data=PREPRO_DIR) 
+    else:
+        user_playlists = [user_payload.id_playlist_train, 
+                          user_payload.id_playlist_test]
+        result = extract_data(user_data=True, playlists=user_playlists, 
+                              zip_dir=DATASET_ZIP_DIR, 
+                              dir_to_store_data=PREPRO_DIR)
+        
+    response = {
+            "message": HTTPStatus.OK.phrase,
+            "status-code": HTTPStatus.OK,
+            "data": result
+        }
+    return response
+
+import spotipy_utilities as spUt
+@app.post('/data/processed', tags=["Preprocessing"])
+@construct_response
+def _preprocess_data(request: Request, user_payload:UserPlaylistPayload):
+
+    if(user_payload == None or ((user_payload.id_playlist_train == '') and (user_payload.id_playlist_test == ''))):
+        result = preprocess(dir_to_store_data = PRO_DIR)
+    else:
+        user_playlists = [user_payload.id_playlist_train,
+                           user_payload.id_playlist_test]
+        
+        tmp_dir_train = PREPRO_DIR + spUt.get_playlist_name(user_playlists[0]) + ".csv"
+        tmp_dir_test = PREPRO_DIR + spUt.get_playlist_name(user_playlists[1]) + ".csv"
+
+        result = preprocess(tmp_dir_train,tmp_dir_test, 
+                            dir_to_store_data = PRO_DIR)
+        
+    response = {
+            "message": HTTPStatus.OK.phrase if result else HTTPStatus.INTERNAL_SERVER_ERROR.phrase,
+            "status-code": HTTPStatus.OK if result else HTTPStatus.INTERNAL_SERVER_ERROR,
+            "data": 'Preprocessing completed!'if result else "Error: can't preprocess the data!"
+        }
+    return response
+
+@app.post('/data/output', tags=["Clustering"])
+@construct_response
+def _cluster_data(request: Request):
+
+    # As of now, the processed playlist are called trainSet and testSet
+    # We may change the naming, but this is not of our interest atm
+    tmp_dir_train = PRO_DIR + "trainSet.csv"
+    tmp_dir_test = PRO_DIR + "testSet.csv"
+
+    result = clustering(tmp_dir_train,tmp_dir_test, 
+                        dir_to_store_data = PRO_DIR,
+                        dir_to_store_model = STORE_MODEL_DIR)
+        
+    response = {
+            "message": HTTPStatus.OK.phrase if result else HTTPStatus.INTERNAL_SERVER_ERROR.phrase,
+            "status-code": HTTPStatus.OK if result else HTTPStatus.INTERNAL_SERVER_ERROR,
+            "data": 'Clustering completed!'if result else "Error: can't clusterize the data!"
+        }
+    return response
+
+@app.post("/models/default", tags=["Recommendation"])
+@construct_response
+def _get_recommended_songs(request: Request):
+    """Return the list of recommended songs"""
+
+    # As of now, the processed playlist are called trainSet and testSet
+    # We may change the naming, but this is not of our interest atm
+    tmp_dir_train = OUT_DIR + "clustertrainSet.csv"
+    tmp_dir_test = OUT_DIR + "clustertestSet.csv"
+
+    recommended_songs = recommend(clustered_train_data=tmp_dir_train,
+                                  clustered_test_data=tmp_dir_test, 
+                                  dir_to_store_recommendation = PRO_DIR)
+
+    response = {
+        "message": HTTPStatus.OK.phrase,
+        "status-code": HTTPStatus.OK,
+        "data": recommended_songs,
+    }
+
     return response
 
 
@@ -194,56 +285,3 @@ def _index(request: Request):
 #     }
 #     return response
 
-
-@app.post('/data/raw', tags=["Data"])
-@construct_response
-def _extract_data(request: Request, user_payload:UserPlaylistPayload):
-
-    if(user_payload == None or ((user_payload.id_playlist_train == '') and (user_payload.id_playlist_test == ''))):
-        result = extract_data(zip_dir=DATASET_ZIP_DIR, dir_to_store_data=PREPRO_DIR)  # default: user_data=False, playlists=conf.PLAYLISTS
-    else:
-        user_playlists = [user_payload.id_playlist_train, user_payload.id_playlist_test]
-        result = extract_data(user_data=True, playlists=user_playlists, zip_dir=DATASET_ZIP_DIR, dir_to_store_data=PREPRO_DIR)  # default: user_data=False, playlists=conf.PLAYLISTS
-        
-    response = {
-            "message": HTTPStatus.OK.phrase,
-            "status-code": HTTPStatus.OK,
-            "data": result
-        }
-    return response
-
-
-
-@app.post('/data/processed', tags=["Preprocess"])
-@construct_response
-def _preprocess_data(request: Request, user_payload:UserPlaylistPayload):
-
-    if(user_payload == None or ((user_payload.id_playlist_train == '') and (user_payload.id_playlist_test == ''))):
-        result = preprocess(dir_to_store_data = PRO_DIR)  # default: user_data=False, playlists=conf.PLAYLISTS
-    else:
-        user_playlists = [user_payload.id_playlist_train, user_payload.id_playlist_test]
-        result = preprocess(user_playlists[0],user_playlists[1], dir_to_store_data = PRO_DIR)  # default: user_data=False, playlists=conf.PLAYLISTS
-        
-    response = {
-            "message": HTTPStatus.OK.phrase if result else HTTPStatus.INTERNAL_SERVER_ERROR.phrase,
-            "status-code": HTTPStatus.OK if result else HTTPStatus.INTERNAL_SERVER_ERROR,
-            "data": 'Preprocessing done!'if result else "Can't preprocess the data"
-        }
-    return response
-
-
-
-@app.post("/models/default", tags=["Recommendation"])
-@construct_response
-def _get_recommended_songs(request: Request, payload: PredictPayload):
-    """Return the list of recommended songs"""
-
-    recommended_songs = recommend()
-
-    response = {
-        "message": HTTPStatus.OK.phrase,
-        "status-code": HTTPStatus.OK,
-        "data": recommended_songs,
-    }
-
-    return response
