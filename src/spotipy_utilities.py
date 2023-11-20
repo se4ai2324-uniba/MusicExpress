@@ -50,7 +50,7 @@ def track_ids_from_playlist(user, playlist_id):
     offset = 0
     limit = 100
     check_len = True
-    
+
     while check_len:
         playlist = conf.SP.user_playlist_tracks(user, playlist_id,
                                                 limit=limit, offset=offset)
@@ -58,12 +58,12 @@ def track_ids_from_playlist(user, playlist_id):
         for elem in playlist['items']:
             track = elem['track']
             track_ids.append(track['id'])
-            if(len(track_ids) == 15):
+            if len(track_ids) == 15:
                 check_len = False
                 break
 
         offset += limit
-        if (len(playlist['items']) < limit):
+        if len(playlist['items']) < limit:
             break
 
     return track_ids

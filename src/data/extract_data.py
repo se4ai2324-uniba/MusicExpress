@@ -7,11 +7,10 @@ import zipfile as zf  # noqa:E402
 import files_utilities as flUt  # noqa:E402
 import spotipy_utilities as spUt  # noqa:E402
 import conf  # noqa:E402
-import os  # noqa:E402
 # pylint: enable=wrong-import-position
 
 
-def extract_data(user_data=False, playlists=conf.PLAYLISTS, 
+def extract_data(user_data=False, playlists=None,
                  zip_dir=conf.DATA_DIR + 'dataset.zip',
                  dir_to_store_data=conf.PREPRO_DATA_DIR):
     """ Method to extract data
@@ -20,6 +19,8 @@ def extract_data(user_data=False, playlists=conf.PLAYLISTS,
     playlist_names = []
 
     if not user_data:
+        playlists = conf.PLAYLISTS
+
         # Default scenario
         with zf.ZipFile(zip_dir, 'r') as zip_ref:
             zip_ref.extractall(dir_to_store_data)
@@ -28,7 +29,7 @@ def extract_data(user_data=False, playlists=conf.PLAYLISTS,
         for p in conf.PLAYLISTS:
             print(f"Playlist's ID: {p} || Name: {spUt.get_playlist_name(p)}")
             playlist_names.append(spUt.get_playlist_name(p))
-    
+
     else:
         # User playlists scenario
         print("The provided playlists are:\n")
@@ -37,23 +38,25 @@ def extract_data(user_data=False, playlists=conf.PLAYLISTS,
 
         print("===================================================")
         print("Checking if the playlists are stored, "
-            "otherwise the data will be extracted.")
+              "otherwise the data will be extracted.")
 
         for playlist_id in playlists:
 
+            # pylint: disable=line-too-long
             playlist_name = spUt.clear_playlist_name(spUt.get_playlist_name(playlist_id))  # noqa:E501
+            # pylint: enable=line-too-long
 
             playlist_names.append(playlist_name)
 
             if flUt.check_file_exists(playlist_id, dir_to_store_data):
                 print(f"{spUt.get_playlist_name(playlist_id)} is "
-                    "stored and ready to be used.")
+                      f"stored and ready to be used.")
             else:
                 print(f"{spUt.get_playlist_name(playlist_id)} isn't stored. "
-                    f"Creating dataframe...")
+                      f"Creating dataframe...")
 
                 # flUt.create_playlist_df(playlist_id)  # noqa:F841
-                flUt.create_playlist_df(playlist_id, dir_to_store_data)  # noqa:F841
+                flUt.create_playlist_df(playlist_id, dir_to_store_data)  # noqa:E501,F841
 
             print("===================================================")
 
@@ -65,6 +68,7 @@ def extract_data(user_data=False, playlists=conf.PLAYLISTS,
         print("===================================================")
 
     return playlist_names
+
 
 if __name__ == "__main__":
     extract_data()

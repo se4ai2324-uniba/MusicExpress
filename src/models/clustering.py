@@ -11,7 +11,7 @@ import conf                                 # noqa:E402
 # pylint: enable=wrong-import-position
 
 
-def clustering(processed_train_data=conf.PRO_TRAIN_SET_PATH, 
+def clustering(processed_train_data=conf.PRO_TRAIN_SET_PATH,
                processed_test_data=conf.PRO_TEST_SET_PATH,
                dir_to_store_data=conf.OUTPUT_DIR,
                dir_to_store_model=conf.MODEL_FILE_PATH):
@@ -56,10 +56,8 @@ def clustering(processed_train_data=conf.PRO_TRAIN_SET_PATH,
 # Save the model to the file
     dump(kmedoids, dir_to_store_model)
 
-    if(os.path.exists(output_train_file) and os.path.exists(output_test_file)):
-        return True
-    else:
-        return False
+    return bool(os.path.exists(output_train_file) and os.path.exists(output_test_file))  # noqa:E501
+
 
 if __name__ == "__main__":
     clustering()

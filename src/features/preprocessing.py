@@ -1,11 +1,11 @@
 """Script to process the extracted data"""
 
 # pylint: disable=wrong-import-position
+import os    # noqa:E402
 import sys  # noqa:E402
 sys.path.append('src')  # noqa:E402
 import pandas as pd  # noqa:E402
 import conf  # noqa:E402
-import os    # noqa:E402
 # pylint: enable=wrong-import-position
 
 
@@ -44,7 +44,7 @@ def print_column_min_max(df, column):
           f"and the max val. is {str(column_max)}")
 
 
-def preprocess(raw_train_data=conf.TRAIN_SET_CSV_PATH, 
+def preprocess(raw_train_data=conf.TRAIN_SET_CSV_PATH,
                raw_test_data=conf.TEST_SET_CSV_PATH,
                dir_to_store_data=conf.PRO_DATA_DIR):
     """Method to preprocess raw data"""
@@ -52,7 +52,7 @@ def preprocess(raw_train_data=conf.TRAIN_SET_CSV_PATH,
     test_tracks_df = pd.read_csv(raw_test_data)
 
     output_train_file = dir_to_store_data + 'trainSet.csv'
-    output_test_file =  dir_to_store_data + 'testSet.csv'
+    output_test_file = dir_to_store_data + 'testSet.csv'
 
     print("===================================================")
     print("Preprocessing train set..\nRemoving rows with null values...")
@@ -83,11 +83,8 @@ def preprocess(raw_train_data=conf.TRAIN_SET_CSV_PATH,
     test_tracks_df.to_csv(output_test_file, index=False)
     print("The data has been stored!")
     print("===================================================")
-    
-    if(os.path.exists(output_train_file) and os.path.exists(output_test_file)):
-        return True
-    else:
-        return False
+
+    return bool(os.path.exists(output_train_file) and os.path.exists(output_test_file))  # noqa:E501
 
 
 if __name__ == "__main__":

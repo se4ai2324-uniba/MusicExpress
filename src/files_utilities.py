@@ -57,7 +57,8 @@ def create_playlist_df(playlist_id, data_dir=conf.PREPRO_DATA_DIR):
     return tracks_df
 
 
-def store_playlist_dataframe(playlist_id, dataframe, data_dir_df=conf.PREPRO_DATA_DIR):
+def store_playlist_dataframe(playlist_id, dataframe,
+                             data_dir_df=conf.PREPRO_DATA_DIR):
     """Method that stores the Dataframe of a Playlist"""
     playlist_name = spUt.get_playlist_name(playlist_id)
     file_name = playlist_name + ".csv"

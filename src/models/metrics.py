@@ -65,6 +65,7 @@ def log_experiments(accuracy):
 
     mlflow.end_run()
 
+
 if __name__ == "__main__":
     model_accuracy = metrics()
     log_experiments(model_accuracy)
