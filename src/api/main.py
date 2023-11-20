@@ -64,10 +64,13 @@ def construct_response(f):
             "url": request.url._url,
         }
 
-        # Add data
+        # Additional data in the response
+        if "target_song" in results:
+            response["target_song"] = results["target_song"]
+
         if "data" in results:
             response["data"] = results["data"]
-
+        
         return response
 
     return wrap
@@ -113,7 +116,9 @@ import spotipy_utilities as spUt
 def _preprocess_data(request: Request, user_payload:UserPlaylistPayload):
 
     if(user_payload == None or ((user_payload.id_playlist_train == '') and (user_payload.id_playlist_test == ''))):
-        result = preprocess(dir_to_store_data = PRO_DIR)
+        result = preprocess(raw_train_data=DEFAULT_TRAIN_DATA,
+                            raw_test_data=DEFAULT_TEST_DATA,
+                            dir_to_store_data = PRO_DIR)
     else:
         user_playlists = [user_payload.id_playlist_train,
                            user_payload.id_playlist_test]
@@ -141,7 +146,7 @@ def _cluster_data(request: Request):
     tmp_dir_test = PRO_DIR + "testSet.csv"
 
     result = clustering(tmp_dir_train,tmp_dir_test, 
-                        dir_to_store_data = PRO_DIR,
+                        dir_to_store_data = OUT_DIR,
                         dir_to_store_model = STORE_MODEL_DIR)
         
     response = {
@@ -161,14 +166,15 @@ def _get_recommended_songs(request: Request):
     tmp_dir_train = OUT_DIR + "clustertrainSet.csv"
     tmp_dir_test = OUT_DIR + "clustertestSet.csv"
 
-    recommended_songs = recommend(clustered_train_data=tmp_dir_train,
+    target_song, recommended_songs = recommend(clustered_train_data=tmp_dir_train,
                                   clustered_test_data=tmp_dir_test, 
                                   dir_to_store_recommendation = PRO_DIR)
 
     response = {
         "message": HTTPStatus.OK.phrase,
         "status-code": HTTPStatus.OK,
-        "data": recommended_songs,
+        "target_song": target_song if len(target_song) > 0 else "Check below output message!",
+        "data": recommended_songs if len(recommended_songs) > 0 else "We are sorry, our system was not able to provide any recommendations.",
     }
 
     return response

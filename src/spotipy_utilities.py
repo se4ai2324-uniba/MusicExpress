@@ -76,7 +76,7 @@ def get_track_features(track_id):
 
     # Track Info
     name = track_details['name']
-    artist = track_details['artists'][0]
+    artist = track_details['artists'][0]['name']
 
     # Track Features
     energy = track_features[0]['energy']

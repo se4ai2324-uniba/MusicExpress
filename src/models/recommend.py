@@ -70,8 +70,10 @@ def recommend(clustered_train_data=conf.CLUSTER_TRAIN_SET_PATH,
     track_cluster = train_tracks_df[train_tracks_df['Name'] == train_track['Name']]  # noqa:E501
 
     print(f"The track from which suggestions will be computed is: "
-          f"Song: {track_cluster['Name'].values[0]} - "
-          f"Artist: {track_cluster['Artist'].values[0]}")
+          f"{track_cluster['Name'].values[0]} - "
+          f"{track_cluster['Artist'].values[0]}")
+    
+    target_song = track_cluster['Name'].values[0] + " - " + track_cluster['Artist'].values[0]
 
     train_track_cluster = track_cluster['Cluster'].values[0]
     print("===================================================")
@@ -114,7 +116,7 @@ def recommend(clustered_train_data=conf.CLUSTER_TRAIN_SET_PATH,
             }
         result.append(temp)
 
-    return result
+    return target_song, result
 
 if __name__ == "__main__":
     recommend()

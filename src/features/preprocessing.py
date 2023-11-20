@@ -83,7 +83,7 @@ def preprocess(raw_train_data=conf.TRAIN_SET_CSV_PATH,
     test_tracks_df.to_csv(output_test_file, index=False)
     print("The data has been stored!")
     print("===================================================")
-
+    
     if(os.path.exists(output_train_file) and os.path.exists(output_test_file)):
         return True
     else:

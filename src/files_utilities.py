@@ -7,12 +7,12 @@ import conf
 import spotipy_utilities as spUt
 
 
-def check_file_exists(playlist_id):
+def check_file_exists(playlist_id, dir_to_check_data=conf.PREPRO_DATA_DIR):
     """Method that checks whether a file has already been stored or not"""
     current_playlist = spUt.clear_playlist_name(spUt.get_playlist_name(playlist_id))  # noqa:E501
 
-    file_name = str(current_playlist) + ".csv"
-    file_path = conf.PREPRO_DATA_DIR + file_name
+    file_name = current_playlist + ".csv"
+    file_path = dir_to_check_data + file_name
 
     if os.path.isfile(file_path):
         print(f"The playlist {current_playlist} was already stored.")
