@@ -62,7 +62,9 @@ def construct_response(f):
             "method": request.method,
             "status-code": results["status-code"],
             "timestamp": datetime.now().isoformat(),
+            # pylint: disable=protected-access
             "url": request.url._url,
+            # pylint: enable=protected-access
         }
 
         # Additional data in the response
@@ -77,6 +79,7 @@ def construct_response(f):
     return wrap
 
 
+# pylint: disable=unused-argument
 @app.get("/", tags=["General"])
 @construct_response
 def _index(request: Request):
@@ -182,4 +185,4 @@ def _recommended_songs(request: Request):
 
     return response
 
-# pylint: enable=line-too-long,anomalous-backslash-in-string
+# pylint: enable=line-too-long,anomalous-backslash-in-string,unused-argument
