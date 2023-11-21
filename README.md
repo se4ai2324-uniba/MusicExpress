@@ -101,6 +101,10 @@ Testing is conducted within the DVC pipeline, and you can find more details abou
 
 Quality assessment tools have been integrated throughout the code, and you can discover further information [here](reports/README.md).
 
+## API
+
+API have been integrated, and you can discover further information [here](src/api/README.md).
+
 ## Citation
 
 ```bibtex

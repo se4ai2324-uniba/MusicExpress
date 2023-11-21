@@ -92,7 +92,7 @@ You can easily run the analysis on a notebook with the following command:
 pynblint path\to\notebook.ipynb -qo path/to/save/report.json
 ```
 
-We run the Pynblint analysis on the [test_deepchecks notebook](../src/tests/test_deepchecks.ipynb) and we show a snippet of the analysis' results at first:
+We run the Pynblint analysis on the [test_deepchecks notebook](../src/tests/test_deepchecks.ipynb) and on the [MusicExpress notebook](../notebooks/MusicExpress.ipynb) we show a snippet of the analysis' results at first:
 
 ![plot](/figures/pynblint_before_fix.png?raw=true)
 

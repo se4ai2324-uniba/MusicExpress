@@ -86,10 +86,10 @@ More information about this tool can be found [here](https://github.com/deepchec
 The Pytest library is utilized in the following scripts:
 
 - [test_api](../tests/pytest/test_api.py)
-- [test_files_utilities](../tests/pytest/test_files_utilities.py.py)
-- [test_preprocessing](../tests/pytest/test_preprocessing.py.py)
-- [test_recommend](../tests/pytest/test_recommend.py.py)
-- [test_spotipy_utilities](../tests/pytest/test_spotipy_utilities.py.py)
+- [test_files_utilities](../tests/pytest/test_files_utilities.py)
+- [test_preprocessing](../tests/pytest/test_preprocessing.py)
+- [test_recommend](../tests/pytest/test_recommend.py)
+- [test_spotipy_utilities](../tests/pytest/test_spotipy_utilities.py)
 
 In each of these scripts, various tests have been executed to ensure that every component functions as expected.
 
