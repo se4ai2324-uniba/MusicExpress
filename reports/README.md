@@ -92,10 +92,20 @@ You can easily run the analysis on a notebook with the following command:
 pynblint path\to\notebook.ipynb -qo path/to/save/report.json
 ```
 
+For the [MusicExpress notebook](../notebooks/MusicExpress.ipynb) we had to address certain issues by marking them as unsolvable. To address these issues, the exclude tag is utilized in the following manner:
+
+```bash
+pynblint MusicExpress.ipynb --exclude '["notebook-too-long", "cell-too-long", "imports-beyond-first-cell"]'
+```
+
 We run the Pynblint analysis on the [test_deepchecks notebook](../src/tests/test_deepchecks.ipynb) and on the [MusicExpress notebook](../notebooks/MusicExpress.ipynb) we show a snippet of the analysis' results at first:
 
 ![plot](/figures/pynblint_before_fix.png?raw=true)
 
-After fixing all the listed issues, the analysis' results should be as follows:
+Following the analysis on the test_deepchecks notebook, after fixing all the listed issues:
 
 ![plot](/figures/pynblint_after_fix.png?raw=true)
+
+Here for the MusicExpress notebook:
+
+![plot](/figures/pynblint_MusicExpress.png?raw=true)
