@@ -11,7 +11,7 @@ from pathlib import Path                                         # noqa:E402
 from typing import List                                          # noqa:E402
 from fastapi import FastAPI, Request                             # noqa:E402
 # pylint: disable=import-error
-from schemas import UserPlaylistPayload                          # noqa:E402
+from api.schemas import UserPlaylistPayload                          # noqa:E402
 # pylint: enable=import-error
 import conf                                                      # noqa:E402
 import spotipy_utilities as spUt                                 # noqa:E402
@@ -61,9 +61,9 @@ def construct_response(f):
             "message": results["message"],
             "method": request.method,
             "status-code": results["status-code"],
-            "timestamp": datetime.now().isoformat(),
+            #"timestamp": datetime.now().isoformat(),
             # pylint: disable=protected-access
-            "url": request.url._url,
+            #"url": request.url._url,
             # pylint: enable=protected-access
         }
 
@@ -73,6 +73,9 @@ def construct_response(f):
 
         if "data" in results:
             response["data"] = results["data"]
+
+        if "authors" in results:
+            response["authors"] = results["authors"]
 
         return response
 
@@ -89,6 +92,7 @@ def _index(request: Request):
         "message": HTTPStatus.OK.phrase,
         "status-code": HTTPStatus.OK,
         "data": {"message": "Welcome to MusicExpress! Please, read the `/docs` if you want to use our system!"},  # noqa:E501
+        "authors": ['Rinaldi Ivan', 'Sibilla Antonio', 'de Benedictis Salvatore (Spiderman)', 'Laraspata Lucrezia'],
     }
 
     return response
