@@ -2,16 +2,14 @@
 # pylint: disable=wrong-import-position,line-too-long,anomalous-backslash-in-string  # noqa:E501
 import os                                                        # noqa:E402
 import sys                                                       # noqa:E402
-from sys import platform                                         # noqa:E402
 sys.path.append('\\'.join(os.getcwd().split('\\')[:-2])+'\src')  # noqa:E402,E501,W605
-from datetime import datetime                                    # noqa:E402
 from functools import wraps                                      # noqa:E402
 from http import HTTPStatus                                      # noqa:E402
 from pathlib import Path                                         # noqa:E402
 from typing import List                                          # noqa:E402
-from fastapi import FastAPI, Request                             # noqa:E402
+from fastapi import FastAPI, Request, HTTPException              # noqa:E402
 # pylint: disable=import-error
-from api.schemas import UserPlaylistPayload                          # noqa:E402
+from api.schemas import UserPlaylistPayload                      # noqa:E402
 # pylint: enable=import-error
 import conf                                                      # noqa:E402
 import spotipy_utilities as spUt                                 # noqa:E402
@@ -22,7 +20,7 @@ from models.recommend import recommend                           # noqa:E402
 # pylint: enable=wrong-import-position
 
 # Folder Directory
-BASE_PATH = '\\'.join(os.getcwd().split('\\')[:-2]) + '\\' if platform == 'win32' else '/'.join(os.getcwd().split('/')[:-2]) + '/'  # noqa:E501
+BASE_PATH = conf.DIR_PATH
 
 # Default Data Directories
 DATASET_ZIP_DIR = os.path.join(BASE_PATH, conf.DATA_DIR + 'dataset.zip')
@@ -61,10 +59,6 @@ def construct_response(f):
             "message": results["message"],
             "method": request.method,
             "status-code": results["status-code"],
-            #"timestamp": datetime.now().isoformat(),
-            # pylint: disable=protected-access
-            #"url": request.url._url,
-            # pylint: enable=protected-access
         }
 
         # Additional data in the response
@@ -92,13 +86,13 @@ def _index(request: Request):
         "message": HTTPStatus.OK.phrase,
         "status-code": HTTPStatus.OK,
         "data": {"message": "Welcome to MusicExpress! Please, read the `/docs` if you want to use our system!"},  # noqa:E501
-        "authors": ['Rinaldi Ivan', 'Sibilla Antonio', 'de Benedictis Salvatore (Spiderman)', 'Laraspata Lucrezia'],
+        "authors": ['Rinaldi Ivan', 'Sibilla Antonio', 'de Benedictis Salvatore (Spiderman)', 'Laraspata Lucrezia'],   # noqa:E501
     }
 
     return response
 
 
-@app.post('/data/raw', tags=["Data"])
+@app.post('/extract', tags=["Data"])
 @construct_response
 def _extract_data(request: Request, user_payload: UserPlaylistPayload):
 
@@ -121,7 +115,7 @@ def _extract_data(request: Request, user_payload: UserPlaylistPayload):
     return response
 
 
-@app.post('/data/processed', tags=["Preprocessing"])
+@app.post('/preprocess', tags=["Preprocessing"])
 @construct_response
 def _preprocess_data(request: Request, user_payload: UserPlaylistPayload):
 
@@ -139,16 +133,20 @@ def _preprocess_data(request: Request, user_payload: UserPlaylistPayload):
         result = preprocess(tmp_dir_train, tmp_dir_test,
                             dir_to_store_data=PRO_DIR)
 
-    response = {
-            "message": HTTPStatus.OK.phrase if result else HTTPStatus.INTERNAL_SERVER_ERROR.phrase,   # noqa:E501
-            "status-code": HTTPStatus.OK if result else HTTPStatus.INTERNAL_SERVER_ERROR,   # noqa:E501
-            "data": 'Preprocessing completed!' if result else "Error: can't preprocess the data!"   # noqa:E501
+    if result:
+
+        response = {
+            "message": HTTPStatus.OK.phrase,
+            "status-code": HTTPStatus.OK,
+            "data": 'Preprocessing completed!'
         }
 
-    return response
+        return response
+
+    raise HTTPException(status_code=404, detail='Error: can\'t preprocess the data!')   # noqa:E501
 
 
-@app.post('/data/output', tags=["Clustering"])
+@app.post('/cluster', tags=["Clustering"])
 @construct_response
 def _cluster_data(request: Request):
 
@@ -159,16 +157,20 @@ def _cluster_data(request: Request):
                         dir_to_store_data=OUT_DIR,
                         dir_to_store_model=STORE_MODEL_DIR)
 
-    response = {
-            "message": HTTPStatus.OK.phrase if result else HTTPStatus.INTERNAL_SERVER_ERROR.phrase,  # noqa:E501
-            "status-code": HTTPStatus.OK if result else HTTPStatus.INTERNAL_SERVER_ERROR,  # noqa:E501
-            "data": 'Clustering completed!' if result
-                    else "Error: can't clusterize the data!"
+    if result:
+
+        response = {
+            "message": HTTPStatus.OK.phrase,
+            "status-code": HTTPStatus.OK,
+            "data": 'Clustering completed!'
         }
-    return response
+
+        return response
+
+    raise HTTPException(status_code=404, detail='Error: can\'t clusterize the data!')   # noqa:E501
 
 
-@app.get("/data/output", tags=["Recommendation"])
+@app.get("/recommendation", tags=["Recommendation"])
 @construct_response
 def _recommended_songs(request: Request):
     """Return the list of recommended songs"""
@@ -179,14 +181,17 @@ def _recommended_songs(request: Request):
     target_song, recommended_songs = recommend(clustered_train_data=tmp_dir_train,   # noqa:E501
                                                clustered_test_data=tmp_dir_test,   # noqa:E501
                                                dir_to_store_recommendation=PRO_DIR)   # noqa:E501
+    if len(target_song) > 0:
 
-    response = {
-        "message": HTTPStatus.OK.phrase,
-        "status-code": HTTPStatus.OK,
-        "target_song": target_song if len(target_song) > 0 else "Check below output message!",  # noqa:E501
-        "data": recommended_songs if len(recommended_songs) > 0 else "We are sorry, our system was not able to provide any recommendations.",  # noqa:E501
-    }
+        response = {
+            "message": HTTPStatus.OK.phrase,
+            "status-code": HTTPStatus.OK,
+            "target_song": target_song,
+            "data": recommended_songs
+        }
 
-    return response
+        return response
+
+    raise HTTPException(status_code=404, detail='We are sorry, our system was not able to provide any recommendations.')   # noqa:E501
 
 # pylint: enable=line-too-long,anomalous-backslash-in-string,unused-argument

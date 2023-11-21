@@ -1,9 +1,13 @@
 """Script with shared constants for most scripts"""
-
+# pylint: disable=wrong-import-position
 import os
+from pathlib import Path
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
+# pylint: enable=wrong-import-position
 
+# Directory in which the project is stored
+DIR_PATH = Path(__file__).resolve().parent.parent
 
 # Folder in which playlists (our data) are stored
 DATA_DIR = "data/raw/"
