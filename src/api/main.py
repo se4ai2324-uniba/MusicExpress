@@ -86,7 +86,7 @@ def _index(request: Request):
         "message": HTTPStatus.OK.phrase,
         "status-code": HTTPStatus.OK,
         "data": {"message": "Welcome to MusicExpress! Please, read the `/docs` if you want to use our system!"},  # noqa:E501
-        "authors": ['Rinaldi Ivan', 'Sibilla Antonio', 'de Benedictis Salvatore (Spiderman)', 'Laraspata Lucrezia'],   # noqa:E501
+        "authors": ['Rinaldi Ivan', 'Sibilla Antonio', 'de Benedictis Salvatore (Spiderman)', 'Laraspata Lucrezia'],  # noqa:E501
     }
 
     return response

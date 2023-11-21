@@ -84,8 +84,8 @@ stages:
     outs:
     - path: data/output/recommendations.csv
       hash: md5
-      md5: 17df529cd68b0f63a87de54ca4476528
-      size: 164
+      md5: 200fc8c29c9b0dd70617f2b1d23abf86
+      size: 144
   metrics:
     cmd: python src/models/metrics.py
     deps:
@@ -99,8 +99,8 @@ stages:
       size: 9546
     - path: data/output/recommendations.csv
       hash: md5
-      md5: 17df529cd68b0f63a87de54ca4476528
-      size: 164
+      md5: 200fc8c29c9b0dd70617f2b1d23abf86
+      size: 144
     - path: src/models/metrics.py
       hash: md5
       md5: 2bc420aeec8a0026ac223a41582d62ae
