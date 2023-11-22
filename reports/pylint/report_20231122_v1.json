@@ -1,0 +1,15 @@
+[
+    {
+        "type": "fatal",
+        "module": "api",
+        "obj": "",
+        "line": 1,
+        "column": 0,
+        "endLine": null,
+        "endColumn": null,
+        "path": "src\\api\\__init__.py",
+        "symbol": "parse-error",
+        "message": "error while code parsing: Unable to load file src\\api\\__init__.py:\n[Errno 2] No such file or directory: 'src\\\\api\\\\__init__.py'",
+        "message-id": "F0010"
+    }
+]
