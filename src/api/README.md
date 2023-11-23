@@ -27,6 +27,8 @@ To access the Swagger UI, open your web browser and navigate to:
 http://127.0.0.1:8000/docs
 ```
 
-This interface dynamically documents the available endpoints, their input parameters, and allows you to make requests directly from the browser. Below
+This interface dynamically documents the available endpoints, their input parameters, and allows you to make requests directly from the browser. Below an example of one of our endpoints:
+
+![plot](/figures/fastapi_swagger_example.png?raw=true)
 
 More information about this tool can be found [here](https://fastapi.tiangolo.com/).
