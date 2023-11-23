@@ -10,23 +10,6 @@ import conf                                                      # noqa:E402
 # pylint: enable=wrong-import-position,anomalous-backslash-in-string
 
 
-class PredictPayload(BaseModel):
-    '''Default data payload'''
-    id_playlist_train: str
-    id_playlist_test: str
-    no_recommendations: int
-
-    class Config:
-        '''Default data values'''
-        schema_extra = {
-            "default": {
-                "id_playlist_train": conf.PLAYLISTS[0],
-                "id_playlist_test": conf.PLAYLISTS[1],
-                "no_recommendations": conf.NO_RECOMMENDATIONS,
-            }
-        }
-
-
 class UserPlaylistPayload(BaseModel):
     '''User data payload'''
     id_playlist_train: str

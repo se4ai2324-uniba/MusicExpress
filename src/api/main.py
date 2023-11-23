@@ -5,8 +5,6 @@ import sys                                                       # noqa:E402
 sys.path.append('\\'.join(os.getcwd().split('\\')[:-2])+'\src')  # noqa:E402,E501,W605
 from functools import wraps                                      # noqa:E402
 from http import HTTPStatus                                      # noqa:E402
-from pathlib import Path                                         # noqa:E402
-from typing import List                                          # noqa:E402
 from fastapi import FastAPI, Request, HTTPException              # noqa:E402
 # pylint: disable=import-error
 from api.schemas import UserPlaylistPayload                      # noqa:E402
@@ -34,10 +32,6 @@ OUT_DIR = os.path.join(BASE_PATH, "data\output\\")  # noqa:W605
 
 # Directory containing models.pkl files
 STORE_MODEL_DIR = os.path.join(BASE_PATH, "models\model.pkl")  # noqa:W605
-MODELS_DIR = Path("models/")
-
-# Models list
-model_wrappers_list: List[dict] = []
 
 # Define application
 app = FastAPI(
