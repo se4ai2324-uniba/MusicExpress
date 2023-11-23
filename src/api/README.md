@@ -9,8 +9,6 @@ To produce the API for our system we used:
 FastAPI is employed in the [main](../main.py) in which, after initializing the FastAPI framework, we create endpoints for our system functionalities, such as:
 
 - data extraction,
-- preprocessing,
-- clustering,
 - music recommendations.
 
 Running the command:
