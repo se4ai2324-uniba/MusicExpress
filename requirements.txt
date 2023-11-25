@@ -35,3 +35,7 @@ pynblint==0.1.5
 flake8==6.1.0
 flake8-html==0.4.3
 great-expectations==0.18.1
+
+# Libraries needed for API
+fastapi==0.104.1
+uvicorn==0.24.0.post1

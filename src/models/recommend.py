@@ -9,8 +9,6 @@ import conf  # noqa:E402
 import spotipy_utilities as spUt  # noqa:E402
 # pylint: enable=wrong-import-position
 
-RECOMM_PATH = conf.OUTPUT_DIR + "recommendations.csv"
-
 
 def euclidean_distance(track_1, track_2, features):
     """"Euclidean distance between two songs"""
@@ -52,13 +50,16 @@ def recommend_songs(test_tracks_cluster, test_track,
     return recommended_songs
 
 
-def recommend():
+def recommend(clustered_train_data=conf.CLUSTER_TRAIN_SET_PATH,
+              clustered_test_data=conf.CLUSTER_TEST_SET_PATH,
+              no_recommendations=conf.NO_RECOMMENDATIONS,
+              dir_to_store_recommendation=conf.OUTPUT_DIR):
     """Method to recommend songs to the user"""
-    train_tracks_df = pd.read_csv(conf.CLUSTER_TRAIN_SET_PATH)
-    test_tracks_df = pd.read_csv(conf.CLUSTER_TEST_SET_PATH)
+    train_tracks_df = pd.read_csv(clustered_train_data)
+    test_tracks_df = pd.read_csv(clustered_test_data)
+    recomm_path = dir_to_store_recommendation + "recommendations.csv"
 
-    train_track_index = random.randint(0, len(train_tracks_df))
-    train_track = train_tracks_df.iloc[train_track_index]
+    train_track = train_tracks_df.iloc[random.randint(0, len(train_tracks_df))]  # noqa:E501
     print("===================================================")
     print("Starting song recommendation phase...")
     print("===================================================")
@@ -66,15 +67,14 @@ def recommend():
     track_cluster = train_tracks_df[train_tracks_df['Name'] == train_track['Name']]  # noqa:E501
 
     print(f"The track from which suggestions will be computed is: "
-          f"Song: {track_cluster['Name'].values[0]} - "
-          f"Artist: {track_cluster['Artist'].values[0]}")
+          f"{track_cluster['Name'].values[0]} - "
+          f"{track_cluster['Artist'].values[0]}")
 
-    train_track_cluster = track_cluster['Cluster'].values[0]
     print("===================================================")
 
     recommendations = recommend_songs(test_tracks_df,
-                                      train_track, train_track_cluster,
-                                      conf.NO_RECOMMENDATIONS, conf.FEATURES)
+                                      train_track, track_cluster['Cluster'].values[0],  # noqa:E501
+                                      no_recommendations, conf.FEATURES)
     recommendations_links = []
 
     for x, recommendation in enumerate(recommendations):
@@ -87,17 +87,23 @@ def recommend():
         print("Preview: ", recommendations_links[x])
     print("===================================================")
 
-    recommendations_data = []
+    # pylint: disable=line-too-long
+    recommendations_data = [{'Name': rec['Name'], 'Artist': rec['Artist']}
+                            for rec in recommendations]
+    # pylint: enable=line-too-long
+    pd.DataFrame(recommendations_data).to_csv(recomm_path, index=False)
 
-    for recommendation in recommendations:
-        recommendation_dict = {
-            'Name': recommendation['Name'],
-            'Artist': recommendation['Artist']
-            }
-        recommendations_data.append(recommendation_dict)
+    # Build dict with recommended songs
+    # pylint: disable=line-too-long
+    result = [{'Name': rec['Name'], 'Artist': rec['Artist'],
+               'Preview': recommendations_links[i]}
+              for i, rec in enumerate(recommendations)]
+    # pylint: enable=line-too-long
 
-    recommendations_df = pd.DataFrame(recommendations_data)
-    recommendations_df.to_csv(RECOMM_PATH, index=False)
+    # pylint: disable=line-too-long
+    return track_cluster['Name'].values[0] + " - " + track_cluster['Artist'].values[0], result  # noqa:E501
+    # pylint: enable=line-too-long
 
 
-recommend()
+if __name__ == "__main__":
+    recommend()

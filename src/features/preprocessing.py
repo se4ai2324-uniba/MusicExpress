@@ -1,14 +1,12 @@
 """Script to process the extracted data"""
 
 # pylint: disable=wrong-import-position
+import os    # noqa:E402
 import sys  # noqa:E402
 sys.path.append('src')  # noqa:E402
 import pandas as pd  # noqa:E402
 import conf  # noqa:E402
 # pylint: enable=wrong-import-position
-
-OUTPUT_TRAIN_FILE = conf.PRO_DATA_DIR + 'trainSet.csv'
-OUTPUT_TEST_FILE = conf.PRO_DATA_DIR + 'testSet.csv'
 
 
 def remove_null_values_df(df):
@@ -46,10 +44,15 @@ def print_column_min_max(df, column):
           f"and the max val. is {str(column_max)}")
 
 
-def preprocess():
+def preprocess(raw_train_data=conf.TRAIN_SET_CSV_PATH,
+               raw_test_data=conf.TEST_SET_CSV_PATH,
+               dir_to_store_data=conf.PRO_DATA_DIR):
     """Method to preprocess raw data"""
-    train_tracks_df = pd.read_csv(conf.TRAIN_SET_CSV_PATH)
-    test_tracks_df = pd.read_csv(conf.TEST_SET_CSV_PATH)
+    train_tracks_df = pd.read_csv(raw_train_data)
+    test_tracks_df = pd.read_csv(raw_test_data)
+
+    output_train_file = dir_to_store_data + 'trainSet.csv'
+    output_test_file = dir_to_store_data + 'testSet.csv'
 
     print("===================================================")
     print("Preprocessing train set..\nRemoving rows with null values...")
@@ -76,10 +79,13 @@ def preprocess():
     print("===================================================")
 
     print("Storing the preprocessed files in the folder preprocessed_data.")
-    train_tracks_df.to_csv(OUTPUT_TRAIN_FILE, index=False)
-    test_tracks_df.to_csv(OUTPUT_TEST_FILE, index=False)
+    train_tracks_df.to_csv(output_train_file, index=False)
+    test_tracks_df.to_csv(output_test_file, index=False)
     print("The data has been stored!")
     print("===================================================")
 
+    return bool(os.path.exists(output_train_file) and os.path.exists(output_test_file))  # noqa:E501
 
-preprocess()
+
+if __name__ == "__main__":
+    preprocess()

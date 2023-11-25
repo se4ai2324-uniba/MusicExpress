@@ -101,6 +101,10 @@ Testing is conducted within the DVC pipeline, and you can find more details abou
 
 Quality assessment tools have been integrated throughout the code, and you can discover further information [here](reports/README.md).
 
+## API
+
+API have been integrated, and you can discover further information [here](src/api/README.md).
+
 ## Citation
 
 ```bibtex
@@ -143,7 +147,12 @@ url = {https://github.com/se4ai2324-uniba/MusicExpress}
     ├── requirements.txt   <- The requirements file for reproducing the analysis environment
     │
     ├── setup.py           <- makes project pip installable (pip install -e .) so src can be imported
+    ├
     ├── src                <- Source code for use in this project.
+    │   │
+    │   ├── api           <- Scripts containing API endpoints
+    │   │   └── main.py
+    │   │   └── schemas.py
     │   │
     │   ├── data           <- Scripts to download or generate data
     │   │   └── extract_data.py
@@ -158,6 +167,14 @@ url = {https://github.com/se4ai2324-uniba/MusicExpress}
     │   │   └── metrics.py
     │   │
     │   ├── tests         <- Test scripts
+    │   │   ├── pytest
+    │   │   │   │
+    │   │   │   ├── test_api.ipynb
+    │   │   │   ├── test_files_utilities.ipynb
+    │   │   │   ├── test_preprocessing.ipynb
+    │   │   │   ├── test_recommend.ipynb
+    │   │   │   └── test_spotipy_utilities.ipynb
+    │   │   │
     │   │   ├── test_deepchecks.ipynb
     │   │   ├── test_extract_data.py
     │   │   └── test_preprocessed_data.py

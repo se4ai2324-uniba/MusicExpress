@@ -64,16 +64,7 @@ def test_get_track_features():
     track_id = '18lR4BzEs7e3qzc0KVkTpU'
     expected_track_features = [
             "What I've Done",
-            {
-                # pylint: disable=line-too-long
-                'external_urls': {'spotify': 'https://open.spotify.com/artist/6XyY86QOPPrYVGvF9ch6wz'},  # noqa:E501
-                # pylint: enable=line-too-long
-                'href': 'https://api.spotify.com/v1/artists/6XyY86QOPPrYVGvF9ch6wz',  # noqa:E501
-                'id': '6XyY86QOPPrYVGvF9ch6wz',
-                'name': 'Linkin Park',
-                'type': 'artist',
-                'uri': 'spotify:artist:6XyY86QOPPrYVGvF9ch6wz'
-            },
+            "Linkin Park",
             0.93,
             0.138,
             -5.285]

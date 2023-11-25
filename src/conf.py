@@ -1,15 +1,20 @@
 """Script with shared constants for most scripts"""
-
+# pylint: disable=wrong-import-position
 import os
+from pathlib import Path
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
+# pylint: enable=wrong-import-position
 
+# Directory in which the project is stored
+DIR_PATH = Path(__file__).resolve().parent.parent
 
 # Folder in which playlists (our data) are stored
 DATA_DIR = "data/raw/"
 PREPRO_DATA_DIR = "data/interim/"
 PRO_DATA_DIR = "data/processed/"
 OUTPUT_DIR = "data/output/"
+
 
 # Labels needed when creating Dataframes of the Playlists later in the code
 DATAFRAMECOLUMNS = ['Name', 'Artist', 'Energy', 'Liveness', 'Loudness']

@@ -10,49 +10,65 @@ import conf  # noqa:E402
 # pylint: enable=wrong-import-position
 
 
-def extract_data():
+def extract_data(user_data=False, playlists=None,
+                 zip_dir=conf.DATA_DIR + 'dataset.zip',
+                 dir_to_store_data=conf.PREPRO_DATA_DIR):
     """ Method to extract data
     """
-    with zf.ZipFile(conf.DATA_DIR + 'dataset.zip', 'r') as zip_ref:
-        zip_ref.extractall(conf.PREPRO_DATA_DIR)
-
-    print("The default playlists are:\n")
-    for p in conf.PLAYLISTS:
-        print(f"Playlist's ID: {p} || Name: {spUt.get_playlist_name(p)}")
-
-    print("===================================================")
-    print("Checking if the playlist is stored, "
-          "otherwise the data will be extracted.")
-
-    # List of the playlists names
-    # needed to store them and avoid repeatedly retrieving them
+    # List of the playlists names needed to store them
     playlist_names = []
 
-    for playlist_id in conf.PLAYLISTS:
+    if not user_data:
+        playlists = conf.PLAYLISTS
 
-        playlist_name = spUt.clear_playlist_name(spUt.get_playlist_name(playlist_id))  # noqa:E501
+        # Default scenario
+        with zf.ZipFile(zip_dir, 'r') as zip_ref:
+            zip_ref.extractall(dir_to_store_data)
 
-        playlist_names.append(playlist_name)
+        print("The default playlists are:\n")
+        for p in conf.PLAYLISTS:
+            print(f"Playlist's ID: {p} || Name: {spUt.get_playlist_name(p)}")
+            playlist_names.append(spUt.get_playlist_name(p))
 
-        if flUt.check_file_exists(playlist_id):
-            print(f"{spUt.get_playlist_name(playlist_id)} is "
-                  "stored and ready to be used.")
-        else:
-            print(f"{spUt.get_playlist_name(playlist_id)} isn't stored. "
-                  f"Creating dataframe...")
-
-            # pylint: disable=unused-variable
-            tracks_df = flUt.create_playlist_df(playlist_id)  # noqa:F841
-            # pylint: enable=unused-variable
+    else:
+        # User playlists scenario
+        print("The provided playlists are:\n")
+        for p in playlists:
+            print(f"Playlist's ID: {p} || Name: {spUt.get_playlist_name(p)}")
 
         print("===================================================")
+        print("Checking if the playlists are stored, "
+              "otherwise the data will be extracted.")
 
-    print("All playlists have been stored!")
+        for playlist_id in playlists:
 
-    print("Here is a list of all the stored playlists:")
-    for x, playlist_name in enumerate(playlist_names):
-        print(f"{str(x + 1)}. Playlist: {playlist_name}")
-    print("===================================================")
+            # pylint: disable=line-too-long
+            playlist_name = spUt.clear_playlist_name(spUt.get_playlist_name(playlist_id))  # noqa:E501
+            # pylint: enable=line-too-long
+
+            playlist_names.append(playlist_name)
+
+            if flUt.check_file_exists(playlist_id, dir_to_store_data):
+                print(f"{spUt.get_playlist_name(playlist_id)} is "
+                      f"stored and ready to be used.")
+            else:
+                print(f"{spUt.get_playlist_name(playlist_id)} isn't stored. "
+                      f"Creating dataframe...")
+
+                # flUt.create_playlist_df(playlist_id)  # noqa:F841
+                flUt.create_playlist_df(playlist_id, dir_to_store_data)  # noqa:E501,F841
+
+            print("===================================================")
+
+        print("All playlists have been stored!")
+
+        print("Here is a list of all the stored playlists:")
+        for x, playlist_name in enumerate(playlist_names):
+            print(f"{str(x + 1)}. Playlist: {playlist_name}")
+        print("===================================================")
+
+    return playlist_names
 
 
-extract_data()
+if __name__ == "__main__":
+    extract_data()
