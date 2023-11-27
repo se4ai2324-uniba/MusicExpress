@@ -33,11 +33,35 @@ OUT_DIR = os.path.join(BASE_PATH, "data\output\\")  # noqa:W605
 # Directory containing models.pkl files
 STORE_MODEL_DIR = os.path.join(BASE_PATH, "models\model.pkl")  # noqa:W605
 
+
+# Additional details for each endpoint
+tags_metadata = [
+    {
+        "name": "Root",
+        "description": "Explore the root endpoint for essential details, including version, authors, and external links.",   # noqa:E501
+    },
+    {
+        "name": "Data",
+        "description": "Extract songs from users' playlists available on Spotify.",   # noqa:E501
+    }, 
+    {
+        "name": "Recommendation",
+        "description": "Get song recommendations given the IDs of two previously extracted playlists.",   # noqa:E501
+    }
+]
+
+app_description_message = (
+    "Welcome! Explore our Music Recommender System API utilizing K-Medoids clustering for song recommendations. "   # noqa:E501
+    "Feel free to test the API's endpoints with your playlists or the default ones!"   # noqa:E501
+    )
+
+
 # Define application
 app = FastAPI(
     title="MusicExpress",
-    description="Music Recommender System using the K-Medoids clustering method",   # noqa:E501
+    description=app_description_message,
     version="v01",
+    openapi_tags=tags_metadata
 )
 
 
@@ -61,26 +85,48 @@ def construct_response(f):
 
         if "data" in results:
             response["data"] = results["data"]
+        
+        if "version" in results:
+            response["version"] = results["version"]
 
         if "authors" in results:
             response["authors"] = results["authors"]
 
+        if "github" in results:
+            response["github"] = results["github"]
+
+        if "dagshub" in results:
+            response["dagshub"] = results["dagshub"]
+        
         return response
 
     return wrap
 
 
 # pylint: disable=unused-argument
-@app.get("/", tags=["General"])
+@app.get("/", tags=["Root"])
 @construct_response
 def _index(request: Request):
     """Root endpoint."""
+    """
+    Root endpoint.
+    
+    **Parameters**
+    - No parameters needed
+
+    **Output**
+    - A **JSON object** containing the **HTTP message**, the **HTTP status code**, a **welcome message*
+      and the **names of the system's authors**
+    """
 
     response = {
         "message": HTTPStatus.OK.phrase,
         "status-code": HTTPStatus.OK,
         "data": {"message": "Welcome to MusicExpress! Please, read the `/docs` if you want to use our system!"},  # noqa:E501
+        "version": "Current: 1.0",
         "authors": ['Rinaldi Ivan', 'Sibilla Antonio', 'de Benedictis Salvatore', 'Laraspata Lucrezia'],  # noqa:E501
+        'github': 'https://github.com/se4ai2324-uniba/MusicExpress',
+        'dagshub': 'https://dagshub.com/se4ai2324-uniba/MusicExpress',
     }
 
     return response
@@ -89,6 +135,25 @@ def _index(request: Request):
 @app.post('/extract', tags=["Data"])
 @construct_response
 def _extract_data(request: Request, user_payload: UserPlaylistPayload):
+    """
+    Endpoint to **extract data** from two playlists available on Spotify.
+    
+    **Parameters**
+    - **ID** of a **playlist** with **songs that you like**
+    - **ID** of a **playlist** from which **recommendations have to be computed**
+    - If **no IDs** are provided, two **default playlists** will be used 
+
+    The playlist's id can be found in the link provided by Spotify when
+    sharing a user created playlist. 
+    Here's an example: https://open.spotify.com/playlist/_**3fSsw9Mp5Mi2DDiweZggtP**_?si=406250be812b4b0a.
+
+    The IDs will be sent together within the endpoint's **Payload**.
+
+    **Output**
+    - If everything works out, a **JSON object** containing the **HTTP message**, 
+    the **HTTP status code** and the **playlists' names**
+    - Otherwise, an **exception** will be raised
+    """
 
     if (user_payload is None or ((user_payload.id_playlist_train == '') and (user_payload.id_playlist_test == ''))):  # noqa:E501
         result = extract_data(zip_dir=DATASET_ZIP_DIR,
@@ -111,7 +176,29 @@ def _extract_data(request: Request, user_payload: UserPlaylistPayload):
 @app.post("/recommendation", tags=["Recommendation"])
 @construct_response
 def _recommended_songs(request: Request, user_payload: UserPlaylistPayload):
-    """Return the list of recommended songs"""
+    """
+    Endpoint to **get song recommendations** given the IDs of 
+    two playlists previously extracted.
+    
+    **Parameters**
+    - **ID** of an **extracted playlist** with **songs that you like**
+    - **ID** of an **extracted playlist** from which **recommendations 
+    have to be computed**
+    - If **no IDs** are provided, two **default playlists** will be used 
+
+    The playlist's id can be found in the link provided by Spotify 
+    when sharing a user created playlist. 
+    Here's an example: https://open.spotify.com/playlist/**3fSsw9Mp5Mi2DDiweZggtP**?si=406250be812b4b0a.
+
+    The IDs will be sent together within the endpoint's **Payload**.
+
+    **Output**
+    - If everything works out, a **JSON object** containing the 
+    **HTTP message**, the **HTTP status code**,
+      the **target song (song used to compute recommendations)** 
+      and the **song recommendations**
+    - Otherwise, an **exception** will be raised
+    """
 
     processed_train_dir = PRO_DIR + "trainSet.csv"
     processed_test_dir = PRO_DIR + "testSet.csv"
