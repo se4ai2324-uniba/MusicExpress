@@ -39,3 +39,6 @@ great-expectations==0.18.1
 # Libraries needed for API
 fastapi==0.104.1
 uvicorn==0.24.0.post1
+
+# Libraries needed for Deployment
+docker==6.1.3
