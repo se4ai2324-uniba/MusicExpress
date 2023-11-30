@@ -1,0 +1,31 @@
+name: model_testing_workflow
+
+on:
+  push:
+    paths:
+      - "scripts/**"
+
+jobs:
+  model-training:
+    name: Model training
+    runs-on: windows-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Set up Python >=3.11.5 <=3.11.6
+        uses: actions/setup-python@v2
+        with:
+          python-version: ">=3.11.5 <=3.11.6"
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r ./requirements.txt
+      - name: Extract data
+        run: |
+          python src/data/train.py
+      - name: Preprocess data
+        run: |
+          python src/features/preprocessing.py
+      - name: Cluster data
+        run: |
+          python src/models/clustering.py
