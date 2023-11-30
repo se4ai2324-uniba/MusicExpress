@@ -2,6 +2,8 @@ name: api_testing_workflow
 
 on:
   push:
+    branches:
+      - M05_DEPLOYMENT
     paths:
       - "./src/**"
 
