@@ -38,7 +38,6 @@ jobs:
       - name: flake8 Lint
         uses: py-actions/flake8@v2
         with:
-          path: "src/"
           ignore: "E226, E121, E123, E126, W504"
           exclude: "src/tests/test_deepchecks.py"
           max-line-length: "120"
