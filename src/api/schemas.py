@@ -6,7 +6,6 @@ sys.path.append('\\'.join(os.getcwd().split('\\')[:-2])+'\src')  # noqa:E402,E50
 # pylint: disable=no-name-in-module
 from pydantic import BaseModel                                   # noqa:E402
 # pylint: enable=import-error
-import conf                                                      # noqa:E402
 # pylint: enable=wrong-import-position,anomalous-backslash-in-string
 
 
