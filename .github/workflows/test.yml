@@ -24,6 +24,7 @@ jobs:
         run: |
           pytest ./src/tests/pytest/test_api.py
 
+          
   scripts-testing:
     name: Scripts testing
     runs-on: windows-latest
