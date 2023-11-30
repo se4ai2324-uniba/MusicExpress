@@ -1,6 +1,6 @@
 # MusicExpress
 
-[![QA](https://github.com/se4ai2324-uniba/MusicExpress/actions/workflows/QA.yml/badge.svg)](https://github.com/se4ai2324-uniba/MusicExpress/actions/workflows/CI.yml)
+[![QA](https://github.com/se4ai2324-uniba/MusicExpress/actions/workflows/QA.yml/badge.svg)](https://github.com/se4ai2324-uniba/MusicExpress/actions/workflows/QA.yml)
 [![Test](https://github.com/se4ai2324-uniba/MusicExpress/actions/workflows/Test.yml/badge.svg)](https://github.com/se4ai2324-uniba/MusicExpress/actions/workflows/Test.yml)
 [![Model](https://github.com/se4ai2324-uniba/MusicExpress/actions/workflows/Model_testing.yml/badge.svg)](https://github.com/se4ai2324-uniba/MusicExpress/actions/workflows/Model_testing.yml)
 
