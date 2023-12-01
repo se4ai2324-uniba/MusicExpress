@@ -3,7 +3,8 @@ name: api_testing_workflow
 on:
   push:
     paths:
-      - "./src/**"
+      - 'src/api/**'
+      - 'src/tests/**'
 
 jobs:
   api-testing:
@@ -22,7 +23,9 @@ jobs:
           pip install -r ./requirements.txt
       - name: Test the API with pytest
         run: |
-          pytest ./src/tests/pytest/test_api.py
+          cd src/tests/pytest
+          pytest test_api.py
+
   scripts-testing:
     name: Scripts testing
     runs-on: windows-latest
@@ -39,7 +42,8 @@ jobs:
           pip install -r ./requirements.txt
       - name: Test the Python scripts with pytest
         run: |
-          pytest ./src/tests/pytest/test_files_utilities.py
-          pytest ./src/tests/pytest/test_preprocessing.py
-          pytest ./src/tests/pytest/test_recommend.py
-          pytest ./src/tests/pytest/test_spotipy_utilities.py
+          cd src/tests/pytest
+          pytest test_files_utilities.py
+          pytest test_preprocessing.py
+          pytest test_recommend.py
+          pytest test_spotipy_utilities.py
