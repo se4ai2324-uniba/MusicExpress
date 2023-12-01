@@ -31,6 +31,7 @@ jobs:
 
       - name: Test the API with pytest
         run: |
+          dvc pull -r myremote
           python -m pytest src\tests\pytest\test_api.py
 
   scripts-testing:

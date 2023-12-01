@@ -29,6 +29,7 @@ jobs:
 
       - name: Extract data
         run: |
+          dvc pull -r myremote
           python src/data/extract_data.py
 
       - name: Preprocess data
