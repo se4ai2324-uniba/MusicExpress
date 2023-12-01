@@ -35,8 +35,7 @@ def test_check_file_exists():
 
 
 def test_read_not_stored_playlist_df():
-    '''Test method for the 
-    method read_playlist_df'''
+    '''Test method for the method read_playlist_df'''
     method_result = flUt.read_playlist_df(NOT_STORED_PLAYLIST_ID)
     assert method_result is None, "The file is already stored!"
 

@@ -38,7 +38,7 @@ STORE_MODEL_DIR = os.path.join(BASE_PATH, "models\model.pkl")  # noqa:W605
 tags_metadata = [
     {
         "name": "Root",
-        "description": "Explore root endpoint for essential details, including version, authors, and external links.",   # noqa:E501
+        "description": "Explore the root endpoint for essential details, including version, authors, and external links.",   # noqa:E501
     },
     {
         "name": "Data",
