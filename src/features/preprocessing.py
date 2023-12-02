@@ -1,4 +1,4 @@
-"""Script to process the extracted data"""
+"""Script to process the extracted data (default or user's playlists)"""
 
 # pylint: disable=wrong-import-position
 import os    # noqa:E402

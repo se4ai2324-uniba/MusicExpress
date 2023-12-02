@@ -1,4 +1,4 @@
-"""Script for data clustering"""
+"""Script for data clustering processed data"""
 
 # pylint: disable=wrong-import-position
 import os                                   # noqa:E402

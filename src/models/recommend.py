@@ -1,4 +1,4 @@
-"""Script for recommending songs to the user"""
+"""Script for recommending songs to the user using clustered data"""
 # pylint: disable=wrong-import-position
 import sys  # noqa:E402
 sys.path.append('src')  # noqa:E402
