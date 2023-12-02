@@ -1,4 +1,4 @@
-"""Script to extract the data"""
+"""Script to extract the data (default or user's ones)"""
 
 # pylint: disable=wrong-import-position
 import sys  # noqa:E402
