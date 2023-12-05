@@ -109,6 +109,10 @@ Quality assessment tools have been integrated throughout the code, and you can d
 
 API have been integrated, and you can discover further information [here](src/api/README.md).
 
+## Docker
+
+Docker has been integrated, and you can discover further information [here](docker/README.md).
+
 ## Citation
 
 ```bibtex

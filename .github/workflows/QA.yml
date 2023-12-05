@@ -1,7 +1,10 @@
 name: quality_assurance_workflow
 run-name: Checking Pylint code quality after changes
 
-on: [push]
+on:
+  push:
+    paths:
+      - "src/**"
 
 jobs:
   pylint_qa:
