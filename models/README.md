@@ -68,3 +68,18 @@ Moreover, in our experiment, we solicited the opinions of only 10 users to rate 
 
 ![plot](/figures/euclideanDistanceResults.png?raw=true)
 stions. Following the computed cluster and the results of this initial test.
+
+### Carbon Footprint
+
+As suggested in the [Carbon emissions Section in Hugging Face's Model Card webpage](https://huggingface.co/docs/hub/model-cards-co2) we offer insights into our model's carbon footprint. Tracking and reporting emissions are crucial for understanding the environmental impact of our field.
+
+```bibtex
+co2_eq_emissions:
+  emissions: # TODO
+  source: CodeCarbon
+  geographical_location: Apulia, Italy
+  hardware_used: CPU count: 16, CPU model: 12th Gen Intel(R) core(TM) i7-12650H, GPU count: 1, GPU model: 1 x NVIDIA GeForce RTX 3050 6GB Laptop GPU
+```
+
+Here are the hardware details detected by Code Carbon during our emissions tracking:
+![plot](/figures/codecarbon_tracking.png?raw=true)

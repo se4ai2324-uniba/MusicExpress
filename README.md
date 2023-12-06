@@ -111,7 +111,7 @@ API have been integrated, and you can discover further information [here](src/ap
 
 ## Github Actions
 
-Github Actions has been integrated, and you can discover further information [here](.github\workflows\README.md).
+Github Actions has been integrated, and you can discover further information [here](.github/workflows/README.md).
 
 ## Docker
 
