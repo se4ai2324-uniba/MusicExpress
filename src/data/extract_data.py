@@ -11,6 +11,7 @@ from codecarbon import EmissionsTracker  # noqa:E402
 # pylint: enable=wrong-import-position
 
 
+# Codecarbon tracker instance 
 tracker = EmissionsTracker(
         project_name="_DATA_EXTRACTION_",
         output_file=conf.CODECARBON_REPORT_PATH,

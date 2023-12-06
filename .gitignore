@@ -92,3 +92,7 @@ target/
 # MLFlow Runs
 mlruns
 .mlruns/*
+
+!reports/codecarbon/
+reports/codecarbon/*
+!reports/codecarbon/*.csv
