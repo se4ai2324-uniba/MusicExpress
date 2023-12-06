@@ -67,7 +67,6 @@ We conducted user testing involving users to gather their **feedback**: each use
 Moreover, in our experiment, we solicited the opinions of only 10 users to rate the suggested songs as "Liked" or "Not Liked" based on the song used for the suggestions. Following the computed cluster and the results of this initial test.
 
 ![plot](/figures/euclideanDistanceResults.png?raw=true)
-stions. Following the computed cluster and the results of this initial test.
 
 ### Carbon Footprint
 

@@ -22,6 +22,6 @@ We defined **three different actions**, each activated under certain conditions:
    - **Actions**: Executes main pipeline steps to validate system integrity post-changes
    - **Purpose**: Confirm that the system doesn't fail after changes
 
-DVC has been utilized to retrieve the required data within the [API and Scripts Testing](test_scripts_api.yml) and [Model Testing](Model_testing.yml.yml) actions.
+DVC has been utilized to retrieve the required data within the [API and Scripts Testing](test_scripts_api.yml) and [Model Testing](Model_testing.yml) actions.
 
 Within each action different jobs can be defined. Those are run in parallel allowing us to check different things at the same time. For example, in the [API and Scripts Testing](test_scripts_api.yml) we check that the tests for our API and the ones for our Python scripts still work thanks to two different jobs named, respectively, _api-testing_ and _scripts-testing_.
