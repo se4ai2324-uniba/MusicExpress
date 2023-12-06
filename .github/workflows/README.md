@@ -17,7 +17,7 @@ We defined **three different actions**, each activated under certain conditions:
    - **Actions**: Runs Pytest tests to verify proper functionality
    - **Purpose**: Ensures everything works correctly in the specified sub-folders
 
-3. [Model Testing](Model_testing.yml.yml):
+3. [Model Testing](Model_testing.yml):
    - **Trigger**: On changes to specific src sub-folders (_data, features, models_)
    - **Actions**: Executes main pipeline steps to validate system integrity post-changes
    - **Purpose**: Confirm that the system doesn't fail after changes
