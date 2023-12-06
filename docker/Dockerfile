@@ -5,7 +5,7 @@ FROM python:3.11.6
 RUN pip install --upgrade pip
 
 # Copy the whole current directory into the container
-COPY . .
+COPY .. .
 
 # Install requirements.txt (project dependencies)
 RUN pip install -r requirements.txt

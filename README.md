@@ -109,6 +109,10 @@ Quality assessment tools have been integrated throughout the code, and you can d
 
 API have been integrated, and you can discover further information [here](src/api/README.md).
 
+## Github Actions
+
+Github Actions has been integrated, and you can discover further information [here](.github\workflows\README.md).
+
 ## Docker
 
 Docker has been integrated, and you can discover further information [here](docker/README.md).
@@ -129,13 +133,22 @@ url = {https://github.com/se4ai2324-uniba/MusicExpress}
 
     ├── LICENSE
     ├── Makefile           <- Makefile with commands like `make data` or `make train`
-    ├── README.md          <- The top-level README for developers using this project.
+    ├── README.md          <- The top-level README of the repository
+    │
+    ├── .dvc               <- DVC files
+    │
+    ├── .github
+    │   └── workflows      <- Github actions
+    │
     ├── data
-    │   ├── external       <- Data from third party sources.
+    │   ├── external       <- Data from third party sources
     │   ├── interim        <- Data before processing
     │   ├── output         <- Data after clustering and song recommendations
     │   ├── processed      <- Processed data, ready to be used for clustering
-    │   └── raw            <- The original, immutable data dump.
+    │   └── raw            <- The original, immutable data dump
+    │
+    ├── docker             <- Docker files
+    │   └── Dockerfile       <- Docker image of our system (interact with API)
     │
     ├── docs               <- A default Sphinx project; see sphinx-doc.org for details
     │
@@ -145,7 +158,7 @@ url = {https://github.com/se4ai2324-uniba/MusicExpress}
     │
     ├── references         <- Data dictionaries, manuals, and all other explanatory materials.
     │
-    ├── reports            <- Generated analysis as HTML, PDF, LaTeX, etc.
+    ├── reports            <- Generated analysis as HTML, PDF, LaTeX, etc
     │   ├── deepchecks        <- Deepchecks generated HTML pages for data integrity
     │   ├── figures        <- Generated graphics and figures to be used in reporting
     │   ├── flake8        <- Flake8 generated HTML page for quality assessment (QA)
@@ -156,7 +169,7 @@ url = {https://github.com/se4ai2324-uniba/MusicExpress}
     │
     ├── setup.py           <- makes project pip installable (pip install -e .) so src can be imported
     ├
-    ├── src                <- Source code for use in this project.
+    ├── src                <- Source code for use in this project
     │   │
     │   ├── api           <- Scripts containing API endpoints
     │   │   └── main.py
@@ -194,6 +207,7 @@ url = {https://github.com/se4ai2324-uniba/MusicExpress}
     │   │── great_expectations_utilities.py    <- Methods for file operations
     │   └── spotipy_utilities.py    <- Methods that make use of Spotipy features
     │
+    ├── compose.yaml          <- Docker-compose file
     └── tox.ini            <- tox file with settings for running tox; see tox.readthedocs.io
 
 ---

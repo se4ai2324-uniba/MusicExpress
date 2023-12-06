@@ -12,14 +12,14 @@ Firstly, we installed the Docker library and initialized it in our repository us
 docker init
 ```
 
-This command generated the following files: Dockerfile and docker-compose.yaml.
+This command generated the following files: [Dockerfile](Dockerfile) and [docker-compose.yaml](../compose.yaml).
 
-In the Dockerfile, we defined the container's behavior as follows:
+In the [Dockerfile](Dockerfile), we defined the container's behavior as follows:
 
 ```bash
 FROM python:3.11.6
 RUN pip install --upgrade pip
-COPY . .
+COPY .. .
 RUN pip install -r requirements.txt
 WORKDIR /src
 EXPOSE 8000
@@ -33,7 +33,7 @@ We specify the **base image** as Python 3.11.6 available on [Python's Docker Hub
 With the following command, we create **a Docker image** named "**musicexpress**" with version "**1.0**," utilizing the current directory as the build context.
 
 ```bash
-docker build -t musicexpress:1.0 .
+docker build -t musicexpress:1.0 -f docker/Dockerfile .
 ```
 
 The resulting image is visible in [Docker Desktop](https://www.docker.com/products/docker-desktop/), as illustrated below:
@@ -63,3 +63,19 @@ http://127.0.0.1:8000/docs
 ![plot](/figures/docker_result.png?raw=true)
 
 More information about this tool can be found [here](https://docs.docker.com/). Other images can be found on [Docker Hub](https://hub.docker.com/).
+
+## Docker-Compose
+
+In the [docker-compose.yaml](../compose.yaml) file, we define the services that utilize Docker images.
+
+Currently, the services include:
+
+- **Server**: uses the current directory as context to build the image specified in an available Dockerfile (in our case: [Dockerfile](Dockerfile)).
+
+With the following command, we start the services defined in the [docker-compose.yaml](../compose.yaml).
+
+```bash
+docker compose up
+```
+
+This will read the docker-compose.yml file in the current directory, build, create, and start containers based on the specified configurations.
