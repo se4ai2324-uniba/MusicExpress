@@ -5,9 +5,9 @@ sys.path.append('src')  # noqa:E402
 import random  # noqa:E402
 import numpy as np  # noqa:E402
 import pandas as pd  # noqa:E402
+from codecarbon import EmissionsTracker     # noqa:E402
 import conf  # noqa:E402
 import spotipy_utilities as spUt  # noqa:E402
-from codecarbon import EmissionsTracker     # noqa:E402
 # pylint: enable=wrong-import-position
 
 

@@ -7,8 +7,8 @@ sys.path.append('src')                      # noqa:E402
 import pandas as pd                         # noqa:E402
 from sklearn_extra.cluster import KMedoids  # noqa:E402
 from joblib import dump                     # noqa:E402
-import conf                                 # noqa:E402
 from codecarbon import EmissionsTracker     # noqa:E402
+import conf                                 # noqa:E402
 # pylint: enable=wrong-import-position
 
 

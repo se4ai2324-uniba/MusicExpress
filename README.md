@@ -117,6 +117,10 @@ Github Actions has been integrated, and you can discover further information [he
 
 Docker has been integrated, and you can discover further information [here](docker/README.md).
 
+## GreenAI - Code Carbon
+
+Code Carbon has been integrated, and you can discover further information in the last section of our [Model Card](models/README.md).
+
 ## Citation
 
 ```bibtex
@@ -148,7 +152,7 @@ url = {https://github.com/se4ai2324-uniba/MusicExpress}
     │   └── raw            <- The original, immutable data dump
     │
     ├── docker             <- Docker files
-    │   └── Dockerfile       <- Docker image of our system (interact with API)
+    │   └── Dockerfile     <- Docker image of our system (interact with API)
     │
     ├── docs               <- A default Sphinx project; see sphinx-doc.org for details
     │
@@ -159,11 +163,12 @@ url = {https://github.com/se4ai2324-uniba/MusicExpress}
     ├── references         <- Data dictionaries, manuals, and all other explanatory materials.
     │
     ├── reports            <- Generated analysis as HTML, PDF, LaTeX, etc
-    │   ├── deepchecks        <- Deepchecks generated HTML pages for data integrity
+    │   ├── codecarbo      <- Codecarbon generated emission report
+    │   ├── deepchecks     <- Deepchecks generated HTML pages for data integrity
     │   ├── figures        <- Generated graphics and figures to be used in reporting
-    │   ├── flake8        <- Flake8 generated HTML page for quality assessment (QA)
-    │   ├── pylint        <- Pylint reports for quality assessment (QA)
-    │   └── pynblint        <- Pynblint reports for quality assessment (QA)
+    │   ├── flake8         <- Flake8 generated HTML page for quality assessment (QA)
+    │   ├── pylint         <- Pylint reports for quality assessment (QA)
+    │   └── pynblint       <- Pynblint reports for quality assessment (QA)
     │
     ├── requirements.txt   <- The requirements file for reproducing the analysis environment
     │
@@ -171,7 +176,7 @@ url = {https://github.com/se4ai2324-uniba/MusicExpress}
     ├
     ├── src                <- Source code for use in this project
     │   │
-    │   ├── api           <- Scripts containing API endpoints
+    │   ├── api            <- Scripts containing API endpoints
     │   │   └── main.py
     │   │   └── schemas.py
     │   │
@@ -187,7 +192,7 @@ url = {https://github.com/se4ai2324-uniba/MusicExpress}
     │   │   ├── recommend.py
     │   │   └── metrics.py
     │   │
-    │   ├── tests         <- Test scripts
+    │   ├── tests          <- Test scripts
     │   │   ├── pytest
     │   │   │   │
     │   │   │   ├── test_api.ipynb
@@ -202,12 +207,12 @@ url = {https://github.com/se4ai2324-uniba/MusicExpress}
     │   │
     │   │── visualization  <- Scripts to create exploratory and results oriented visualizations
     │   │
-    │   │── conf.py    <- Variables used in all the other scripts
-    │   │── files_utilities.py    <- Methods for file operations
-    │   │── great_expectations_utilities.py    <- Methods for file operations
-    │   └── spotipy_utilities.py    <- Methods that make use of Spotipy features
+    │   │── conf.py                             <- Variables used in all the other scripts
+    │   │── files_utilities.py                  <- Methods for file operations
+    │   │── great_expectations_utilities.py     <- Methods for file operations
+    │   └── spotipy_utilities.py                <- Methods that make use of Spotipy features
     │
-    ├── compose.yaml          <- Docker-compose file
+    ├── compose.yaml       <- Docker-compose file
     └── tox.ini            <- tox file with settings for running tox; see tox.readthedocs.io
 
 ---
