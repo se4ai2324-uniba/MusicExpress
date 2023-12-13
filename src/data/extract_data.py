@@ -23,7 +23,7 @@ tracker = EmissionsTracker(
 def extract_data(user_data=False, playlists=None,
                  zip_dir=conf.DATA_DIR + 'dataset.zip',
                  dir_to_store_data=conf.PREPRO_DATA_DIR):
-    """ Method to extract data"""
+    """ Method to extract playlist's data"""
     # List of the playlists names
     tracker.start()
     playlist_names = []
