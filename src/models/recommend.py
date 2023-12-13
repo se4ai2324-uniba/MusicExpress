@@ -1,13 +1,22 @@
-"""Script for recommending songs to the user"""
+"""Script for recommending songs to the user using clustered data"""
 # pylint: disable=wrong-import-position
 import sys  # noqa:E402
 sys.path.append('src')  # noqa:E402
 import random  # noqa:E402
 import numpy as np  # noqa:E402
 import pandas as pd  # noqa:E402
+from codecarbon import EmissionsTracker     # noqa:E402
 import conf  # noqa:E402
 import spotipy_utilities as spUt  # noqa:E402
 # pylint: enable=wrong-import-position
+
+
+tracker = EmissionsTracker(
+        project_name="_RECOMMENDATION_",
+        output_file=conf.CODECARBON_REPORT_PATH,
+        tracking_mode='process',
+        on_csv_write='update'
+        )
 
 
 def euclidean_distance(track_1, track_2, features):
@@ -23,7 +32,7 @@ def euclidean_distance(track_1, track_2, features):
 def recommend_songs(test_tracks_cluster, test_track,
                     cluster_label, num_recommendations, features):
     """Function to recommend songs based on cluster"""
-
+    tracker.start()
     # pylint: disable=line-too-long
     cluster_tracks = test_tracks_cluster[test_tracks_cluster['Cluster'] == cluster_label]  # noqa:E501
     # pylint: enable=line-too-long
@@ -100,6 +109,7 @@ def recommend(clustered_train_data=conf.CLUSTER_TRAIN_SET_PATH,
               for i, rec in enumerate(recommendations)]
     # pylint: enable=line-too-long
 
+    tracker.stop()
     # pylint: disable=line-too-long
     return track_cluster['Name'].values[0] + " - " + track_cluster['Artist'].values[0], result  # noqa:E501
     # pylint: enable=line-too-long

@@ -1,0 +1,10 @@
+version: "1.0"
+
+services:
+
+  server:
+    build:
+      context: .
+      dockerfile: /docker/Dockerfile
+    ports:
+      - 8000:8000

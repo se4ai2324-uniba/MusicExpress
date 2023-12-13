@@ -1,12 +1,21 @@
-"""Script to process the extracted data"""
+"""Script to process the extracted data (default or user's playlists)"""
 
 # pylint: disable=wrong-import-position
 import os    # noqa:E402
 import sys  # noqa:E402
 sys.path.append('src')  # noqa:E402
 import pandas as pd  # noqa:E402
+from codecarbon import EmissionsTracker  # noqa:E402
 import conf  # noqa:E402
 # pylint: enable=wrong-import-position
+
+
+tracker = EmissionsTracker(
+        project_name="_PREPROCESSING_",
+        output_file=conf.CODECARBON_REPORT_PATH,
+        tracking_mode='process',
+        on_csv_write='update'
+        )
 
 
 def remove_null_values_df(df):
@@ -48,6 +57,7 @@ def preprocess(raw_train_data=conf.TRAIN_SET_CSV_PATH,
                raw_test_data=conf.TEST_SET_CSV_PATH,
                dir_to_store_data=conf.PRO_DATA_DIR):
     """Method to preprocess raw data"""
+    tracker.start()
     train_tracks_df = pd.read_csv(raw_train_data)
     test_tracks_df = pd.read_csv(raw_test_data)
 
@@ -84,6 +94,7 @@ def preprocess(raw_train_data=conf.TRAIN_SET_CSV_PATH,
     print("The data has been stored!")
     print("===================================================")
 
+    tracker.stop()
     return bool(os.path.exists(output_train_file) and os.path.exists(output_test_file))  # noqa:E501
 
 

@@ -1,5 +1,11 @@
 # MusicExpress
 
+[![python](https://img.shields.io/badge/Python-3.10.5-3776AB.svg?style=flat&logo=python&logoColor=white)](https://www.python.org)
+[![python](https://img.shields.io/badge/Python-3.11-3776AB.svg?style=flat&logo=python&logoColor=white)](https://www.python.org)
+[![QA](https://github.com/se4ai2324-uniba/MusicExpress/actions/workflows/QA.yml/badge.svg)](https://github.com/se4ai2324-uniba/MusicExpress/actions/workflows/QA.yml)
+[![Pytest](https://github.com/se4ai2324-uniba/MusicExpress/actions/workflows/test_scripts_api.yml/badge.svg)](https://github.com/se4ai2324-uniba/MusicExpress/actions/workflows/test_scripts_api.yml)
+[![Pipeline](https://github.com/se4ai2324-uniba/MusicExpress/actions/workflows/Model_testing.yml/badge.svg)](https://github.com/se4ai2324-uniba/MusicExpress/actions/workflows/Model_testing.yml)
+
 Within this repository, a Music Recommender System using the K-Medoids clustering method is presented. The goal of this system is to provide the user with personalized suggestions, taking into account their preferences in terms of songs. The number of suggestions can be decided by the users (e.g., 5 suggestions). Spotify playlists are used to compute the clusters and provide song suggestions to the user.
 The user should provide a playlist with songs they like and may or may not provide a playlist from which suggestions should be made. To compute the best suggestions, a song is randomly picked from the user's preferences, and the Euclidean Distance measure is adopted to determine song recommendations, taking into account the songs' features.
 
@@ -105,6 +111,18 @@ Quality assessment tools have been integrated throughout the code, and you can d
 
 API have been integrated, and you can discover further information [here](src/api/README.md).
 
+## Github Actions
+
+Github Actions has been integrated, and you can discover further information [here](.github/workflows/README.md).
+
+## Docker
+
+Docker has been integrated, and you can discover further information [here](docker/README.md).
+
+## GreenAI - Code Carbon
+
+Code Carbon has been integrated, and you can discover further information in the last section of our [Model Card](models/README.md).
+
 ## Citation
 
 ```bibtex
@@ -121,13 +139,22 @@ url = {https://github.com/se4ai2324-uniba/MusicExpress}
 
     ├── LICENSE
     ├── Makefile           <- Makefile with commands like `make data` or `make train`
-    ├── README.md          <- The top-level README for developers using this project.
+    ├── README.md          <- The top-level README of the repository
+    │
+    ├── .dvc               <- DVC files
+    │
+    ├── .github
+    │   └── workflows      <- Github actions
+    │
     ├── data
-    │   ├── external       <- Data from third party sources.
+    │   ├── external       <- Data from third party sources
     │   ├── interim        <- Data before processing
     │   ├── output         <- Data after clustering and song recommendations
     │   ├── processed      <- Processed data, ready to be used for clustering
-    │   └── raw            <- The original, immutable data dump.
+    │   └── raw            <- The original, immutable data dump
+    │
+    ├── docker             <- Docker files
+    │   └── Dockerfile     <- Docker image of our system (interact with API)
     │
     ├── docs               <- A default Sphinx project; see sphinx-doc.org for details
     │
@@ -137,20 +164,21 @@ url = {https://github.com/se4ai2324-uniba/MusicExpress}
     │
     ├── references         <- Data dictionaries, manuals, and all other explanatory materials.
     │
-    ├── reports            <- Generated analysis as HTML, PDF, LaTeX, etc.
-    │   ├── deepchecks        <- Deepchecks generated HTML pages for data integrity
+    ├── reports            <- Generated analysis as HTML, PDF, LaTeX, etc
+    │   ├── codecarbo      <- Codecarbon generated emission report
+    │   ├── deepchecks     <- Deepchecks generated HTML pages for data integrity
     │   ├── figures        <- Generated graphics and figures to be used in reporting
-    │   ├── flake8        <- Flake8 generated HTML page for quality assessment (QA)
-    │   ├── pylint        <- Pylint reports for quality assessment (QA)
-    │   └── pynblint        <- Pynblint reports for quality assessment (QA)
+    │   ├── flake8         <- Flake8 generated HTML page for quality assessment (QA)
+    │   ├── pylint         <- Pylint reports for quality assessment (QA)
+    │   └── pynblint       <- Pynblint reports for quality assessment (QA)
     │
     ├── requirements.txt   <- The requirements file for reproducing the analysis environment
     │
     ├── setup.py           <- makes project pip installable (pip install -e .) so src can be imported
     ├
-    ├── src                <- Source code for use in this project.
+    ├── src                <- Source code for use in this project
     │   │
-    │   ├── api           <- Scripts containing API endpoints
+    │   ├── api            <- Scripts containing API endpoints
     │   │   └── main.py
     │   │   └── schemas.py
     │   │
@@ -166,7 +194,7 @@ url = {https://github.com/se4ai2324-uniba/MusicExpress}
     │   │   ├── recommend.py
     │   │   └── metrics.py
     │   │
-    │   ├── tests         <- Test scripts
+    │   ├── tests          <- Test scripts
     │   │   ├── pytest
     │   │   │   │
     │   │   │   ├── test_api.ipynb
@@ -181,11 +209,12 @@ url = {https://github.com/se4ai2324-uniba/MusicExpress}
     │   │
     │   │── visualization  <- Scripts to create exploratory and results oriented visualizations
     │   │
-    │   │── conf.py    <- Variables used in all the other scripts
-    │   │── files_utilities.py    <- Methods for file operations
-    │   │── great_expectations_utilities.py    <- Methods for file operations
-    │   └── spotipy_utilities.py    <- Methods that make use of Spotipy features
+    │   │── conf.py                             <- Variables used in all the other scripts
+    │   │── files_utilities.py                  <- Methods for file operations
+    │   │── great_expectations_utilities.py     <- Methods for file operations
+    │   └── spotipy_utilities.py                <- Methods that make use of Spotipy features
     │
+    ├── compose.yaml       <- Docker-compose file
     └── tox.ini            <- tox file with settings for running tox; see tox.readthedocs.io
 
 ---

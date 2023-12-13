@@ -1,21 +1,31 @@
-"""Script to extract the data"""
+"""Script to extract the data (default or user's playlists)"""
 
 # pylint: disable=wrong-import-position
 import sys  # noqa:E402
 sys.path.append('src')  # noqa:E402
 import zipfile as zf  # noqa:E402
+from codecarbon import EmissionsTracker  # noqa:E402
 import files_utilities as flUt  # noqa:E402
 import spotipy_utilities as spUt  # noqa:E402
 import conf  # noqa:E402
 # pylint: enable=wrong-import-position
 
 
+# Codecarbon tracker instance
+tracker = EmissionsTracker(
+        project_name="_DATA_EXTRACTION_",
+        output_file=conf.CODECARBON_REPORT_PATH,
+        tracking_mode='process',
+        on_csv_write='update'
+        )
+
+
 def extract_data(user_data=False, playlists=None,
                  zip_dir=conf.DATA_DIR + 'dataset.zip',
                  dir_to_store_data=conf.PREPRO_DATA_DIR):
-    """ Method to extract data
-    """
-    # List of the playlists names needed to store them
+    """ Method to extract playlist's data"""
+    # List of the playlists names
+    tracker.start()
     playlist_names = []
 
     if not user_data:
@@ -67,6 +77,7 @@ def extract_data(user_data=False, playlists=None,
             print(f"{str(x + 1)}. Playlist: {playlist_name}")
         print("===================================================")
 
+    tracker.stop()
     return playlist_names
 
 

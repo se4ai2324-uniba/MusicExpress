@@ -31,4 +31,8 @@ This interface dynamically documents the available endpoints, their input parame
 
 ![plot](/figures/fastapi_swagger_example.png?raw=true)
 
+Moreover, we provide an example of a potential outcome from the preceding endpoint:
+
+![plot](/figures/fastapi_swagger_result_example.png?raw=true)
+
 More information about this tool can be found [here](https://fastapi.tiangolo.com/).

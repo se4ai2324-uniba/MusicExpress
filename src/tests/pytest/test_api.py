@@ -18,7 +18,10 @@ def test_index():
         "method": "GET",
         # pylint: disable=line-too-long
         "data": {"message": "Welcome to MusicExpress! Please, read the `/docs` if you want to use our system!"},  # noqa:E501
-        "authors": ['Rinaldi Ivan', 'Sibilla Antonio', 'de Benedictis Salvatore (Spiderman)', 'Laraspata Lucrezia'],  # noqa:E501
+        "version": "Current: 1.0",
+        "authors": ['Rinaldi Ivan', 'Sibilla Antonio', 'de Benedictis Salvatore', 'Laraspata Lucrezia'],  # noqa:E501
+        "github": 'https://github.com/se4ai2324-uniba/MusicExpress',
+        "dagshub": 'https://dagshub.com/se4ai2324-uniba/MusicExpress'
         # pylint: enable=line-too-long
     }
 
@@ -32,23 +35,9 @@ def test_extract_data():
     assert response.request.method == 'POST'
 
 
-def test_preprocess_data():
-    """Method to test preprocess endpoint"""
-    payload = {"id_playlist_train": "", "id_playlist_test": ""}
-    response = client.post("/preprocess", json=payload)
-    assert response.status_code == 200
-    assert response.request.method == 'POST'
-
-
-def test_cluster_data():
-    """Method to test cluster endpoint"""
-    response = client.post("/cluster")
-    assert response.status_code == 200
-    assert response.request.method == 'POST'
-
-
 def test_recommended_songs():
     """Method to test recommendation endpoint"""
-    response = client.get("/recommendation")
+    payload = {"id_playlist_train": "", "id_playlist_test": ""}
+    response = client.post("/recommendation", json=payload)
     assert response.status_code == 200
-    assert response.request.method == 'GET'
+    assert response.request.method == 'POST'

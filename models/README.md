@@ -67,4 +67,32 @@ We conducted user testing involving users to gather their **feedback**: each use
 Moreover, in our experiment, we solicited the opinions of only 10 users to rate the suggested songs as "Liked" or "Not Liked" based on the song used for the suggestions. Following the computed cluster and the results of this initial test.
 
 ![plot](/figures/euclideanDistanceResults.png?raw=true)
-stions. Following the computed cluster and the results of this initial test.
+
+### Carbon Footprint
+
+As suggested in the [Carbon emissions Section in Hugging Face's Model Card webpage](https://huggingface.co/docs/hub/model-cards-co2) we offer insights into our model's carbon footprint. Tracking and reporting emissions are crucial for understanding the environmental impact of our field.
+
+We used [Code Carbon](https://github.com/mlco2/codecarbon) to track our emissions. This tool allows us to assess the environmental impact of code by estimating its carbon footprint.
+
+```bibtex
+co2_eq_emissions:
+  emissions: 2.4699354187091408e-05 (in grams of CO2)
+  source: Code Carbon
+  geographical_location: Apulia, Italy
+  hardware_used: 12th Gen Intel(R) Core(TM) i7-12650H and NVIDIA GeForce RTX 3050 6GB Laptop GPU
+```
+
+To clarify the very small value for the emissions, we reported the emissions value for a test scenario using our default dataset.
+
+We also report the efficiency card computed on the [Energy Label website](https://energy-label.streamlit.app/Efficency_Label).
+
+![plot](/figures/efficiency_card.jpg?raw=true)
+
+Use the following command to access to the Code Carbon Dashboard:
+
+```bash
+carbonboard --filepath="reports\codecarbon\emissions.csv" --port=port_number
+```
+
+![plot](/figures/codecarbon_dashboard.png?raw=true)
+![plot](/figures/codecarbon_dashboard_tables.png?raw=true)
