@@ -9,10 +9,10 @@ from locust import HttpUser, task, between, tag     # noqa:E402
 
 
 DEFAULT_PLAYLIST_PAYLOAD = {"id_playlist_train": "",
-                             "id_playlist_test": ""}
+                            "id_playlist_test": ""}
 
 USER_PLAYLIST_PAYLOAD = {"id_playlist_train": "2zBDRrXmYP3FDJ6NSVUFHT",
-                          "id_playlist_test": "0M30TrJrlMHl8kjECKYPg0"}
+                         "id_playlist_test": "0M30TrJrlMHl8kjECKYPg0"}
 
 
 class DefaultUser(HttpUser):
@@ -24,7 +24,7 @@ class DefaultUser(HttpUser):
     def root_endpoint(self):
         """Root endpoint behaviour"""
         self.client.get("/")
-    
+
     @tag('default_scenario', 'default_user')
     @task(2)
     def extract_data_default(self):
@@ -34,7 +34,7 @@ class DefaultUser(HttpUser):
 
     @tag('default_scenario', 'default_user')
     @task(3)
-    def get_recommendations_default(self): 
+    def get_recommendations_default(self):
         """Get recommendations using default data behaviour"""
         self.client.post("/recommendation", json=DEFAULT_PLAYLIST_PAYLOAD)
         time.sleep(5)
@@ -52,14 +52,14 @@ class PersonalizedUser(HttpUser):
 
     @tag('user_scenario', 'personalized_user')
     @task(3)
-    def extract_data(self): 
+    def extract_data(self):
         """Extract user data behaviour"""
         self.client.post("/extract", json=USER_PLAYLIST_PAYLOAD)
         time.sleep(5)
 
     @tag('user_scenario', 'personalized_user')
     @task(4)
-    def get_recommendations(self): 
+    def get_recommendations(self):
         """Get recommendations using user data behaviour"""
         self.client.post("/recommendation", json=USER_PLAYLIST_PAYLOAD)
         time.sleep(5)
