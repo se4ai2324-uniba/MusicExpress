@@ -1,7 +1,7 @@
 # MusicExpress
 
-[![python](https://img.shields.io/badge/Python-3.10.5-3776AB.svg?style=flat&logo=python&logoColor=white)](https://www.python.org)
-[![python](https://img.shields.io/badge/Python-3.11-3776AB.svg?style=flat&logo=python&logoColor=white)](https://www.python.org)
+[![python](https://img.shields.io/badge/Python-3.11.5-3776AB.svg?style=flat&logo=python&logoColor=white)](https://www.python.org)
+[![python](https://img.shields.io/badge/Python-3.11.6-3776AB.svg?style=flat&logo=python&logoColor=white)](https://www.python.org)
 [![QA](https://github.com/se4ai2324-uniba/MusicExpress/actions/workflows/QA.yml/badge.svg)](https://github.com/se4ai2324-uniba/MusicExpress/actions/workflows/QA.yml)
 [![Pytest](https://github.com/se4ai2324-uniba/MusicExpress/actions/workflows/test_scripts_api.yml/badge.svg)](https://github.com/se4ai2324-uniba/MusicExpress/actions/workflows/test_scripts_api.yml)
 [![Pipeline](https://github.com/se4ai2324-uniba/MusicExpress/actions/workflows/Model_testing.yml/badge.svg)](https://github.com/se4ai2324-uniba/MusicExpress/actions/workflows/Model_testing.yml)
@@ -18,7 +18,7 @@ The Model and Data Cards are available here:
 
 ## Requirements
 
-- Python 3.11.5 ([Download here](https://python.domainunion.de/downloads/release/python-3115/)) (on VS Code select the Python 3.11.5 Kernel) since there might be some problems with the scikit-learn-extra library when using Python 3.12.0
+- Python 3.11.5 ([Download here](https://python.domainunion.de/downloads/release/python-3115/)) or even 3.11.6 (on VS Code select the correct Python Kernel) since there might be some problems with the _scikit-learn-extra_ library when using Python 3.12.0
 
 - The libraries **mlflow** and **dagshub** might be highlighted by Pylance (if installed) in the [metrics.py](src/models/metrics.py) script: this won't lead to issues when using the virtual environment to run the code
 
@@ -123,6 +123,10 @@ Docker has been integrated, and you can discover further information [here](dock
 
 Code Carbon has been integrated, and you can discover further information in the last section of our [Model Card](models/README.md).
 
+## Performance & Load Testing
+
+Locust has been integrated, and you can discover further information [here](src/locust/README.md).
+
 ## Citation
 
 ```bibtex
@@ -187,6 +191,9 @@ url = {https://github.com/se4ai2324-uniba/MusicExpress}
     │   │
     │   ├── features       <- Scripts to turn raw data into features for modeling
     │   │   └── preprocessing.py
+    │   │
+    │   ├── locust       <- Scripts to run Locust performance and load tests
+    │   │   └── locustfile.py
     │   │
     │   ├── models         <- Scripts to train the model and then use the trained model to make
     │   │   │                 suggestions
