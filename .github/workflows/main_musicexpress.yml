@@ -27,6 +27,15 @@ jobs:
         username: ${{ secrets.AzureAppService_ContainerUsername_85d124765a2e4566bef9484990854434 }}
         password: ${{ secrets.AzureAppService_ContainerPassword_6ed6760b112f4d809573e136d51e32d0 }}
 
+    - name: Set up DVC
+      uses: iterative/setup-dvc@v1
+
+    - name: Pull data with DVC
+      env:
+        GDRIVE_CREDENTIALS_DATA: ${{ secrets.GDRIVE_CREDENTIALS_DATA }}
+      run: |
+        dvc pull
+
     - name: Build and push container image to registry
       uses: docker/build-push-action@v3
       with:
