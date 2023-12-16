@@ -67,6 +67,9 @@ jobs:
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_46B6DB51CD354B21B91F6EF64EE4C959 }}
 
+      - name: 'Checkout'
+        uses: actions/checkout@v3
+        
       - name: 'Run Docker-Compose'
         uses: isbang/compose-action@v1.5.1
         with:
