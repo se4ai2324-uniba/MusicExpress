@@ -70,5 +70,5 @@ jobs:
       - name: 'Run Docker-Compose'
         uses: isbang/compose-action@v1.5.1
         with:
-          compose-file: "./compose.yaml"
+          compose-file: "/compose.yaml"
           down-flags: "--volumes"
