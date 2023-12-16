@@ -2,6 +2,7 @@
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
 name: Build and deploy container app to Azure Web App - musicexpress
+run-name: Production - Deploy to Azure Web App
 
 on:
   push:
