@@ -3,6 +3,7 @@
 # More info on Python, GitHub Actions, and Azure App Service: https://aka.ms/python-webapps-actions
 
 name: Build and deploy Python app to Azure Web App - musicexpress-staging
+run-name: Build and Deploy - Staging
 
 on:
   push:
@@ -46,7 +47,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     environment:
-      name: 'Staging'
+      name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     steps:
@@ -63,7 +64,7 @@ jobs:
         id: deploy-to-webapp
         with:
           app-name: 'musicexpress-staging'
-          slot-name: 'Staging'
+          slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_46B6DB51CD354B21B91F6EF64EE4C959 }}
 
       - name: 'Checkout'
