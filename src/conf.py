@@ -10,10 +10,10 @@ from spotipy.oauth2 import SpotifyClientCredentials
 DIR_PATH = Path(__file__).resolve().parent.parent
 
 # Folder in which playlists (our data) are stored
-DATA_DIR = "data\\raw\\"
-PREPRO_DATA_DIR = "data\\interim\\"
-PRO_DATA_DIR = "data\\processed\\"
-OUTPUT_DIR = "data\\output\\"
+DATA_DIR = "data/raw/"
+PREPRO_DATA_DIR = "data/interim/"
+PRO_DATA_DIR = "data/processed/"
+OUTPUT_DIR = "data/output/"
 
 CODECARBON_REPORT_PATH = str(DIR_PATH) + "/reports/codecarbon/emissions.csv"
 
@@ -64,4 +64,4 @@ CLUSTER_TEST_SET_PATH = os.path.join(OUTPUT_DIR, 'clustertestSet.csv')
 RECOMMENDATIONS_PATH = os.path.join(OUTPUT_DIR, 'recommendations.csv')
 
 # Path to store the K-Medoids model (needed for MLFlow Model Registry)
-MODEL_FILE_PATH = "models\\model.pkl"
+MODEL_FILE_PATH = "models/model.pkl"

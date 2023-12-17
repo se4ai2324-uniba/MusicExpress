@@ -26,12 +26,12 @@ DEFAULT_TRAIN_DATA = os.path.join(BASE_PATH, conf.TRAIN_SET_CSV_PATH)
 DEFAULT_TEST_DATA = os.path.join(BASE_PATH, conf.TEST_SET_CSV_PATH)
 
 # Data Directories
-PREPRO_DIR = os.path.join(BASE_PATH, "data\\interim\\")  # noqa:W605
-PRO_DIR = os.path.join(BASE_PATH, "data\\processed\\")  # noqa:W605
-OUT_DIR = os.path.join(BASE_PATH, "data\\output\\")  # noqa:W605
+PREPRO_DIR = os.path.join(BASE_PATH, "data\interim\\")  # noqa:W605
+PRO_DIR = os.path.join(BASE_PATH, "data\processed\\")  # noqa:W605
+OUT_DIR = os.path.join(BASE_PATH, "data\output\\")  # noqa:W605
 
 # Directory containing models.pkl files
-STORE_MODEL_DIR = os.path.join(BASE_PATH, "models\\model.pkl")  # noqa:W605
+STORE_MODEL_DIR = os.path.join(BASE_PATH, "models\model.pkl")  # noqa:W605
 
 
 # Additional details for each endpoint
@@ -207,9 +207,9 @@ def _recommended_songs(request: Request, user_payload: UserPlaylistPayload):
     cluster_train_dir = OUT_DIR + "clustertrainSet.csv"
     cluster_test_dir = OUT_DIR + "clustertestSet.csv"
 
-    train_set_csv_path = os.path.join(BASE_PATH, conf.TRAIN_SET_CSV_PATH)
-    test_set_csv_path = os.path.join(BASE_PATH, conf.TEST_SET_CSV_PATH)
-
+    train_set_csv_path = PREPRO_DIR + 'keep grinding..csv'
+    test_set_csv_path = PREPRO_DIR + 'Spotify\'s Most Played All-Time [Updated Weekly]  Most Streamed  Top Played  500Mil+.csv'  # noqa:E501
+    
     messages = " - "
 
     default_case = (user_payload is None or ((user_payload.id_playlist_train == '') and (user_payload.id_playlist_test == '')))  # noqa:E501
