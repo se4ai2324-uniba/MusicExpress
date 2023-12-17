@@ -157,17 +157,17 @@ def _extract_data(request: Request, user_payload: UserPlaylistPayload):
     """
 
     if (user_payload is None or ((user_payload.id_playlist_train == '') and (user_payload.id_playlist_test == ''))):  # noqa:E501
-        result = extract_data(zip_dir=DATASET_ZIP_DIR,
+        result, stored_data_path = extract_data(zip_dir=DATASET_ZIP_DIR,
                               dir_to_store_data=PREPRO_DIR)
     else:
         user_playlists = [user_payload.id_playlist_train,
                           user_payload.id_playlist_test]
-        result = extract_data(user_data=True, playlists=user_playlists,
+        result, stored_data_path = extract_data(user_data=True, playlists=user_playlists,
                               zip_dir=DATASET_ZIP_DIR,
                               dir_to_store_data=PREPRO_DIR)
 
     response = {
-            "message": HTTPStatus.OK.phrase,
+            "message": HTTPStatus.OK.phrase + " - The data has been stored in " + stored_data_path,  # noqa:E501
             "status-code": HTTPStatus.OK,
             "data": result
         }

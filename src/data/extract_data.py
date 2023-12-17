@@ -1,6 +1,7 @@
 """Script to extract the data (default or user's playlists)"""
 
 # pylint: disable=wrong-import-position
+import os   # noqa:E402
 import sys  # noqa:E402
 sys.path.append('src')  # noqa:E402
 import zipfile as zf  # noqa:E402
@@ -36,7 +37,7 @@ def extract_data(user_data=False, playlists=None,
             zip_ref.extractall(dir_to_store_data)
 
         print("The default playlists are:\n")
-        for p in conf.PLAYLISTS:
+        for p in playlists:
             print(f"Playlist's ID: {p} || Name: {spUt.get_playlist_name(p)}")
             playlist_names.append(spUt.get_playlist_name(p))
 
@@ -78,7 +79,8 @@ def extract_data(user_data=False, playlists=None,
         print("===================================================")
 
     tracker.stop()
-    return playlist_names
+    stored_data_path = os.getcwd()
+    return playlist_names, stored_data_path
 
 
 if __name__ == "__main__":
