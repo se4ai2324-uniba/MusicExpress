@@ -234,6 +234,8 @@ def _recommended_songs(request: Request, user_payload: UserPlaylistPayload):
 
     messages += "Extracted playlists in " + PREPRO_DIR + ": " + str(os.listdir(PREPRO_DIR)) + " - "  # noqa:E501
 
+    print(messages)
+
     # Recommendation
     if default_case:  
         preprocess(raw_train_data=DEFAULT_TRAIN_DATA,
