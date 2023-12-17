@@ -2,6 +2,7 @@
 # pylint: disable=wrong-import-position,line-too-long,anomalous-backslash-in-string  # noqa:E501
 import os                                                        # noqa:E402
 import sys                                                       # noqa:E402
+from sys import platform                                         # noqa:E402
 sys.path.append('\\'.join(os.getcwd().split('\\')[:-2])+'\src')  # noqa:E402,E501,W605
 from functools import wraps                                      # noqa:E402
 from http import HTTPStatus                                      # noqa:E402

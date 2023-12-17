@@ -3,6 +3,7 @@
 # pylint: disable=wrong-import-position
 import os   # noqa:E402
 import sys  # noqa:E402
+from pathlib import Path  # noqa:E402
 sys.path.append('src')  # noqa:E402
 import zipfile as zf  # noqa:E402
 from codecarbon import EmissionsTracker  # noqa:E402
@@ -79,7 +80,7 @@ def extract_data(user_data=False, playlists=None,
         print("===================================================")
 
     tracker.stop()
-    stored_data_path = "Files in dir to store data: " + str(os.listdir(dir_to_store_data))  # noqa:E501
+    stored_data_path = "Files in dir to store data: " + str(os.listdir(dir_to_store_data)) + "Path file: " + Path(__file__).resolve().parent  # noqa:E501
     return playlist_names, stored_data_path
 
 
