@@ -2,6 +2,7 @@
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 
 name: Build and deploy container app to Azure Web App - musicexpress-staging
+run-name: Staging - Deploy to Azure Web App
 
 on:
   push:
@@ -26,13 +27,21 @@ jobs:
         username: ${{ secrets.AzureAppService_ContainerUsername_cda7809aca8e40bdb768ccc04e35bccc }}
         password: ${{ secrets.AzureAppService_ContainerPassword_14b2a3a45e6649dfa6d11eb3756f338e }}
 
-    - name: Build and push container image to registry
-      uses: docker/build-push-action@v3
-      with:
-        push: true
-        tags: stagingmusicexpress.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_cda7809aca8e40bdb768ccc04e35bccc }}/stagingmusicexpress:${{ github.sha }}
-        file: ./Dockerfile
+    - name: Set up DVC
+      uses: iterative/setup-dvc@v1
 
+    - name: Pull data with DVC
+      env:
+        GDRIVE_CREDENTIALS_DATA: ${{ secrets.GDRIVE_CREDENTIALS_DATA }}
+      run: |
+        dvc pull
+
+    - name: Build the Docker image
+      run: docker build -t stagingmusicexpress.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_85d124765a2e4566bef9484990854434 }}/stagingmusicexpress:${{ github.sha }} -f docker/Dockerfile . 
+    
+    - name: Push the Docker image to the Azure registry
+      run: docker push stagingmusicexpress.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_85d124765a2e4566bef9484990854434 }}/stagingmusicexpress:${{ github.sha }}
+  
   deploy:
     runs-on: ubuntu-latest
     needs: build
