@@ -80,7 +80,7 @@ def extract_data(user_data=False, playlists=None,
         print("===================================================")
 
     tracker.stop()
-    stored_data_path = "Files in dir to store data: " + str(os.listdir(dir_to_store_data)) + "Path file: " + str(Path(__file__).resolve().parent)  # noqa:E501
+    stored_data_path = "Files in dir to store data: " + str(os.listdir(dir_to_store_data)) + "Path file: " + str(Path(__file__).resolve())  # noqa:E501
     return playlist_names, stored_data_path
 
 

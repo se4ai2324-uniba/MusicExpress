@@ -59,7 +59,7 @@ def preprocess(raw_train_data=conf.TRAIN_SET_CSV_PATH,
                dir_to_store_data=conf.PRO_DATA_DIR):
     """Method to preprocess raw data"""
     tracker.start()
-    print(+ "Path file: " + Path(__file__).resolve())
+    print("Path file: " + str(Path(__file__).resolve()))
     train_tracks_df = pd.read_csv(raw_train_data)
     test_tracks_df = pd.read_csv(raw_test_data)
 
