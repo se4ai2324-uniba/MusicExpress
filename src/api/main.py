@@ -26,12 +26,12 @@ DEFAULT_TRAIN_DATA = os.path.join(BASE_PATH, conf.TRAIN_SET_CSV_PATH)
 DEFAULT_TEST_DATA = os.path.join(BASE_PATH, conf.TEST_SET_CSV_PATH)
 
 # Data Directories
-PREPRO_DIR = os.path.join(BASE_PATH, "data\interim\\")  # noqa:W605
-PRO_DIR = os.path.join(BASE_PATH, "data\processed\\")  # noqa:W605
-OUT_DIR = os.path.join(BASE_PATH, "data\output\\")  # noqa:W605
+PREPRO_DIR = os.path.join(BASE_PATH, "data\\interim\\")  # noqa:W605
+PRO_DIR = os.path.join(BASE_PATH, "data\\processed\\")  # noqa:W605
+OUT_DIR = os.path.join(BASE_PATH, "data\\output\\")  # noqa:W605
 
 # Directory containing models.pkl files
-STORE_MODEL_DIR = os.path.join(BASE_PATH, "models\model.pkl")  # noqa:W605
+STORE_MODEL_DIR = os.path.join(BASE_PATH, "models\\model.pkl")  # noqa:W605
 
 
 # Additional details for each endpoint
