@@ -37,10 +37,10 @@ jobs:
         dvc pull
 
     - name: Build the Docker image
-      run: docker build -t stagingmusicexpress.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_85d124765a2e4566bef9484990854434 }}/stagingmusicexpress:${{ github.sha }} -f docker/Dockerfile . 
+      run: docker build -t stagingmusicexpress.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_cda7809aca8e40bdb768ccc04e35bccc }}/stagingmusicexpress:${{ github.sha }} -f docker/Dockerfile . 
     
     - name: Push the Docker image to the Azure registry
-      run: docker push stagingmusicexpress.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_85d124765a2e4566bef9484990854434 }}/stagingmusicexpress:${{ github.sha }}
+      run: docker push stagingmusicexpress.azurecr.io/${{ secrets.AzureAppService_ContainerUsername_cda7809aca8e40bdb768ccc04e35bccc }}/stagingmusicexpress:${{ github.sha }}
   
   deploy:
     runs-on: ubuntu-latest
