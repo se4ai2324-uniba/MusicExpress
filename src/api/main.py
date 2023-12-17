@@ -207,11 +207,17 @@ def _recommended_songs(request: Request, user_payload: UserPlaylistPayload):
     cluster_train_dir = OUT_DIR + "clustertrainSet.csv"
     cluster_test_dir = OUT_DIR + "clustertestSet.csv"
 
+    train_set_csv_path = os.path.join(BASE_PATH, conf.TRAIN_SET_CSV_PATH)
+    test_set_csv_path = os.path.join(BASE_PATH, conf.TEST_SET_CSV_PATH)
+
+    messages = " - "
+
     default_case = (user_payload is None or ((user_payload.id_playlist_train == '') and (user_payload.id_playlist_test == '')))  # noqa:E501
 
     # Check if the data has been extracted
     if default_case:
-        if not os.path.exists(conf.TRAIN_SET_CSV_PATH) or not os.path.exists(conf.TEST_SET_CSV_PATH):  # noqa:E501
+        if not os.path.exists(train_set_csv_path) or not os.path.exists(test_set_csv_path):  # noqa:E501
+            messages += "The data has not been extracted yet. Extracted data from default playlists - "  # noqa:E501
             extract_data(zip_dir=DATASET_ZIP_DIR, dir_to_store_data=PREPRO_DIR)
     else:
         user_playlists = [user_payload.id_playlist_train,
@@ -221,9 +227,12 @@ def _recommended_songs(request: Request, user_payload: UserPlaylistPayload):
         tmp_dir_test = PREPRO_DIR + spUt.get_playlist_name(user_playlists[1]) + ".csv"
 
         if not os.path.exists(tmp_dir_train) or not os.path.exists(tmp_dir_test):  # noqa:E501
+            messages += "The data has not been extracted yet. Extracted data from user's playlists - "  # noqa:E501
             extract_data(user_data=True, playlists=user_playlists,
                          zip_dir=DATASET_ZIP_DIR,
                          dir_to_store_data=PREPRO_DIR)
+
+    messages += "Extracted playlists in " + PREPRO_DIR + ": " + str(os.listdir(PREPRO_DIR)) + " - "  # noqa:E501
 
     # Recommendation
     if default_case:  
@@ -248,7 +257,7 @@ def _recommended_songs(request: Request, user_payload: UserPlaylistPayload):
     if len(target_song) > 0:
 
         response = {
-            "message": HTTPStatus.OK.phrase,
+            "message": HTTPStatus.OK.phrase + messages,
             "status-code": HTTPStatus.OK,
             "target_song": target_song,
             "data": recommended_songs
