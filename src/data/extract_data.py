@@ -79,7 +79,7 @@ def extract_data(user_data=False, playlists=None,
         print("===================================================")
 
     tracker.stop()
-    stored_data_path = os.getcwd()
+    stored_data_path = "Files in dir to store data: " + str(os.listdir(dir_to_store_data))  # noqa:E501
     return playlist_names, stored_data_path
 
 
