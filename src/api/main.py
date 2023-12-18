@@ -22,17 +22,39 @@ from models.recommend import recommend                           # noqa:E402
 BASE_PATH = conf.DIR_PATH
 
 # Default Data Directories
-DATASET_ZIP_DIR = os.path.join(BASE_PATH, conf.DATA_DIR + 'dataset.zip')
+DATASET_ZIP_DIR = os.path.join(BASE_PATH, conf.DATA_DIR, 'dataset.zip')
 DEFAULT_TRAIN_DATA = os.path.join(BASE_PATH, conf.TRAIN_SET_CSV_PATH)
 DEFAULT_TEST_DATA = os.path.join(BASE_PATH, conf.TEST_SET_CSV_PATH)
 
 # Data Directories
-PREPRO_DIR = os.path.join(BASE_PATH, "data\interim\\")  # noqa:W605
-PRO_DIR = os.path.join(BASE_PATH, "data\processed\\")  # noqa:W605
-OUT_DIR = os.path.join(BASE_PATH, "data\output\\")  # noqa:W605
+PREPRO_DIR = os.path.join(BASE_PATH, "data", "interim")  # noqa:W605
+PRO_DIR = os.path.join(BASE_PATH, "data", "processed")  # noqa:W605
+OUT_DIR = os.path.join(BASE_PATH, "data", "output")  # noqa:W605
 
 # Directory containing models.pkl files
-STORE_MODEL_DIR = os.path.join(BASE_PATH, "models\model.pkl")  # noqa:W605
+STORE_MODEL_DIR = os.path.join(BASE_PATH, "models", "model.pkl")  # noqa:W605
+
+PROCESSED_TRAIN_DIR = os.path.join(PRO_DIR, "trainSet.csv")
+PROCESSED_TEST_DIR = os.path.join(PRO_DIR, "testSet.csv")
+CLUSTER_TRAIN_DIR = os.path.join(OUT_DIR, "clustertrainSet.csv")
+CLUSTER_TEST_DIR = os.path.join(OUT_DIR, "clustertestSet.csv")
+
+TRAIN_SET_CSV_PATH = os.path.join(PREPRO_DIR, "keep grinding..csv")
+TEST_SET_CSV_PATH = os.path.join(PREPRO_DIR, "Spotify's Most Played All-Time [Updated Weekly]  Most Streamed  Top Played  500Mil+.csv")  # noqa:E501
+
+# Modify file paths based on the operating system
+if platform == "win32":
+    PREPRO_DIR = PREPRO_DIR.replace("/", "\\")
+    PRO_DIR = PRO_DIR.replace("/", "\\")
+    OUT_DIR = OUT_DIR.replace("/", "\\")
+    STORE_MODEL_DIR = STORE_MODEL_DIR.replace("/", "\\")
+    PROCESSED_TRAIN_DIR = PROCESSED_TRAIN_DIR.replace("/", "\\")
+    PROCESSED_TEST_DIR = PROCESSED_TEST_DIR.replace("/", "\\")
+    CLUSTER_TRAIN_DIR = CLUSTER_TRAIN_DIR.replace("/", "\\")
+    CLUSTER_TEST_DIR = CLUSTER_TEST_DIR.replace("/", "\\")
+    TRAIN_SET_CSV_PATH = TRAIN_SET_CSV_PATH.replace("/", "\\")
+    TEST_SET_CSV_PATH = TEST_SET_CSV_PATH.replace("/", "\\")
+
 
 
 # Additional details for each endpoint
@@ -203,29 +225,26 @@ def _recommended_songs(request: Request, user_payload: UserPlaylistPayload):
     - Otherwise, an **exception** will be raised
     """
 
-    processed_train_dir = PRO_DIR + "trainSet.csv"
-    processed_test_dir = PRO_DIR + "testSet.csv"
-    cluster_train_dir = OUT_DIR + "clustertrainSet.csv"
-    cluster_test_dir = OUT_DIR + "clustertestSet.csv"
-
-    train_set_csv_path = PREPRO_DIR + 'keep grinding..csv'
-    test_set_csv_path = PREPRO_DIR + 'Spotify\'s Most Played All-Time [Updated Weekly]  Most Streamed  Top Played  500Mil+.csv'  # noqa:E501
-    
     messages = " - "
 
     default_case = (user_payload is None or ((user_payload.id_playlist_train == '') and (user_payload.id_playlist_test == '')))  # noqa:E501
 
     # Check if the data has been extracted
     if default_case:
-        if not os.path.exists(train_set_csv_path) or not os.path.exists(test_set_csv_path):  # noqa:E501
+        if not os.path.exists(TRAIN_SET_CSV_PATH) or not os.path.exists(TEST_SET_CSV_PATH):  # noqa:E501
             messages += "The data has not been extracted yet. Extracted data from default playlists - "  # noqa:E501
             extract_data(zip_dir=DATASET_ZIP_DIR, dir_to_store_data=PREPRO_DIR)
     else:
         user_playlists = [user_payload.id_playlist_train,
-                          user_payload.id_playlist_test]        
+                          user_payload.id_playlist_test]
 
-        tmp_dir_train = PREPRO_DIR + spUt.get_playlist_name(user_playlists[0]) + ".csv"
-        tmp_dir_test = PREPRO_DIR + spUt.get_playlist_name(user_playlists[1]) + ".csv"
+        tmp_dir_train = os.path.join(PREPRO_DIR, spUt.get_playlist_name(user_playlists[0]) + ".csv")
+        tmp_dir_test = os.path.join(PREPRO_DIR, spUt.get_playlist_name(user_playlists[1]) + ".csv")
+
+        # Modify file paths based on the operating system
+        if platform == "win32":
+            tmp_dir_train = tmp_dir_train.replace("/", "\\")
+            tmp_dir_test = tmp_dir_test.replace("/", "\\")
 
         if not os.path.exists(tmp_dir_train) or not os.path.exists(tmp_dir_test):  # noqa:E501
             messages += "The data has not been extracted yet. Extracted data from user's playlists - "  # noqa:E501
@@ -245,17 +264,22 @@ def _recommended_songs(request: Request, user_payload: UserPlaylistPayload):
         user_playlists = [user_payload.id_playlist_train,
                           user_payload.id_playlist_test]
 
-        tmp_dir_train = PREPRO_DIR + spUt.get_playlist_name(user_playlists[0]) + ".csv"  # noqa:E501
-        tmp_dir_test = PREPRO_DIR + spUt.get_playlist_name(user_playlists[1]) + ".csv"   # noqa:E501
+        tmp_dir_train = os.path.join(PREPRO_DIR, spUt.get_playlist_name(user_playlists[0]) + ".csv")
+        tmp_dir_test = os.path.join(PREPRO_DIR, spUt.get_playlist_name(user_playlists[1]) + ".csv")
+
+        # Modify file paths based on the operating system
+        if platform == "win32":
+            tmp_dir_train = tmp_dir_train.replace("/", "\\")
+            tmp_dir_test = tmp_dir_test.replace("/", "\\")
 
         preprocess(tmp_dir_train, tmp_dir_test, dir_to_store_data=PRO_DIR)
 
-    clustering(processed_train_dir, processed_test_dir,
+    clustering(PROCESSED_TEST_DIR, PROCESSED_TEST_DIR,
                dir_to_store_data=OUT_DIR,
                dir_to_store_model=STORE_MODEL_DIR)
 
-    target_song, recommended_songs = recommend(clustered_train_data=cluster_train_dir,   # noqa:E501
-                                               clustered_test_data=cluster_test_dir,   # noqa:E501
+    target_song, recommended_songs = recommend(clustered_train_data=CLUSTER_TRAIN_DIR,   # noqa:E501
+                                               clustered_test_data=CLUSTER_TEST_DIR,   # noqa:E501
                                                dir_to_store_recommendation=PRO_DIR)   # noqa:E501
     if len(target_song) > 0:
 
