@@ -111,7 +111,7 @@ In this project, we've seamlessly integrated a variety of tools, each designed f
 - **[GreenAI](models/README.md)**: Code Carbon (details are in the last section of the linked README)
 - **[Performance & Load Testing](src/locust/README.md)**: Locust
 - **[Resource & Performance Monitoring](src/api/README.md)**: Prometheus and Grafana (details are in the last section of the linked README)
-- **[Data Drifts Monitoring](src/tests/datadrift/README.md)**: Deepchecks
+- **[Data Drifts Monitoring](src/tests/DataDrift/README.md)**: Deepchecks
 
 ## Uptime Monitoring
 
