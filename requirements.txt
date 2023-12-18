@@ -47,3 +47,7 @@ codecarbon==2.3.2
 dash==2.14.2
 dash_bootstrap_components==1.5.0
 fire==0.5.0
+
+# Libraries needed for Prometheus and Grafana
+prometheus-client==0.18.0
+prometheus-fastapi-instrumentator==6.1.0

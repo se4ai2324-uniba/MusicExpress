@@ -17,7 +17,7 @@ instrumentator = Instrumentator(
     inprogress_labels=True,
 )
 
-# Additional Metrics
+# Additional Prometheus Default Metrics
 
 instrumentator.add(
     metrics.request_size(
