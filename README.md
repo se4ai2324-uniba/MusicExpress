@@ -99,33 +99,18 @@ dvc pull -r myremote
 dvc repro
 ```
 
-## Testing
+## Integrated Tools
 
-Testing is conducted within the DVC pipeline, and you can find more details about it [here](src/tests/README.md).
+In this project, we've seamlessly integrated a variety of tools, each designed for specific tasks. For detailed information about each tool, please refer to the following list:
 
-## Quality Assessment (QA)
-
-Quality assessment tools have been integrated throughout the code, and you can discover further information [here](reports/README.md).
-
-## API
-
-API have been integrated, and you can discover further information [here](src/api/README.md).
-
-## Github Actions
-
-Github Actions has been integrated, and you can discover further information [here](.github/workflows/README.md).
-
-## Docker
-
-Docker has been integrated, and you can discover further information [here](docker/README.md).
-
-## GreenAI - Code Carbon
-
-Code Carbon has been integrated, and you can discover further information in the last section of our [Model Card](models/README.md).
-
-## Performance & Load Testing
-
-Locust has been integrated, and you can discover further information [here](src/locust/README.md).
+- **[Testing](src/tests/README.md)**: GreatExpectations, Deepchecks and Pytest
+- **[Quality Assessment (QA)](reports/README.md)**: Pylint, Pynblint and Flake8
+- **[API](src/api/README.md)**: FastAPI
+- **[Automated Workflows](.github/workflows/README.md)**: Github Actions
+- **[Containerization](docker/README.md)**: Docker
+- **[GreenAI](models/README.md)**: Code Carbon (details are in the last section of the linked README)
+- **[Performance & Load Testing](src/locust/README.md)**: Locust
+- **[Resource & Performance Monitoring](src/api/README.md)**: Prometheus and Grafana (details are in the last section of the linked README)
 
 ## Citation
 
@@ -182,9 +167,10 @@ url = {https://github.com/se4ai2324-uniba/MusicExpress}
     ├
     ├── src                <- Source code for use in this project
     │   │
-    │   ├── api            <- Scripts containing API endpoints
-    │   │   └── main.py
-    │   │   └── schemas.py
+    │   ├── api            <- Scripts related to API
+    │   │   ├── main.py         <- API endpoints
+    │   │   ├── monitoring.py   <- Additional Prometheus metrics
+    │   │   └── schemas.py      <- API utilities
     │   │
     │   ├── data           <- Scripts to download or generate data
     │   │   └── extract_data.py
@@ -197,9 +183,9 @@ url = {https://github.com/se4ai2324-uniba/MusicExpress}
     │   │
     │   ├── models         <- Scripts to train the model and then use the trained model to make
     │   │   │                 suggestions
-    │   │   ├── clustering.py
-    │   │   ├── recommend.py
-    │   │   └── metrics.py
+    │   │   ├── clustering.py   <- Scrip to cluster data
+    │   │   ├── recommend.py    <- Scrip to compute song recommendations
+    │   │   └── metrics.py      <- Scrip to compute metrics
     │   │
     │   ├── tests          <- Test scripts
     │   │   ├── pytest
@@ -222,6 +208,7 @@ url = {https://github.com/se4ai2324-uniba/MusicExpress}
     │   └── spotipy_utilities.py                <- Methods that make use of Spotipy features
     │
     ├── compose.yaml       <- Docker-compose file
+    ├── prometheus.yaml    <- Prometheus config file
     └── tox.ini            <- tox file with settings for running tox; see tox.readthedocs.io
 
 ---
