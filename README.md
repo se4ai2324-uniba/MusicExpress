@@ -111,6 +111,11 @@ In this project, we've seamlessly integrated a variety of tools, each designed f
 - **[GreenAI](models/README.md)**: Code Carbon (details are in the last section of the linked README)
 - **[Performance & Load Testing](src/locust/README.md)**: Locust
 - **[Resource & Performance Monitoring](src/api/README.md)**: Prometheus and Grafana (details are in the last section of the linked README)
+- **[Data Drifts Monitoring](src/tests/datadrift/README.md)**: Deepchecks
+
+## Uptime Monitoring
+
+We use **Better Uptime** to monitor the status of our website. Check the current status at [our status page](https://musicexpress.betteruptime.com/).
 
 ## Citation
 
@@ -139,7 +144,7 @@ url = {https://github.com/se4ai2324-uniba/MusicExpress}
     │   ├── external       <- Data from third party sources
     │   ├── interim        <- Data before processing
     │   ├── output         <- Data after clustering and song recommendations
-    │   ├── processed      <- Processed data, ready to be used for clustering
+    │   ├── processed      <- Processed data, ready for clustering
     │   └── raw            <- The original, immutable data dump
     │
     ├── docker             <- Docker files
@@ -154,10 +159,10 @@ url = {https://github.com/se4ai2324-uniba/MusicExpress}
     ├── references         <- Data dictionaries, manuals, and all other explanatory materials.
     │
     ├── reports            <- Generated analysis as HTML, PDF, LaTeX, etc
-    │   ├── codecarbo      <- Codecarbon generated emission report
-    │   ├── deepchecks     <- Deepchecks generated HTML pages for data integrity
+    │   ├── codecarbon     <- Codecarbon emission report
+    │   ├── deepchecks     <- Deepchecks HTML pages for data integrity
     │   ├── figures        <- Generated graphics and figures to be used in reporting
-    │   ├── flake8         <- Flake8 generated HTML page for quality assessment (QA)
+    │   ├── flake8         <- Flake8 HTML page for quality assessment (QA)
     │   ├── pylint         <- Pylint reports for quality assessment (QA)
     │   └── pynblint       <- Pynblint reports for quality assessment (QA)
     │
@@ -168,37 +173,42 @@ url = {https://github.com/se4ai2324-uniba/MusicExpress}
     ├── src                <- Source code for use in this project
     │   │
     │   ├── api            <- Scripts related to API
+    │   │   │
     │   │   ├── main.py         <- API endpoints
     │   │   ├── monitoring.py   <- Additional Prometheus metrics
     │   │   └── schemas.py      <- API utilities
     │   │
-    │   ├── data           <- Scripts to download or generate data
+    │   ├── data           <- Scripts to download or extract data
     │   │   └── extract_data.py
     │   │
-    │   ├── features       <- Scripts to turn raw data into features for modeling
+    │   ├── features       <- Scripts to process raw data
     │   │   └── preprocessing.py
     │   │
     │   ├── locust       <- Scripts to run Locust performance and load tests
     │   │   └── locustfile.py
     │   │
-    │   ├── models         <- Scripts to train the model and then use the trained model to make
-    │   │   │                 suggestions
+    │   ├── models         <- Scripts to train the model, make suggestions, and compute metrics
+    │   │   │
     │   │   ├── clustering.py   <- Scrip to cluster data
     │   │   ├── recommend.py    <- Scrip to compute song recommendations
     │   │   └── metrics.py      <- Scrip to compute metrics
     │   │
     │   ├── tests          <- Test scripts
+    │   │   │
+    │   │   ├── datadrift
+    │   │   │   └── deepchecks_datadrift.ipynb  <- Deepchecks data drift monitoring
+    │   │   │
     │   │   ├── pytest
     │   │   │   │
-    │   │   │   ├── test_api.ipynb
-    │   │   │   ├── test_files_utilities.ipynb
-    │   │   │   ├── test_preprocessing.ipynb
-    │   │   │   ├── test_recommend.ipynb
-    │   │   │   └── test_spotipy_utilities.ipynb
+    │   │   │   ├── test_api.py
+    │   │   │   ├── test_files_utilities.py
+    │   │   │   ├── test_preprocessing.py
+    │   │   │   ├── test_recommend.py
+    │   │   │   └── test_spotipy_utilities.py
     │   │   │
-    │   │   ├── test_deepchecks.ipynb
-    │   │   ├── test_extract_data.py
-    │   │   └── test_preprocessed_data.py
+    │   │   ├── test_deepchecks.ipynb           <- Deepchecks data inspection tests
+    │   │   ├── test_extract_data.py            <- GreatExpectations test on extract_data.py
+    │   │   └── test_preprocessed_data.py       <- GreatExpectations test on preprocessed_data.py
     │   │
     │   │── visualization  <- Scripts to create exploratory and results oriented visualizations
     │   │
