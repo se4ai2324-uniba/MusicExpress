@@ -56,7 +56,6 @@ if platform == "win32":
     TEST_SET_CSV_PATH = TEST_SET_CSV_PATH.replace("/", "\\")
 
 
-
 # Additional details for each endpoint
 tags_metadata = [
     {
@@ -180,17 +179,17 @@ def _extract_data(request: Request, user_payload: UserPlaylistPayload):
     """
 
     if (user_payload is None or ((user_payload.id_playlist_train == '') and (user_payload.id_playlist_test == ''))):  # noqa:E501
-        result, stored_data_path = extract_data(zip_dir=DATASET_ZIP_DIR,
+        result = extract_data(zip_dir=DATASET_ZIP_DIR,
                               dir_to_store_data=PREPRO_DIR)
     else:
         user_playlists = [user_payload.id_playlist_train,
                           user_payload.id_playlist_test]
-        result, stored_data_path = extract_data(user_data=True, playlists=user_playlists,
+        result = extract_data(user_data=True, playlists=user_playlists,
                               zip_dir=DATASET_ZIP_DIR,
                               dir_to_store_data=PREPRO_DIR)
 
     response = {
-            "message": HTTPStatus.OK.phrase + " - The data has been stored in " + stored_data_path,  # noqa:E501
+            "message": HTTPStatus.OK.phrase,
             "status-code": HTTPStatus.OK,
             "data": result
         }
@@ -235,8 +234,8 @@ def _recommended_songs(request: Request, user_payload: UserPlaylistPayload):
         user_playlists = [user_payload.id_playlist_train,
                           user_payload.id_playlist_test]
 
-        tmp_dir_train = os.path.join(PREPRO_DIR, spUt.get_playlist_name(user_playlists[0]) + ".csv")
-        tmp_dir_test = os.path.join(PREPRO_DIR, spUt.get_playlist_name(user_playlists[1]) + ".csv")
+        tmp_dir_train = os.path.join(PREPRO_DIR, spUt.get_playlist_name(user_playlists[0]) + ".csv")  # noqa:E501
+        tmp_dir_test = os.path.join(PREPRO_DIR, spUt.get_playlist_name(user_playlists[1]) + ".csv")  # noqa:E501
 
         # Modify file paths based on the operating system
         if platform == "win32":
@@ -249,17 +248,16 @@ def _recommended_songs(request: Request, user_payload: UserPlaylistPayload):
                          dir_to_store_data=PREPRO_DIR)
 
     # Recommendation
-    if default_case:  
+    if default_case:
         preprocess(raw_train_data=DEFAULT_TRAIN_DATA,
                    raw_test_data=DEFAULT_TEST_DATA, dir_to_store_data=PRO_DIR)
     else:
         user_playlists = [user_payload.id_playlist_train,
                           user_payload.id_playlist_test]
 
-        tmp_dir_train = os.path.join(PREPRO_DIR, spUt.get_playlist_name(user_playlists[0]) + ".csv")
-        tmp_dir_test = os.path.join(PREPRO_DIR, spUt.get_playlist_name(user_playlists[1]) + ".csv")
+        tmp_dir_train = os.path.join(PREPRO_DIR, spUt.get_playlist_name(user_playlists[0]) + ".csv")  # noqa:E501
+        tmp_dir_test = os.path.join(PREPRO_DIR, spUt.get_playlist_name(user_playlists[1]) + ".csv")  # noqa:E501
 
-        # Modify file paths based on the operating system
         if platform == "win32":
             tmp_dir_train = tmp_dir_train.replace("/", "\\")
             tmp_dir_test = tmp_dir_test.replace("/", "\\")

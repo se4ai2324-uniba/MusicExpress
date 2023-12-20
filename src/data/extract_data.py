@@ -1,9 +1,7 @@
 """Script to extract the data (default or user's playlists)"""
 
 # pylint: disable=wrong-import-position
-import os   # noqa:E402
 import sys  # noqa:E402
-from pathlib import Path  # noqa:E402
 sys.path.append('src')  # noqa:E402
 import zipfile as zf  # noqa:E402
 from codecarbon import EmissionsTracker  # noqa:E402
@@ -67,7 +65,6 @@ def extract_data(user_data=False, playlists=None,
                 print(f"{spUt.get_playlist_name(playlist_id)} isn't stored. "
                       f"Creating dataframe...")
 
-                # flUt.create_playlist_df(playlist_id)  # noqa:F841
                 flUt.create_playlist_df(playlist_id, dir_to_store_data)  # noqa:E501,F841
 
             print("===================================================")
