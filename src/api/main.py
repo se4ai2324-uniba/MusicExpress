@@ -274,7 +274,7 @@ def _recommended_songs(request: Request, user_payload: UserPlaylistPayload):
 
         preprocess(tmp_dir_train, tmp_dir_test, dir_to_store_data=PRO_DIR)
 
-    clustering(PROCESSED_TEST_DIR, PROCESSED_TEST_DIR,
+    clustering(PROCESSED_TRAIN_DIR, PROCESSED_TEST_DIR,
                dir_to_store_data=OUT_DIR,
                dir_to_store_model=STORE_MODEL_DIR)
 
