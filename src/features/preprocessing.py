@@ -1,12 +1,14 @@
 """Script to process the extracted data (default or user's playlists)"""
 
 # pylint: disable=wrong-import-position
-import os    # noqa:E402
-import sys  # noqa:E402
-sys.path.append('src')  # noqa:E402
-import pandas as pd  # noqa:E402
-from codecarbon import EmissionsTracker  # noqa:E402
-import conf  # noqa:E402
+import os                                 # noqa:E402
+import sys                                # noqa:E402
+from sys import platform                  # noqa:E402
+from pathlib import Path                  # noqa:E402
+sys.path.append('src')                    # noqa:E402
+import pandas as pd                       # noqa:E402
+from codecarbon import EmissionsTracker   # noqa:E402
+import conf                               # noqa:E402
 # pylint: enable=wrong-import-position
 
 
@@ -58,11 +60,18 @@ def preprocess(raw_train_data=conf.TRAIN_SET_CSV_PATH,
                dir_to_store_data=conf.PRO_DATA_DIR):
     """Method to preprocess raw data"""
     tracker.start()
+    print("Path file: " + str(Path(__file__).resolve()))
+
     train_tracks_df = pd.read_csv(raw_train_data)
     test_tracks_df = pd.read_csv(raw_test_data)
 
-    output_train_file = dir_to_store_data + 'trainSet.csv'
-    output_test_file = dir_to_store_data + 'testSet.csv'
+    output_train_file = os.path.join(dir_to_store_data, 'trainSet.csv')
+    output_test_file = os.path.join(dir_to_store_data, 'testSet.csv')
+
+    # Modify file paths based on the operating system
+    if platform == "win32":
+        output_train_file = output_train_file.replace("/", "\\")
+        output_test_file = output_test_file.replace("/", "\\")
 
     print("===================================================")
     print("Preprocessing train set..\nRemoving rows with null values...")

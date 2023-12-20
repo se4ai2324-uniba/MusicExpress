@@ -3,6 +3,7 @@
 # pylint: disable=wrong-import-position
 import os                                   # noqa:E402
 import sys                                  # noqa:E402
+from sys import platform                    # noqa:E402
 sys.path.append('src')                      # noqa:E402
 import pandas as pd                         # noqa:E402
 from sklearn_extra.cluster import KMedoids  # noqa:E402
@@ -30,8 +31,13 @@ def clustering(processed_train_data=conf.PRO_TRAIN_SET_PATH,
     train_tracks_df = pd.read_csv(processed_train_data)
     test_tracks_df = pd.read_csv(processed_test_data)
 
-    output_train_file = dir_to_store_data + 'clustertrainSet.csv'
-    output_test_file = dir_to_store_data + 'clustertestSet.csv'
+    output_train_file = os.path.join(dir_to_store_data, 'clustertrainSet.csv')
+    output_test_file = os.path.join(dir_to_store_data, 'clustertestSet.csv')
+
+    # Modify file paths based on the operating system
+    if platform == "win32":
+        output_train_file = output_train_file.replace("/", "\\")
+        output_test_file = output_test_file.replace("/", "\\")
 
     train_set = train_tracks_df[conf.FEATURES]
     test_set = test_tracks_df[conf.FEATURES]
