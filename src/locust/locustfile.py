@@ -33,7 +33,7 @@ class DefaultUser(HttpUser):
         time.sleep(5)
 
     @tag('default_scenario', 'default_user')
-    @task(3)
+    @task(5)
     def get_recommendations_default(self):
         """Get recommendations using default data behaviour"""
         self.client.post("/recommendation", json=DEFAULT_PLAYLIST_PAYLOAD)
@@ -51,14 +51,14 @@ class PersonalizedUser(HttpUser):
         self.client.get("/")
 
     @tag('user_scenario', 'personalized_user')
-    @task(3)
+    @task(2)
     def extract_data(self):
         """Extract user data behaviour"""
         self.client.post("/extract", json=USER_PLAYLIST_PAYLOAD)
         time.sleep(5)
 
     @tag('user_scenario', 'personalized_user')
-    @task(4)
+    @task(5)
     def get_recommendations(self):
         """Get recommendations using user data behaviour"""
         self.client.post("/recommendation", json=USER_PLAYLIST_PAYLOAD)
