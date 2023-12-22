@@ -5,12 +5,13 @@ It allows to **automate tasks** like testing and checking the quality of the cod
 
 ## Our Actions
 
-We defined **three different actions**, each activated under certain conditions:
+We defined **five different actions**, each activated under certain conditions:
 
 1. [Quality Assessment (QA)](QA.yml)
    - **Trigger**: On changes to the src folder
    - **Actions**: Runs Pylint in the src folder
    - **Criteria**: Fails if the Pylint quality score is below 8
+
 2. [API and Scripts Testing](test_scripts_api.yml):
 
    - **Trigger**: On changes to specific src sub-folders (_api, tests, data, features, models_)
@@ -22,6 +23,22 @@ We defined **three different actions**, each activated under certain conditions:
    - **Actions**: Executes main pipeline steps to validate system integrity post-changes
    - **Purpose**: Confirm that the system doesn't fail after changes
 
-DVC has been utilized to retrieve the required data within the [API and Scripts Testing](test_scripts_api.yml) and [Model Testing](Model_testing.yml) actions.
+4. [Production Deployment](azure_deploy_main.yml):
+   - **Trigger**: On push onto _main_ branch
+   - **Actions**: Builds a Docker image and deploys it on Azure
+   - **Purpose**: Continous Deployment of the MusicExpress's production version
+
+4. [Staging Deployment](azure_deploy_staging.yml):
+   - **Trigger**: On push onto _staging_ branch
+   - **Actions**: Builds a Docker image and deploys it on Azure
+   - **Purpose**: Continous Deployment of the MusicExpress's staging version
+
+
+
+DVC has been utilized to retrieve the required data within the following actions:
+- [API and Scripts Testing](test_scripts_api.yml) 
+- [Model Testing](Model_testing.yml)
+- [Production Deployment](azure_deploy_main.yml)
+- [Staging Deployment](azure_deploy_staging.yml)
 
 Within each action different jobs can be defined. Those are run in parallel allowing us to check different things at the same time. For example, in the [API and Scripts Testing](test_scripts_api.yml) we check that the tests for our API and the ones for our Python scripts still work thanks to two different jobs named, respectively, _api-testing_ and _scripts-testing_.

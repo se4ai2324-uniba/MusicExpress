@@ -113,6 +113,11 @@ In this project, we've seamlessly integrated a variety of tools, each designed f
 - **[Resource & Performance Monitoring](src/api/README.md)**: Prometheus and Grafana (details are in the last section of the linked README)
 - **[Data Drifts Monitoring](src/tests/DataDrift/README.md)**: Deepchecks
 
+## Cloud Deployment
+
+We selected Azure as cloud provider to deploy our services, available [here](musicexpress.azurewebsites.net).
+
+
 ## Uptime Monitoring
 
 We use **Better Uptime** to monitor the status of our website. Check the current status at [our status page](https://musicexpress.betteruptime.com/).
