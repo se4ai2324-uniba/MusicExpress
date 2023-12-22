@@ -36,7 +36,7 @@ def extract_data(user_data=False, playlists=None,
             zip_ref.extractall(dir_to_store_data)
 
         print("The default playlists are:\n")
-        for p in conf.PLAYLISTS:
+        for p in playlists:
             print(f"Playlist's ID: {p} || Name: {spUt.get_playlist_name(p)}")
             playlist_names.append(spUt.get_playlist_name(p))
 
@@ -65,7 +65,6 @@ def extract_data(user_data=False, playlists=None,
                 print(f"{spUt.get_playlist_name(playlist_id)} isn't stored. "
                       f"Creating dataframe...")
 
-                # flUt.create_playlist_df(playlist_id)  # noqa:F841
                 flUt.create_playlist_df(playlist_id, dir_to_store_data)  # noqa:E501,F841
 
             print("===================================================")
