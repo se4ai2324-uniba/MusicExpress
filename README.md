@@ -117,7 +117,6 @@ In this project, we've seamlessly integrated a variety of tools, each designed f
 
 We selected Azure as cloud provider to deploy our services, available [here](musicexpress.azurewebsites.net).
 
-
 ## Uptime Monitoring
 
 We use **Better Uptime** to monitor the status of our website. Check the current status at [our status page](https://musicexpress.betteruptime.com/).
@@ -143,9 +142,11 @@ url = {https://github.com/se4ai2324-uniba/MusicExpress}
     ├── .dvc               <- DVC files
     │
     ├── .github
+    │   │
     │   └── workflows      <- Github actions
     │
     ├── data
+    │   │
     │   ├── external       <- Data from third party sources
     │   ├── interim        <- Data before processing
     │   ├── output         <- Data after clustering and song recommendations
@@ -153,6 +154,7 @@ url = {https://github.com/se4ai2324-uniba/MusicExpress}
     │   └── raw            <- The original, immutable data dump
     │
     ├── docker             <- Docker files
+    │   │
     │   └── Dockerfile     <- Docker image of our system (interact with API)
     │
     ├── docs               <- A default Sphinx project; see sphinx-doc.org for details
@@ -164,6 +166,7 @@ url = {https://github.com/se4ai2324-uniba/MusicExpress}
     ├── references         <- Data dictionaries, manuals, and all other explanatory materials.
     │
     ├── reports            <- Generated analysis as HTML, PDF, LaTeX, etc
+    │   │
     │   ├── codecarbon     <- Codecarbon emission report
     │   ├── deepchecks     <- Deepchecks HTML pages for data integrity
     │   ├── figures        <- Generated graphics and figures to be used in reporting
@@ -173,9 +176,9 @@ url = {https://github.com/se4ai2324-uniba/MusicExpress}
     │
     ├── requirements.txt   <- The requirements file for reproducing the analysis environment
     │
-    ├── setup.py           <- makes project pip installable (pip install -e .) so src can be imported
+    ├── setup.py           <- Makes project pip installable (pip install -e .) so src can be imported
     ├
-    ├── src                <- Source code for use in this project
+    ├── src                <- Project's source code
     │   │
     │   ├── api            <- Scripts related to API
     │   │   │
@@ -184,12 +187,15 @@ url = {https://github.com/se4ai2324-uniba/MusicExpress}
     │   │   └── schemas.py      <- API utilities
     │   │
     │   ├── data           <- Scripts to download or extract data
+    │   │   │
     │   │   └── extract_data.py
     │   │
     │   ├── features       <- Scripts to process raw data
+    │   │   │
     │   │   └── preprocessing.py
     │   │
-    │   ├── locust       <- Scripts to run Locust performance and load tests
+    │   ├── locust         <- Scripts to run Locust performance and load tests
+    │   │   │
     │   │   └── locustfile.py
     │   │
     │   ├── models         <- Scripts to train the model, make suggestions, and compute metrics
@@ -201,6 +207,7 @@ url = {https://github.com/se4ai2324-uniba/MusicExpress}
     │   ├── tests          <- Test scripts
     │   │   │
     │   │   ├── datadrift
+    │   │   │   │
     │   │   │   └── deepchecks_datadrift.ipynb  <- Deepchecks data drift monitoring
     │   │   │
     │   │   ├── pytest
