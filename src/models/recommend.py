@@ -1,13 +1,15 @@
 """Script for recommending songs to the user using clustered data"""
 # pylint: disable=wrong-import-position
-import sys  # noqa:E402
-sys.path.append('src')  # noqa:E402
-import random  # noqa:E402
-import numpy as np  # noqa:E402
-import pandas as pd  # noqa:E402
-from codecarbon import EmissionsTracker     # noqa:E402
-import conf  # noqa:E402
-import spotipy_utilities as spUt  # noqa:E402
+import os                                    # noqa:E402
+import sys                                   # noqa:E402
+from sys import platform                     # noqa:E402
+sys.path.append('src')                       # noqa:E402
+import random                                # noqa:E402
+import numpy as np                           # noqa:E402
+import pandas as pd                          # noqa:E402
+from codecarbon import EmissionsTracker      # noqa:E402
+import conf                                  # noqa:E402
+import spotipy_utilities as spUt             # noqa:E402
 # pylint: enable=wrong-import-position
 
 
@@ -66,7 +68,11 @@ def recommend(clustered_train_data=conf.CLUSTER_TRAIN_SET_PATH,
     """Method to recommend songs to the user"""
     train_tracks_df = pd.read_csv(clustered_train_data)
     test_tracks_df = pd.read_csv(clustered_test_data)
-    recomm_path = dir_to_store_recommendation + "recommendations.csv"
+
+    recomm_path = os.path.join(dir_to_store_recommendation, "recommendations.csv")  # noqa:E501
+
+    if platform == "win32":
+        recomm_path = recomm_path.replace("/", "\\")
 
     train_track = train_tracks_df.iloc[random.randint(0, len(train_tracks_df))]  # noqa:E501
     print("===================================================")

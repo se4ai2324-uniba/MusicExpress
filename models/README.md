@@ -40,7 +40,7 @@ Here, instead, we can observe the clusters of the test dataset.
 
 ![plot](/figures/TestSet_Clusters_3D.png?raw=true)
 
-Using the computed clusters, and randomly picking a song from the training set, the system suggests the 5 (or more) most similar songs from the test set, based on their features. The Euclidean Distance has been used to compute the most similar songs.
+Using the computed clusters, and randomly picking a song from the training set, the system suggests the 5 most similar songs from the test set, based on their features. The Euclidean Distance has been used to compute the most similar songs.
 
 Here's an example of song suggestions provided by our model.
 
@@ -50,9 +50,9 @@ Here's an example of song suggestions provided by our model.
 
 **Primary intended uses**:
 
-- The user selects a Spotify playlist which contains the user’s preferred songs (train set), then the model computes the clusters and suggests k songs picked from the test playlist, which are the closest in terms of song’s features to a random song previously picked from the train set.
+- The user selects a Spotify playlist which contains the user’s preferred songs (train set), then the model computes the clusters and suggests 5 songs picked from the test playlist, which are the closest in terms of song’s features to a random song previously picked from the train set.
 
-- The user selects two Spotify playlist. The first playlist contains the user’s preferred songs (train set), the second playlist (test set) contains the songs from which the model must suggest k songs.
+- The user selects two Spotify playlist. The first playlist contains the user’s preferred songs (train set), the second playlist (test set) contains the songs from which the model must suggest 5 songs.
 
 **Primary intended users**:
 

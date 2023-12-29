@@ -144,22 +144,34 @@ url = {https://github.com/se4ai2324-uniba/MusicExpress}
     ├── .github
     │   │
     │   └── workflows      <- Github actions
+    │       │
+    │       ├── azure_deploy_main.yml       <- Deployment on Azure of the Production release
+    │       ├── azure_deploy_staging.yml    <- Deployment on Azure of the Staging release
+    │       ├── datadrift_scan.yml          <- Data drift detection action
+    │       ├── Model_testing.yml           <- Model testing (extract data, preprocess, and clustering) action
+    │       ├── test_scripts_api.yml        <- Pytest scripts action
+    │       ├── QA.yml                      <- Quality Assessment action
+    │       └── README.md                   <- Github actions README
     │
     ├── data
     │   │
-    │   ├── external       <- Data from third party sources
     │   ├── interim        <- Data before processing
     │   ├── output         <- Data after clustering and song recommendations
     │   ├── processed      <- Processed data, ready for clustering
-    │   └── raw            <- The original, immutable data dump
+    │   ├── raw            <- The original, immutable data dump
+    │   └── README.md      <- Data Card
     │
     ├── docker             <- Docker files
     │   │
-    │   └── Dockerfile     <- Docker image of our system (interact with API)
+    │   ├── Dockerfile     <- Docker image of our system (interact with API)
+    │   └── README.md      <- Docker README
     │
     ├── docs               <- A default Sphinx project; see sphinx-doc.org for details
     │
     ├── models             <- Trained and serialized models, model predictions, or model summaries
+    │   │
+    │   ├── model.pkl      <- Last trained model
+    │   └── README.md      <- Model Card
     │
     ├── notebooks          <- Jupyter notebook providing an overview of code and the Spotipy library
     │
@@ -168,11 +180,13 @@ url = {https://github.com/se4ai2324-uniba/MusicExpress}
     ├── reports            <- Generated analysis as HTML, PDF, LaTeX, etc
     │   │
     │   ├── codecarbon     <- Codecarbon emission report
-    │   ├── deepchecks     <- Deepchecks HTML pages for data integrity
+    │   ├── deepchecks     <- Deepchecks report for data integrity and data drift detection
     │   ├── figures        <- Generated graphics and figures to be used in reporting
-    │   ├── flake8         <- Flake8 HTML page for quality assessment (QA)
+    │   ├── flake8         <- Flake8 report for quality assessment (QA)
+    │   ├── loucst         <- Locust load testing reports
     │   ├── pylint         <- Pylint reports for quality assessment (QA)
-    │   └── pynblint       <- Pynblint reports for quality assessment (QA)
+    │   ├── pynblint       <- Pynblint reports for quality assessment (QA)
+    │   └── README.md      <- Reporting tools README
     │
     ├── requirements.txt   <- The requirements file for reproducing the analysis environment
     │
@@ -182,45 +196,50 @@ url = {https://github.com/se4ai2324-uniba/MusicExpress}
     │   │
     │   ├── api            <- Scripts related to API
     │   │   │
-    │   │   ├── main.py         <- API endpoints
-    │   │   ├── monitoring.py   <- Additional Prometheus metrics
-    │   │   └── schemas.py      <- API utilities
+    │   │   ├── main.py           <- API endpoints
+    │   │   ├── monitoring.py     <- Additional Prometheus metrics
+    │   │   ├── schemas.py        <- API utilities
+    │   │   └── README.md         <- API README
     │   │
     │   ├── data           <- Scripts to download or extract data
     │   │   │
-    │   │   └── extract_data.py
+    │   │   └── extract_data.py   <- Script to extract data from Spotify playlists
     │   │
     │   ├── features       <- Scripts to process raw data
     │   │   │
-    │   │   └── preprocessing.py
+    │   │   └── preprocessing.py  <- Script to preprocess extracted data
     │   │
     │   ├── locust         <- Scripts to run Locust performance and load tests
     │   │   │
-    │   │   └── locustfile.py
+    │   │   ├── locustfile.py     <- Script to perform Locust load testing
+    │   │   └── README.md         <- Locust README
     │   │
     │   ├── models         <- Scripts to train the model, make suggestions, and compute metrics
     │   │   │
-    │   │   ├── clustering.py   <- Scrip to cluster data
-    │   │   ├── recommend.py    <- Scrip to compute song recommendations
-    │   │   └── metrics.py      <- Scrip to compute metrics
+    │   │   ├── clustering.py     <- Script to cluster data
+    │   │   ├── recommend.py      <- Script to compute song recommendations
+    │   │   └── metrics.py        <- Script to compute metrics
     │   │
     │   ├── tests          <- Test scripts
     │   │   │
     │   │   ├── datadrift
     │   │   │   │
-    │   │   │   └── deepchecks_datadrift.ipynb  <- Deepchecks data drift monitoring
+    │   │   │   ├── deepchecks_datadrift.ipynb  <- Deepchecks data drift monitoring
+    │   │   │   └── README.md                   <- Data drift monitoring README
     │   │   │
     │   │   ├── pytest
     │   │   │   │
-    │   │   │   ├── test_api.py
-    │   │   │   ├── test_files_utilities.py
-    │   │   │   ├── test_preprocessing.py
-    │   │   │   ├── test_recommend.py
-    │   │   │   └── test_spotipy_utilities.py
+    │   │   │   ├── test_api.py                 <- Pytest API tests
+    │   │   │   ├── test_files_utilities.py     <- Pytest files utilities methods tests
+    │   │   │   ├── test_preprocessing.py       <- Pytest data preprocessing tests
+    │   │   │   ├── test_recommend.py           <- Pytest recommendation methods tests
+    │   │   │   └── test_spotipy_utilities.py   <- Pytest spotipy utilities methods tests
     │   │   │
     │   │   ├── test_deepchecks.ipynb           <- Deepchecks data inspection tests
     │   │   ├── test_extract_data.py            <- GreatExpectations test on extract_data.py
-    │   │   └── test_preprocessed_data.py       <- GreatExpectations test on preprocessed_data.py
+    │   │   ├── test_preprocessed_data.py       <- GreatExpectations test on preprocessed_data.py
+    │   │   │
+    │   │   └── README.md  <- Testing tools README
     │   │
     │   │── visualization  <- Scripts to create exploratory and results oriented visualizations
     │   │

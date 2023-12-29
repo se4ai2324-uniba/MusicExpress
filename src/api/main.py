@@ -283,7 +283,7 @@ def _recommended_songs(request: Request, user_payload: UserPlaylistPayload):
 
     target_song, recommended_songs = recommend(clustered_train_data=CLUSTER_TRAIN_DIR,   # noqa:E501
                                                clustered_test_data=CLUSTER_TEST_DIR,   # noqa:E501
-                                               dir_to_store_recommendation=PRO_DIR)   # noqa:E501
+                                               dir_to_store_recommendation=OUT_DIR)   # noqa:E501
     if len(target_song) > 0:
 
         response = {

@@ -1,0 +1,93 @@
+[
+    {
+        "type": "convention",
+        "module": "tests.datadrift.deepchecks_datadrift",
+        "obj": "",
+        "line": 12,
+        "column": 9,
+        "endLine": null,
+        "endColumn": null,
+        "path": "src\\tests\\datadrift\\deepchecks_datadrift.py",
+        "symbol": "trailing-whitespace",
+        "message": "Trailing whitespace",
+        "message-id": "C0303"
+    },
+    {
+        "type": "convention",
+        "module": "tests.datadrift.deepchecks_datadrift",
+        "obj": "",
+        "line": 34,
+        "column": 0,
+        "endLine": null,
+        "endColumn": null,
+        "path": "src\\tests\\datadrift\\deepchecks_datadrift.py",
+        "symbol": "missing-final-newline",
+        "message": "Final newline missing",
+        "message-id": "C0304"
+    },
+    {
+        "type": "convention",
+        "module": "tests.datadrift.deepchecks_datadrift",
+        "obj": "",
+        "line": 1,
+        "column": 0,
+        "endLine": null,
+        "endColumn": null,
+        "path": "src\\tests\\datadrift\\deepchecks_datadrift.py",
+        "symbol": "missing-module-docstring",
+        "message": "Missing module docstring",
+        "message-id": "C0114"
+    },
+    {
+        "type": "warning",
+        "module": "tests.datadrift.deepchecks_datadrift",
+        "obj": "",
+        "line": 4,
+        "column": 0,
+        "endLine": 4,
+        "endColumn": 19,
+        "path": "src\\tests\\datadrift\\deepchecks_datadrift.py",
+        "symbol": "reimported",
+        "message": "Reimport 'pandas' (imported line 1)",
+        "message-id": "W0404"
+    },
+    {
+        "type": "convention",
+        "module": "tests.datadrift.deepchecks_datadrift",
+        "obj": "",
+        "line": 11,
+        "column": 0,
+        "endLine": 11,
+        "endColumn": 11,
+        "path": "src\\tests\\datadrift\\deepchecks_datadrift.py",
+        "symbol": "wrong-import-position",
+        "message": "Import \"import conf\" should be placed at the top of the module",
+        "message-id": "C0413"
+    },
+    {
+        "type": "convention",
+        "module": "tests.datadrift.deepchecks_datadrift",
+        "obj": "",
+        "line": 2,
+        "column": 0,
+        "endLine": 2,
+        "endColumn": 9,
+        "path": "src\\tests\\datadrift\\deepchecks_datadrift.py",
+        "symbol": "wrong-import-order",
+        "message": "standard import \"import os\" should be placed before \"import pandas as pd\"",
+        "message-id": "C0411"
+    },
+    {
+        "type": "convention",
+        "module": "tests.datadrift.deepchecks_datadrift",
+        "obj": "",
+        "line": 3,
+        "column": 0,
+        "endLine": 3,
+        "endColumn": 10,
+        "path": "src\\tests\\datadrift\\deepchecks_datadrift.py",
+        "symbol": "wrong-import-order",
+        "message": "standard import \"import sys\" should be placed before \"import pandas as pd\"",
+        "message-id": "C0411"
+    }
+]

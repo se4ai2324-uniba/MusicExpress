@@ -1,5 +1,23 @@
 # Reports
 
+Different tools used in this project generate reports upon execution. The listed tools include:
+
+- **codecarbon**: Checks carbon emissions during recommendation computations.
+- **deepchecks**: Assesses data quality and detects data drift.
+- **flake8**: Evaluates code quality, specifically for Python scripts.
+- **locust**: Performs load testing.
+- **pylint**: Assesses code quality for Python scripts.
+- **pynblint**: Evaluates code quality for Jupyter notebooks.
+
+Insights for some tools are detailed in other README files, with links provided:
+
+- **[codecarbon README](../models/README.md)** (details are in the last section of the linked README)
+- **[deepchecks Test README](../src/tests/README.md)**
+- **[deepchecks Data Drift README](../src/tests/datadrift/README.md)**
+- **[locust README](../src/locust/README.md)**
+
+Additional insights for the remaining tools, employed for **Code Quality assessment**, including **flake8**, **pylint**, and **pynblint**, are provided below.
+
 ## Code Quality
 
 To ensure code quality, we utilized three essential code analysis tools:
