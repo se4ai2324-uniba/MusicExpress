@@ -18,7 +18,7 @@ sys.path.insert(0, root)
 processed_train_data_directory = root + '/' + conf.PRO_DATA_DIR + 'trainSet.csv'    # noqa:E501
 processed_test_data_directory = root + '/' + conf.PRO_DATA_DIR + 'testSet.csv'
 
-# Numerical Feature Drift
+# Selecton of Numerical Feature
 df_processed_train = pd.read_csv(processed_train_data_directory)
 df_processed_train = df_processed_train.drop(['Artist', 'Name'], axis=1)
 df_processed_test = pd.read_csv(processed_test_data_directory)
