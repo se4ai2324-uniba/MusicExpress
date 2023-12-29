@@ -11,10 +11,10 @@ Different tools used in this project generate reports upon execution. The listed
 
 Insights for some tools are detailed in other README files, with links provided:
 
-- **[codecarbon README](../models/README.md)** (details are in the last section of the linked README)
-- **[deepchecks Test README](../src/tests/README.md)**
-- **[deepchecks Data Drift README](../src/tests/datadrift/README.md)**
-- **[locust README](../src/locust/README.md)**
+- **[codecarbon](../models/README.md)** (details are in the last section of the linked README)
+- **[deepchecks - Test](../src/tests/README.md)**
+- **[deepchecks - Data Drift](../src/tests/datadrift/README.md)**
+- **[locust](../src/locust/README.md)**
 
 Additional insights for the remaining tools, employed for **Code Quality assessment**, including **flake8**, **pylint**, and **pynblint**, are provided below.
 
@@ -71,12 +71,6 @@ pylint --output-format=json:folder\name_of_your_report.json,colorized script_fol
 ```
 
 To keep a historical record of our reports, we've established the following naming conventions:
-
-Naming Convention for Individual Script Reports:
-
-```bash
-report_script_name_yyyymmdd.json
-```
 
 Naming Convention for Folder Reports:
 

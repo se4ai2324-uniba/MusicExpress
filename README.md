@@ -20,29 +20,29 @@ The Model and Data Cards are available here:
 
 - Python 3.11.5 ([Download here](https://python.domainunion.de/downloads/release/python-3115/)) or even 3.11.6 (on VS Code select the correct Python Kernel) since there might be some problems with the _scikit-learn-extra_ library when using Python 3.12.0
 
-- The libraries **mlflow** and **dagshub** might be highlighted by Pylance (if installed) in the [metrics.py](src/models/metrics.py) script: this won't lead to issues when using the virtual environment to run the code
+- **Pylance** (if installed) may highlight libraries like **mlflow** and **dagshub**, indicating **they cannot be resolved**. However, this should not cause issues when running the code, provided all requirements are installed.
 
-We suggest you to use a virtual environment in which you can download the requirements.
+Considering the previous point, it is **highly recommended to use a virtual environment** for downloading the requirements. If you choose not to use it, you can skip the following section and proceed directly to the **Installation of requirements.txt** part.
 
 ### Create a Virtual Environment
 
 We report different ways to create a virtual environment so that if you have different versions of Python on your computer, you can easily create one without needing to look it up.
 
-#### Standard creation
+#### Utilize the most recently installed Python version
 
-- Windows:
+- **Windows Distribution**:
 
 ```bash
 python -m venv your_venv_name
 ```
 
-- Linux:
+- **Linux Distribution**:
 
 ```bash
 python3 -m venv your_venv_name
 ```
 
-#### Specifc Python Version creation
+#### Specify a particular Python version for use
 
 ```bash
 path\to\the\python\version\exe\you\want\to\use -m venv your_venv_name
@@ -56,17 +56,13 @@ path\...\Python311\python.exe -m venv your_venv_name
 
 ### Activate the virtual environment
 
-- Windows:
+- **Windows Distribution**:
 
 ```bash
 your_venv_name/Scripts/activate
 ```
 
-```bash
-your_venv_name/Scripts/activate.ps1
-```
-
-- Linux:
+- **Linux Distribution**:
 
 ```bash
 your_venv_name/bin/activate
@@ -74,14 +70,14 @@ your_venv_name/bin/activate
 
 ### Installation of requirements.txt
 
-We suggest to update pip before installing the requirements in the virtual environment. Copy the following code to update pip:
+It is recommended to update pip before installing requirements in the virtual environment to avoid potential installation issues. Copy and execute the following code to update pip:
 
 ```bash
 python.exe -m pip install --upgrade pip
 ```
 
-After updating pip, you will need to install the requirements.txt in order for the model to work and also plot the results.
-You can easily install them as follows:
+One pip is updated, proceed to install the requirements.txt to ensure the proper functioning of the model and visualization of results.
+You can easily install them with the following command:
 
 ```bash
 pip install -r requirements.txt
@@ -89,19 +85,22 @@ pip install -r requirements.txt
 
 ### Reproduce DVC Pipeline
 
-With the following instructions you will be able to run the DVC Pipeline that we developed:
+Given that the requirements have been installed, if you intend to utilize DVC for pipeline reproduction, download the data and execute the pipeline using the following commands:
 
 ```bash
-# Retrieves the data needed in the pipeline from the remote storage
+# Retrieve data from remote storage
 dvc pull -r myremote
 
-# Runs the DVC Pipeline
+# Run DVC Pipeline (only modified files are processed by default)
 dvc repro
+
+# Forcefully run the entire DVC Pipeline
+dvc repro --force
 ```
 
 ## Integrated Tools
 
-In this project, we've seamlessly integrated a variety of tools, each designed for specific tasks. For detailed information about each tool, please refer to the following list:
+In this project, we've integrated a variety of tools, each designed for specific tasks. For detailed information about each tool, please refer to the following list:
 
 - **[Testing](src/tests/README.md)**: GreatExpectations, Deepchecks and Pytest
 - **[Quality Assessment (QA)](reports/README.md)**: Pylint, Pynblint and Flake8

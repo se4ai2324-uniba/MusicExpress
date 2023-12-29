@@ -1,6 +1,6 @@
 # Testing
 
-To test our code, two libraries have been adopted:
+To test our code, three libraries have been adopted:
 
 - **GreatExpectations**: this library can be used to validate, document, and test data to ensure its quality and integrity throughout the data pipeline.
 
@@ -10,7 +10,7 @@ To test our code, two libraries have been adopted:
 
 ## GreatExpectations
 
-The Greatexpectations library is employed in the [great_expectations_utilities script](../great_expectations_utilities.py), [test_extractData script](../tests/test_extract_data.py) and [test_preprocessed_data script](../tests/test_preprocessed_data.py) to examine the data needed for suggesting songs to the user. To assess this data, two test suites were established:
+The Greatexpectations library is employed in the [great_expectations_utilities script](../great_expectations_utilities.py), [test_extract_data script](../tests/test_extract_data.py) and [test_preprocessed_data script](../tests/test_preprocessed_data.py) to examine the data needed for suggesting songs to the user. To assess this data, two test suites were established:
 
 - Test Suite: **extracted_data_expectations**
 
