@@ -1,12 +1,15 @@
 name: Data Drift Scan
 run-name: Data Drift Scan with Deepchecks
 
+
 on:
     push:
       paths:
         - "src/tests/DataDrift/**"
         - "data/raw/**"
 
+permissions:
+  contents: write
 jobs:
     deepchecks_datadrift:
         name: Deepchecks Data Drift Scan

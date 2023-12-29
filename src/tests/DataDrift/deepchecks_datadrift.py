@@ -27,13 +27,13 @@ check = FeatureDrift()
 uni_result = check.run(
     train_dataset=train_data_ds, test_dataset=test_data_ds
     )
-uni_result.save_as_html(conf.DEEPCHECKS_REPORT_DIR + 'Drift_Univariate_report.html')
-print('The Univariate Drift report has been saved in reports/deepchecks folder.')
+uni_result.save_as_html(conf.DEEPCHECKS_REPORT_DIR + 'Drift_Univariate_report.html')    # noqa:E501
+print('The Univariate Drift report has been saved in reports/deepchecks folder.')       # noqa:E501
 
 # Run Multivariate Drift
 check = MultivariateDrift()
 multi_result = check.run(
     train_dataset=train_data_ds, test_dataset=test_data_ds
     )
-multi_result.save_as_html(conf.DEEPCHECKS_REPORT_DIR + 'Drift_Multivariate_report.html')
-print('The Multivariate Drift report has been saved in reports/deepchecks folder.')
+multi_result.save_as_html(conf.DEEPCHECKS_REPORT_DIR + 'Drift_Multivariate_report.html') # noqa:E501
+print('The Multivariate Drift report has been saved in reports/deepchecks folder.')      # noqa:E501
