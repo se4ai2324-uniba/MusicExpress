@@ -1,15 +1,15 @@
 """Script to check data drift using deepchecks library"""
 # pylint: disable=wrong-import-position
-import os
-import sys
-import pandas as pd
-from deepchecks.tabular.checks import FeatureDrift
-from deepchecks.tabular.checks import MultivariateDrift
-from deepchecks.tabular import Dataset
+import os                                                   # noqa:E402
+import sys                                                  # noqa:E402
+import pandas as pd                                         # noqa:E402
+from deepchecks.tabular.checks import FeatureDrift          # noqa:E402
+from deepchecks.tabular.checks import MultivariateDrift     # noqa:E402
+from deepchecks.tabular import Dataset                      # noqa:E402
 current_dir = os.getcwd()
 src = os.path.dirname(os.path.dirname(current_dir))
 sys.path.insert(0, src)
-import conf        # noqa:E402
+import conf                                                 # noqa:E402
 # pylint: enable=wrong-import-position
 
 # Dataset
