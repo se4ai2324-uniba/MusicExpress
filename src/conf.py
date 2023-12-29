@@ -15,6 +15,11 @@ PREPRO_DATA_DIR = "data/interim/"
 PRO_DATA_DIR = "data/processed/"
 OUTPUT_DIR = "data/output/"
 
+# Root folder in which reports are stored
+REPORT_DIR = "reports/"
+DEEPCHECKS_REPORT_DIR = "reports/deepchecks/"
+
+# Folder in which Code Carbon report is stored
 CODECARBON_REPORT_PATH = str(DIR_PATH) + "/reports/codecarbon/emissions.csv"
 
 # Labels needed when creating Dataframes of the Playlists later in the code
