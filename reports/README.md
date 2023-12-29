@@ -11,9 +11,9 @@ Different tools used in this project generate reports upon execution. The listed
 
 Insights for some tools are detailed in other README files, with links provided:
 
-- **[codecarbon](../models/README.md)** (details are in the last section of the linked README)
+- **[codecarbon](../models/README.md#carbon-footprint)** (details are in the last section of the linked README)
 - **[deepchecks - Test](../src/tests/README.md)**
-- **[deepchecks - Data Drift](../src/tests/datadrift/README.md)**
+- **[deepchecks - Data Drift](../src/tests/DataDrift/README.md)**
 - **[locust](../src/locust/README.md)**
 
 Additional insights for the remaining tools, employed for **Code Quality assessment**, including **flake8**, **pylint**, and **pynblint**, are provided below.

@@ -6,7 +6,7 @@ To produce the API for our system we used:
 
 ## FastAPI
 
-FastAPI is employed in the [main](../main.py) in which, after initializing the FastAPI framework, we create endpoints for our system functionalities, such as:
+FastAPI is employed in the [main](main.py) in which, after initializing the FastAPI framework, we create endpoints for our system functionalities, such as:
 
 - data extraction,
 - music recommendations.
@@ -55,7 +55,7 @@ docker run \
   prom/prometheus
 ```
 
-The `-v` option is used to bind mount our Prometheus config file (`prometheus.yml`) to the Docker Image one.
+The `-v` option is used to bind mount our [Prometheus config file](../../prometheus.yml) (`prometheus.yml`) to the Docker Image one.
 After the Docker Image has been downloaded (if not already avaiable), the Prometheus UI can be accessed at at <http://localhost:9090>.
 
 ![plot](/figures/prometheus_ui_example.png?raw=true)

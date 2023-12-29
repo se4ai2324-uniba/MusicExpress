@@ -107,9 +107,9 @@ In this project, we've integrated a variety of tools, each designed for specific
 - **[API](src/api/README.md)**: FastAPI
 - **[Automated Workflows](.github/workflows/README.md)**: Github Actions
 - **[Containerization](docker/README.md)**: Docker
-- **[GreenAI](models/README.md)**: Code Carbon (details are in the last section of the linked README)
+- **[GreenAI](models/README.md#carbon-footprint)**: Code Carbon (details are in the last section of the linked README)
 - **[Performance & Load Testing](src/locust/README.md)**: Locust
-- **[Resource & Performance Monitoring](src/api/README.md)**: Prometheus and Grafana (details are in the last section of the linked README)
+- **[Resource & Performance Monitoring](src/api/README.md#resource--performance-monitoring)**: Prometheus and Grafana (details are in the last section of the linked README)
 - **[Data Drifts Monitoring](src/tests/DataDrift/README.md)**: Deepchecks
 
 ## Cloud Deployment
