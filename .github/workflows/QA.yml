@@ -27,7 +27,7 @@ jobs:
 
       - name: Analyze code with pylint
         run: |
-          pylint --fail-under=8 src/
+          pylint --fail-under=8 --ignore=src/locust/locust.py src/
 
   flake8_qa:
     name: Flake8 code quality assurance

@@ -31,16 +31,19 @@ FEATURES = ['Energy', 'Liveness', 'Loudness']
 # List of Playlists IDs:
 # "3fSsw9Mp5Mi2DDiweZggtP" # Keep grinding || Training Set
 # "2YRe7HRKNRvXdJBp9nXFza" # Spotify Most Played All Time 500Mil+  || Test Set
+# pylint: disable=line-too-long
 PLAYLISTS = ["3fSsw9Mp5Mi2DDiweZggtP", "2YRe7HRKNRvXdJBp9nXFza"]
+PLAYLISTS_NAMES = ["keep grinding.", "Spotify's Most Played All-Time [Updated Weekly]  Most Streamed  Top Played  500Mil+"]  # noqa:E501
+# pylint: enable=line-too-long
 
 # ID and Secret of My Spotify App on Developer Spotify
-# SPOTIFYCLIENTID = "978d7e659f4440609a2399c869cc3e27"
-# SPOTIFYCLIENTSECRET = "1b160cf5acf94d44922b14c3cc5b295a"
-# SPOTIFYUSER = "ivanrinaldi_"
+SPOTIFYCLIENTID = "978d7e659f4440609a2399c869cc3e27"
+SPOTIFYCLIENTSECRET = "1b160cf5acf94d44922b14c3cc5b295a"
+SPOTIFYUSER = "ivanrinaldi_"
 
-SPOTIFYCLIENTID = "f8d07e9fe54f4f599c830d69a6cf8560"
-SPOTIFYCLIENTSECRET = "63e627330a5a447aa95f894b731ef61c"
-SPOTIFYUSER = "MusicExpress"
+# SPOTIFYCLIENTID = "f8d07e9fe54f4f599c830d69a6cf8560"
+# SPOTIFYCLIENTSECRET = "63e627330a5a447aa95f894b731ef61c"
+# SPOTIFYUSER = "MusicExpress"
 
 # Instances of the main elements needed from the Spotipy library
 # in order to work with playlists and tracks

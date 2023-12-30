@@ -36,29 +36,30 @@ def extract_data(user_data=False, playlists=None,
         dir_to_store_data = dir_to_store_data.replace("/", "\\")
 
     if not user_data:
-        playlists = conf.PLAYLISTS
 
         # Default scenario
         with zf.ZipFile(zip_dir, 'r') as zip_ref:
             zip_ref.extractall(dir_to_store_data)
 
         print("The default playlists are:\n")
-        for p in playlists:
-            print(f"Playlist's ID: {p} || Name: {spUt.get_playlist_name(p)}")
-            playlist_names.append(spUt.get_playlist_name(p))
+        for p in conf.PLAYLISTS_NAMES:
+            print(f"Playlist's Name: {p}")
+            playlist_names.append(p)
 
     else:
         # User playlists scenario
+        playlist_names = []
+
         print("The provided playlists are:\n")
         for p in playlists:
-            print(f"Playlist's ID: {p} || Name: {spUt.get_playlist_name(p)}")
+            playlist_names.append(spUt.clear_playlist_name(spUt.get_playlist_name(p)))  # noqa:E501
+            print(f"Playlist's ID: {p} || Name: {playlist_names[-1]}")
 
         print("===================================================")
         print("Checking if the playlists are stored, "
               "otherwise the data will be extracted.")
 
         for playlist_id in playlists:
-
             # pylint: disable=line-too-long
             playlist_name = spUt.clear_playlist_name(spUt.get_playlist_name(playlist_id))  # noqa:E501
             # pylint: enable=line-too-long

@@ -239,31 +239,14 @@ def _recommended_songs(request: Request, user_payload: UserPlaylistPayload):
 
     default_case = (user_payload is None or ((user_payload.id_playlist_train == '') and (user_payload.id_playlist_test == '')))  # noqa:E501
 
-    # Check if the data has been extracted
+    # Check if the data has been extracted and then preprocess it
     if default_case:
         if not os.path.exists(TRAIN_SET_CSV_PATH) or not os.path.exists(TEST_SET_CSV_PATH):  # noqa:E501
             extract_data(zip_dir=DATASET_ZIP_DIR, dir_to_store_data=PREPRO_DIR)
-    else:
-        user_playlists = [user_payload.id_playlist_train,
-                          user_payload.id_playlist_test]
 
-        tmp_dir_train = os.path.join(PREPRO_DIR, spUt.get_playlist_name(user_playlists[0]) + ".csv")  # noqa:E501
-        tmp_dir_test = os.path.join(PREPRO_DIR, spUt.get_playlist_name(user_playlists[1]) + ".csv")  # noqa:E501
-
-        # Modify file paths based on the operating system
-        if platform == "win32":
-            tmp_dir_train = tmp_dir_train.replace("/", "\\")
-            tmp_dir_test = tmp_dir_test.replace("/", "\\")
-
-        if not os.path.exists(tmp_dir_train) or not os.path.exists(tmp_dir_test):  # noqa:E501
-            extract_data(user_data=True, playlists=user_playlists,
-                         zip_dir=DATASET_ZIP_DIR,
-                         dir_to_store_data=PREPRO_DIR)
-
-    # Recommendation
-    if default_case:
         preprocess(raw_train_data=DEFAULT_TRAIN_DATA,
                    raw_test_data=DEFAULT_TEST_DATA, dir_to_store_data=PRO_DIR)
+
     else:
         user_playlists = [user_payload.id_playlist_train,
                           user_payload.id_playlist_test]
@@ -277,6 +260,11 @@ def _recommended_songs(request: Request, user_payload: UserPlaylistPayload):
         if platform == "win32":
             tmp_dir_train = tmp_dir_train.replace("/", "\\")
             tmp_dir_test = tmp_dir_test.replace("/", "\\")
+
+        if not os.path.exists(tmp_dir_train) or not os.path.exists(tmp_dir_test):  # noqa:E501
+            extract_data(user_data=True, playlists=user_playlists,
+                         zip_dir=DATASET_ZIP_DIR,
+                         dir_to_store_data=PREPRO_DIR)
 
         preprocess(tmp_dir_train, tmp_dir_test, dir_to_store_data=PRO_DIR)
 
