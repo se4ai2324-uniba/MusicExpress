@@ -1,5 +1,5 @@
 name: pytest_tests_workflow
-run-name: Testing pytest tests if API or pipeline scripts change
+run-name: Run Pytest tests when API or pipeline scripts change
 
 on:
   push:
@@ -60,7 +60,7 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r ./requirements.txt
 
-      - name: Test the Python scripts with pytest
+      - name: Test Python scripts with pytest
         run: |
           python -m pytest src\tests\pytest\test_file_utilities.py
           python -m pytest src\tests\pytest\test_preprocessing.py

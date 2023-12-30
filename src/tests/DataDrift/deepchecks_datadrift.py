@@ -45,6 +45,7 @@ uni_result.save_as_html(
     conf.DEEPCHECKS_REPORT_DIR + 'Drift_Univariate_report.html'
     )
 print('The Univariate Drift report has been saved in reports/deepchecks.')
+
 # Run Multivariate Drift
 check = MultivariateDrift()
 multi_result = check.run(

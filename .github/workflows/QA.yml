@@ -1,5 +1,5 @@
 name: quality_assurance_workflow
-run-name: Checking Pylint code quality after changes
+run-name: Check code quality - Pylint and Flake8
 
 on:
   push:
