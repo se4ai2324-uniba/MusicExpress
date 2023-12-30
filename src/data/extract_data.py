@@ -28,10 +28,10 @@ def extract_data(user_data=False, playlists=None,
     # List of the playlists names
     tracker.start()
     playlist_names = []
-    print(f"DIRECTORY: {dir_to_store_data}")
-    dir_to_store_data += "/"
-    print(f"AFTER DIRECTORY: {dir_to_store_data}")
 
+    dir_to_store_data += "/"
+
+    # Modify file path based on the operating system
     if platform == "win32":
         dir_to_store_data = dir_to_store_data.replace("/", "\\")
 
