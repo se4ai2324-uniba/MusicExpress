@@ -36,9 +36,12 @@ uni_result = check.run(
     train_dataset=train_data_ds, test_dataset=test_data_ds
     )
 
-# Remove the file if it exists
+# Remove reports if it exists
 if os.path.exists(report_file_path_univariate):
     os.remove(report_file_path_univariate)
+
+if os.path.exists(report_file_path_multivariate):
+    os.remove(report_file_path_multivariate)
 
 # Save the report
 uni_result.save_as_html(
@@ -51,10 +54,6 @@ check = MultivariateDrift()
 multi_result = check.run(
     train_dataset=train_data_ds, test_dataset=test_data_ds
     )
-
-# Remove the file if it exists
-if os.path.exists(report_file_path_multivariate):
-    os.remove(report_file_path_multivariate)
 
 # Save the report
 multi_result.save_as_html(
