@@ -1,11 +1,11 @@
 """Script for data clustering processed data"""
 
-# pylint: disable=wrong-import-position
+# pylint: disable=wrong-import-position, no-name-in-module
 import sys                                          # noqa:E402
 sys.path.append('src')                              # noqa:E402
 import time                                         # noqa:E402
 from locust import HttpUser, task, between, tag     # noqa:E402
-# pylint: enable=wrong-import-position
+# pylint: enable=wrong-import-position, no-name-in-module
 
 
 DEFAULT_PLAYLIST_PAYLOAD = {"id_playlist_train": "",

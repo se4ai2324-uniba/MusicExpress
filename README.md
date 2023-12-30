@@ -2,9 +2,13 @@
 
 [![python](https://img.shields.io/badge/Python-3.11.5-3776AB.svg?style=flat&logo=python&logoColor=white)](https://www.python.org)
 [![python](https://img.shields.io/badge/Python-3.11.6-3776AB.svg?style=flat&logo=python&logoColor=white)](https://www.python.org)
+[![linting: pylint](https://img.shields.io/badge/linting-pylint-yellowgreen)](https://github.com/pylint-dev/pylint)
 [![QA](https://github.com/se4ai2324-uniba/MusicExpress/actions/workflows/QA.yml/badge.svg)](https://github.com/se4ai2324-uniba/MusicExpress/actions/workflows/QA.yml)
 [![Pytest](https://github.com/se4ai2324-uniba/MusicExpress/actions/workflows/test_scripts_api.yml/badge.svg)](https://github.com/se4ai2324-uniba/MusicExpress/actions/workflows/test_scripts_api.yml)
 [![Pipeline](https://github.com/se4ai2324-uniba/MusicExpress/actions/workflows/Model_testing.yml/badge.svg)](https://github.com/se4ai2324-uniba/MusicExpress/actions/workflows/Model_testing.yml)
+[![Data Drift](https://github.com/se4ai2324-uniba/MusicExpress/actions/workflows/datadrift_scan.yml/badge.svg)](https://github.com/se4ai2324-uniba/MusicExpress/actions/workflows/datadrift_scan.yml)
+[![Azure Deploy Main](https://github.com/se4ai2324-uniba/MusicExpress/actions/workflows/azure_deploy_main.yml/badge.svg)](https://github.com/se4ai2324-uniba/MusicExpress/actions/workflows/azure_deploy_main.yml)
+[![Azure Deploy Staging](https://github.com/se4ai2324-uniba/MusicExpress/actions/workflows/azure_deploy_staging.yml/badge.svg)](https://github.com/se4ai2324-uniba/MusicExpress/actions/workflows/azure_deploy_staging.yml)
 
 Within this repository, a Music Recommender System using the K-Medoids clustering method is presented. The goal of this system is to provide the user with personalized suggestions, taking into account their preferences in terms of songs. The number of suggestions can be decided by the users (e.g., 5 suggestions). Spotify playlists are used to compute the clusters and provide song suggestions to the user.
 The user should provide a playlist with songs they like and may or may not provide a playlist from which suggestions should be made. To compute the best suggestions, a song is randomly picked from the user's preferences, and the Euclidean Distance measure is adopted to determine song recommendations, taking into account the songs' features.
