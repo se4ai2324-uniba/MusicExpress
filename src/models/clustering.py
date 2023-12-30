@@ -27,6 +27,7 @@ def clustering(processed_train_data=conf.PRO_TRAIN_SET_PATH,
                dir_to_store_model=conf.MODEL_FILE_PATH):
     """Method to generate data clusters"""
     tracker.start()
+
     print("Starting to cluster out the data...")
     train_tracks_df = pd.read_csv(processed_train_data)
     test_tracks_df = pd.read_csv(processed_test_data)

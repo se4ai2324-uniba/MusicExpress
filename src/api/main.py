@@ -7,8 +7,10 @@ sys.path.append('\\'.join(os.getcwd().split('\\')[:-2])+'\src')  # noqa:E402,E50
 from functools import wraps                                      # noqa:E402
 from http import HTTPStatus                                      # noqa:E402
 from fastapi import FastAPI, Request, HTTPException              # noqa:E402
+from fastapi.middleware.cors import CORSMiddleware               # noqa:E402
 # pylint: disable=import-error
 from api.schemas import UserPlaylistPayload                      # noqa:E402
+from api.monitoring import instrumentator                        # noqa:E402
 # pylint: enable=import-error
 import conf                                                      # noqa:E402
 import spotipy_utilities as spUt                                 # noqa:E402
@@ -84,6 +86,17 @@ app = FastAPI(
     description=APP_DESCRIPTION_MESSAGE,
     version="v01",
     openapi_tags=tags_metadata
+)
+
+# Expose app to compute Prometheus metrics
+instrumentator.instrument(app).expose(app, include_in_schema=False, should_gzip=True)  # noqa:E501
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 
@@ -270,7 +283,7 @@ def _recommended_songs(request: Request, user_payload: UserPlaylistPayload):
 
     target_song, recommended_songs = recommend(clustered_train_data=CLUSTER_TRAIN_DIR,   # noqa:E501
                                                clustered_test_data=CLUSTER_TEST_DIR,   # noqa:E501
-                                               dir_to_store_recommendation=PRO_DIR)   # noqa:E501
+                                               dir_to_store_recommendation=OUT_DIR)   # noqa:E501
     if len(target_song) > 0:
 
         response = {

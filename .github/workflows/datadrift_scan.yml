@@ -1,0 +1,57 @@
+name: Data Drift Scan
+run-name: Data Drift Scan with Deepchecks
+
+
+on:
+    push:
+      paths:
+        - "src/tests/DataDrift/**"
+        - "data/raw/**"
+
+permissions:
+  contents: write
+jobs:
+    deepchecks_datadrift:
+        name: Deepchecks Data Drift Scan
+        runs-on: windows-latest
+
+        steps:
+            - name: Checkout repository
+              uses: actions/checkout@v4
+      
+            - name: Set up Python >=3.11.5 <=3.11.6
+              uses: actions/setup-python@v4
+              with:
+                python-version: ">=3.11.5 <=3.11.6"
+      
+            - name: Set up DVC
+              uses: iterative/setup-dvc@v1
+      
+            - name: Pull data with DVC
+              env:
+                GDRIVE_CREDENTIALS_DATA: ${{ secrets.GDRIVE_CREDENTIALS_DATA }}
+              run: |
+                dvc pull
+      
+            - name: Install dependencies
+              run: |
+                python -m pip install --upgrade pip
+                pip install -r ./requirements.txt
+      
+            - name: Extract data
+              run: |
+                python src/data/extract_data.py
+      
+            - name: Preprocess data
+              run: |
+                python src/features/preprocessing.py
+            - name: Run Deepchecks Data Drift Scan
+              run: |
+                python src/tests/DataDrift/deepchecks_datadrift.py
+            - name: update file and push to remote
+              run: |
+                git config --global user.name 'github-actions[bot]'
+                git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+                git add reports/deepchecks/*
+                git commit -m "Automated Data Drift Deepchecks Scan reports"
+                git push

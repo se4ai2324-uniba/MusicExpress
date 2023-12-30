@@ -1,5 +1,7 @@
 # Data Card
 
+Reminder: The song count in the playlists may vary as they are updated daily.
+
 The train dataset is a Spotify playlist named “keep grinding.” that consists of 610 songs.
 Here is the link to this playlist: «[keep grinding.](https://open.spotify.com/playlist/3fSsw9Mp5Mi2DDiweZggtP?si=151ba94cd4ca4cbb)».
 

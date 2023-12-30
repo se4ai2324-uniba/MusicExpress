@@ -1,13 +1,14 @@
 """Script to extract the data (default or user's playlists)"""
 
 # pylint: disable=wrong-import-position
-import sys  # noqa:E402
-sys.path.append('src')  # noqa:E402
-import zipfile as zf  # noqa:E402
-from codecarbon import EmissionsTracker  # noqa:E402
-import files_utilities as flUt  # noqa:E402
-import spotipy_utilities as spUt  # noqa:E402
-import conf  # noqa:E402
+import sys                                   # noqa:E402
+from sys import platform                     # noqa:E402
+sys.path.append('src')                       # noqa:E402
+import zipfile as zf                         # noqa:E402
+from codecarbon import EmissionsTracker      # noqa:E402
+import files_utilities as flUt               # noqa:E402
+import spotipy_utilities as spUt             # noqa:E402
+import conf                                  # noqa:E402
 # pylint: enable=wrong-import-position
 
 
@@ -27,6 +28,12 @@ def extract_data(user_data=False, playlists=None,
     # List of the playlists names
     tracker.start()
     playlist_names = []
+
+    dir_to_store_data += "/"
+
+    # Modify file path based on the operating system
+    if platform == "win32":
+        dir_to_store_data = dir_to_store_data.replace("/", "\\")
 
     if not user_data:
         playlists = conf.PLAYLISTS

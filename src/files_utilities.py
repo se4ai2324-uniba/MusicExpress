@@ -38,7 +38,7 @@ def read_playlist_df(playlist_id):
 
 def create_playlist_df(playlist_id, data_dir=conf.PREPRO_DATA_DIR):
     """Method that creates the Dataframe for a Playlist and stores it"""
-    tracks = spUt.track_ids_from_playlist("ivanrinaldi_", playlist_id)
+    tracks = spUt.track_ids_from_playlist(conf.SPOTIFYUSER, playlist_id)
     print(f"{len(tracks)} tracks have been found in the given playlist!")
     print("Extracting features of each track...")
 

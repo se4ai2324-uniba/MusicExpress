@@ -1,7 +1,7 @@
 # MusicExpress
 
-[![python](https://img.shields.io/badge/Python-3.10.5-3776AB.svg?style=flat&logo=python&logoColor=white)](https://www.python.org)
-[![python](https://img.shields.io/badge/Python-3.11-3776AB.svg?style=flat&logo=python&logoColor=white)](https://www.python.org)
+[![python](https://img.shields.io/badge/Python-3.11.5-3776AB.svg?style=flat&logo=python&logoColor=white)](https://www.python.org)
+[![python](https://img.shields.io/badge/Python-3.11.6-3776AB.svg?style=flat&logo=python&logoColor=white)](https://www.python.org)
 [![QA](https://github.com/se4ai2324-uniba/MusicExpress/actions/workflows/QA.yml/badge.svg)](https://github.com/se4ai2324-uniba/MusicExpress/actions/workflows/QA.yml)
 [![Pytest](https://github.com/se4ai2324-uniba/MusicExpress/actions/workflows/test_scripts_api.yml/badge.svg)](https://github.com/se4ai2324-uniba/MusicExpress/actions/workflows/test_scripts_api.yml)
 [![Pipeline](https://github.com/se4ai2324-uniba/MusicExpress/actions/workflows/Model_testing.yml/badge.svg)](https://github.com/se4ai2324-uniba/MusicExpress/actions/workflows/Model_testing.yml)
@@ -18,31 +18,31 @@ The Model and Data Cards are available here:
 
 ## Requirements
 
-- Python 3.11.5 ([Download here](https://python.domainunion.de/downloads/release/python-3115/)) (on VS Code select the Python 3.11.5 Kernel) since there might be some problems with the scikit-learn-extra library when using Python 3.12.0
+- Python 3.11.5 ([Download here](https://python.domainunion.de/downloads/release/python-3115/)) or even 3.11.6 (on VS Code select the correct Python Kernel) since there might be some problems with the _scikit-learn-extra_ library when using Python 3.12.0
 
-- The libraries **mlflow** and **dagshub** might be highlighted by Pylance (if installed) in the [metrics.py](src/models/metrics.py) script: this won't lead to issues when using the virtual environment to run the code
+- **Pylance** (if installed) may highlight libraries like **mlflow** and **dagshub**, indicating **they cannot be resolved**. However, this should not cause issues when running the code, provided all requirements are installed.
 
-We suggest you to use a virtual environment in which you can download the requirements.
+Considering the previous point, it is **highly recommended to use a virtual environment** for downloading the requirements. If you choose not to use it, you can skip the following section and proceed directly to the **Installation of requirements.txt** part.
 
 ### Create a Virtual Environment
 
 We report different ways to create a virtual environment so that if you have different versions of Python on your computer, you can easily create one without needing to look it up.
 
-#### Standard creation
+#### Utilize the most recently installed Python version
 
-- Windows:
+- **Windows Distribution**:
 
 ```bash
 python -m venv your_venv_name
 ```
 
-- Linux:
+- **Linux Distribution**:
 
 ```bash
 python3 -m venv your_venv_name
 ```
 
-#### Specifc Python Version creation
+#### Specify a particular Python version for use
 
 ```bash
 path\to\the\python\version\exe\you\want\to\use -m venv your_venv_name
@@ -56,17 +56,13 @@ path\...\Python311\python.exe -m venv your_venv_name
 
 ### Activate the virtual environment
 
-- Windows:
+- **Windows Distribution**:
 
 ```bash
 your_venv_name/Scripts/activate
 ```
 
-```bash
-your_venv_name/Scripts/activate.ps1
-```
-
-- Linux:
+- **Linux Distribution**:
 
 ```bash
 your_venv_name/bin/activate
@@ -74,14 +70,14 @@ your_venv_name/bin/activate
 
 ### Installation of requirements.txt
 
-We suggest to update pip before installing the requirements in the virtual environment. Copy the following code to update pip:
+It is recommended to update pip before installing requirements in the virtual environment to avoid potential installation issues. Copy and execute the following code to update pip:
 
 ```bash
 python.exe -m pip install --upgrade pip
 ```
 
-After updating pip, you will need to install the requirements.txt in order for the model to work and also plot the results.
-You can easily install them as follows:
+One pip is updated, proceed to install the requirements.txt to ensure the proper functioning of the model and visualization of results.
+You can easily install them with the following command:
 
 ```bash
 pip install -r requirements.txt
@@ -89,39 +85,40 @@ pip install -r requirements.txt
 
 ### Reproduce DVC Pipeline
 
-With the following instructions you will be able to run the DVC Pipeline that we developed:
+Given that the requirements have been installed, if you intend to utilize DVC for pipeline reproduction, download the data and execute the pipeline using the following commands:
 
 ```bash
-# Retrieves the data needed in the pipeline from the remote storage
+# Retrieve data from remote storage
 dvc pull -r myremote
 
-# Runs the DVC Pipeline
+# Run DVC Pipeline (only modified files are processed by default)
 dvc repro
+
+# Forcefully run the entire DVC Pipeline
+dvc repro --force
 ```
 
-## Testing
+## Integrated Tools
 
-Testing is conducted within the DVC pipeline, and you can find more details about it [here](src/tests/README.md).
+In this project, we've integrated a variety of tools, each designed for specific tasks. For detailed information about each tool, please refer to the following list:
 
-## Quality Assessment (QA)
+- **[Testing](src/tests/README.md)**: GreatExpectations, Deepchecks and Pytest
+- **[Quality Assessment (QA)](reports/README.md)**: Pylint, Pynblint and Flake8
+- **[API](src/api/README.md)**: FastAPI
+- **[Automated Workflows](.github/workflows/README.md)**: Github Actions
+- **[Containerization](docker/README.md)**: Docker
+- **[GreenAI](models/README.md#carbon-footprint)**: Code Carbon (details are in the last section of the linked README)
+- **[Performance & Load Testing](src/locust/README.md)**: Locust
+- **[Resource & Performance Monitoring](src/api/README.md#resource--performance-monitoring)**: Prometheus and Grafana (details are in the last section of the linked README)
+- **[Data Drifts Monitoring](src/tests/DataDrift/README.md)**: Deepchecks
 
-Quality assessment tools have been integrated throughout the code, and you can discover further information [here](reports/README.md).
+## Cloud Deployment
 
-## API
+We selected Azure as cloud provider to deploy our services, available [here](musicexpress.azurewebsites.net).
 
-API have been integrated, and you can discover further information [here](src/api/README.md).
+## Uptime Monitoring
 
-## Github Actions
-
-Github Actions has been integrated, and you can discover further information [here](.github/workflows/README.md).
-
-## Docker
-
-Docker has been integrated, and you can discover further information [here](docker/README.md).
-
-## GreenAI - Code Carbon
-
-Code Carbon has been integrated, and you can discover further information in the last section of our [Model Card](models/README.md).
+We use **Better Uptime** to monitor the status of our website. Check the current status at [our status page](https://musicexpress.betteruptime.com/).
 
 ## Citation
 
@@ -144,68 +141,104 @@ url = {https://github.com/se4ai2324-uniba/MusicExpress}
     ├── .dvc               <- DVC files
     │
     ├── .github
+    │   │
     │   └── workflows      <- Github actions
+    │       │
+    │       ├── azure_deploy_main.yml       <- Deployment on Azure of the Production release
+    │       ├── azure_deploy_staging.yml    <- Deployment on Azure of the Staging release
+    │       ├── datadrift_scan.yml          <- Data drift detection action
+    │       ├── Model_testing.yml           <- Model testing (extract data, preprocess, and clustering) action
+    │       ├── test_scripts_api.yml        <- Pytest scripts action
+    │       ├── QA.yml                      <- Quality Assessment action
+    │       └── README.md                   <- Github actions README
     │
     ├── data
-    │   ├── external       <- Data from third party sources
+    │   │
     │   ├── interim        <- Data before processing
     │   ├── output         <- Data after clustering and song recommendations
-    │   ├── processed      <- Processed data, ready to be used for clustering
-    │   └── raw            <- The original, immutable data dump
+    │   ├── processed      <- Processed data, ready for clustering
+    │   ├── raw            <- The original, immutable data dump
+    │   └── README.md      <- Data Card
     │
     ├── docker             <- Docker files
-    │   └── Dockerfile     <- Docker image of our system (interact with API)
+    │   │
+    │   ├── Dockerfile     <- Docker image of our system (interact with API)
+    │   └── README.md      <- Docker README
     │
     ├── docs               <- A default Sphinx project; see sphinx-doc.org for details
     │
     ├── models             <- Trained and serialized models, model predictions, or model summaries
+    │   │
+    │   ├── model.pkl      <- Last trained model
+    │   └── README.md      <- Model Card
     │
     ├── notebooks          <- Jupyter notebook providing an overview of code and the Spotipy library
     │
     ├── references         <- Data dictionaries, manuals, and all other explanatory materials.
     │
     ├── reports            <- Generated analysis as HTML, PDF, LaTeX, etc
-    │   ├── codecarbo      <- Codecarbon generated emission report
-    │   ├── deepchecks     <- Deepchecks generated HTML pages for data integrity
+    │   │
+    │   ├── codecarbon     <- Codecarbon emission report
+    │   ├── deepchecks     <- Deepchecks report for data integrity and data drift detection
     │   ├── figures        <- Generated graphics and figures to be used in reporting
-    │   ├── flake8         <- Flake8 generated HTML page for quality assessment (QA)
+    │   ├── flake8         <- Flake8 report for quality assessment (QA)
+    │   ├── loucst         <- Locust load testing reports
     │   ├── pylint         <- Pylint reports for quality assessment (QA)
-    │   └── pynblint       <- Pynblint reports for quality assessment (QA)
+    │   ├── pynblint       <- Pynblint reports for quality assessment (QA)
+    │   └── README.md      <- Reporting tools README
     │
     ├── requirements.txt   <- The requirements file for reproducing the analysis environment
     │
-    ├── setup.py           <- makes project pip installable (pip install -e .) so src can be imported
+    ├── setup.py           <- Makes project pip installable (pip install -e .) so src can be imported
     ├
-    ├── src                <- Source code for use in this project
+    ├── src                <- Project's source code
     │   │
-    │   ├── api            <- Scripts containing API endpoints
-    │   │   └── main.py
-    │   │   └── schemas.py
+    │   ├── api            <- Scripts related to API
+    │   │   │
+    │   │   ├── main.py           <- API endpoints
+    │   │   ├── monitoring.py     <- Additional Prometheus metrics
+    │   │   ├── schemas.py        <- API utilities
+    │   │   └── README.md         <- API README
     │   │
-    │   ├── data           <- Scripts to download or generate data
-    │   │   └── extract_data.py
+    │   ├── data           <- Scripts to download or extract data
+    │   │   │
+    │   │   └── extract_data.py   <- Script to extract data from Spotify playlists
     │   │
-    │   ├── features       <- Scripts to turn raw data into features for modeling
-    │   │   └── preprocessing.py
+    │   ├── features       <- Scripts to process raw data
+    │   │   │
+    │   │   └── preprocessing.py  <- Script to preprocess extracted data
     │   │
-    │   ├── models         <- Scripts to train the model and then use the trained model to make
-    │   │   │                 suggestions
-    │   │   ├── clustering.py
-    │   │   ├── recommend.py
-    │   │   └── metrics.py
+    │   ├── locust         <- Scripts to run Locust performance and load tests
+    │   │   │
+    │   │   ├── locustfile.py     <- Script to perform Locust load testing
+    │   │   └── README.md         <- Locust README
+    │   │
+    │   ├── models         <- Scripts to train the model, make suggestions, and compute metrics
+    │   │   │
+    │   │   ├── clustering.py     <- Script to cluster data
+    │   │   ├── recommend.py      <- Script to compute song recommendations
+    │   │   └── metrics.py        <- Script to compute metrics
     │   │
     │   ├── tests          <- Test scripts
+    │   │   │
+    │   │   ├── datadrift
+    │   │   │   │
+    │   │   │   ├── deepchecks_datadrift.ipynb  <- Deepchecks data drift monitoring
+    │   │   │   └── README.md                   <- Data drift monitoring README
+    │   │   │
     │   │   ├── pytest
     │   │   │   │
-    │   │   │   ├── test_api.ipynb
-    │   │   │   ├── test_files_utilities.ipynb
-    │   │   │   ├── test_preprocessing.ipynb
-    │   │   │   ├── test_recommend.ipynb
-    │   │   │   └── test_spotipy_utilities.ipynb
+    │   │   │   ├── test_api.py                 <- Pytest API tests
+    │   │   │   ├── test_files_utilities.py     <- Pytest files utilities methods tests
+    │   │   │   ├── test_preprocessing.py       <- Pytest data preprocessing tests
+    │   │   │   ├── test_recommend.py           <- Pytest recommendation methods tests
+    │   │   │   └── test_spotipy_utilities.py   <- Pytest spotipy utilities methods tests
     │   │   │
-    │   │   ├── test_deepchecks.ipynb
-    │   │   ├── test_extract_data.py
-    │   │   └── test_preprocessed_data.py
+    │   │   ├── test_deepchecks.ipynb           <- Deepchecks data inspection tests
+    │   │   ├── test_extract_data.py            <- GreatExpectations test on extract_data.py
+    │   │   ├── test_preprocessed_data.py       <- GreatExpectations test on preprocessed_data.py
+    │   │   │
+    │   │   └── README.md  <- Testing tools README
     │   │
     │   │── visualization  <- Scripts to create exploratory and results oriented visualizations
     │   │
@@ -215,6 +248,7 @@ url = {https://github.com/se4ai2324-uniba/MusicExpress}
     │   └── spotipy_utilities.py                <- Methods that make use of Spotipy features
     │
     ├── compose.yaml       <- Docker-compose file
+    ├── prometheus.yaml    <- Prometheus config file
     └── tox.ini            <- tox file with settings for running tox; see tox.readthedocs.io
 
 ---

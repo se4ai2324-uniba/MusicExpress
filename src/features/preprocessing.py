@@ -4,7 +4,6 @@
 import os                                 # noqa:E402
 import sys                                # noqa:E402
 from sys import platform                  # noqa:E402
-from pathlib import Path                  # noqa:E402
 sys.path.append('src')                    # noqa:E402
 import pandas as pd                       # noqa:E402
 from codecarbon import EmissionsTracker   # noqa:E402
@@ -60,7 +59,6 @@ def preprocess(raw_train_data=conf.TRAIN_SET_CSV_PATH,
                dir_to_store_data=conf.PRO_DATA_DIR):
     """Method to preprocess raw data"""
     tracker.start()
-    print("Path file: " + str(Path(__file__).resolve()))
 
     train_tracks_df = pd.read_csv(raw_train_data)
     test_tracks_df = pd.read_csv(raw_test_data)
@@ -73,6 +71,7 @@ def preprocess(raw_train_data=conf.TRAIN_SET_CSV_PATH,
         output_train_file = output_train_file.replace("/", "\\")
         output_test_file = output_test_file.replace("/", "\\")
 
+    # Train Set preprocessing
     print("===================================================")
     print("Preprocessing train set..\nRemoving rows with null values...")
     train_tracks_df = remove_null_values_df(train_tracks_df)
@@ -83,9 +82,9 @@ def preprocess(raw_train_data=conf.TRAIN_SET_CSV_PATH,
     print("Post-Normalization min and max values:")
     print_column_min_max(train_tracks_df, "Loudness")
     print("The train set has been preprocessed!")
-
     print("===================================================")
 
+    # Test Set preprocessing
     print("Moving onto the test set. Removing rows with null values...")
     test_tracks_df = remove_null_values_df(test_tracks_df)
     print("Normalizing the values in the column Loudness."
@@ -97,6 +96,7 @@ def preprocess(raw_train_data=conf.TRAIN_SET_CSV_PATH,
     print_column_min_max(test_tracks_df, "Loudness")
     print("===================================================")
 
+    # Store processed datasets
     print("Storing the preprocessed files in the folder preprocessed_data.")
     train_tracks_df.to_csv(output_train_file, index=False)
     test_tracks_df.to_csv(output_test_file, index=False)
