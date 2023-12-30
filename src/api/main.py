@@ -268,8 +268,11 @@ def _recommended_songs(request: Request, user_payload: UserPlaylistPayload):
         user_playlists = [user_payload.id_playlist_train,
                           user_payload.id_playlist_test]
 
-        tmp_dir_train = os.path.join(PREPRO_DIR, spUt.get_playlist_name(user_playlists[0]) + ".csv")  # noqa:E501
-        tmp_dir_test = os.path.join(PREPRO_DIR, spUt.get_playlist_name(user_playlists[1]) + ".csv")  # noqa:E501
+        train_playlist_name = spUt.get_playlist_name(user_playlists[0])
+        test_playlist_name = spUt.get_playlist_name(user_playlists[1])
+
+        tmp_dir_train = os.path.join(PREPRO_DIR, spUt.clear_playlist_name(train_playlist_name) + ".csv")  # noqa:E501
+        tmp_dir_test = os.path.join(PREPRO_DIR, spUt.clear_playlist_name(test_playlist_name) + ".csv")  # noqa:E501
 
         if platform == "win32":
             tmp_dir_train = tmp_dir_train.replace("/", "\\")
