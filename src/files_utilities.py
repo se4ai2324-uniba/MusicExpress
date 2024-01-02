@@ -79,9 +79,6 @@ def retrieve_all_playlists(playlist_dir=conf.PREPRO_DATA_DIR):
     for playlist_id, playlist_name in zip(default_ids, default_names):
         available_playlists.append({"Id": playlist_id, "Name": playlist_name})
     
-    print("Available playlists after default")
-    print(available_playlists)
-
     # Getting other playlists that the user migth have extracted
     files_list = os.listdir(playlist_dir)
     files_to_remove = [".gitkeep", "feedbackUser1.csv", "feedbackUser2.csv"]   # List of files that need to be removed if found in the folder  # noqa:E501

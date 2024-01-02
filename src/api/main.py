@@ -1,24 +1,24 @@
 """Main script: it includes our API initialization and endpoints."""
 # pylint: disable=wrong-import-position,line-too-long,anomalous-backslash-in-string  # noqa:E501
-import os                                                        # noqa:E402
-import sys                                                       # noqa:E402
-from sys import platform                                         # noqa:E402
-sys.path.append('\\'.join(os.getcwd().split('\\')[:-2])+'\src')  # noqa:E402,E501,W605
-from functools import wraps                                      # noqa:E402
-from http import HTTPStatus                                      # noqa:E402
-from fastapi import FastAPI, Request, HTTPException              # noqa:E402
-from fastapi.middleware.cors import CORSMiddleware               # noqa:E402
+import os                                                         # noqa:E402
+import sys                                                        # noqa:E402
+from sys import platform                                          # noqa:E402
+sys.path.append('\\'.join(os.getcwd().split('\\')[:-2])+'\\src')  # noqa:E402,E501,W605
+from functools import wraps                                       # noqa:E402
+from http import HTTPStatus                                       # noqa:E402
+from fastapi import FastAPI, Request, HTTPException               # noqa:E402
+from fastapi.middleware.cors import CORSMiddleware                # noqa:E402
 # pylint: disable=import-error
-from api.schemas import UserPlaylistPayload                      # noqa:E402
-from api.monitoring import instrumentator                        # noqa:E402
+from api.schemas import UserPlaylistPayload                       # noqa:E402
+from api.monitoring import instrumentator                         # noqa:E402
 # pylint: enable=import-error
-import conf                                                      # noqa:E402
-import spotipy_utilities as spUt                                 # noqa:E402
-import files_utilities as flUt                                   # noqa:E402
-from data.extract_data import extract_data                       # noqa:E402
-from features.preprocessing import preprocess                    # noqa:E402
-from models.clustering import clustering                         # noqa:E402
-from models.recommend import recommend                           # noqa:E402
+import conf                                                       # noqa:E402
+import spotipy_utilities as spUt                                  # noqa:E402
+import files_utilities as flUt                                    # noqa:E402
+from data.extract_data import extract_data                        # noqa:E402
+from features.preprocessing import preprocess                     # noqa:E402
+from models.clustering import clustering                          # noqa:E402
+from models.recommend import recommend                            # noqa:E402
 # pylint: enable=wrong-import-position
 
 # Folder Directory
@@ -184,7 +184,6 @@ def _get_available_playlists(request: Request):
     """
 
     available_playlists = flUt.retrieve_all_playlists(PREPRO_DIR)
-    print(available_playlists)
 
     if len(available_playlists) > 0:
 
