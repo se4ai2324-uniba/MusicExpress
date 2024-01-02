@@ -96,6 +96,16 @@ After the Docker Image has been downloaded (if not already avaiable), the Grafan
 
 ![plot](/figures/grafana_ui_example.png?raw=true)
 
-Through the Grafana UI, we create a dashboard to showcase the additional metrics defined for Prometheus. Utilizing charts, we display the Prometheus metrics, grouped by rows to enhance result organization.Below is a screenshot of our dashboard.
+Through the Grafana UI, we create a dashboard to showcase the additional metrics defined for Prometheus. Utilizing charts, we display the Prometheus metrics, grouped by rows to enhance result organization.
+
+We decided to track the following metrics:
+
+- **Total number of requests**: quantifies the total number of requests
+- **Request Rate**: measures how quickly requests are processed
+- **Average Latency (for both GET and POST requests)**: tracks the response time for user actions
+- **Average Request Size (for both GET and POST requests)**: measures the average data payload in incoming requests
+- **Average Response Size (for both GET and POST requests)**: measures the average data sent back to users in responses
+
+These metrics provide a comprehensive view of our system's performance and usage patterns. For instance, tracking the request rate helps gauge the workload, while average latency and sizes offer insights into efficiency. Below is a screenshot of our dashboard.
 
 ![plot](/figures/grafana_dashboard_example.png?raw=true)
