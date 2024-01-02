@@ -20,13 +20,22 @@ The Model and Data Cards are available here:
 - [Model Card](models/README.md)
 - [Data Card](data/README.md)
 
+## Cloud Deployment
+
+We selected Azure as cloud provider to deploy our services, available [here](musicexpress.azurewebsites.net).
+
+## Uptime Monitoring
+
+We use **Better Uptime** to monitor the status of our website. Check the current status at [our status page](https://musicexpress.betteruptime.com/).
+
 ## Requirements
 
 - Python 3.11.5 ([Download here](https://python.domainunion.de/downloads/release/python-3115/)) or even 3.11.6 (on VS Code select the correct Python Kernel) since there might be some problems with the _scikit-learn-extra_ library when using Python 3.12.0
 
 - **Pylance** (if installed) may highlight libraries like **mlflow** and **dagshub**, indicating **they cannot be resolved**. However, this should not cause issues when running the code, provided all requirements are installed.
 
-Considering the previous point, it is **highly recommended to use a virtual environment** for downloading the requirements. If you choose not to use it, you can skip the following section and proceed directly to the **Installation of requirements.txt** part.
+> [!TIP]
+> Considering the previous point, it is **highly recommended to use a virtual environment** for downloading the requirements. If you choose not to use it, you can skip the following section and proceed directly to the **[Installation of requirements](https://github.com/se4ai2324-uniba/MusicExpress/tree/staging?tab=readme-ov-file#installation-of-requirementstxt)** part.
 
 ### Create a Virtual Environment
 
@@ -102,11 +111,13 @@ dvc repro
 dvc repro --force
 ```
 
+Following the pipeline execution, the experiment is logged using [Mlflow](https://mlflow.org/docs/latest/index.html). All tracked files via DVC and the results of the experiment are showcased in our [Dagshub Repository](https://dagshub.com/se4ai2324-uniba/MusicExpress).
+
 ## Integrated Tools
 
 In this project, we've integrated a variety of tools, each designed for specific tasks. For detailed information about each tool, please refer to the following list:
 
-- **[Testing](src/tests/README.md)**: GreatExpectations, Deepchecks and Pytest
+- **[Testing](src/tests/README.md)**: Great Expectations, Deepchecks and Pytest
 - **[Quality Assessment (QA)](reports/README.md)**: Pylint, Pynblint and Flake8
 - **[API](src/api/README.md)**: FastAPI
 - **[Automated Workflows](.github/workflows/README.md)**: Github Actions
@@ -115,14 +126,6 @@ In this project, we've integrated a variety of tools, each designed for specific
 - **[Performance & Load Testing](src/locust/README.md)**: Locust
 - **[Resource & Performance Monitoring](src/api/README.md#resource--performance-monitoring)**: Prometheus and Grafana (details are in the last section of the linked README)
 - **[Data Drifts Monitoring](src/tests/DataDrift/README.md)**: Deepchecks
-
-## Cloud Deployment
-
-We selected Azure as cloud provider to deploy our services, available [here](musicexpress.azurewebsites.net).
-
-## Uptime Monitoring
-
-We use **Better Uptime** to monitor the status of our website. Check the current status at [our status page](https://musicexpress.betteruptime.com/).
 
 ## Citation
 
@@ -138,15 +141,12 @@ url = {https://github.com/se4ai2324-uniba/MusicExpress}
 
 ## Project Organization
 
-    ├── LICENSE
-    ├── Makefile           <- Makefile with commands like `make data` or `make train`
-    ├── README.md          <- The top-level README of the repository
-    │
-    ├── .dvc               <- DVC files
+    ├
+    ├── .dvc                <- DVC files
     │
     ├── .github
     │   │
-    │   └── workflows      <- Github actions
+    │   └── workflows       <- Github actions
     │       │
     │       ├── azure_deploy_main.yml       <- Deployment on Azure of the Production release
     │       ├── azure_deploy_staging.yml    <- Deployment on Azure of the Staging release
@@ -156,74 +156,73 @@ url = {https://github.com/se4ai2324-uniba/MusicExpress}
     │       ├── QA.yml                      <- Quality Assessment action
     │       └── README.md                   <- Github actions README
     │
-    ├── data
+    ├── data                <- Data folder
     │   │
-    │   ├── interim        <- Data before processing
-    │   ├── output         <- Data after clustering and song recommendations
-    │   ├── processed      <- Processed data, ready for clustering
-    │   ├── raw            <- The original, immutable data dump
-    │   └── README.md      <- Data Card
+    │   ├── interim          <- Data before processing
+    │   ├── output           <- Data after clustering and song recommendations
+    │   ├── processed        <- Processed data, ready for clustering
+    │   ├── raw              <- The original, immutable data dump
+    │   └── README.md        <- Data Card
     │
-    ├── docker             <- Docker files
+    ├── docker              <- Docker files
     │   │
-    │   ├── Dockerfile     <- Docker image of our system (interact with API)
-    │   └── README.md      <- Docker README
+    │   ├── Dockerfile       <- Docker image of our system (interact with API)
+    │   └── README.md        <- Docker README
     │
-    ├── docs               <- A default Sphinx project; see sphinx-doc.org for details
+    ├── docs                <- A default Sphinx project; see sphinx-doc.org for details
     │
-    ├── models             <- Trained and serialized models, model predictions, or model summaries
+    ├── figures             <- Images displayed in all the README(s) files
+    │
+    ├── models              <- Trained and serialized models, model predictions, or model summaries
     │   │
-    │   ├── model.pkl      <- Last trained model
-    │   └── README.md      <- Model Card
+    │   ├── model.pkl        <- Last trained model
+    │   └── README.md        <- Model Card
     │
-    ├── notebooks          <- Jupyter notebook providing an overview of code and the Spotipy library
-    │
-    ├── references         <- Data dictionaries, manuals, and all other explanatory materials.
-    │
-    ├── reports            <- Generated analysis as HTML, PDF, LaTeX, etc
+    ├── notebooks           <- Jupyter notebooks folder
     │   │
-    │   ├── codecarbon     <- Codecarbon emission report
-    │   ├── deepchecks     <- Deepchecks report for data integrity and data drift detection
-    │   ├── figures        <- Generated graphics and figures to be used in reporting
-    │   ├── flake8         <- Flake8 report for quality assessment (QA)
-    │   ├── loucst         <- Locust load testing reports
-    │   ├── pylint         <- Pylint reports for quality assessment (QA)
-    │   ├── pynblint       <- Pynblint reports for quality assessment (QA)
-    │   └── README.md      <- Reporting tools README
+    │   └── MusicExpress     <- Notebook providing an overview of the whole recommendation process
     │
-    ├── requirements.txt   <- The requirements file for reproducing the analysis environment
+    ├── references          <- Data dictionaries, manuals, and all other explanatory materials.
     │
-    ├── setup.py           <- Makes project pip installable (pip install -e .) so src can be imported
-    ├
-    ├── src                <- Project's source code
+    ├── reports             <- Generated analysis as HTML, PDF, LaTeX, etc
     │   │
-    │   ├── api            <- Scripts related to API
+    │   ├── codecarbon       <- Codecarbon emission report
+    │   ├── deepchecks       <- Deepchecks report for data integrity and data drift detection
+    │   ├── flake8           <- Flake8 report for quality assessment (QA)
+    │   ├── loucst           <- Locust load testing reports
+    │   ├── pylint           <- Pylint reports for quality assessment (QA)
+    │   ├── pynblint         <- Pynblint reports for quality assessment (QA)
+    │   └── README.md        <- Reporting tools README
+    │
+    ├── src                 <- Project's source code
+    │   │
+    │   ├── api              <- Scripts related to API
     │   │   │
     │   │   ├── main.py           <- API endpoints
     │   │   ├── monitoring.py     <- Additional Prometheus metrics
     │   │   ├── schemas.py        <- API utilities
     │   │   └── README.md         <- API README
     │   │
-    │   ├── data           <- Scripts to download or extract data
+    │   ├── data             <- Scripts to download or extract data
     │   │   │
     │   │   └── extract_data.py   <- Script to extract data from Spotify playlists
     │   │
-    │   ├── features       <- Scripts to process raw data
+    │   ├── features         <- Scripts to process raw data
     │   │   │
     │   │   └── preprocessing.py  <- Script to preprocess extracted data
     │   │
-    │   ├── locust         <- Scripts to run Locust performance and load tests
+    │   ├── locust           <- Scripts to run Locust performance and load tests
     │   │   │
     │   │   ├── locustfile.py     <- Script to perform Locust load testing
     │   │   └── README.md         <- Locust README
     │   │
-    │   ├── models         <- Scripts to train the model, make suggestions, and compute metrics
+    │   ├── models           <- Scripts to train the model, make suggestions, and compute metrics
     │   │   │
     │   │   ├── clustering.py     <- Script to cluster data
     │   │   ├── recommend.py      <- Script to compute song recommendations
     │   │   └── metrics.py        <- Script to compute metrics
     │   │
-    │   ├── tests          <- Test scripts
+    │   ├── tests            <- Test scripts
     │   │   │
     │   │   ├── datadrift
     │   │   │   │
@@ -242,18 +241,26 @@ url = {https://github.com/se4ai2324-uniba/MusicExpress}
     │   │   ├── test_extract_data.py            <- GreatExpectations test on extract_data.py
     │   │   ├── test_preprocessed_data.py       <- GreatExpectations test on preprocessed_data.py
     │   │   │
-    │   │   └── README.md  <- Testing tools README
-    │   │
-    │   │── visualization  <- Scripts to create exploratory and results oriented visualizations
+    │   │   └── README.md    <- Testing tools README
     │   │
     │   │── conf.py                             <- Variables used in all the other scripts
     │   │── files_utilities.py                  <- Methods for file operations
     │   │── great_expectations_utilities.py     <- Methods for file operations
     │   └── spotipy_utilities.py                <- Methods that make use of Spotipy features
     │
-    ├── compose.yaml       <- Docker-compose file
-    ├── prometheus.yaml    <- Prometheus config file
-    └── tox.ini            <- tox file with settings for running tox; see tox.readthedocs.io
+    ├── .dockerignore       <- Docker-ignore file
+    ├── .dvcignore          <- DVC-ignore file
+    ├── compose.yaml        <- Docker-compose file
+    ├── dvc.lock            <- DVC record file
+    ├── dvc.yaml            <- DVC pipeline file
+    ├── LICENSE             <- MIT License
+    ├── Makefile            <- Makefile with commands like `make data` or `make train`
+    ├── prometheus.yaml     <- Prometheus config file
+    ├── README.md           <- The top-level README of the repository
+    ├── requirements.txt    <- The requirements file for reproducing the analysis environment
+    ├── setup.py            <- Makes project pip installable (pip install -e .) so src can be imported
+    ├── test_environment.py <- Checks Python Version
+    └── tox.ini             <- tox file with settings for running tox; see tox.readthedocs.io
 
 ---
 

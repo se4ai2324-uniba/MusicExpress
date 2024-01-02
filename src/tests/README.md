@@ -2,27 +2,30 @@
 
 To test our code, three libraries have been adopted:
 
-- **GreatExpectations**: this library can be used to validate, document, and test data to ensure its quality and integrity throughout the data pipeline.
+- **Great Expectations**: this library can be used to validate, document, and test data to ensure its quality and integrity throughout the data pipeline.
 
 - **Deepchecks**: this library, on the other hand, is valuable for diagnosing and monitoring deep learning models through the various tools it offers, including those for inspecting, visualizing, and comprehending the behavior of neural networks.
 
 - **Pytest**: this library simplifies the process of writing and executing unit tests and provides features such as fixtures, parameterized testing, and detailed test reporting.
 
-## GreatExpectations
+## Data Quality Tests
 
-The Greatexpectations library is employed in the [great_expectations_utilities script](../great_expectations_utilities.py), [test_extract_data script](../tests/test_extract_data.py) and [test_preprocessed_data script](../tests/test_preprocessed_data.py) to examine the data needed for suggesting songs to the user. To assess this data, two test suites were established:
+### GreatExpectations
 
-- Test Suite: **extracted_data_expectations**
+The **Great Expectations** library is employed in the [great_expectations_utilities script](../great_expectations_utilities.py), [test_extract_data script](../tests/test_extract_data.py) and [test_preprocessed_data script](../tests/test_preprocessed_data.py) to examine the data needed for suggesting songs to the user. To assess this data, two test suites were established:
 
-  - Involved tests:
-    - **expect_column_values_to_not_be_null**
-    - **expect_column_values_to_be_of_type**
+1. Test Suite: **extracted_data_expectations**
 
-- Test Suite: **preprocessed_data_expectations**
-  - Involved tests:
-    - **expect_column_values_to_not_be_null**
-    - **expect_column_values_to_be_of_type**
-    - **expect_column_values_to_be_between**
+   - Involved tests:
+     - **expect_column_values_to_not_be_null**
+     - **expect_column_values_to_be_of_type**
+
+2. Test Suite: **preprocessed_data_expectations**
+
+   - Involved tests:
+     - **expect_column_values_to_not_be_null**
+     - **expect_column_values_to_be_of_type**
+     - **expect_column_values_to_be_between**
 
 Following is a code snippet displaying the defined tests for a column in our dataset:
 
@@ -60,9 +63,9 @@ The two test suites are included in the DVC pipeline prior to the corresponding 
 
 More information about this tool can be found [here](https://github.com/great-expectations/great_expectations).
 
-## Deepchecks
+### Deepchecks
 
-The Deepchecks library is utilized in the [test_deepchecks notebook](../tests/test_deepchecks.ipynb) to evaluate the train and test data required for song recommendations.
+The **Deepchecks** library is utilized in the [test_deepchecks notebook](../tests/test_deepchecks.ipynb) to evaluate the train and test data required for song recommendations.
 Deepchecks provides different sub-packages, each containing many checks and suites for specific tasks. In our case, we used the **Tabular** sub-package, which contains the **data_integrity** test suite. The same test suite was run on both the raw datasets and the processed datasets.
 
 This test suite is composed of eleven checks related to data integrity, from which we kept only the following pertinent tests:
@@ -79,9 +82,12 @@ Here is an example of Deepchecks' UI results:
 
 ![plot](/figures/deepchecks_example.png?raw=true)
 
+Addittionaly, this library has also been adopted for **Data Drift Detection**, and you can read more about it [here](./datadrift/README.md).
 More information about this tool can be found [here](https://github.com/deepchecks/deepchecks/tree/main).
 
-## Pytest
+## Scripts Testing
+
+### Pytest
 
 The Pytest library is utilized in the following scripts:
 

@@ -14,6 +14,7 @@ from api.monitoring import instrumentator                        # noqa:E402
 # pylint: enable=import-error
 import conf                                                      # noqa:E402
 import spotipy_utilities as spUt                                 # noqa:E402
+import files_utilities as flUt                                   # noqa:E402
 from data.extract_data import extract_data                       # noqa:E402
 from features.preprocessing import preprocess                    # noqa:E402
 from models.clustering import clustering                         # noqa:E402
@@ -166,6 +167,37 @@ def _index(request: Request):
     return response
 
 
+@app.get("/available_playlists", tags=["Available_Playlists"])
+@construct_response
+def _get_available_playlists(request: Request):
+    """
+    Endpoint to **get all available playlists** for the current user.
+
+    **Parameters**
+    - None
+
+    **Output**
+    - If everything works out, a **JSON object** containing the
+    **HTTP message**, the **HTTP status code**,
+      and **a list of the names of all the available playlists**
+    - Otherwise, an **exception** will be raised
+    """
+
+    available_playlists = flUt.retrieve_all_playlists(PREPRO_DIR)
+
+    if len(available_playlists) > 0:
+
+        response = {
+            "message": HTTPStatus.OK.phrase,
+            "status-code": HTTPStatus.OK,
+            "data": available_playlists
+        }
+
+        return response
+
+    raise HTTPException(status_code=404, detail='We are sorry, our system was not able to retrieve any playlist.')   # noqa:E501
+
+
 @app.post('/extract', tags=["Data"])
 @construct_response
 def _extract_data(request: Request, user_payload: UserPlaylistPayload):
@@ -287,6 +319,5 @@ def _recommended_songs(request: Request, user_payload: UserPlaylistPayload):
         return response
 
     raise HTTPException(status_code=404, detail='We are sorry, our system was not able to provide any recommendations.')   # noqa:E501
-
 
 # pylint: enable=line-too-long,anomalous-backslash-in-string,unused-argument

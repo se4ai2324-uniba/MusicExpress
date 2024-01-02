@@ -1,4 +1,4 @@
-# Datadrifts
+# Data Drift Detection
 
 Despite being already adopted in this project for testing purposes, we adopeted **Deepchecks** to also monitor data drifts in our data.
 

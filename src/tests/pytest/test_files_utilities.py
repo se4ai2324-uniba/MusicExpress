@@ -63,3 +63,10 @@ def test_store_playlist_dataframe():
     method_result = os.path.exists(tmp_dir)
     assert method_result is not False, "The playlist was not stored!"
     os.remove(tmp_dir)
+
+
+def test_retrieve_all_playlists():
+    '''Test method for the method retrieve_all_playlists'''
+    tmp_dir = conf.PREPRO_DATA_DIR
+    retrieved_playlists = flUt.retrieve_all_playlists(tmp_dir)
+    assert len(retrieved_playlists) > 0, "No playlists stored!"

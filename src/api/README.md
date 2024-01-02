@@ -1,12 +1,10 @@
 # API
 
-To produce the API for our system we used:
-
-- **FastAPI**: a modern, fast (high-performance), web framework for building APIs with Python 3.7+ based on standard Python type hints.
+To produce the API for our system we used **FastAPI**.
 
 ## FastAPI
 
-FastAPI is employed in the [main](main.py) in which, after initializing the FastAPI framework, we create endpoints for our system functionalities, such as:
+**FastAPI** is a modern, fast (high-performance), web framework for building APIs with Python 3.7+ based on standard Python type hint. This tool is employed in the [main](main.py) in which, after initializing the FastAPI framework, we create endpoints for our system functionalities, such as:
 
 - data extraction,
 - music recommendations.

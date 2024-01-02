@@ -66,3 +66,17 @@ def store_playlist_dataframe(playlist_id, dataframe,
     dataframe.to_csv(file_path, index=False)
     print("Playlist has been successfully saved!")
     print(f" - Playlist\'s Name: {str(spUt.get_playlist_name(playlist_id))}.")
+
+
+def retrieve_all_playlists(playlist_dir=conf.PREPRO_DATA_DIR):
+    """Method that retrieves the names of all the stored playlists"""
+    files_list = os.listdir(playlist_dir)
+
+    # List of files that need to be removed if found in the folder
+    files_to_remove = [".gitkeep", "feedbackUser1.csv", "feedbackUser2.csv"]
+    for f in files_to_remove:
+        if f in files_list:
+            files_list.remove(f)
+
+    files_list = [file[:-4] if file.endswith('.csv') else file for file in files_list]  # noqa:E501
+    return files_list

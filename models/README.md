@@ -50,9 +50,9 @@ Here's an example of song suggestions provided by our model.
 
 **Primary intended uses**:
 
-- The user selects a Spotify playlist which contains the user’s preferred songs (train set), then the model computes the clusters and suggests 5 songs picked from the test playlist, which are the closest in terms of song’s features to a random song previously picked from the train set.
+- The user can augment their playlist selection by inputting the ID of playlists they or other users have created on Spotify. Playlists created by Spotify cannot be utilized for this purpose. The extracted playlists can then function as either the training or test set for the system.
 
-- The user selects two Spotify playlist. The first playlist contains the user’s preferred songs (train set), the second playlist (test set) contains the songs from which the model must suggest 5 songs.
+- The user selects a Spotify playlist which contains the user’s preferred songs (train set), then the model computes the clusters and suggests 5 songs picked from a selected test playlist, which are the closest in terms of song’s features to a random song previously picked from the train set. Both the train set and test set can be either default playlists or playlists extracted by the user.
 
 **Primary intended users**:
 
@@ -70,7 +70,7 @@ Moreover, in our experiment, we solicited the opinions of only 10 users to rate 
 
 ### Carbon Footprint
 
-As suggested in the [Carbon emissions Section in Hugging Face's Model Card webpage](https://huggingface.co/docs/hub/model-cards-co2) we offer insights into our model's carbon footprint. Tracking and reporting emissions are crucial for understanding the environmental impact of our field.
+As suggested in the [Carbon emissions Section in Hugging Face's Model Card webpage](https://huggingface.co/docs/hub/model-cards-co2), we offer insights into our model's carbon footprint. Tracking and reporting emissions are crucial for understanding the environmental impact of our field.
 
 We used [Code Carbon](https://github.com/mlco2/codecarbon) to track our emissions. This tool allows us to assess the environmental impact of code by estimating its carbon footprint.
 
