@@ -24,9 +24,16 @@ The Model and Data Cards are available here:
 
 We selected Azure as cloud provider to deploy our services, available [here](musicexpress.azurewebsites.net).
 
-## Uptime Monitoring
+### Uptime Monitoring
 
 We use **Better Uptime** to monitor the status of our website. Check the current status at [our status page](https://musicexpress.betteruptime.com/).
+
+## Front-End
+
+We made a new GitHub repository for our front-end code. You can find it [here](https://github.com/llaraspata/MusicExpress-FrontEnd).
+
+> [!NOTE]
+> We opted to maintain a separation between the back-end and front-end, aligning with industry standards in software development to ensure effective project manageability.
 
 ## Requirements
 
