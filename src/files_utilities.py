@@ -70,13 +70,36 @@ def store_playlist_dataframe(playlist_id, dataframe,
 
 def retrieve_all_playlists(playlist_dir=conf.PREPRO_DATA_DIR):
     """Method that retrieves the names of all the stored playlists"""
-    files_list = os.listdir(playlist_dir)
+    default_ids = conf.PLAYLISTS
+    default_names = conf.PLAYLISTS_NAMES
 
-    # List of files that need to be removed if found in the folder
-    files_to_remove = [".gitkeep", "feedbackUser1.csv", "feedbackUser2.csv"]
+    available_playlists = []
+
+    # Getting playlists available by default
+    for playlist_id, playlist_name in zip(default_ids, default_names):
+        available_playlists.append({"Id": playlist_id, "Name": playlist_name})
+    
+    print("Available playlists after default")
+    print(available_playlists)
+
+    # Getting other playlists that the user migth have extracted
+    files_list = os.listdir(playlist_dir)
+    files_to_remove = [".gitkeep", "feedbackUser1.csv", "feedbackUser2.csv"]   # List of files that need to be removed if found in the folder  # noqa:E501
+
     for f in files_to_remove:
         if f in files_list:
             files_list.remove(f)
 
     files_list = [file[:-4] if file.endswith('.csv') else file for file in files_list]  # noqa:E501
-    return files_list
+
+    for playlist_name in files_list:
+        if playlist_name not in default_names:
+            playlist_id = spUt.get_playlist_id(playlist_name)
+
+            if playlist_id is not None:
+                available_playlists.append({"Id": playlist_id, "Name": playlist_name})
+
+    print("Available playlists")
+    print(available_playlists)
+
+    return available_playlists

@@ -184,6 +184,7 @@ def _get_available_playlists(request: Request):
     """
 
     available_playlists = flUt.retrieve_all_playlists(PREPRO_DIR)
+    print(available_playlists)
 
     if len(available_playlists) > 0:
 
