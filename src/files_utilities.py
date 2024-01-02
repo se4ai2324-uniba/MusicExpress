@@ -78,10 +78,11 @@ def retrieve_all_playlists(playlist_dir=conf.PREPRO_DATA_DIR):
     # Getting playlists available by default
     for playlist_id, playlist_name in zip(default_ids, default_names):
         available_playlists.append({"Id": playlist_id, "Name": playlist_name})
-    
+
     # Getting other playlists that the user migth have extracted
     files_list = os.listdir(playlist_dir)
-    files_to_remove = [".gitkeep", "feedbackUser1.csv", "feedbackUser2.csv"]   # List of files that need to be removed if found in the folder  # noqa:E501
+    # List of files that need to be removed if found in the folder
+    files_to_remove = [".gitkeep", "feedbackUser1.csv", "feedbackUser2.csv"]   # noqa:E501
 
     for f in files_to_remove:
         if f in files_list:
@@ -94,7 +95,7 @@ def retrieve_all_playlists(playlist_dir=conf.PREPRO_DATA_DIR):
             playlist_id = spUt.get_playlist_id(playlist_name)
 
             if playlist_id is not None:
-                available_playlists.append({"Id": playlist_id, "Name": playlist_name})
+                available_playlists.append({"Id": playlist_id, "Name": playlist_name})  # noqa:E501
 
     print("Available playlists")
     print(available_playlists)

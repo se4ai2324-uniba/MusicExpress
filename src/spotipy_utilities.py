@@ -106,6 +106,7 @@ def get_track_preview(track_name, artist_name):
 
 
 def get_playlist_id(playlist_name):
+    """Method to retrieve playlist id given its name"""
     results = conf.SP.search(q=playlist_name, type='playlist', limit=1)
     if results['playlists']['items']:
         playlist_id = results['playlists']['items'][0]['id']
