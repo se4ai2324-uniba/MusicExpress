@@ -26,12 +26,15 @@ Additional information on extracting various features is accessible in the [Spot
 We present screenshots to provide insight into the data used in the overall process.
 
 1. **Raw Data (After Extraction)**:
+
    ![plot](/figures/rawDataExample.png?raw=true)
 
 2. **Processed Data**:
+
    ![plot](/figures/processedDataExample.png?raw=true)
 
 3. **Clustered Data (Used for Recommendations)**:
+
    ![plot](/figures/clusteredDataExample.png?raw=true)
 
 ## Feature Selection

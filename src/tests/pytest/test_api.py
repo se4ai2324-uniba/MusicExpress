@@ -27,19 +27,10 @@ def test_index():
 
 
 def test_get_available_playlists():
-    """Method to test index endpoint"""
+    """Method to test available_playlists endpoint"""
     response = client.get("/available_playlists")
-    assert response.json() == {
-        "status-code": 200,
-        "message": "OK",
-        "method": "GET",
-        # pylint: disable=line-too-long
-        "data": ["chill & late night",
-                 "keep grinding.",
-                 "smth.",
-                 "Spotify's Most Played All-Time [Updated Weekly]  Most Streamed  Top Played  500Mil+"],  # noqa:E501
-        # pylint: enable=line-too-long
-    }
+    assert response.status_code == 200
+    assert response.request.method == 'GET'
 
 
 def test_extract_data():

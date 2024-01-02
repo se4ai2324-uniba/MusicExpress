@@ -10,8 +10,8 @@ We defined **five different actions**, each activated under certain conditions:
 1. [Quality Assessment (QA)](QA.yml)
 
    - **Trigger**: On changes to the src folder
-   - **Actions**: Runs Pylint in the src folder
-   - **Criteria**: Fails if the Pylint quality score is below 8
+   - **Actions**: Runs a job for Pylint and one for Flake8 in the src folder
+   - **Criteria**: Fails if the Pylint quality score is below 8 or if Flake8 finds errors
 
 2. [API and Scripts Testing](test_scripts_api.yml):
 
