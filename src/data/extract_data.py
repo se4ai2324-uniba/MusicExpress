@@ -36,7 +36,6 @@ def extract_data(user_data=False, playlists=None,
         dir_to_store_data = dir_to_store_data.replace("/", "\\")
 
     if not user_data:
-
         # Default scenario
         with zf.ZipFile(zip_dir, 'r') as zip_ref:
             zip_ref.extractall(dir_to_store_data)
