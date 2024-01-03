@@ -1,4 +1,4 @@
-name: pytest_tests_workflow
+name: Pytest tests after changes
 run-name: Run Pytest tests when API or pipeline scripts change
 
 on:

@@ -1,4 +1,4 @@
-name: quality_assurance_workflow
+name: Code Quality after changes
 run-name: Check code quality - Pylint and Flake8
 
 on:
