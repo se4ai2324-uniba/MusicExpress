@@ -64,8 +64,6 @@ def extract_data(user_data=False, playlists=None,
             playlist_name = spUt.clear_playlist_name(spUt.get_playlist_name(playlist_id))  # noqa:E501
             # pylint: enable=line-too-long
 
-            playlist_names.append(playlist_name)
-
             if flUt.check_file_exists(playlist_id, dir_to_store_data):
                 print(f"{spUt.get_playlist_name(playlist_id)} is "
                       f"stored and ready to be used.")
