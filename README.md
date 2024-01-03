@@ -41,9 +41,16 @@ Here are the links for all our services:
 - [Prometheus](https://musicexpresswaprometheus.azurewebsites.net/)
 - [Grafana](https://musicexpresswagrafana.azurewebsites.net/)
 
-## Uptime Monitoring
+### Uptime Monitoring
 
 We use **Better Uptime** to monitor the status of our website. Check the current status at [our status page](https://musicexpress.betteruptime.com/).
+
+## Front-End
+
+We made a new GitHub repository for our front-end code. You can find it [here](https://github.com/llaraspata/MusicExpress-FrontEnd).
+
+> [!NOTE]
+> We opted to maintain a separation between the back-end and front-end, aligning with industry standards in software development to ensure effective project manageability.
 
 ## Requirements
 
