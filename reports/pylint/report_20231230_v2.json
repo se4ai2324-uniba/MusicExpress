@@ -1,0 +1,28 @@
+[
+    {
+        "type": "error",
+        "module": "tests.DataDrift.deepchecks_datadrift",
+        "obj": "",
+        "line": 8,
+        "column": 0,
+        "endLine": 8,
+        "endColumn": 50,
+        "path": "src\\tests\\DataDrift\\deepchecks_datadrift.py",
+        "symbol": "no-name-in-module",
+        "message": "No name 'FeatureDrift' in module 'deepchecks.tabular.checks'",
+        "message-id": "E0611"
+    },
+    {
+        "type": "error",
+        "module": "tests.DataDrift.deepchecks_datadrift",
+        "obj": "",
+        "line": 9,
+        "column": 0,
+        "endLine": 9,
+        "endColumn": 55,
+        "path": "src\\tests\\DataDrift\\deepchecks_datadrift.py",
+        "symbol": "no-name-in-module",
+        "message": "No name 'MultivariateDrift' in module 'deepchecks.tabular.checks'",
+        "message-id": "E0611"
+    }
+]

@@ -1,21 +1,24 @@
 """Main script: it includes our API initialization and endpoints."""
 # pylint: disable=wrong-import-position,line-too-long,anomalous-backslash-in-string  # noqa:E501
-import os                                                        # noqa:E402
-import sys                                                       # noqa:E402
-from sys import platform                                         # noqa:E402
-sys.path.append('\\'.join(os.getcwd().split('\\')[:-2])+'\src')  # noqa:E402,E501,W605
-from functools import wraps                                      # noqa:E402
-from http import HTTPStatus                                      # noqa:E402
-from fastapi import FastAPI, Request, HTTPException              # noqa:E402
+import os                                                         # noqa:E402
+import sys                                                        # noqa:E402
+from sys import platform                                          # noqa:E402
+sys.path.append('\\'.join(os.getcwd().split('\\')[:-2])+'\\src')  # noqa:E402,E501,W605
+from functools import wraps                                       # noqa:E402
+from http import HTTPStatus                                       # noqa:E402
+from fastapi import FastAPI, Request, HTTPException               # noqa:E402
+from fastapi.middleware.cors import CORSMiddleware                # noqa:E402
 # pylint: disable=import-error
-from api.schemas import UserPlaylistPayload                      # noqa:E402
+from api.schemas import UserPlaylistPayload                       # noqa:E402
+from api.monitoring import instrumentator                         # noqa:E402
 # pylint: enable=import-error
-import conf                                                      # noqa:E402
-import spotipy_utilities as spUt                                 # noqa:E402
-from data.extract_data import extract_data                       # noqa:E402
-from features.preprocessing import preprocess                    # noqa:E402
-from models.clustering import clustering                         # noqa:E402
-from models.recommend import recommend                           # noqa:E402
+import conf                                                       # noqa:E402
+import spotipy_utilities as spUt                                  # noqa:E402
+import files_utilities as flUt                                    # noqa:E402
+from data.extract_data import extract_data                        # noqa:E402
+from features.preprocessing import preprocess                     # noqa:E402
+from models.clustering import clustering                          # noqa:E402
+from models.recommend import recommend                            # noqa:E402
 # pylint: enable=wrong-import-position
 
 # Folder Directory
@@ -86,6 +89,17 @@ app = FastAPI(
     openapi_tags=tags_metadata
 )
 
+# Expose app to compute Prometheus metrics
+instrumentator.instrument(app).expose(app, include_in_schema=False, should_gzip=True)  # noqa:E501
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 
 def construct_response(f):
     """Construct a JSON response for an endpoint's results."""
@@ -151,6 +165,37 @@ def _index(request: Request):
     }
 
     return response
+
+
+@app.get("/available_playlists", tags=["Available_Playlists"])
+@construct_response
+def _get_available_playlists(request: Request):
+    """
+    Endpoint to **get all available playlists** for the current user.
+
+    **Parameters**
+    - None
+
+    **Output**
+    - If everything works out, a **JSON object** containing the
+    **HTTP message**, the **HTTP status code**,
+      and **a list of the names of all the available playlists**
+    - Otherwise, an **exception** will be raised
+    """
+
+    available_playlists = flUt.retrieve_all_playlists(PREPRO_DIR)
+
+    if len(available_playlists) > 0:
+
+        response = {
+            "message": HTTPStatus.OK.phrase,
+            "status-code": HTTPStatus.OK,
+            "data": available_playlists
+        }
+
+        return response
+
+    raise HTTPException(status_code=404, detail='We are sorry, our system was not able to retrieve any playlist.')   # noqa:E501
 
 
 @app.post('/extract', tags=["Data"])
@@ -226,18 +271,24 @@ def _recommended_songs(request: Request, user_payload: UserPlaylistPayload):
 
     default_case = (user_payload is None or ((user_payload.id_playlist_train == '') and (user_payload.id_playlist_test == '')))  # noqa:E501
 
-    # Check if the data has been extracted
+    # Check if the data has been extracted and then preprocess it
     if default_case:
         if not os.path.exists(TRAIN_SET_CSV_PATH) or not os.path.exists(TEST_SET_CSV_PATH):  # noqa:E501
             extract_data(zip_dir=DATASET_ZIP_DIR, dir_to_store_data=PREPRO_DIR)
+
+        preprocess(raw_train_data=DEFAULT_TRAIN_DATA,
+                   raw_test_data=DEFAULT_TEST_DATA, dir_to_store_data=PRO_DIR)
+
     else:
         user_playlists = [user_payload.id_playlist_train,
                           user_payload.id_playlist_test]
 
-        tmp_dir_train = os.path.join(PREPRO_DIR, spUt.get_playlist_name(user_playlists[0]) + ".csv")  # noqa:E501
-        tmp_dir_test = os.path.join(PREPRO_DIR, spUt.get_playlist_name(user_playlists[1]) + ".csv")  # noqa:E501
+        train_playlist_name = spUt.get_playlist_name(user_playlists[0])
+        test_playlist_name = spUt.get_playlist_name(user_playlists[1])
 
-        # Modify file paths based on the operating system
+        tmp_dir_train = os.path.join(PREPRO_DIR, spUt.clear_playlist_name(train_playlist_name) + ".csv")  # noqa:E501
+        tmp_dir_test = os.path.join(PREPRO_DIR, spUt.clear_playlist_name(test_playlist_name) + ".csv")  # noqa:E501
+
         if platform == "win32":
             tmp_dir_train = tmp_dir_train.replace("/", "\\")
             tmp_dir_test = tmp_dir_test.replace("/", "\\")
@@ -247,21 +298,6 @@ def _recommended_songs(request: Request, user_payload: UserPlaylistPayload):
                          zip_dir=DATASET_ZIP_DIR,
                          dir_to_store_data=PREPRO_DIR)
 
-    # Recommendation
-    if default_case:
-        preprocess(raw_train_data=DEFAULT_TRAIN_DATA,
-                   raw_test_data=DEFAULT_TEST_DATA, dir_to_store_data=PRO_DIR)
-    else:
-        user_playlists = [user_payload.id_playlist_train,
-                          user_payload.id_playlist_test]
-
-        tmp_dir_train = os.path.join(PREPRO_DIR, spUt.get_playlist_name(user_playlists[0]) + ".csv")  # noqa:E501
-        tmp_dir_test = os.path.join(PREPRO_DIR, spUt.get_playlist_name(user_playlists[1]) + ".csv")  # noqa:E501
-
-        if platform == "win32":
-            tmp_dir_train = tmp_dir_train.replace("/", "\\")
-            tmp_dir_test = tmp_dir_test.replace("/", "\\")
-
         preprocess(tmp_dir_train, tmp_dir_test, dir_to_store_data=PRO_DIR)
 
     clustering(PROCESSED_TRAIN_DIR, PROCESSED_TEST_DIR,
@@ -270,7 +306,7 @@ def _recommended_songs(request: Request, user_payload: UserPlaylistPayload):
 
     target_song, recommended_songs = recommend(clustered_train_data=CLUSTER_TRAIN_DIR,   # noqa:E501
                                                clustered_test_data=CLUSTER_TEST_DIR,   # noqa:E501
-                                               dir_to_store_recommendation=PRO_DIR)   # noqa:E501
+                                               dir_to_store_recommendation=OUT_DIR)   # noqa:E501
     if len(target_song) > 0:
 
         response = {
@@ -283,6 +319,5 @@ def _recommended_songs(request: Request, user_payload: UserPlaylistPayload):
         return response
 
     raise HTTPException(status_code=404, detail='We are sorry, our system was not able to provide any recommendations.')   # noqa:E501
-
 
 # pylint: enable=line-too-long,anomalous-backslash-in-string,unused-argument

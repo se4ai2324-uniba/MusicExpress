@@ -26,6 +26,13 @@ def test_index():
     }
 
 
+def test_get_available_playlists():
+    """Method to test available_playlists endpoint"""
+    response = client.get("/available_playlists")
+    assert response.status_code == 200
+    assert response.request.method == 'GET'
+
+
 def test_extract_data():
     """Method to test extract endpoint"""
     payload = {"id_playlist_train": "", "id_playlist_test": ""}

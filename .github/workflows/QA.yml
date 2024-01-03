@@ -1,5 +1,5 @@
-name: quality_assurance_workflow
-run-name: Checking Pylint code quality after changes
+name: Code Quality after changes
+run-name: Check code quality - Pylint and Flake8
 
 on:
   push:
@@ -32,16 +32,20 @@ jobs:
   flake8_qa:
     name: Flake8 code quality assurance
     runs-on: windows-latest
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
       - name: Set up Python >=3.11.5 <=3.11.6
         uses: actions/setup-python@v4
         with:
           python-version: ">=3.11.5 <=3.11.6"
+
       - name: Install Flake8
         run: |
           python -m pip install --upgrade pip
           pip install flake8
+
       - name: flake8 Lint
         run: flake8 src\

@@ -1,5 +1,8 @@
 # Data Card
 
+> [!NOTE]
+> Reminder: The song count in the playlists may vary as they are updated daily.
+
 The train dataset is a Spotify playlist named “keep grinding.” that consists of 610 songs.
 Here is the link to this playlist: «[keep grinding.](https://open.spotify.com/playlist/3fSsw9Mp5Mi2DDiweZggtP?si=151ba94cd4ca4cbb)».
 
@@ -18,17 +21,27 @@ The Spotipy library ([Spotipy](https://spotipy.readthedocs.io/en/2.22.1/)) is us
 
 Additional information on extracting various features is accessible in the [Spotify API documentation](https://developer.spotify.com/documentation/web-api/reference/get-audio-features).
 
-## Dataset Example
+## Dataset Before and After Processing & Clustering
 
-Following an example of the data that has been used.
+We present screenshots to provide insight into the data used in the overall process.
 
-![plot](/figures/datasetExampleShort.png?raw=true)
+1. **Raw Data (After Extraction)**:
+
+   ![plot](/figures/rawDataExample.png?raw=true)
+
+2. **Processed Data**:
+
+   ![plot](/figures/processedDataExample.png?raw=true)
+
+3. **Clustered Data (Used for Recommendations)**:
+
+   ![plot](/figures/clusteredDataExample.png?raw=true)
 
 ## Feature Selection
 
 The **Correlation Matrix**, used to examine relationships among features, helped us in determining significant correlations among them or if they were largely independent of each other.
 
-The goal was to identify the two features with the highest correlation and select one additional feature with the strongest correlation to the other two among the remaining features.
+The objective was to select the features with the strongest correlation, with the option to include an additional feature if it demonstrates a small correlation with the already identified high-correlation features.
 
 ![plot](/figures/corrMatrixExample.png?raw=true)
 

@@ -38,7 +38,7 @@ def read_playlist_df(playlist_id):
 
 def create_playlist_df(playlist_id, data_dir=conf.PREPRO_DATA_DIR):
     """Method that creates the Dataframe for a Playlist and stores it"""
-    tracks = spUt.track_ids_from_playlist("ivanrinaldi_", playlist_id)
+    tracks = spUt.track_ids_from_playlist(conf.SPOTIFYUSER, playlist_id)
     print(f"{len(tracks)} tracks have been found in the given playlist!")
     print("Extracting features of each track...")
 
@@ -66,3 +66,38 @@ def store_playlist_dataframe(playlist_id, dataframe,
     dataframe.to_csv(file_path, index=False)
     print("Playlist has been successfully saved!")
     print(f" - Playlist\'s Name: {str(spUt.get_playlist_name(playlist_id))}.")
+
+
+def retrieve_all_playlists(playlist_dir=conf.PREPRO_DATA_DIR):
+    """Method that retrieves the names of all the stored playlists"""
+    default_ids = conf.PLAYLISTS
+    default_names = conf.PLAYLISTS_NAMES
+
+    available_playlists = []
+
+    # Getting playlists available by default
+    for playlist_id, playlist_name in zip(default_ids, default_names):
+        available_playlists.append({"Id": playlist_id, "Name": playlist_name})
+
+    # Getting other playlists that the user migth have extracted
+    files_list = os.listdir(playlist_dir)
+    # List of files that need to be removed if found in the folder
+    files_to_remove = [".gitkeep", "feedbackUser1.csv", "feedbackUser2.csv"]   # noqa:E501
+
+    for f in files_to_remove:
+        if f in files_list:
+            files_list.remove(f)
+
+    files_list = [file[:-4] if file.endswith('.csv') else file for file in files_list]  # noqa:E501
+
+    for playlist_name in files_list:
+        if playlist_name not in default_names:
+            playlist_id = spUt.get_playlist_id(playlist_name)
+
+            if playlist_id is not None:
+                available_playlists.append({"Id": playlist_id, "Name": playlist_name})  # noqa:E501
+
+    print("Available playlists")
+    print(available_playlists)
+
+    return available_playlists

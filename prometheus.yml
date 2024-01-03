@@ -1,0 +1,15 @@
+global:
+  # Default: scrape targets every 15 seconds
+  scrape_interval: 15s
+
+  external_labels:
+    monitor: "musicexpress-monitor"
+
+scrape_configs:
+  - job_name: "musicexpress"
+
+    # Scrape targets from this job every 5 seconds
+    scrape_interval: 5s
+
+    static_configs:
+      - targets: ["host.docker.internal:8000"]

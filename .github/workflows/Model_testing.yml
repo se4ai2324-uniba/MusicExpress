@@ -1,4 +1,4 @@
-name: model_testing_workflow
+name: Test pipeline after changes
 run-name: Testing main pipeline steps if scripts change
 
 on:
